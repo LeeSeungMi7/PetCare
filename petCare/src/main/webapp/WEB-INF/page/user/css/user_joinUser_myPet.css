@@ -1,0 +1,71 @@
+.mypet_box1, .mypet_box2{
+    display: flex;
+}
+
+.mypet_box2 > div{
+    margin-right: 7%;
+}
+
+.mypet_box1 img{
+    width: 50px;
+    height: fit-content;
+}
+
+.mypet_box1 button{
+    margin-left: auto;
+    border: transparent;
+    background-color: transparent;
+} 
+
+/* 버튼 */
+
+.btn {
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    background: none;
+    cursor: pointer;
+    padding: 25px 80px;
+    display: inline-block;
+    margin: 15px 30px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    outline: none;
+    position: relative;
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    transition: all 1s
+}
+
+.centered {
+    text-align: center;
+    margin-top: 5%;
+}
+
+.btn {
+    border: 3px solid #b5e4cc;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    transition: all 1s
+}
+
+.btn:after {
+    width: 0%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: #b5e4cc;
+}
+
+.btn:hover:after,
+.btn:active:after {
+    width: 100%
+}

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 부트스트랩 CDN 로드 : 항상 최신 버전 사용 : maxcdn -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+
+    <!-- alert 창 꾸미기-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <!--css-->
+    <link rel="stylesheet" href="../css/user_joinUser_myPet.css">
+    <link rel="stylesheet" href="../css/user_joinUser.css">
+</head>
+
+
+<body>
+    <!-- 헤더 영역-->
+    <header>
+        헤더입니다.
+    </header>
+    <!-- 본문 영역-->
+    <section name="f">
+        <div class="join-user" style="align-items: center">
+            <!--이름-->
+            <div class="join-user__items">
+                <label>이름</label>
+                <input type="text" id="user_name" oninput="onInputInvalid('name')" />
+                <span class="error_next_box" id="error_name" aria-live="assertive"></span>
+            </div>
+
+            <!--이메일-->
+            <div class="join-user__items">
+                <label>이메일</label>
+                <div class="join-user__items--row" style="justify-content: space-between">
+                    <input id="user_email" type="email" oninput="onInputInvalid('email')" />
+                    <button>인증</button>
+                </div>
+                <span class="error_next_box" id="error_email" aria-live="assertive"></span>
+            </div>
+            <!--비밀번호-->
+            <div class="join-user__items">
+                <label>비밀번호</label>
+                <input id="user_password" type="password" maxlength="15" placeholder="비밀번호를 입력하세요"
+                    oninput="onInputInvalid('password')">
+                <input id="user_check_password" type="password" maxlength="15" placeholder="비밀번호 확인"
+                    style="margin-top: 10px;" oninput="onInputInvalid('passwordCheck')">
+                <span class="error_next_box" id="error_password" aria-live="assertive"></span>
+            </div>
+            <!--연락처-->
+            <div class="join-user__items">
+                <label>연락처</label>
+                <div class="join-user__items--row" style="justify-content: space-between">
+                    <select id="user_phone_number_pre" style="min-width: 60px;" oninput="onInputInvalid('phoneNumber')">
+                        <option value="010">010</option>
+                        <option value="011">011</option>
+                        <option value="016">016</option>
+                    </select>
+                    -
+                    <input id="user_phone_number_in" style="max-width: 60px" maxlength="4"
+                        oninput="onInputInvalid('phoneNumber')">
+                    -
+                    <input id="user_phone_number_post" style="max-width: 60px" maxlength="4"
+                        oninput="onInputInvalid('phoneNumber')">
+                </div>
+                <span class="error_next_box" id="error_phone_number" aria-live="assertive"></span>
+            </div>
+            <!--주소-->
+            <div class="join-user__items">
+                <label>주소</label>
+                <input id="user_post" type="text" placeholder="우편번호" readonly onclick="findAddr()">
+                <input id="user_addr" type="text" placeholder="주소" readonly style="margin-top: 10px;"> <br>
+                <input id="user_addr_detail" type="text" placeholder="상세주소를 입력하세요." style="margin-top: -12px;">
+                <span class="error_next_box" id="error_address" aria-live="assertive"></span>
+            </div>
+
+            <!--내반려동물-->
+            <div class="join-user__items">
+
+                <ul class="list-group">
+                    <li class="list-group-item active" aria-current="true">내 반려 동물</li>
+                    <li class="list-group-item">
+
+                        <div class="mypet_box1">
+                            <div>이름 : 구름이</div>
+                            <button onclick="rainbow_btn(this)"><img src="../img/rainbow.png"></button>
+                        </div>
+
+                        <div class="mypet_box2">
+                            <div>나이 : 7살</div>
+                            <div>성별 : 남아</div>
+                        </div>
+                    </li>
+
+                    <!--테스트-->
+
+                    <li class="list-group-item">
+
+                        <div class="mypet_box1">
+                            <div>이름 : 여름이</div>
+                            <button onclick="rainbow_btn(this)"><img src="../img/rainbow.png"></button>
+                        </div>
+
+                        <div class="mypet_box2">
+                            <div>나이 : 4살</div>
+                            <div>성별 : 여아</div>
+                        </div>
+                    </li>
+
+                    <li class="list-group-item">
+
+                        <div class="mypet_box1">
+                            <div>이름 : 방울이</div>
+                            <button onclick="rainbow_btn(this)"><img src="../img/rainbow.png"></button>
+                        </div>
+
+                        <div class="mypet_box2">
+                            <div>나이 : 17살</div>
+                            <div>성별 : 남아</div>
+                        </div>
+                    </li>
+
+                    <li class="list-group-item">
+
+                        <div class="mypet_box1">
+                            <div>이름 : 니노막시무스카이져쏘제쏘냐</div>
+                            <button onclick="rainbow_btn(this)"><img src="../img/rainbow.png"></button>
+                        </div>
+
+                        <div class="mypet_box2">
+                            <div>나이 : 17살</div>
+                            <div>성별 : 남아</div>
+                        </div>
+                    </li>
+                    <!-- 테스트 끝 -->
+                </ul>
+
+                <div class="centered">
+                    <button class="btn" style="margin: 0; padding-top: 5px;">반려동물 추가하기</button>
+                </div>
+            </div>
+            <!--완료-->
+            <div class="join-user__items">
+                <div class="join-user__items--row" style="justify-content: space-between">
+                    <button class="buttonOk" onclick="submit()">가입</button>
+                    <button class="buttonOk" onclick="submit()">취소</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 푸터 영역-->
+    <footer>
+        푸터입니다
+    </footer>
+    </script>
+    <script type="application/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="application/javascript" src="../js/user_joinUser.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</body>
+
+</html>
