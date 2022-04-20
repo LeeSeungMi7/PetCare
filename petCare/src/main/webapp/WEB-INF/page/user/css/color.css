@@ -1,0 +1,47 @@
+.color--primary {
+    color: #3de007;
+}
+
+.color--primary-half {
+    color: #3de00733;
+}
+
+.color--black {
+    color: #000000;
+}
+
+.color--white {
+    color: #fff;
+}
+
+.color--red {
+    color: red;
+}
+
+.color--gray {
+    color: #6b7684;
+}
+
+.background--primary {
+    background: #3de007;
+}
+
+.background--primary-half {
+    background: #3de00733;
+}
+
+.background--black {
+    background: #000;
+}
+
+.background--white {
+    background: #fff;
+}
+
+.background--red {
+    background: red;
+}
+
+.background--gray {
+    background: #6b7684;
+}
