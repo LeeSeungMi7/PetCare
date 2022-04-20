@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">  
+
+<!-- 제이쿼리 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+
+<!-- 부트스트랩 CDN 로드 : 항상 최신 버전 사용 : maxcdn -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
+
+<!-- 데이트피커사용하기 -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css" type="text/css" />
+
+
+<link rel="stylesheet" href="/resources/css/user/partner_mypage_reservation.css"> 
+</head>
+
+
+<body>
+
+  <div id="pet-layout" class="background--white">
+    <!--헤더입니다.-->
+    <header class="pet-header background--white" id="header">
+    </header>
+    <!--사이드-->
+    <div id="user_submenu"></div>
+    <div class="pet-body pet-home">
+  
+        <!--본문-->
+        <div class="pet-body pet-home">
+            <!-- 홈 최상단 슬라이더 -->
+
+              <div class="outerBox">
+                  <div>
+                      <label>예약 신청 대기자 명단</label>
+                      <table class="table">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th scope="col">번호</th>
+                              <th scope="col">날짜</th>
+                              <th scope="col">시간</th>
+                              <th scope="col">보호자</th>	
+                              <th scope="col">연락처</th>
+                              <th scope="col">반려동물</th>
+                              <th scope="col">가능 여부</th>		      
+                            </tr>
+                          </thead>
+      
+      
+                          <tbody id="dyn_tbody">
+                            <tr>
+                              <th scope="row">1</th>
+                              <td>2022-04-16</td>
+                              <td>10:00</td>
+                              <td>홍길동</td>
+                              <td>010-1231-1111</td>
+                              <td>구름이</td>	
+                              <td>
+                                  <div class="btngroup">
+                                      <button class="btn save" onclick="deleteRowFunction(this)">가능</button>
+                                      <button class="btn cancel" onclick="deleteRowFunction(this)">불가능</button>
+                                  </div>
+                              </td>      
+                            </tr>
+                            
+                            <!-- 테스트 -->
+                            <tr>
+                              <th scope="row">2</th>
+                              <td>2022-04-16</td>
+                              <td>10:00</td>
+                              <td>홍길동</td>
+                              <td>010-1231-1111</td>
+                              <td>구름이</td>	
+                              <td>
+                                  <div class="btngroup">
+                                      <button class="btn save" onclick="deleteRowFunction(this)">가능</button>
+                                      <button class="btn cancel" onclick="deleteRowFunction(this)">불가능</button>
+                                  </div>
+                              </td>      
+                            </tr>
+                            <tr>
+                              <th scope="row">3</th>
+                              <td>2022-04-16</td>
+                              <td>10:00</td>
+                              <td>홍길동</td>
+                              <td>010-1231-1111</td>
+                              <td>구름이</td>	
+                              <td>
+                                  <div class="btngroup">
+                                      <button class="btn save" onclick="deleteRowFunction(this)">가능</button>
+                                      <button class="btn cancel" onclick="deleteRowFunction(this)">불가능</button>
+                                  </div>
+                              </td>      
+                            </tr>  
+                          </tbody>
+                        </table>
+                    
+                    
+                        <!-- 페이징 속성 정의 -->
+                        <nav aria-label="Page navigation example">		
+                          <ul id="dyn_ul" class="pagination" style="justify-content: center;">
+                            <li class="page-item"><a class="page-link" >Previous</a></li>
+                            <li class="page-item"><a class="page-link" >1</a></li>	    
+                            <li class="page-item"><a class="page-link" >Next</a></li> 
+                          </ul>
+                        </nav>
+      
+                  </div>
+      
+                  <div class="total_list">
+                      <label>총 예약 현황</label>
+                      <div>
+                          일자 : <input type="text" id="datepicker">
+                          <button class="w-btn w-btn-green" type="button">
+                              <img src="/resources/img/excel.png">엑셀 출력
+                          </button> 
+                      </div>
+                      <table class="table">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th scope="col">번호</th>
+                              <th scope="col">날짜</th>
+                              <th scope="col">시간</th>
+                              <th scope="col">보호자이름</th>	
+                              <th scope="col">보호자연락처</th>
+                              <th scope="col">반려동물</th>	      
+                            </tr>
+                          </thead>
+      
+      
+                          <tbody id="dyn_tbody">
+                            <tr>
+                              <th scope="row">1</th>
+                              <td>2022-04-16</td>
+                              <td>10:00</td>
+                              <td>홍길동</td>
+                              <td>010-1231-1111</td>
+                              <td>구름이</td>	 
+                            </tr>
+                            
+                            <!-- 테스트 -->
+                            <tr>
+                              <th scope="row">2</th>
+                              <td>2022-04-16</td>
+                              <td>10:00</td>
+                              <td>홍길동</td>
+                              <td>010-1231-1111</td>
+                              <td>구름이</td>	  
+                            </tr>
+                            <tr>
+                              <th scope="row">3</th>
+                              <td>2022-04-16</td>
+                              <td>10:00</td>
+                              <td>홍길동</td>
+                              <td>010-1231-1111</td>
+                              <td>구름이</td>	    
+                            </tr>  
+                          </tbody>
+                        </table>
+                    
+                    
+                        <!-- 페이징 속성 정의 -->
+                        <nav aria-label="Page navigation example">		
+                          <ul id="dyn_ul" class="pagination" style="justify-content: center;">
+                            <li class="page-item"><a class="page-link" >Previous</a></li>
+                            <li class="page-item"><a class="page-link" >1</a></li>	    
+                            <li class="page-item"><a class="page-link" >Next</a></li> 
+                          </ul>
+                        </nav>
+                      </div>
+              </div>
+                
+                    
+        
+                    
+            <!-- 지식 백과사전 📚 -->
+            <footer id="footer">
+                
+            </footer>
+        </div>
+    </div>
+</div>
+
+
+<script src="/resources/js/user/common.js"></script>
+<script src="/resources/js/user/partner_mypage_reservation.js"></script>
+
+
+</body>
+</html>
