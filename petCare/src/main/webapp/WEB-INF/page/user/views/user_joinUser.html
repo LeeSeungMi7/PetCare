@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 부트스트랩 CDN 로드 : 항상 최신 버전 사용 : maxcdn -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"> -->
+    <!--제이쿼리-->
+    <script type="application/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--css-->
+    <link rel="stylesheet" href="/resources/css/user/user_joinUser_myPet.css">
+    <!--공통 적용-->
+    <link rel="stylesheet" href="/resources/css/user/Hos_joinUser.css">
+</head>
+
+
+<body>
+    <div id="pet-layout" class="background--white">
+        <!--헤더입니다.-->
+        <header class="pet-header background--white" id="header">
+        </header>
+
+        <div class="pet-body pet-home">
+
+            <!--본문-->
+            <div class="pet-body pet-home">
+                <!-- 홈 최상단 슬라이더 -->
+                <section name="f">
+                    <div class="join-user" style="align-items: center">
+                        <!--사용자이름-->
+                        <div class="join-user__items">
+                            <label>이름</label>
+                            <input type="text" id="user_name" oninput="onInputInvalid('name')" />
+                            <span class="error_next_box" id="error_name" aria-live="assertive"></span>
+                        </div>
+            
+                        <!--이메일-->
+                        <div class="join-user__items">
+                            <label>이메일</label>
+                            <div class="join-user__items--row" style="justify-content: space-between">
+                                <input id="user_email" type="email" oninput="onInputInvalid('email')" />
+                                <button class="button_class">인증</button>
+                            </div>
+                            <span class="error_next_box" id="error_email" aria-live="assertive"></span>
+                        </div>
+                        <!--비밀번호-->
+                        <div class="join-user__items">
+                            <label>비밀번호</label>
+                            <input id="user_password" type="password" maxlength="15" placeholder="비밀번호를 입력하세요"
+                                oninput="onInputInvalid('password')">
+                            <input id="user_check_password" type="password" maxlength="15" placeholder="비밀번호 확인"
+                                style="margin-top: 10px;" oninput="onInputInvalid('passwordCheck')">
+                            <span class="error_next_box" id="error_password" aria-live="assertive"></span>
+                        </div>
+                        <!--연락처-->
+                        <div class="join-user__items">
+                            <label>연락처</label>
+                            <div class="join-user__items--row" style="justify-content: space-between">
+                                <select id="user_phone_number_pre" style="min-width: 90px;" oninput="onInputInvalid('phoneNumber')">
+                                    <option value="010">010</option>
+                                    <option value="011">011</option>
+                                    <option value="016">016</option>
+                                </select>
+                                -
+                                <input id="user_phone_number_in" style="max-width: 90px" maxlength="4"
+                                    oninput="onInputInvalid('phoneNumber')">
+                                -
+                                <input id="user_phone_number_post" style="max-width: 90px" maxlength="4"
+                                    oninput="onInputInvalid('phoneNumber')">
+                            </div>
+                            <span class="error_next_box" id="error_phone_number" aria-live="assertive"></span>
+                        </div>
+                        <!--주소-->
+                        <div class="join-user__items">
+                            <label>주소</label>
+                            <input id="user_post" type="text" placeholder="우편번호" readonly onclick="findAddr()">
+                            <input id="user_addr" type="text" placeholder="주소" readonly style="margin-top: 10px;"> <br>
+                            <input id="user_addr_detail" type="text" placeholder="상세주소를 입력하세요." style="margin-top: -12px;">
+                            <span class="error_next_box" id="error_address" aria-live="assertive"></span>
+                        </div>
+            
+                        <!--내반려동물-->
+                        <div class="join-user__items">
+            
+                            <ul class="list-group">
+                                <li class="list-group-item active" aria-current="true">반려동물 등록
+                                    <a href="#" class="addList">추가</a>
+                                </li>
+                                <li class="list-group-item">
+            
+                                    <div class="mypet_box1">
+                                        <div>이름 : 구름이</div>
+                                        <button onclick="rainbow_btn(this)"><img src="/img/minus.png"></button>
+                                    </div>
+            
+                                    <div class="mypet_box2">
+                                        <div>나이 : 7살</div>
+                                        <div>성별 : 남아</div>
+                                    </div>
+                                </li>
+                            </ul>
+            
+                        </div>
+                        <!--완료-->
+                        <div class="join-user__items">
+                            <div class="join-user__items--row" style="justify-content: space-between">
+                                <button class="buttonOk button_class" onclick="submit()">가입</button>
+                                <button class="buttonOk button_class" >취소</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- 지식 백과사전 📚 -->
+                <footer id="footer">
+                    
+                </footer>
+            </div>
+        </div>
+    </div>
+    <script src="/resources/js/user/common.js"></script>
+    <script type="application/javascript" src="/resources/js/user/user_joinUser.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</body>
+
+</html>
