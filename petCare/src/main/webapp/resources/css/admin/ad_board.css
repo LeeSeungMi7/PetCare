@@ -1,0 +1,19 @@
+table{
+    white-space : nowrap;
+    overflow : hidden; 
+    text-overflow : ellipsis;
+}
+a{
+    text-decoration: none;
+}
+.en_insertBtn a{
+    color:#fff;
+}
+.en_insertBtn{
+    background-color: #77af9c;
+    color: #d7fff1;
+    border : 0px;
+    position: absolute;
+    right: 1.5%;
+    align-items: center;
+}

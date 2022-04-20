@@ -3,34 +3,14 @@
 
 <head>
     <meta charset="utf-8">
-    <link href="../css/index.css" rel="stylesheet">
-    <link href="../css/color.css" rel="stylesheet">
-    <link href="../css/text.css" rel="stylesheet">
-    <link href="../css/header.css" rel="stylesheet">
-    <link href="../css/footer.css" rel="stylesheet">
-    <link href="../css/button.css" rel="stylesheet">
-    <link href="../css/home.css" rel="stylesheet">
+    <!-- 제이쿼리 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
 <div id="pet-layout" class="background--white">
     <!--헤더입니다.-->
-    <header class="pet-header background--white">
-        <div class="pet-header__logo row">
-            <div class="text--18-bold color--primary">PETCARE</div>
-            <div class="pet-header__join">
-                <span class="text--14-normal">로그인</span>
-                <span class="text--14-normal">회원가입</span>
-            </div>
-        </div>
-        <div class="pet-header__tabs row">
-            <a class="pet-header__tab text--16-normal color--black active" href="#">홈</a>
-            <a class="pet-header__tab text--16-normal color--black" href="../hospital/hospital_detail.html">내주변 병원</a>
-            <a class="pet-header__tab text--16-normal color--black" href="www.naver.com">자랑하기</a>
-            <a class="pet-header__tab text--16-normal color--black" href="www.naver.com">QnA</a>
-            <a class="pet-header__tab text--16-normal color--black" href="www.naver.com">동물백과</a>
-            <a class="pet-header__tab text--16-normal color--black" href="www.naver.com">내정보</a>
-        </div>
+    <header class="pet-header background--white" id="header">
     </header>
 
     <div class="pet-body pet-home">
@@ -122,21 +102,14 @@
                 </div>
             </div>
             <!-- 지식 백과사전 📚 -->
-            <footer>
-                <div class="pet-footer">
-                    <div>상호명 : 주식회사 PETCARE</div>
-                    <div class="text--12-lighter">주식회사 PETCARE은 의료정보의 중개서비스 또는 의료정보중개시스템의 제공자로서, <br>의료정보의 당사자가 아니며,
-                        의료정보와
-                        관련된 의무와 책임은 각 의료기관에게 있습니다.
-                    </div>
-                    <div class="text--12-lighter">
-                        © 2022 PetCare All right reserved
-                    </div>
-                </div>
+            <footer id="footer">
+                
             </footer>
         </div>
     </div>
 </div>
+
+<script src="/resources/js/user/common.js"></script>
 </body>
 
 </html>

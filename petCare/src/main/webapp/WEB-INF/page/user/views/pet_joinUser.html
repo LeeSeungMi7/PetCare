@@ -4,73 +4,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/pet_joinUser.css">
+    <!--제이쿼리-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
 
+    <!-- <link rel="stylesheet" href="../css/pet_joinUser.css">
+    <link rel="stylesheet" href="../css/user_joinUser_myPet.css"> -->
+    
+    <!--공통 적용-->
+    <link rel="stylesheet" href="/resources/css/user/Hos_joinUser.css">
 </head>
 
 <body>
-    <!-- 헤더 영역-->
-    <header>
-        헤더입니다.
-    </header>
-    <!-- 본문 영역-->
-    <section name="f">
-        <div class="join-user" style="align-items: center">
-            <!--반려동물 이름-->
-            <div class="join-user__items">
-                <label>반려동물 이름</label>
-                <input type="text" id="user_name" oninput="onInputInvalid('name')" />
-                <span class="error_next_box" id="error_name" aria-live="assertive"></span>
-            </div>
+    <div id="pet-layout" class="background--white">
+        <!--헤더입니다.-->
+        <header class="pet-header background--white" id="header">
+        </header>
 
-            <!--어떤 동물인가요?-->
-            <div class="join-user__items">
-                <label>어떤 동물인가요?</label>
-                    <input id="user_animal" type="text" maxlength="20" placeholder="예) 강아지, 고양이" oninput="onInputInvalid('animal')" />
-                <span class="error_next_box" id="error_animal" aria-live="assertive"></span>
-            </div>
-            <!--몇살인가요?-->
-            <div class="join-user__items">
-                <label>몇살인가요?</label>
-                <div class="join-user__items--row"style="justify-content: space-between">
-                <input id="user_old" type="text" maxlength="5" oninput="onInputInvalid('old')"style="padding-right: 40px;">
-                살
-                </div>
-                <span class="error_next_box" id="error_old" aria-live="assertive"></span>
-            </div>
-            <!--성별-->
-            <div class="join-user__items">
-                <label>성별</label>
-                <div class="join-user__items--row" style="justify-content: space-between">
-                    <input type="radio" name="gender" value="male" checked="checked"/> 수컷입니다.
-                    <input type="radio" name="gender" value="female" /> 암컷입니다.
-                </div>
-            </div>
-            <!--중성화수술은 했나요?-->
-            <div class="join-user__items">
-                <label>중성화수술은 했나요?</label>
-                <div class="join-user__items--row" style="justify-content: space-between">
-                    <input type="radio" name="" value="yes" /> 수술완료.
-                    <input type="radio" name="" value="no" checked="checked"/> 안했습니다.
-                </div>
-            </div>
-            <!--완료-->
-            <div class="join-user__items">
-                <div class="join-user__items--row" style="justify-content: space-between">
-                    <button class="buttonOk" onclick="submit()">가입</button>
-                    <button class="buttonOk" onclick="submit()">취소</button>
-                </div>
+        <div class="pet-body pet-home">
+
+            <!--본문-->
+            <div class="pet-body pet-home">
+                <!-- 홈 최상단 슬라이더 -->
+                <section name="f">
+                    <div class="join-user" style="align-items: center">
+                        <!--반려동물 이름-->
+                        <div class="join-user__items">
+                            <label>반려동물 이름</label>
+                            <input type="text" id="user_name" oninput="onInputInvalid('name')" />
+                            <span class="error_next_box" id="error_name" aria-live="assertive"></span>
+                        </div>
+            
+                        <!--어떤 동물인가요?-->
+                        <div class="join-user__items">
+                            <label>어떤 동물인가요?</label>
+                                <input id="user_animal" type="text" maxlength="20" placeholder="예) 강아지, 고양이" oninput="onInputInvalid('animal')" />
+                            <span class="error_next_box" id="error_animal" aria-live="assertive"></span>
+                        </div>
+                        <!--몇살인가요?-->
+                        <div class="join-user__items">
+                            <label>몇살인가요?</label>
+                            <div class="join-user__items--row"style="justify-content: space-between">
+                            <input id="user_old" type="text" maxlength="5" oninput="onInputInvalid('old')"style="padding-right: 40px;">
+                            살
+                            </div>
+                            <span class="error_next_box" id="error_old" aria-live="assertive"></span>
+                        </div>
+                        <!--성별-->
+                        <div class="join-user__items">
+                            <label>성별</label>
+                            <div class="join-user__items--row" style="justify-content: space-between">
+                                <input type="radio" name="gender" value="male" checked="checked"/> 수컷입니다.
+                                <input type="radio" name="gender" value="female" /> 암컷입니다.
+                            </div>
+                        </div>
+                        <!--중성화수술은 했나요?-->
+                        <div class="join-user__items">
+                            <label>중성화수술은 했나요?</label>
+                            <div class="join-user__items--row" style="justify-content: space-between">
+                                <input type="radio" name="ch1" value="yes" /> 수술완료.
+                                <input type="radio" name="ch1" value="no" checked="checked"/> 수술 전.
+                            </div>
+                        </div>
+                        <!--완료-->
+                        <div class="join-user__items">
+                            <div class="join-user__items--row" style="justify-content: space-between">
+                                <button class="buttonOk button_class" onclick="submit()">가입</button>
+                                <button class="buttonOk button_class">취소</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- 지식 백과사전 📚 -->
+                <footer id="footer">
+                    
+                </footer>
             </div>
         </div>
-    </section>
-    <!-- 푸터 영역-->
-    <footer>
-        푸터입니다
-    </footer>
-    </script>
-    <script type="application/javascript"
-        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="application/javascript" src="../js/pet_joinUser.js"></script>
+    </div>
+
+    <script src="/resources/js/user/common.js"></script>
+    <script type="application/javascript" src="/resources/js/user/pet_joinUser.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </body>
 
