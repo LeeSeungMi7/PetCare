@@ -1,0 +1,58 @@
+.pet-header {
+    position: relative;
+}
+
+#pet-layout {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#map {
+    flex: 3;
+    width: 100%;
+}
+
+.pet-map-placeinfo {
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: -145px;
+    border: 1px solid #007bff;
+}
+
+.pet-map-placeinfo > * {
+    margin-top: 5px;
+}
+
+.pet-hospital {
+    flex: 1;
+    overflow: scroll;
+    cursor: pointer;
+}
+
+.pet-hospital__infos {
+    height: 100%;
+}
+
+.pet-hospital__info {
+    flex: 2;
+    padding: 10px;
+}
+.pet-hospital__list {
+    border: 1px solid #007bff;
+    height: 100%;
+    overflow-y: scroll;
+}
+.pet-hospital__list-title {
+    padding: 10px 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.pet-hospital__list-item {
+    padding: 20px;
+}
+
+.pet-hospital__list-item:not(:last-of-type) {
+    border-bottom: 1px solid #007bff;
+}
