@@ -7,7 +7,7 @@ function user_signin(){
     }
 
     if(chk1){
-        $(location).attr("href", "/views/user_joinUser.html");
+        $(location).attr("href", "../views/user_joinUser.html");
     }
 }
 
@@ -20,6 +20,6 @@ function partner_signin(){
     }
 
     if(chk1){
-        $(location).attr("href", "/views/Hos_joinUser.html");
+        $(location).attr("href", "../views/Hos_joinUser.html");
     }
 }

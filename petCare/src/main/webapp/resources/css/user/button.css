@@ -27,6 +27,31 @@ button {
 .button--xl {
     font-size: 20px;
 }
+/** button bold **/
+.button--bold-xs {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.button--bold-sm {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.button--bold-sl {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.button--bold-l {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.button--bold-xl {
+    font-size: 20px;
+    font-weight: bold;
+}
 
 /** primary **/
 .button--primary-xs {
@@ -58,6 +83,41 @@ button {
     color: #000;
     background-color: #3de00733;
 }
+/** primary-bold **/
+.button--primary-bold-xs {
+    font-size: 12px;
+    color: #000;
+    background-color: #3de00733;
+    font-weight: bold;
+}
+
+.button--primary-bold-sm {
+    font-size: 14px;
+    color: #000;
+    background-color: #3de00733;
+    font-weight: bold;
+}
+
+.button--primary-bold-sl {
+    font-size: 16px;
+    color: #000;
+    background-color: #3de00733;
+    font-weight: bold;
+}
+
+.button--primary-bold-l {
+    font-size: 18px;
+    color: #000;
+    background-color: #3de00733;
+    font-weight: bold;
+}
+
+.button--primary-bold-xl {
+    font-size: 20px;
+    color: #000;
+    background-color: #3de00733;
+    font-weight: bold;
+}
 
 /** pink **/
 .button--pink-xs {
@@ -88,4 +148,39 @@ button {
     font-size: 20px;
     color: #000;
     background-color: #ff167e33;
+}
+/** pink-bold **/
+.button--pink-bold-xs {
+    font-size: 12px;
+    color: #000;
+    background-color: #ff167e33;
+    font-weight: bold;
+}
+
+.button--pink-bold-sm {
+    font-size: 14px;
+    color: #000;
+    background-color: #ff167e33;
+    font-weight: bold;
+}
+
+.button--pink-bold-sl {
+    font-size: 16px;
+    color: #000;
+    background-color: #ff167e33;
+    font-weight: bold;
+}
+
+.button--pink-bold-l {
+    font-size: 18px;
+    color: #000;
+    background-color: #ff167e33;
+    font-weight: bold;
+}
+
+.button--pink-bold-xl {
+    font-size: 20px;
+    color: #000;
+    background-color: #ff167e33;
+    font-weight: bold;
 }

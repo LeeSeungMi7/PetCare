@@ -9,7 +9,6 @@ body {
 }
 
 body {
-    padding-top: 100px;
     box-sizing: border-box;
 }
 
@@ -17,17 +16,17 @@ body {
     position: relative;
 }
 
-.column {
+.pet-column {
     display: flex;
     flex-direction: column;
 }
 
-.row {
+.pet-row {
     display: flex;
     flex-direction: row;
 }
 
-.center {
+.pet-center {
     text-align: center;
     justify-content: center;
     align-items: center;
