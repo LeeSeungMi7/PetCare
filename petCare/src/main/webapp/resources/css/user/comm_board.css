@@ -1,0 +1,41 @@
+a{
+    text-decoration: none;
+}
+.board{
+    margin:auto;
+    border:1px solid #3de007;
+    width: 850px;
+    margin-top: 20px;
+}
+.titlebox{
+    width: 500px !important;
+    white-space: nowrap;
+    margin-bottom: 10px; 
+}
+.datebox{
+    margin-bottom: 10px;
+    width:300px !important;
+}
+.namebox{
+    margin-bottom: 10px;
+    width: 200px !important;
+}
+.contentbox{
+    margin-bottom:10px;
+    height:auto;
+    min-height: 500px !important;
+}
+.commentbox{
+    margin-bottom: 5px;
+    min-height: 100px !important;
+}
+.form-label{
+    font-size: 16px !important;
+    font-weight: normal !important;
+}
+.menu a{
+    cursor:pointer;
+}
+li{
+    list-style: none !important;
+}

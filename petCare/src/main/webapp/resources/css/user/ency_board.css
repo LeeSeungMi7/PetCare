@@ -1,0 +1,27 @@
+a{
+    text-decoration: none;
+}
+.board{
+    margin:auto;
+    border:1px solid #3de007;
+    width: 850px;
+    margin-top: 30px;
+}
+.titlebox{
+    width: 500px !important;
+    white-space: nowrap;
+    margin-bottom: 15px; 
+}
+.datebox{
+    margin-bottom: 15px;
+    width:300px !important;
+}
+.contentbox{
+    margin-bottom:10px;
+    height:auto;
+    min-height: 500px !important;
+}
+.form-label{
+    font-size: 20px !important;
+    font-weight: normal !important;
+}
