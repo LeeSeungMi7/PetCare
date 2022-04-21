@@ -109,6 +109,7 @@ buildNumber.properties
 
 # Eclipse m2e generated files
 # Eclipse Core
+database.properties
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
