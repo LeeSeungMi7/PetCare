@@ -1,0 +1,34 @@
+a{
+    text-decoration: none;
+}
+.board{
+    margin:auto;
+    border:1px solid #3de007;
+    width: 400px;
+    margin-top: 10px;
+}
+.titlebox{
+    width: 230px !important;
+    white-space: nowrap;
+    margin-bottom: 5px; 
+}
+.namebox{
+    margin-bottom: 5px;
+    width: 90px !important;
+}
+.datebox{
+    margin-bottom: 5px;
+    width:110px !important;
+}
+.contentbox{
+    margin-bottom:5px;
+    height:auto;
+    min-height: 200px !important;
+}
+.form-label{
+    font-size: 14px !important;
+    font-weight: normal !important;
+}
+.datepick{
+    width: 95px !important;
+}
