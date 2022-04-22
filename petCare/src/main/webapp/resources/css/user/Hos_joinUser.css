@@ -6,12 +6,12 @@ section {
 .join-user {
     display: flex;
     flex-direction: column;
-    border: solid 1px black;
     border-radius: 30px;
     padding: 20px;
-    /* position: relative; */
+    align-items: center;
+    margin: auto;
     max-width: 600px;
-    margin: 20%;
+    border: solid 3px black;
 }
 
 .error-message {
@@ -78,8 +78,8 @@ section {
 
 } 
 
-.join-user__items > .join-user__items--row > button {
-    width: 150px; 
+.join-user__items > .join-user__items--row > .buttonOk {
+    width: 150px;
     font-size: larger
 }
 

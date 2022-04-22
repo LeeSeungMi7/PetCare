@@ -208,7 +208,7 @@ const invalid = {
         return '주소를 모두 입력해주세요.';
     },
     all() {
-        return !this.name() && !this.phoneNumber() && !this.password() && !this.id() && !this.address();
+        return !this.name() && !this.phoneNumber() && !this.password() && !this.passwordCheck() && !this.address() && !this.openingHours();
     }
 }
 

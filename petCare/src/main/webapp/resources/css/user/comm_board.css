@@ -2,10 +2,7 @@ a{
     text-decoration: none;
 }
 .board{
-    margin:auto;
     border:1px solid #3de007;
-    width: 850px;
-    margin-top: 20px;
 }
 .titlebox{
     width: 500px !important;

@@ -1,143 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 제이쿼리 -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    
-    <link rel="stylesheet" href="/resources/css/user/Hos_joinUser.css">
+    <meta charset="utf-8">
+    <link href="../../../../resources/css/user/index.css" rel="stylesheet">
+    <link href="../../../../resources/css/user/color.css" rel="stylesheet">
+    <link href="../../../../resources/css/user/text.css" rel="stylesheet">
+    <link href="../../../../resources/css/user/header.css" rel="stylesheet">
+    <link href="../../../../resources/css/user/footer.css" rel="stylesheet">
+    <link href="../../../../resources/css/user/button.css" rel="stylesheet">
+    <link href="../../../../resources/css/user/loginForm.css" rel="stylesheet">
+    <link href="../../../../resources/css/user/hos_joinUser.css" rel="stylesheet">
+  <!--부트스트랩-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"  crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- 제이쿼리 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!--alert-->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+  <!-- 카카오 주소 -->
+  <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <!-- 경은이 카카오 MAP API-KEY -->
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1e818982c81810e2470dd6b0b339e676&libraries=services"></script>
+
+    <script type="application/javascript">
+        $(document).ready(function () {
+            //나중에 jsp 교체
+
+            $("#header").load("./header.html");
+            $("#contents").load("./hos_joinUser_body.html");
+            $("#footer").load("./footer.html");
+        });
+    </script>
 </head>
 
 <body>
     <div id="pet-layout" class="background--white">
-        <!--헤더입니다.-->
-        <header class="pet-header background--white" id="header">
-        </header>
+        <!--헤더-->
+        <header class="pet-header background--white" id="header"></header>
 
-        <div class="pet-body pet-home">
+        <!--본문-->
+        <div class="pet-body pet-hos_joinUser" id="contents"></div>
 
-            <!--본문-->
-            <div class="pet-body pet-home">
-                <!-- 홈 최상단 슬라이더 -->
-                <section name="f" class="pet-home__boards row">
-                    <div class="join-user" style="align-items: center">
-                        <!--병원이름-->
-                        <div class="join-user__items">
-                            <label>병원 이름</label>
-                            <input type="text" id="user_name" oninput="onInputInvalid('name')" />
-                            <span class="error_next_box" id="error_name" aria-live="assertive"></span>
-                        </div>
-            
-                        <!--이메일-->
-                        <div class="join-user__items">
-                            <label>이메일</label>
-                            <div class="join-user__items--row" style="justify-content: space-between">
-                                <input id="user_email" type="email" oninput="onInputInvalid('email')" />
-                                <button class="button_class">인증</button>
-                            </div>
-                            <span class="error_next_box" id="error_email" aria-live="assertive"></span>
-                        </div>
-                        <!--비밀번호-->
-                        <div class="join-user__items">
-                            <label>비밀번호</label>
-                            <input id="user_password" type="password" maxlength="15" placeholder="비밀번호를 입력하세요"
-                                oninput="onInputInvalid('password')">
-                            <input id="user_check_password" type="password" maxlength="15" placeholder="비밀번호 확인"
-                                style="margin-top: 10px;" oninput="onInputInvalid('passwordCheck')">
-                            <span class="error_next_box" id="error_password" aria-live="assertive"></span>
-                        </div>
-                        <!--연락처-->
-                        <div class="join-user__items">
-                            <label>연락처</label>
-                            <div class="join-user__items--row" style="justify-content: space-between">
-                                <select id="user_phone_number_pre" style="min-width: 90px;" oninput="onInputInvalid('phoneNumber')">
-                                    <option value="010">010</option>
-                                    <option value="011">011</option>
-                                    <option value="016">016</option>
-                                </select>
-                                -
-                                <input id="user_phone_number_in" style="max-width: 90px" maxlength="4"
-                                    oninput="onInputInvalid('phoneNumber')">
-                                -
-                                <input id="user_phone_number_post" style="max-width: 90px" maxlength="4"
-                                    oninput="onInputInvalid('phoneNumber')">
-                            </div>
-                            <span class="error_next_box" id="error_phone_number" aria-live="assertive"></span>
-                        </div>
-                        <!--주소-->
-                        <div class="join-user__items">
-                            <label>주소</label>
-                            <input id="user_post" type="text" placeholder="우편번호" readonly onclick="findAddr()">
-                            <input id="user_addr" type="text" placeholder="주소" readonly style="margin-top: 10px;"> <br>
-                            <input id="user_addr_detail" type="text" placeholder="상세주소를 입력하세요." style="margin-top: -12px;">
-                            <span class="error_next_box" id="error_address" aria-live="assertive"></span>
-                        </div>
-            
-                        <!--진료시간-->
-                        <div class="join-user__items">
-                            <label>진료시간</label>
-                            <div class="join-user__items--row__time">
-                                <input type="text" id="user_weekday_start" oninput="onInputInvalid('time')" placeholder="평일진료"style="max-width: 150px" maxlength="5"/>
-                                ~
-                                <input type="text" id="user_weekday_end" oninput="onInputInvalid('time')" placeholder=""style="max-width: 150px" maxlength="5" />
-                            </div>
-                            <div class="join-user__items--row__time">
-                                <input type="text" id="user_weekend_start" oninput="onInputInvalid('time')" placeholder="주말진료"style="max-width: 150px" maxlength="5"/>
-                                ~
-                                <input type="text" id="user_weekend_end" oninput="onInputInvalid('time')" placeholder=""style="max-width: 150px" maxlength="5" />
-                            </div>
-                            <div class="join-user__items--row__time">
-                                <input type="text" id="user_lunch_start" oninput="onInputInvalid('time')" placeholder="점심시간"style="max-width: 150px" maxlength="5"/>
-                                ~
-                                <input type="text" id="user_lunch_end" oninput="onInputInvalid('time')" placeholder=""style="max-width: 150px" maxlength="5" />
-                            </div>
-                            <span class="error_next_box" id="error_time" aria-live="assertive"></span>
-                        </div>
-            
-                        <!--24시간 병원인지 체크-->
-                        <div class="join-user__items">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" id="jb-checkbox" class="custom-control-input">
-                                <label class="custom-control-label" for="jb-checkbox">24시 병원</label>
-                            </div>
-                        </div>
-            
-                        <!--사업자등록증 첨부-->
-                        <div class="join-user__items">
-                            <label>사업자등록증 첨부</label>
-                                <div class="filebox">
-                                    <input class="upload-name" value="파일선택" disabled="disabled">
-                                    <label for="ex_filename">업로드</label>
-                                    <input type="file" id="ex_filename" class="upload-hidden">
-                                </div>    
-                        </div>
-                        <!--완료-->
-                        <div class="join-user__items">
-                            <div class="join-user__items--row" style="justify-content: space-between">
-                                <button onclick="submit()" class="button_class">신청</button>
-                                <button class="button_class">취소</button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!-- 지식 백과사전 📚 -->
-                <footer id="footer">
-                    
-                </footer>
-            </div>
-        </div>
+        <!--푸터-->
+        <footer id="footer"></footer>
+
     </div>
-    
-    <script src="/resources/js/user/common.js"></script>
-    <!--스크립트 연결 Hos_JoinUser.html-->
-    <script
-        type="application/javascript"
-        src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script type="application/javascript" src="../js/Hos_joinUser.js"></script>
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    
-    </body>
+</body>
 
 </html>

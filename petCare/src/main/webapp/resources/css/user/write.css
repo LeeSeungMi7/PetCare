@@ -1,0 +1,25 @@
+.eidtor {
+    display: flex;
+    flex-direction: column;
+    border: solid 1px black;
+    padding: 20px;
+    position: relative;
+    max-width: 700px;
+}
+
+a{
+    text-decoration: none;
+}
+.board{
+    margin:auto;
+    border:1px solid black;
+    width: 750px;
+    margin-top: 30px;
+}
+
+.contentbox{
+    margin-bottom:10px;
+    height:auto;
+    min-height: 500px;
+    white-space: pre-line !important;
+}
