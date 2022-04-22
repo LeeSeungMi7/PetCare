@@ -9,7 +9,6 @@
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
        
         <link href="../../../../resources/css/admin/ad_commboard.css" rel="stylesheet"/>
-        <link href="../../../../resources/css/admin/ad_common.css" rel="stylesheet"/>
         <link href="../../../../resources/css/admin/styles.css" rel="stylesheet"/>
         <link href="../../../../resources/css/admin/morris.css" rel="stylesheet"/>
         
@@ -17,13 +16,14 @@
     <body class="sb-nav-fixed">
         <!--헤더 영역-->
         <div id="admin_header"></div>
-
-                <main class="admin_main">
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_content">
+                <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">백과사전 등록</h1>
                         <hr>
                         <div class="insertEn">
-                            <div class="insert">
+                            <div class="insert" style="height: 93vh;">
                                 <form action="./boardInsert" method="POST">
                                     <input class="title" type="text" name="title" placeholder="제목"/>
                                     <textarea class="content" name="content" placeholder="내용"></textarea>
@@ -45,7 +45,7 @@
                 </main>
 
                 <!--푸터-->
-                <div id="admin_footer" class="footer_div"></div>
+                <div id="admin_footer"></div>
             </div>
         </div>
 

@@ -8,15 +8,15 @@
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 
         <link href="../../../../resources/css/admin/ad_board.css" rel="stylesheet"/>
-        <link href="../../../../resources/css/admin/ad_common.css" rel="stylesheet"/>
         <link href="../../../../resources/css/admin/styles.css" rel="stylesheet"/>
         <link href="../../../../resources/css/admin/morris.css" rel="stylesheet"/>
     </head>
     <body class="sb-nav-fixed">
         <!--헤더 영역-->
         <div id="admin_header"></div>
-
-                <main class="admin_main">
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_content">
+                <main>
                     <div class="container-fluid px-4">
                         <h1 class="mt-4">백과사전</h1>
                         <hr>
@@ -24,7 +24,7 @@
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
                                 백과사전 관리
-                                <button class="en_insertBtn" id=""><a href = "en_insert.html">백과사전 등록</a></button>
+                                <button class="en_insertBtn shadow-sm bg-body rounded" id=""><a href = "en_insert.html">백과사전 등록</a></button>
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
@@ -69,7 +69,7 @@
                 </main>
 
                 <!--푸터-->
-                <div id="admin_footer" class="footer_div"></div>
+                <div id="admin_footer"></div>
             </div>
         </div>
 

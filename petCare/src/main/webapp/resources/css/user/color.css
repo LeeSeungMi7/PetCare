@@ -18,6 +18,10 @@
     color: red;
 }
 
+.color--blue {
+    color: #007bff;
+}
+
 .color--gray {
     color: #6b7684;
 }
@@ -40,6 +44,10 @@
 
 .background--red {
     background: red;
+}
+
+.background--blue {
+    background: #007bff;
 }
 
 .background--gray {

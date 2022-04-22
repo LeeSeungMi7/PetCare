@@ -1,8 +1,9 @@
 .pet-header {
-    position: fixed;
+    position: sticky;
     top: 0;
     max-width: 800px;
     width: 100%;
+    z-index: 100;
 }
 
 .pet-header__logo {
@@ -28,12 +29,9 @@
 
 .pet-header__tab.active {
     font-weight: bold;
+    background: #3de00733;
 }
 
 .pet-header__tabs > .pet-header__tab:hover {
     background: #3de00733;
-}
-
-.logo{
-    width: 80px;
 }

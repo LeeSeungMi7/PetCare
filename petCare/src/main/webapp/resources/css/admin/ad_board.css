@@ -4,14 +4,12 @@ table{
     text-overflow : ellipsis;
 }
 a{
-    text-decoration: none;
+    text-decoration: none !important;
 }
 .en_insertBtn a{
-    color:#fff;
+    color: mediumseagreen;
 }
 .en_insertBtn{
-    background-color: #77af9c;
-    color: #d7fff1;
     border : 0px;
     position: absolute;
     right: 1.5%;

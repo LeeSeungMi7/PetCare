@@ -4,7 +4,6 @@
 
 .pet-home__slider > img {
     width: 100%;
-    height: 25rem;
 }
 
 .pet-home__title {
@@ -62,8 +61,4 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-}
-
-.pet-home__card-tel{
-    margin-top: 20px;
 }

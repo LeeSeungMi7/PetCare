@@ -1,42 +1,18 @@
-<!--css Home.html-->
-<link href="/resources/css/user/index.css" rel="stylesheet">
-<link href="/resources/css/user/color.css" rel="stylesheet">
-<link href="/resources/css/user/text.css" rel="stylesheet">
-<link href="/resources/css/user/header.css" rel="stylesheet">
-<link href="/resources/css/user/footer.css" rel="stylesheet">
-<link href="/resources/css/user/button.css" rel="stylesheet">
-<link href="/resources/css/user/home.css" rel="stylesheet">
-
-
-
-<!-- css 모달 로그인창-->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" href="/resources/css/user/loginForm.css"> 
-
-<!-- alert 창 꾸미기-->
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-<!-- 헤더 영역-->
-<div class="pet-header__logo row">
-    <div class="text--18-bold color--primary">
-        <img class="logo" src="/resources/img/logo.png">
-    </div>
+<div class="pet-header__logo pet-row">
+    <div class="text--18-bold color--primary">PETCARE</div>
     <div class="pet-header__join">
         <a href="javascript:openModal('modal1');" class="button modal-open text--14-normal">로그인</a>
-        <a href="/views/signinForm.html" class="text--14-normal">회원가입</a>
+        <a href="signinForm.html" class="text--14-normal">회원가입</a>
     </div>
 </div>
-<div class="pet-header__tabs row">
-    <a class="pet-header__tab text--16-normal color--black active" href="#">홈</a>
-    <a class="pet-header__tab text--16-normal color--black" href="#">내주변 병원</a>
+<div class="pet-header__tabs pet-row">
+    <a class="pet-header__tab text--16-normal color--black active" href="home.html">홈</a>
+    <a class="pet-header__tab text--16-normal color--black" href="hospital.html">내주변 병원</a>
     <a class="pet-header__tab text--16-normal color--black" href="www.naver.com">자랑하기</a>
-    <a class="pet-header__tab text--16-normal color--black" href="www.naver.com">QnA</a>
-    <a class="pet-header__tab text--16-normal color--black" href="www.naver.com">동물백과</a>
+    <a class="pet-header__tab text--16-normal color--black" href="qna.html">QnA</a>
+    <a class="pet-header__tab text--16-normal color--black" href="ency_boardList.html">동물백과</a>
     <a class="pet-header__tab text--16-normal color--black" href="www.naver.com">내정보</a>
 </div>
-
-
-
 
 <!--로그인 모달창-->
 <div id="modal"></div>
@@ -56,12 +32,12 @@
                     <input type="password" id="upw" class="form-control" placeholder="Password" required><br>
                     <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">로 그 인</button>
                     <button class="btn btn-lg btn-primary_kakao btn-block" >
-                        <img src="/resources/img/kakao.png" class="kakao_img">
+                        <img src="../../../../resources/img/kakao.png" class="kakao_img">
                         카카오 로그인
                     </button>
                     <div class="searchBox">
-                        <a href="#">비밀번호 찾기</a><br>
-                        <a href="#">회원가입</a>
+                        <a href="./password.html">비밀번호 찾기</a><br>
+                        <a href="./signinForm.html">회원가입</a>
                     </div>
                     <label><p>제휴 병원 가입신청은 회원가입으로 진행해주세요</p></label>
             </form>
@@ -71,7 +47,5 @@
     
         <div class="modal">
         </div>
-
-        
     </div>
 </div>

@@ -1,16 +1,16 @@
 .insertEn {
     width: 100%;
 }
-a {
-    text-decoration: none;
-    color: white;
+button a {
+    text-decoration: none !important;
+    color: white !important;
 }
 .insert {
     padding: 20px 30px;
     display: block;
     width: 600px;
     margin: 5vh auto;
-    height: 105vh;
+    height: 100vh;
     border: 1px solid #dbdbdb;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
