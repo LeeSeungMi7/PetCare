@@ -14,51 +14,44 @@
     <body class="sb-nav-fixed">
         <!--헤더 영역-->
         <div id="admin_header"></div>
-
-                <main class="admin_main">
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_content">
+                <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">백과사전</h1>
+                        <h1 class="mt-4">사용자 관리</h1>
                         <hr>
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
-                                백과사전 관리
-                                <button class="en_insertBtn" id=""><a href = "en_insert.html">백과사전 등록</a></button>
+                                총 사용자
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>번호</th>
-                                            <th>제목</th>
-                                            <th>글내용</th>
-                                            <th>작성일</th>
-                                            <th>조회수</th>
+                                            <th>이름</th>
+                                            <th>이메일</th>
+                                            <th>연락처</th>
+                                            <th>주소</th>
+                                            <th>세부 주소</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>seq</th>
-                                            <th>제목</th>
-                                            <th>글내용</th>
-                                            <th>작성일</th>
-                                            <th>조회수</th>
+                                            <th>이름</th>
+                                            <th>이메일</th>
+                                            <th>연락처</th>
+                                            <th>주소</th>
+                                            <th>세부 주소</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
                                         <tr>
-                                            <td>1</td>
-                                            <td><a href="en_getBoard.html">백과사전 테스트</a></td>
-                                            <td>글 내용 테스트입니다 최대한 길게 작성</td>
-                                            <td>2022/04/17</td>
-                                            <td>61</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td><a href="en_getBoard.html">백과사전 테스트2</a></td>
-                                            <td>글 내용 테스트2입니다 최대한 길게 작성</td>
-                                            <td>2022/04/18</td>
-                                            <td>51</td>
+                                            <td>홍길동</td>
+                                            <td>hong1234@naver.com</td>
+                                            <td>010-1233-1235</td>
+                                            <td>서울특별시 종로구 돈화문로 26</td>
+                                            <td>단성사 빌딩 403호</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -66,7 +59,6 @@
                         </div>
                     </div>
                 </main>
-
                 <!--푸터-->
                 <div id="admin_footer" class="footer_div"></div>
             </div>

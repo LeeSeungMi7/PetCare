@@ -4,7 +4,7 @@ table{
     text-overflow : ellipsis;
 }
 a{
-    text-decoration: none;
+    text-decoration: none !important;
 }
 .en_insertBtn a{
     color:#fff;

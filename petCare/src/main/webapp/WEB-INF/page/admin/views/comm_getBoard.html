@@ -9,7 +9,6 @@
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
        
         <link href="../../../../resources/css/admin/ad_commboard.css" rel="stylesheet"/>
-        <link href="../../../../resources/css/admin/ad_common.css" rel="stylesheet"/>
         <link href="../../../../resources/css/admin/styles.css" rel="stylesheet"/>
         <link href="../../../../resources/css/admin/morris.css" rel="stylesheet"/>
         
@@ -17,66 +16,35 @@
     <body class="sb-nav-fixed">
         <!--헤더 영역-->
         <div id="admin_header"></div>
-
-                <main class="admin_main">
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_content">
+                <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">백과사전</h1>
+                        <h1 class="mt-4">글 상세보기</h1>
                         <hr>
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                백과사전 관리
-                                <button class="en_insertBtn" id=""><a href = "en_insert.html">백과사전 등록</a></button>
-                            </div>
-                            <div class="card-body">
-                                <table id="datatablesSimple">
-                                    <thead>
-                                        <tr>
-                                            <th>번호</th>
-                                            <th>제목</th>
-                                            <th>글내용</th>
-                                            <th>작성일</th>
-                                            <th>조회수</th>
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>seq</th>
-                                            <th>제목</th>
-                                            <th>글내용</th>
-                                            <th>작성일</th>
-                                            <th>조회수</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td><a href="en_getBoard.html">백과사전 테스트</a></td>
-                                            <td>글 내용 테스트입니다 최대한 길게 작성</td>
-                                            <td>2022/04/17</td>
-                                            <td>61</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td><a href="en_getBoard.html">백과사전 테스트2</a></td>
-                                            <td>글 내용 테스트2입니다 최대한 길게 작성</td>
-                                            <td>2022/04/18</td>
-                                            <td>51</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        <div class="insertEn">
+                            <div class="insert">
+                                <form action="./boardInsert" method="POST">
+                                    <input class="title" type="text" name="title" placeholder="제목"/>
+                                    <textarea class="content" name="content" placeholder="내용"></textarea>
+                                    <div class="file-hidden-list"></div>
+                                </form>
+                                <button id="addFile" class="add-button">파일 첨부</button>
+                                <div class="file-list"></div>
+                                <div class="buttonarea">
+                                    <button type="button" class="btn btn-danger"><a href="">삭제</a></button>
+                                    <button type="button" class="btn btn-secondary">
+                                        <a href="ad_community.html">취소</a>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </main>
-
                 <!--푸터-->
-                <div id="admin_footer" class="footer_div"></div>
+                <div id="admin_footer"></div>
             </div>
         </div>
-
-        
-
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" rossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <!-- <script src="../assets/demo/chart-area-demo.js"></script>
