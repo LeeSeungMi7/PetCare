@@ -15,8 +15,8 @@
 	<insert id="partner_register" useGeneratedKeys="true"
 		keyProperty="m_number" parameterType="MemberVO">
 		INSERT INTO
-		Member_Table(m_id, m_pw, m_name, m_tel, m_address_class, m_zipcode, m_address, m_address_detail, m_sido, m_dong, m_role, m_access, p_file_name, p_file_path)
-		VALUES(#{m_id},#{m_pw},#{m_name},#{m_tel},#{m_address_class},#{m_zipcode},#{m_address},#{m_address_detail},#{m_sido},#{m_dong},#{m_role},#{m_access},#{p_file_name},#{p_file_path})
+		Member_Table(m_id, m_pw, m_name, m_tel, m_address_class, m_zipcode, m_address, m_address_detail, m_sido, m_dong, m_role, m_access, p_file_name, p_file_path, p_weekday, p_weekend, p_breaktime, p_24hour)
+		VALUES(#{m_id},#{m_pw},#{m_name},#{m_tel},#{m_address_class},#{m_zipcode},#{m_address},#{m_address_detail},#{m_sido},#{m_dong},#{m_role},#{m_access},#{p_file_name},#{p_file_path},#{p_weekday},#{p_weekend},#{p_breaktime},#{p_24hour})
 	</insert>
 
 	<!-- 메일 중복 체크 -->

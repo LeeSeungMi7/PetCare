@@ -10,6 +10,17 @@ $(document).ready(function () {
             .siblings('.upload-name')
             .val(filename);
     });
+    
+    $("#jb-checkbox").change(function(){
+      if($("#jb-checkbox").is(":checked")){
+          $("#p_24hour").val("1");
+          alert("24시간 병원");
+      }
+      else{
+          alert("24시간 병원 아님");
+      }
+  });
+  
 });
 
 
@@ -45,7 +56,7 @@ const inputUserWeekendStart = getElement('user_weekend_start');
 const inputUserWeekendEnd = getElement('user_weekend_end');
 const inputUserLunchStart = getElement('user_lunch_start');
 const inputUserLunchEnd = getElement('user_lunch_end');
-/** 연락처 태그 **/
+
 
 const errorTypes = {
     name: 'name',
@@ -243,13 +254,31 @@ const invalid = {
         return '주소를 모두 입력해주세요.';
     },
     openingHours() {
-    	
-        const openingHours = "${user.weekdayStart()}${user.weekdayEnd()}${user.weekendStart()}${user.weekendEnd()}${user.lunchStart()}${user.lunchEnd()}";
+		/*const openingHours = `${user.weekdayStart()}${user.weekdayEnd()}${user.weekendStart()}${user.weekendEnd()}${user.lunchStart()}${user.lunchEnd()}`;
         if (/^((([0-1][0-9])|(2[0-3])):[0-5][0-9]){6}$/.test(openingHours)) {
-            return;
+            return
         }
-        return '모든 진료시간을 00:00 형태로 입력해주세요';
+        return '모든 진료시간을 00:00 형태로 입력해주세요';*/
+      	/*  if (/^((([0-1][0-9])|(2[0-3])):[0-5][0-9]){6}$/.test(user.weekendStart() && user.weekendEnd() && user.weekendEnd() && user.weekendStart() && user.lunchStart() && user.lunchEnd())) {
+            return
+        }
+        return '모든 진료시간을 00:00 형태로 입력해주세요';*/
         
+       	if (/^(([0-1][0-9])|(2[0-3])):[0-5][0-9]$/.test(user.weekendStart())) {
+        	return;
+        }else if(/^(([0-1][0-9])|(2[0-3])):[0-5][0-9]$/.test(user.weekendEnd())){
+        	return;
+        }else if(/^(([0-1][0-9])|(2[0-3])):[0-5][0-9]$/.test(user.weekendStart())){
+        	return;
+        }else if(/^(([0-1][0-9])|(2[0-3])):[0-5][0-9]$/.test(user.weekendEnd())){
+        	return;
+        }else if(/^(([0-1][0-9])|(2[0-3])):[0-5][0-9]$/.test(user.lunchStart())){
+        	return;
+        }else if(/^(([0-1][0-9])|(2[0-3])):[0-5][0-9]$/.test(user.lunchEnd())){
+        	return;
+        }else{
+        	return '모든 진료시간을 00:00 형태로 입력해주세요';
+        }
     },
     	
     all() {

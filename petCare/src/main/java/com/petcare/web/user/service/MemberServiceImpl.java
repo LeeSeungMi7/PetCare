@@ -22,13 +22,13 @@ public class MemberServiceImpl implements MemberService{
 	
 	
 	@Override
-	public int user_register(MemberVO memberVO) {
-		return memberDAO.user_register(memberVO);
+	public void user_register(MemberVO memberVO) {
+		 memberDAO.user_register(memberVO);
 	}
 
 	@Override
-	public int partner_register(MemberVO memberVO) {
-		return memberDAO.partner_register(memberVO);
+	public void partner_register(MemberVO memberVO) {
+		 memberDAO.partner_register(memberVO);
 	}
 
 

@@ -28,6 +28,7 @@
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1e818982c81810e2470dd6b0b339e676&libraries=services"></script>
 	<script type="text/javascript">
 	
+
 	/** 서브밋 함수 **/
 	function fn_submit() {
 		var email_check = $("input[name=emailcheck]").val();
@@ -75,6 +76,9 @@
   		}
   	});
   }
+  
+  
+  
 	</script>
 </head>
 
@@ -93,7 +97,7 @@
 				<div class="pet-body pet-home">
 					<!-- 홈 최상단 슬라이더 -->
 					<section name="f" class="pet-home__boards">
-					<form onsubmit="fn_submit(); return false;" method="post" action="/partner_register.do">
+					<form onsubmit="fn_submit();" method="post" action="/partner_register.do" enctype="multipart/form-data">
 	                   	 <div class="join-user" style="align-items: center">
 	                        <!--병원이름-->
 	                        <div class="join-user__items">
@@ -172,7 +176,7 @@
 	                        <!--24시간 병원인지 체크-->
 	                        <div class="join-user__items">
 	                            <div class="custom-control custom-checkbox">
-	                                <input type="checkbox" id="jb-checkbox" class="custom-control-input" name="p_24hour">
+	                                <input type="checkbox" id="jb-checkbox" class="custom-control-input" >
 	                                <label class="custom-control-label" for="jb-checkbox">24시 병원</label>
 	                            </div>
 	                        </div>
@@ -183,7 +187,7 @@
 	                                <div class="filebox">
 	                                    <input class="upload-name" value="파일선택" disabled="disabled">
 	                                    <label for="ex_filename">업로드</label>
-	                                    <input type="file" id="ex_filename" class="upload-hidden">
+	                                    <input type="file" id="ex_filename" class="upload-hidden" name="p_file_name">
 	                                </div>    
 	                        </div>
 	                        
@@ -196,6 +200,7 @@
 	                        </div>
 	                    </div>
 	                    <input type="hidden" name="emailcheck" value="0">
+	                    <input type="hidden" id="p_24hour" name="p_24hour" value="0">
 	                    </form>
 	                </section>
 	                

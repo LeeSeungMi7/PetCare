@@ -16,12 +16,12 @@ public class MemberDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 
 	// 회원가입처리
-	public int user_register(MemberVO memberVO) {
-		return sqlSessionTemplate.insert("MemberDAO.user_register", memberVO);
+	public void user_register(MemberVO memberVO) {
+	     sqlSessionTemplate.insert("MemberDAO.user_register", memberVO);
 	}
 	
-	public int partner_register(MemberVO memberVO) {
-		return sqlSessionTemplate.insert("MemberDAO.partner_register", memberVO);
+	public void partner_register(MemberVO memberVO) {
+		 sqlSessionTemplate.insert("MemberDAO.partner_register", memberVO);
 	}
 	
 	

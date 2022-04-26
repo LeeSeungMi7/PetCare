@@ -37,20 +37,4 @@ public class MemberVO {
 	String p_breaktime2;
 	
 	
-	public void setP_weekend(String p_weekend1,String p_weekend2) {
-		this.p_weekend = p_weekend1 +"/"+ p_weekend2;
-	}
-	public void setM_tel(String m_tel1, String m_tel2, String m_tel3) {
-		this.m_tel = m_tel1 + m_tel2 + m_tel3;
-	}
-	public void setP_weekday(String p_weekday1 , String p_weekday2) {
-		this.p_weekday = p_weekday1 +"/"+ p_weekday2;
-	}
-	public void setP_breaktime(String p_breaktime1, String p_breaktime2) {
-		this.p_breaktime = p_breaktime1 +"/"+ p_breaktime2;
-	}
-	
-	
-	
-	
 }
