@@ -1,3 +1,4 @@
+    <body>
         <h2 style="margin-left:20px; padding-top: 20px;">예약 신청 목록</h2>
         <table
             class="table table-bordered"
@@ -75,7 +76,7 @@
         <label for="formGroupExampleInput2" class="form-label">날짜 선택 :
         </label>
         <input type="text" id="datepicker" class="datepick" readonly="readonly">
-        <button type="button" class="btn btn-success excelbtn btn-lg" onclick="ReportToExcelConverter()">엑셀로 보기</button>
+        <button type="button" class="btn btn-success excelbtn btn-lg" id="excelDownload"onclick="fnExcelReport('table','title');" >엑셀로 보기</button>
         <table class="table table-bordered" id="resevtable">
             <thead>
                 <tr class="table-success">
@@ -114,3 +115,5 @@
                 </tr>
             </tbody>
         </table>
+        
+        <script src="../../../../resources/js/user/ur_reservation.js"></script>

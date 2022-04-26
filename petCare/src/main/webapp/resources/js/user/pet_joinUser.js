@@ -1,26 +1,26 @@
 /** 이름 태그 **/
-const inputPetName = getElement('pet_name');
+const inputPetName = getpetElement('pet_name');
 /** 이름 태그 **/
 
 /** 어떤 동물 태그 **/
-const inputUserAnimal = getElement('user_animal');
+const inputUserAnimal = getpetElement('user_animal');
 /** 어떤 동물 태그 **/
 
 /** 나이 태그 **/
-const inputUserOld = getElement('user_old');
+const inputUserOld = getpetElement('user_old');
 /** 나이 태그 **/
 
-const errorTypes = {
+const errorPetTypes = {
     pet: 'pet',
     animal: 'animal',
     old: 'old'
 }
 
-function getElement(id) {
+function getpetElement(id) {
     return $(`#${id}`);
 }
 
-function debounce(func, wait) {
+function petdebounce(func, wait) {
     let inDebounce;
     return function () {
         const context = this;
@@ -33,7 +33,7 @@ function debounce(func, wait) {
 }
 
 
-const user = {
+const petuser = {
     pet() {
         return inputPetName.val();
     },
@@ -52,8 +52,8 @@ const user = {
     }
 }
 
-function setError(id, message) {
-    const el = document.getElementById(id);
+function petsetError(id, message) {
+    const el = document.getpetElementById(id);
     if (message) {
         el.innerText = message;
         el.style.display = 'block';
@@ -62,21 +62,21 @@ function setError(id, message) {
     }
 }
 
-async function onInputInvalid(type) {
+async function onInputInvalids(type) {
     let message = false;
     let errorId = '';
 
     switch (type) {
-        case errorTypes.pet:
-            message = invalid.pet();
+        case errorPetTypes.pet:
+            message = invalids.pet();
             errorId = 'error_pet';
             break;
-        case errorTypes.animal:
-            message = await invalid.animal();
+        case errorPetTypes.animal:
+            message = await invalids.animal();
             errorId = 'error_animal';
             break;
-        case errorTypes.old:
-            message = invalid.old();
+        case errorPetTypes.old:
+            message = invalids.old();
             errorId = 'error_old';
             break;
     }
@@ -85,10 +85,10 @@ async function onInputInvalid(type) {
 }
 
 /** 유효성 체크 함수 **/
-const invalid = {
+const invalids = {
     pet() {
         /** 영/한 이외의 값이 있는지 체크(공백/특수문자/숫자 등등) **/
-        const pet = user.pet();
+        const pet = petuser.pet();
         if (!pet) {
             return '이름을 입력해주세요.';
         }
@@ -104,7 +104,7 @@ const invalid = {
     },
     animal() {
         /** 영/한 이외의 값이 있는지 체크(공백/특수문자/숫자 등등) **/
-        const animal = user.animal();
+        const animal = petuser.animal();
         if (!animal) {
             return '종류를 입력해주세요.';
         }
@@ -120,7 +120,7 @@ const invalid = {
     },
 
     old() {
-        if (/^[0-9]+$/.test(user.old())) {
+        if (/^[0-9]+$/.test(petuser.old())) {
             return
         }
         return '숫자로만 입력가능합니다.';
@@ -133,12 +133,12 @@ const invalid = {
 
 /** 서브밋 함수 **/
 function petsubmit() {
-    if (invalid.all()) {
+    if (invalids.all()) {
         // TODO: 모든 값들에 대해 유효성 통과
-        user.info();
+        petuser.info();
     } else {
-        for(let type in errorTypes) {
-            onInputInvalid(type);
+        for(let type in errorPetTypes) {
+            onInputInvalids(type);
         }
     }
 }

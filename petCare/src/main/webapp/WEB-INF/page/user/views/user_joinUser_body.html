@@ -100,7 +100,7 @@
                 <!--반려동물 이름-->
                 <div class="join-user__items">
                     <label>반려동물 이름</label>
-                    <input type="text" id="pet_name" oninput="onInputInvalid('pet')" />
+                    <input type="text" id="pet_name" oninput="onInputInvalids('pet')" />
                     <span class="error_next_box" id="error_pet" aria-live="assertive"></span>
                 </div>
 
@@ -108,14 +108,14 @@
                 <div class="join-user__items">
                     <label>어떤 동물인가요?</label>
                     <input id="user_animal" type="text" maxlength="20" placeholder="예) 강아지, 고양이"
-                        oninput="onInputInvalid('animal')" />
+                        oninput="onInputInvalids('animal')" />
                     <span class="error_next_box" id="error_animal" aria-live="assertive"></span>
                 </div>
                 <!--몇살인가요?-->
                 <div class="join-user__items">
                     <label>몇살인가요?</label>
                     <div class="join-user__items--row" style="justify-content: space-between">
-                        <input id="user_old" type="text" maxlength="5" oninput="onInputInvalid('old')"
+                        <input id="user_old" type="text" maxlength="5" oninput="onInputInvalids('old')"
                             style="padding-right: 40px;">
                         살
                     </div>

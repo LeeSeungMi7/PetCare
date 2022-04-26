@@ -15,8 +15,8 @@
             <!--반려동물 이름-->
             <div class="join-user__items">
                 <label>반려동물 이름</label>
-                <input type="text" id="user_name" oninput="onInputInvalid('name')" />
-                <span class="error_next_box" id="error_name" aria-live="assertive"></span>
+                <input type="text" id="user_name" oninput="onInputInvalid('pet')" />
+                <span class="error_next_box" id="error_pet" aria-live="assertive"></span>
             </div>
 
             <!--어떤 동물인가요?-->
@@ -53,8 +53,8 @@
             <!--완료-->
             <div class="join-user__items">
                 <div class="join-user__items--row" style="justify-content: space-between">
-                    <button class="buttonOk" onclick="submit()">가입</button>
-                    <button class="buttonOk" onclick="submit()">취소</button>
+                    <button class="buttonOk" onclick="petsubmit()">가입</button>
+                    <button class="buttonOk" onclick="petsubmit()">취소</button>
                 </div>
             </div>
         </div>
