@@ -1,0 +1,116 @@
+        <h2 style="margin-left:20px; padding-top: 20px;">예약 신청 목록</h2>
+        <table
+            class="table table-bordered"
+            style="margin-top: 20px; margin-bottom: 20px;">
+            <thead>
+                <tr class="table-success">
+                    <th scope="col">번호</th>
+                    <th scope="col">날짜</th>
+                    <th scope="col">시간</th>
+                    <th scope="col">보호자</th>
+                    <th scope="col">전화번호</th>
+                    <th scope="col">반려동물</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>22-04-25</td>
+                    <td>오전 9시</td>
+                    <td>홍길동</td>
+                    <td>010-1234-5678</td>
+                    <td>구름이</td>
+                    <td>
+                        <button
+                            type="button"
+                            class="btn-success btn-sm"
+                            onclick="deleteRowFunction(this)">승인</button>
+                        <button
+                            type="button"
+                            class="btn-danger btn-sm"
+                            onclick="deleteRowFunction(this)">기각</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>22-04-26</td>
+                    <td>오전 10시</td>
+                    <td>사오정</td>
+                    <td>010-1234-5123</td>
+                    <td>야옹이</td>
+                    <td>
+                        <button
+                            type="button"
+                            class="btn-success btn-sm"
+                            onclick="deleteRowFunction(this)">승인</button>
+                        <button
+                            type="button"
+                            class="btn-danger btn-sm"
+                            onclick="deleteRowFunction(this)">기각</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>22-04-27</td>
+                    <td>오후 9시</td>
+                    <td>손오공</td>
+                    <td>010-1438-3421</td>
+                    <td>멍멍이</td>
+                    <td>
+                        <button
+                            type="button"
+                            class="btn-success btn-sm"
+                            onclick="deleteRowFunction(this)">승인</button>
+                        <button
+                            type="button"
+                            class="btn-danger btn-sm"
+                            onclick="deleteRowFunction(this)">기각</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr style="margin-bottom: 20px;">
+        <h2 style="margin-left:20px; padding-top: 20px; margin-bottom: 20px;">총 예약자 목록</h2>
+        <label for="formGroupExampleInput2" class="form-label">날짜 선택 :
+        </label>
+        <input type="text" id="datepicker" class="datepick" readonly="readonly">
+        <button type="button" class="btn btn-success excelbtn btn-lg" onclick="ReportToExcelConverter()">엑셀로 보기</button>
+        <table class="table table-bordered" id="resevtable">
+            <thead>
+                <tr class="table-success">
+                    <th scope="col">번호</th>
+                    <th scope="col">날짜</th>
+                    <th scope="col">시간</th>
+                    <th scope="col">보호자</th>
+                    <th scope="col">전화번호</th>
+                    <th scope="col">반려동물</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>22-04-25</td>
+                    <td>오전 9시</td>
+                    <td>홍길동</td>
+                    <td>010-1234-5678</td>
+                    <td>구름이</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>22-04-26</td>
+                    <td>오전 10시</td>
+                    <td>사오정</td>
+                    <td>010-1234-5123</td>
+                    <td>야옹이</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>22-04-27</td>
+                    <td>오후 9시</td>
+                    <td>손오공</td>
+                    <td>010-1438-3421</td>
+                    <td>멍멍이</td>
+                </tr>
+            </tbody>
+        </table>

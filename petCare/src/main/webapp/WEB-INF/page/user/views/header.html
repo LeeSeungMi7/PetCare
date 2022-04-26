@@ -8,10 +8,14 @@
 <div class="pet-header__tabs pet-row">
     <a class="pet-header__tab text--16-normal color--black active" href="home.html">홈</a>
     <a class="pet-header__tab text--16-normal color--black" href="hospital.html">내주변 병원</a>
-    <a class="pet-header__tab text--16-normal color--black" href="www.naver.com">자랑하기</a>
+    <a class="pet-header__tab text--16-normal color--black" href="show.html">자랑하기</a>
     <a class="pet-header__tab text--16-normal color--black" href="qna.html">QnA</a>
     <a class="pet-header__tab text--16-normal color--black" href="ency_boardList.html">동물백과</a>
-    <a class="pet-header__tab text--16-normal color--black" href="www.naver.com">내정보</a>
+    <a class="pet-header__tab text--16-normal color--black" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">내정보</a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <li><a class="dropdown-item" href="#">내 정보 수정</a></li>
+        <li><a class="dropdown-item" href="myreservation.html">내 예약 관리</a></li>
+    </ul>
 </div>
 
 <!--로그인 모달창-->
@@ -30,8 +34,8 @@
             <form class="form-signin" method="POST" onSubmit="logincall();false">
                     <input type="text" id="uid" class="form-control" placeholder="Email address" required autofocus><BR>
                     <input type="password" id="upw" class="form-control" placeholder="Password" required><br>
-                    <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">로 그 인</button>
-                    <button class="btn btn-lg btn-primary_kakao btn-block" >
+                    <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit" style="margin: 0;">로 그 인</button>
+                    <button class="btn btn-lg btn-primary_kakao btn-block" style="margin: 0; margin-top: 10px;">
                         <img src="../../../../resources/img/kakao.png" class="kakao_img">
                         카카오 로그인
                     </button>

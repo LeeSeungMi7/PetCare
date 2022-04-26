@@ -1,5 +1,5 @@
 /** 이름 태그 **/
-const inputUserName = getElement('user_name');
+const inputPetName = getElement('pet_name');
 /** 이름 태그 **/
 
 /** 어떤 동물 태그 **/
@@ -11,7 +11,7 @@ const inputUserOld = getElement('user_old');
 /** 나이 태그 **/
 
 const errorTypes = {
-    name: 'name',
+    pet: 'pet',
     animal: 'animal',
     old: 'old'
 }
@@ -34,8 +34,8 @@ function debounce(func, wait) {
 
 
 const user = {
-    name() {
-        return inputUserName.val();
+    pet() {
+        return inputPetName.val();
     },
     animal() {
         return inputUserAnimal.val()
@@ -45,7 +45,7 @@ const user = {
     },
     info() {
         return {
-            name: this.name(),
+            pet: this.pet(),
             animal: this.animal(),
             old: this.old(),
         }
@@ -67,9 +67,9 @@ async function onInputInvalid(type) {
     let errorId = '';
 
     switch (type) {
-        case errorTypes.name:
-            message = invalid.name();
-            errorId = 'error_name';
+        case errorTypes.pet:
+            message = invalid.pet();
+            errorId = 'error_pet';
             break;
         case errorTypes.animal:
             message = await invalid.animal();
@@ -86,18 +86,18 @@ async function onInputInvalid(type) {
 
 /** 유효성 체크 함수 **/
 const invalid = {
-    name() {
+    pet() {
         /** 영/한 이외의 값이 있는지 체크(공백/특수문자/숫자 등등) **/
-        const name = user.name();
-        if (!name) {
+        const pet = user.pet();
+        if (!pet) {
             return '이름을 입력해주세요.';
         }
 
-        if (name.length > 20) {
+        if (pet.length > 20) {
             return '이름은 20자리 이하여야 합니다.';
         }
 
-        if (/[^a-zA-Z가-힣ㄱ-ㅎ]/g.test(name)) {
+        if (/[^a-zA-Z가-힣ㄱ-ㅎ]/g.test(pet)) {
             return '이름에 영문/한글 이외의 값은 입력 할 수 없습니다.';
         }
         return;
@@ -126,13 +126,13 @@ const invalid = {
         return '숫자로만 입력가능합니다.';
     },
     all() {
-        return !this.name() && !this.animal() && !this.old();
+        return !this.pet() && !this.animal() && !this.old();
     }
 }
 
 
 /** 서브밋 함수 **/
-function submit() {
+function petsubmit() {
     if (invalid.all()) {
         // TODO: 모든 값들에 대해 유효성 통과
         user.info();
