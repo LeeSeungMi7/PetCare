@@ -1,4 +1,44 @@
-        <div class="pet-body pet-home">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="/resources/css/user/index.css" rel="stylesheet">
+    <link href="/resources/css/user/color.css" rel="stylesheet">
+    <link href="/resources/css/user/text.css" rel="stylesheet">
+    <link href="/resources/css/user/header.css" rel="stylesheet">
+    <link href="/resources/css/user/footer.css" rel="stylesheet">
+    <link href="/resources/css/user/button.css" rel="stylesheet">
+    <link href="/resources/css/user/loginForm.css" rel="stylesheet">
+    <link href="/resources/css/user/home.css" rel="stylesheet">
+    <link href="/resources/css/user/user_joinUser.css" rel="stylesheet">
+    <link href="/resources/css/user/user_joinUser_myPet.css" rel="stylesheet">
+    <!--부트스트랩-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"  crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- 제이쿼리 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--alert-->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+    <!-- 카카오 주소 -->
+    <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <!-- 카카오 MAP API-KEY -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1e818982c81810e2470dd6b0b339e676&libraries=services"></script>
+  
+
+</head>
+
+<body>
+<div id="pet-layout" class="background--white">
+    <!--헤더-->
+	<%@ include file="/WEB-INF/page/user/views/header.jsp" %>
+    <!--본문-->
+	<%-- <%@ include file="/WEB-INF/page/user/views/user_joinUser_body.jsp" %> --%>
+    
+    <div class="pet-body pet-home">
             <!-- 홈 최상단 슬라이더 -->
             <section name="f">
                 <div class="join-user" style="align-items: center">
@@ -60,13 +100,13 @@
 
                         <ul class="list-group">
                             <li class="list-group-item active" aria-current="true">반려동물 등록
-                                <a href="#" class="addList">추가</a>
+                                <a href="/pet_joinUser.do" class="addList">추가</a>
                             </li>
                             <li class="list-group-item">
 
                                 <div class="mypet_box1">
                                     <div>이름 : 구름이</div>
-                                    <button onclick="rainbow_btn(this)"><img src="../../../../resources/img/minus.png"></button>
+                                    <button onclick="rainbow_btn(this)"><img src="/resources/img/minus.png"></button>
                                 </div>
 
                                 <div class="mypet_box2">
@@ -80,12 +120,18 @@
                     <!--완료-->
                     <div class="join-user__items">
                         <div class="join-user__items--row" style="justify-content: space-between">
-                            <button class="buttonOk button_class" onclick="submit()">가입</button>
-                            <button class="buttonOk button_class">취소</button>
+                            <button class="buttonOk button_class" onclick="submit()">등록</button>
+                            <button class="buttonOk button_class" onclick="location.href='/home.do'">취소</button>
                         </div>
                     </div>
                 </div>
             </section>
         </div>
-
-<script src="../../../../resources/js/user/user_joinUser.js"></script>
+    
+    <!--푸터-->
+    <%@ include file="/WEB-INF/page/user/views/footer.jsp" %>
+    
+    <script src="/resources/js/user/user_joinUser.js"></script>
+</div>
+</body>
+</html>

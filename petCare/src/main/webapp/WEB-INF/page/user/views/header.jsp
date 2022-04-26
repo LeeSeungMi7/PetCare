@@ -1,8 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <div class="pet-header__logo pet-row">
     <div class="text--18-bold color--primary">PETCARE</div>
     <div class="pet-header__join">
         <a href="javascript:openModal('modal1');" class="button modal-open text--14-normal">로그인</a>
-        <a href="signinForm.html" class="text--14-normal">회원가입</a>
+        <a href="/signinForm.do" class="text--14-normal">회원가입</a>
     </div>
 </div>
 <div class="pet-header__tabs pet-row">
@@ -32,12 +34,12 @@
                     <input type="password" id="upw" class="form-control" placeholder="Password" required><br>
                     <button id="btn-Yes" class="btn btn-lg btn-primary btn-block" type="submit">로 그 인</button>
                     <button class="btn btn-lg btn-primary_kakao btn-block" >
-                        <img src="../../../../resources/img/kakao.png" class="kakao_img">
+                        <img src="/resources/img/kakao.png" class="kakao_img">
                         카카오 로그인
                     </button>
                     <div class="searchBox">
                         <a href="./password.html">비밀번호 찾기</a><br>
-                        <a href="./signinForm.html">회원가입</a>
+                        <a href="/signinForm.do">회원가입</a>
                     </div>
                     <label><p>제휴 병원 가입신청은 회원가입으로 진행해주세요</p></label>
             </form>

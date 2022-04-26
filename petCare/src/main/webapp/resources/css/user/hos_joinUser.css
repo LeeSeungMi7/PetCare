@@ -119,7 +119,7 @@ header, footer {
 }
 
 
-/* 꾸미기 */
+/* 袁몃�멸린 */
 input {
     font-size: 15px;
     border: 0;
@@ -214,7 +214,7 @@ select:disabled {
   opacity: 0.5;
 }
 
-/* 버튼 */
+/* 踰꾪듉 */
 .button_class{
     display: inline-block;
     padding: 6px 12px;
@@ -244,11 +244,4 @@ select:disabled {
   }
   .addList:hover{
     text-decoration-line: none;
-  }
-  #user_email {
-    width: 17rem;
-  }
-
-  #user_phone_number_pre{
-    text-align: center;
   }

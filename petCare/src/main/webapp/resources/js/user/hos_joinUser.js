@@ -143,7 +143,7 @@ function setError(id, message) {
     }
 }
 
-async function onInputInvalid(type) {
+ function onInputInvalid(type) {
     let message = false;
     let errorId = '';
 
@@ -153,7 +153,7 @@ async function onInputInvalid(type) {
             errorId = 'error_name';
             break;
         case errorTypes.email:
-            message = await invalid.email();
+            message = invalid.email();
             errorId = 'error_email';
             break;
         case errorTypes.password:
@@ -199,33 +199,12 @@ const invalid = {
         }
         return;
     },
-    async email() {
+    email() {
         const emailFormat = /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/.test(user.email())
         if (!emailFormat) {
             return '이메일 형식이 잘못됐습니다.';
         }
-
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                url: '/user/EmailCheck', //Controller에서 인식할 주소 EmailCheck는 가명
-                type: 'post',
-                data: {
-                    email: user.email()
-                },
-                success: function (cnt) {
-                    resolve(cnt === 1 ? '중복된 이메일 입니다.' : undefined);
-                },
-                error: function () {
-                    /** 서버 연동후 지후고 아래 주석 처리 되어 있는 코드 풀기 **/
-                    if (user.email() === 'kyungeun9718@daum.net') {
-                        resolve('중복된 이메일 입니다.');
-                    } else {
-                        resolve();
-                    }
-                    // resolve('알수 없는 에러 입니다.');
-                }
-            });
-        })
+        return; 
     },
     password() {
         const password = user.password();
@@ -264,12 +243,31 @@ const invalid = {
         return '주소를 모두 입력해주세요.';
     },
     openingHours() {
-        const openingHours = `${user.weekdayStart()}${user.weekdayEnd()}${user.weekendStart()}${user.weekendEnd()}${user.lunchStart()}${user.lunchEnd()}`;
-        if (/^((([0-1][0-9])|(2[0-3])):[0-5][0-9]){6}$/.test(openingHours)) {
-            return
+    	
+        if (/^(([0-1][0-9])|(2[0-3])):[0-5][0-9]$/.test(user.weekdayStart())) {
+        	console.log(11);
+        	return;
+        }else if(/^(([0-1][0-9])|(2[0-3])):[0-5][0-9]$/.test(user.weekdayEnd())){
+       		console.log(22);
+        	return;
+        }else if(/^(([0-1][0-9])|(2[0-3])):[0-5][0-9]$/.test(user.weekendStart())){
+        	console.log(33);
+        	return;
+        }else if(/^(([0-1][0-9])|(2[0-3])):[0-5][0-9]$/.test(user.weekendEnd())){
+        	console.log(44);
+        	return;
+        }else if(/^(([0-1][0-9])|(2[0-3])):[0-5][0-9]$/.test(user.lunchStart())){
+        	console.log(55);
+        	return;
+        }else if(/^(([0-1][0-9])|(2[0-3])):[0-5][0-9]$/.test(user.lunchEnd())){
+        	console.log(66);
+        	return;
+        }else{
+        	console.log(123456);
+        	return '모든 진료시간을 00:00 형태로 입력해주세요';
         }
-        return '모든 진료시간을 00:00 형태로 입력해주세요';
     },
+    	
     all() {
         return !this.name() && !this.phoneNumber() && !this.password() && !this.passwordCheck() && !this.address() && !this.openingHours();
     }
@@ -293,17 +291,7 @@ function findAddr() {
     }).open();
 }
 
-/** 서브밋 함수 **/
-function submit() {
-    if (invalid.all()) {
-        // TODO: 모든 값들에 대해 유효성 통과
-        user.info();
-    } else {
-        for (let type in errorTypes) {
-            onInputInvalid(type);
-        }
-    }
-}
+
 var alert = function (msg, type) {
     swal({
         title: '',
@@ -315,11 +303,11 @@ var alert = function (msg, type) {
     });
 }
 
-if (isConfirm) {
+/*if (isConfirm) {
     swal('', '', "success");
 } else {
     swal('', '', "failed");
-}
+}*/
 
 
 function Ok() {
