@@ -244,28 +244,12 @@ const invalid = {
     },
     openingHours() {
     	
-        if (/^(([0-1][0-9])|(2[0-3])):[0-5][0-9]$/.test(user.weekdayStart())) {
-        	console.log(11);
-        	return;
-        }else if(/^(([0-1][0-9])|(2[0-3])):[0-5][0-9]$/.test(user.weekdayEnd())){
-       		console.log(22);
-        	return;
-        }else if(/^(([0-1][0-9])|(2[0-3])):[0-5][0-9]$/.test(user.weekendStart())){
-        	console.log(33);
-        	return;
-        }else if(/^(([0-1][0-9])|(2[0-3])):[0-5][0-9]$/.test(user.weekendEnd())){
-        	console.log(44);
-        	return;
-        }else if(/^(([0-1][0-9])|(2[0-3])):[0-5][0-9]$/.test(user.lunchStart())){
-        	console.log(55);
-        	return;
-        }else if(/^(([0-1][0-9])|(2[0-3])):[0-5][0-9]$/.test(user.lunchEnd())){
-        	console.log(66);
-        	return;
-        }else{
-        	console.log(123456);
-        	return '모든 진료시간을 00:00 형태로 입력해주세요';
+        const openingHours = "${user.weekdayStart()}${user.weekdayEnd()}${user.weekendStart()}${user.weekendEnd()}${user.lunchStart()}${user.lunchEnd()}";
+        if (/^((([0-1][0-9])|(2[0-3])):[0-5][0-9]){6}$/.test(openingHours)) {
+            return;
         }
+        return '모든 진료시간을 00:00 형태로 입력해주세요';
+        
     },
     	
     all() {
