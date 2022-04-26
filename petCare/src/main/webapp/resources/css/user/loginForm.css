@@ -67,7 +67,8 @@ a.button{
   display: flex;
   position: absolute;
   margin-top: 2%;
-  width: 25px;
+  width: 25px !important;
+  height: 23px !important;
 }
 
 label > p{

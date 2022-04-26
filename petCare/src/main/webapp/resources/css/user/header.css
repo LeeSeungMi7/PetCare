@@ -35,3 +35,7 @@
 .pet-header__tabs > .pet-header__tab:hover {
     background: #3de00733;
 }
+.logo{
+    width:60px !important;
+    height:60px !important;
+}

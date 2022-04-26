@@ -1,6 +1,9 @@
 .swal-button{
     height: 45px !important;
 }
+.sweet-alert button{
+    height: 45px !important;
+}
 .myreservation_body{
     min-height: 749px;
 }
