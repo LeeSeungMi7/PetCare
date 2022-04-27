@@ -1,22 +1,42 @@
 .getboard {
     margin: 20px auto auto;
     width: 750px;
+    height: 730px;
 }
-img {
-    width: 300px !important;
-    height: 180px !important;
-}
-ul {
+.list-group {
     margin-bottom: 10px !important;
+    height: 630px;
 }
-.list-group-item {
-    border:2px solid #3de00733 !important;
+.media {
+    margin-bottom: 10px;
+    border: 2px solid #3de00733;
 }
-p {
-    margin-top: 30px;
+.media-left {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+.media-body {
+    margin-top: 10px;
+}
+.badge {
+    width: 100%;
+}
+.content {
+    height: 66px;
+    margin-bottom: 8px;
+    font-size: 20px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+}
+.insertdate {
+    height: 24px;
+    margin-bottom: 16px;
+}
+.media-heading {
+    font-size: 36px;
+    margin-bottom: 30px;
 }
