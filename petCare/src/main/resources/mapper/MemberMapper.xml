@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MemberDAO">
+	<!-- TEST START -->
+	<insert id="user_register" useGeneratedKeys="true"
+		keyProperty="m_number" parameterType="MemberVO">
+		INSERT INTO
+		Member_Table(m_id, m_pw, m_name, m_tel, m_address_class, m_zipcode, m_address, m_address_detail, m_sido, m_dong, m_role, m_access)
+		VALUES(#{m_id},#{m_pw},#{m_name},#{m_tel},#{m_address_class},#{m_zipcode},#{m_address},#{m_address_detail},#{m_sido},#{m_dong},#{m_role},#{m_access})
+	</insert>
+	
+	<insert id="partner_register" useGeneratedKeys="true"
+		keyProperty="m_number" parameterType="MemberVO">
+		INSERT INTO
+		Member_Table(m_id, m_pw, m_name, m_tel, m_address_class, m_zipcode, m_address, m_address_detail, m_sido, m_dong, m_role, m_access, p_file_name, p_file_path, p_weekday, p_weekend, p_breaktime, p_24hour)
+		VALUES(#{m_id},#{m_pw},#{m_name},#{m_tel},#{m_address_class},#{m_zipcode},#{m_address},#{m_address_detail},#{m_sido},#{m_dong},#{m_role},#{m_access},#{p_file_name},#{p_file_path},#{p_weekday},#{p_weekend},#{p_breaktime},#{p_24hour})
+	</insert>
+
+	<!-- 메일 중복 체크 -->
+	<select id="checkemail" parameterType="String" resultType="Integer">
+      SELECT COUNT(*) FROM Member_Table
+      WHERE m_id = #{email}
+	</select>
+	
+	<!-- TEST END -->
+
+		
+</mapper>
+      

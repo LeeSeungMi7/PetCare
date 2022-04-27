@@ -2,7 +2,7 @@
 <web-app version="2.5" xmlns="http://Java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-		
+
 	<!--encodingFilter 등록 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
@@ -64,16 +64,18 @@
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
-				/WEB-INF/spring/adminContext/admin-servlet.xml 
-				<!-- 추가등록 가능
-				 /WEB-INF/spring/adminContext/adminPageContext.xml -->
+				/WEB-INF/spring/adminContext/admin-servlet.xml
+				<!-- 추가등록 가능 /WEB-INF/spring/adminContext/adminPageContext.xml -->
 			</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>admin</servlet-name>
 		<url-pattern>*.mdo</url-pattern>
 	</servlet-mapping>
+	
+
 
 </web-app>

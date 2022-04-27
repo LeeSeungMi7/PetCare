@@ -204,10 +204,3 @@ select:disabled {
   .addList:hover{
     text-decoration-line: none;
   }
-  #user_email {
-    width: 17rem;
-  }
-
-  #user_phone_number_pre{
-    text-align: center;
-  }

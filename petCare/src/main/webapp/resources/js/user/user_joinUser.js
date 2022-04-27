@@ -259,6 +259,7 @@ function deletelist(e){
 
     return false;
 }
+<<<<<<< HEAD
 
 
 function openModal(modalname){
@@ -271,3 +272,5 @@ function openModal(modalname){
     $("#modal").fadeOut(300);
     $(".modal-con").fadeOut(300);
   });
+=======
+>>>>>>> feature/회원가입_기능

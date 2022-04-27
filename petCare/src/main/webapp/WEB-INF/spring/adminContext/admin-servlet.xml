@@ -19,5 +19,7 @@
 		<property name="prefix" value="/WEB-INF/page/admin/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	
+	<mvc:annotation-driven />
 
 </beans>

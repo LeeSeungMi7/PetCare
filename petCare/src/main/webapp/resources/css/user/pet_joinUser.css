@@ -1,14 +1,17 @@
 section {
     padding: 30px;
+
 }
 
 .join-user {
     display: flex;
     flex-direction: column;
-    border: solid 1px black;
+    border-radius: 30px;
     padding: 20px;
-    position: relative;
-    max-width: 350px;
+    align-items: center;
+    margin: auto;
+    max-width: 600px;
+    border: solid 3px black;
 }
 
 .error-message {
@@ -38,7 +41,7 @@ section {
 }
 
 .join-user input, .join-user__items select, .join-user button {
-    height: 30px;
+    height: 40px;
     box-sizing: border-box;
 }
 
@@ -47,6 +50,7 @@ section {
     flex-direction: column;
     margin-bottom: 30px;
     min-width: 250px;
+    width: 350px;
 }
 
 .join-user__items > :first-child {
@@ -62,10 +66,20 @@ section {
     display: flex;
     flex-direction: row;
     align-items: center;
+
 }
+.join-user__items > .join-user__items--row__time{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px; 
+    
+
+} 
 
 .join-user__items > .join-user__items--row > .buttonOk {
-    width: 100px;
+    width: 150px;
     font-size: larger
 }
 
@@ -73,3 +87,161 @@ header, footer {
     flex-basis: 150px;
     background: grey;
 }
+.filebox{
+    float: right;
+}
+
+.filebox label{
+    width: 135px;
+    display: inline-block;
+    color: #fff;
+    line-height: 45px;
+    vertical-align: middle;
+    background-color: #4a4a4a;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.filebox input[type="file"]{
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
+.upload-name{
+    width: 59.5%;
+}
+
+
+/* 袁몃�멸린 */
+input {
+    font-size: 15px;
+    border: 0;
+    border-radius: 15px;
+    outline: none;
+    padding-left: 10px;
+    background-color: rgb(233, 233, 233);
+  }
+
+.mypet_box1 >button >img{
+    width: 100%;
+}
+
+.list-group-item.active {
+    z-index: 2;
+    color: #fff;
+    background-color: grey;
+    border-color: grey;
+}
+
+select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    
+    font-family: "Noto Sansf KR", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    
+    color: #444;
+    background-color: #fff;
+    
+    padding: .6em 1.4em .5em .8em;
+    margin: 0;
+    
+    border: 1px solid #aaa;
+    border-radius: .5em;
+    box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+  }
+  
+  select:hover {
+    border-color: #888;
+  }
+  
+  select:focus {
+    border-color: #aaa;
+    box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
+    box-shadow: 0 0 0 3px -moz-mac-focusring;
+    color: #222;
+    outline: none;
+  }
+  
+  select:disabled {
+    opacity: 0.5;
+  }
+
+  select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  
+  font-family: "Noto Sansf KR", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  
+  color: #444;
+  background-color: #fff;
+  
+  padding: .6em 1.4em .5em .8em;
+  margin: 0;
+  
+  border: 1px solid #aaa;
+  border-radius: .5em;
+  box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+}
+
+select:hover {
+  border-color: #888;
+}
+
+select:focus {
+  border-color: #aaa;
+  box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
+  box-shadow: 0 0 0 3px -moz-mac-focusring;
+  color: #222;
+  outline: none;
+}
+
+select:disabled {
+  opacity: 0.5;
+}
+
+/* 踰꾪듉 */
+.button_class{
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 15px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 2rem;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+  }
+  
+  .button_class:hover{
+    background-color: #3de007;
+    color: white;
+  }
+
+  .addList{
+    color: black;
+    margin-left: 10rem;
+  }
+  .addList:hover{
+    text-decoration-line: none;
+  }
