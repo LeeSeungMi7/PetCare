@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <div class="pet-header__logo pet-row">
-    <div class="text--18-bold color--primary">
+    <a href="home.html">
         <img class="logo" src="../../../../resources/img/petcare_logo.png">
-    </div>
+    </a>
     <div class="pet-header__join">
         <a href="javascript:openModal('modal1');" class="button modal-open text--14-normal">로그인</a>
         <a href="/signinForm.do" class="text--14-normal">회원가입</a>
@@ -17,7 +17,7 @@
     <a class="pet-header__tab text--16-normal color--black" href="ency_boardList.html">동물백과</a>
     <a class="pet-header__tab text--16-normal color--black" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">내정보</a>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <li><a class="dropdown-item" href="userupdate.html">내 정보 수정</a></li>
+        <li><a class="dropdown-item" href="now_password.html">내 정보 수정</a></li>
         <li><a class="dropdown-item" href="myreservation.html">내 예약 관리</a></li>
     </ul>
 </div>

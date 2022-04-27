@@ -240,7 +240,7 @@
     </div>
 </div>
 
-<!-- <script type="application/javascript" src="../../../../resources/js/user/user_joinUser.js"></script> -->
+<script type="application/javascript" src="../../../../resources/js/user/user_joinUser.js"></script>
 <script type="application/javascript" src="../../../../resources/js/user/pet_joinUser.js"></script>
 
 =======
