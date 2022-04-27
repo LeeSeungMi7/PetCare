@@ -39,19 +39,20 @@
               <div class="pet-body pet-home">
 
               <section name="f">
-                <div class="outerBox">
-                <center>
+                <div class="outerBox" align="center">
+
 
                   <table>
                     <tr>
-                      <td>
+                    <td>
                     <h1>회원가입</h1>
                     </td>
                     </tr>
+                    <tr>
                     <td>
                       <a href="/home.do"> <button type = "button"  class="button_class_cancel">취소하기</button></a>
                     </td>
-                
+                	</tr>
                      <tr>
                       <td>
                           
@@ -141,7 +142,7 @@ PetCare는 단체에 속한 여러 구성원들이 공동의 계정으로 PetCar
                 </table>
                 <button type = "button" class="button_class" onclick="user_signin()">일반 사용자 가입</button>
                 <button type = "button" class="button_class"  onclick="partner_signin()">제휴병원 가입신청</button>
-                </center>
+                
               </div>
               </section>
           </div>

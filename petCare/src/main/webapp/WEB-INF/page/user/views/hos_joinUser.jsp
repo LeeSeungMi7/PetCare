@@ -27,58 +27,63 @@
     <!-- 카카오 MAP API-KEY -->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1e818982c81810e2470dd6b0b339e676&libraries=services"></script>
 	<script type="text/javascript">
-	
 
-	/** 서브밋 함수 **/
-	function fn_submit() {
-		var email_check = $("input[name=emailcheck]").val();
-	  		
-		if (invalid.all()) {
-	        user.info();
+		/** 서브밋 함수 **/
+		function fn_submit() {
+			var email_check = $("input[name=emailcheck]").val();
 
-	    } else {
-	        for (let type in errorTypes) {
-	            onInputInvalid(type);
-	           
-	        }
-	        return false;   
-	    }
-		
-		if(email_check=="0"){
-	    	alert('e_mail 중복 확인을 해주세요');
-	    	return false;
-	    }
-	    
-	}
-  	
-  function checkemail() {
-  	
-  	var email = $("#user_email").val();
-  		
-  	$.ajax({
-  		type : "GET",
-  		data : {"email": email},
-  		url : "/check_email.do",
-  		dataType : "json",
-  		success : function(data) {
-  			if (data.cnt > 0) {
-  				alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
-  				
-  			} else {
-  				alert("사용가능한 아이디입니다.");
-  				$("input[name=emailcheck]").val("1");
-  				$("input[name=emailcheck]").change();
-  				$("#user_email").attr("readonly", true); 
-  			}
-  		},
-  		error : function(error) {
-  			alert("error : " + error);
-  		}
-  	});
-  }
-  
-  
-  
+			if (invalid.all()) {
+				user.info();
+
+			} else {
+				for ( let type in errorTypes) {
+					onInputInvalid(type);
+
+				}
+				return false;
+			}
+
+			if (email_check == "0") {
+				alert('e_mail 중복 확인을 해주세요');
+				return false;
+			}
+
+		}
+
+		function checkemail() {
+
+			var email = $("#user_email").val();
+
+			const emailFormat = /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/
+					.test(email)
+			if (!emailFormat) {
+				return;
+			} else {
+				$.ajax({
+					type : "post",
+					data : {
+						"email" : email
+					},
+					url : "/check_email.do",
+					dataType : "json",
+					success : function(data) {
+						if (data.cnt > 0) {
+							alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
+
+						} else {
+							alert("사용가능한 아이디입니다.");
+							$("input[name=emailcheck]").val("1");
+							$("input[name=emailcheck]").change();
+							$("#user_email").attr("readonly", true);
+						}
+					},
+					error : function(error) {
+						alert("error : " + error);
+					}
+				});
+			}
+
+		}
 	</script>
 </head>
 
@@ -97,12 +102,12 @@
 				<div class="pet-body pet-home">
 					<!-- 홈 최상단 슬라이더 -->
 					<section name="f" class="pet-home__boards">
-					<form onsubmit="fn_submit();" method="post" action="/partner_register.do" enctype="multipart/form-data">
+					<form onsubmit="return fn_submit();" method="post" action="/partner_register.do" enctype="multipart/form-data">
 	                   	 <div class="join-user" style="align-items: center">
 	                        <!--병원이름-->
 	                        <div class="join-user__items">
 	                            <label>병원 이름</label>
-	                            <input type="text" id="user_name" oninput="onInputInvalid('name')" name="m_name"/>
+	                            <input type="text" id="user_name" oninput="onInputInvalid('name')" name="m_name" required/>
 	                            <span class="error_next_box" id="error_name" aria-live="assertive"></span>
 	                        </div>
 	                        
@@ -111,7 +116,7 @@
 	                        <div class="join-user__items">
 	                            <label>이메일</label>
 	                            <div class="join-user__items--row" style="justify-content: space-between">
-	                                <input id="user_email" type="email" oninput="onInputInvalid('email')" name="m_id"/>
+	                                <input id="user_email" type="email" oninput="onInputInvalid('email')" name="m_id" required/>
 	                                <button class="button_class" type="button" onclick="checkemail()">인증</button>
 	                            </div>
 	                            <span class="error_next_box" id="error_email" aria-live="assertive"></span>
@@ -120,9 +125,9 @@
 	                        <div class="join-user__items">
 	                            <label>비밀번호</label>
 	                            <input id="user_password" type="password" maxlength="15" placeholder="비밀번호를 입력하세요"
-	                                oninput="onInputInvalid('password')" autoComplete="on" name="m_pw">
+	                                oninput="onInputInvalid('password')" autoComplete="on" name="m_pw" required>
 	                            <input id="user_check_password" type="password" maxlength="15" placeholder="비밀번호 확인"
-	                                style="margin-top: 10px;" oninput="onInputInvalid('passwordCheck')" autoComplete="on">
+	                                style="margin-top: 10px;" oninput="onInputInvalid('passwordCheck')" autoComplete="on" required>
 	                            <span class="error_next_box" id="error_password" aria-live="assertive"></span>
 	                        </div>
 	                        <!--연락처-->
@@ -136,19 +141,19 @@
 	                                </select>
 	                                -
 	                                <input id="user_phone_number_in" style="max-width: 90px" maxlength="4"
-	                                    oninput="onInputInvalid('phoneNumber')" name="m_tel2">
+	                                    oninput="onInputInvalid('phoneNumber')" name="m_tel2" required>
 	                                -
 	                                <input id="user_phone_number_post" style="max-width: 90px" maxlength="4"
-	                                    oninput="onInputInvalid('phoneNumber')" name="m_tel3">
+	                                    oninput="onInputInvalid('phoneNumber')" name="m_tel3" required>
 	                            </div>
 	                            <span class="error_next_box" id="error_phone_number" aria-live="assertive"></span>
 	                        </div>
 	                        <!--주소-->
 	                        <div class="join-user__items">
 	                            <label>주소</label>
-	                            <input id="user_post" type="text" placeholder="우편번호" readonly onclick="findAddr()" name="m_zipcode">
-	                            <input id="user_addr" type="text" placeholder="주소" readonly style="margin-top: 10px;" name="m_address"> <br>
-	                            <input id="user_addr_detail" type="text" placeholder="상세주소를 입력하세요." style="margin-top: -12px;" name="m_address_detail">
+	                            <input id="user_post" type="text" placeholder="우편번호" readonly onclick="findAddr()" name="m_zipcode" required>
+	                            <input id="user_addr" type="text" placeholder="주소" readonly style="margin-top: 10px;" name="m_address" required> <br>
+	                            <input id="user_addr_detail" type="text" placeholder="상세주소를 입력하세요." style="margin-top: -12px;" name="m_address_detail" required>
 	                            <span class="error_next_box" id="error_address" aria-live="assertive"></span>
 	                        </div>
 	            
@@ -156,19 +161,19 @@
 	                        <div class="join-user__items">
 	                            <label>진료시간</label>
 	                            <div class="join-user__items--row__time">
-	                                <input type="text" id="user_weekday_start" oninput="onInputInvalid('openingHours')" placeholder="평일진료" style="max-width:150px;" maxlength="5" name="p_weekday1"/>
+	                                <input type="text" id="user_weekday_start" oninput="onInputInvalid('openingHours')" placeholder="평일진료" style="max-width:150px;" maxlength="5" name="p_weekday1" required/>
 	                                ~
-	                                <input type="text" id="user_weekday_end" oninput="onInputInvalid('openingHours')" placeholder="" style="max-width:150px;" maxlength="5" name="p_weekday2"/>
+	                                <input type="text" id="user_weekday_end" oninput="onInputInvalid('openingHours')" placeholder="" style="max-width:150px;" maxlength="5" name="p_weekday2" required/>
 	                            </div>
 	                            <div class="join-user__items--row__time">
-	                                <input type="text" id="user_weekend_start" oninput="onInputInvalid('openingHours')" placeholder="주말진료" style="max-width:150px;" maxlength="5" name="p_weekend1"/>
+	                                <input type="text" id="user_weekend_start" oninput="onInputInvalid('openingHours')" placeholder="주말진료" style="max-width:150px;" maxlength="5" name="p_weekend1" required/>
 	                                ~
-	                                <input type="text" id="user_weekend_end" oninput="onInputInvalid('openingHours')" placeholder="" style="max-width:150px;" maxlength="5" name="p_weekend2"/>
+	                                <input type="text" id="user_weekend_end" oninput="onInputInvalid('openingHours')" placeholder="" style="max-width:150px;" maxlength="5" name="p_weekend2" required/>
 	                            </div>
 	                            <div class="join-user__items--row__time">
-	                                <input type="text" id="user_lunch_start" oninput="onInputInvalid('openingHours')" placeholder="점심시간"style="max-width: 150px" maxlength="5" name="p_breaktime1"/>
+	                                <input type="text" id="user_lunch_start" oninput="onInputInvalid('openingHours')" placeholder="점심시간"style="max-width: 150px" maxlength="5" name="p_breaktime1" required/>
 	                                ~
-	                                <input type="text" id="user_lunch_end" oninput="onInputInvalid('openingHours')" placeholder=""style="max-width: 150px" maxlength="5" name="p_breaktime2"/>
+	                                <input type="text" id="user_lunch_end" oninput="onInputInvalid('openingHours')" placeholder=""style="max-width: 150px" maxlength="5" name="p_breaktime2" required/>
 	                            </div>
 	                            <span class="error_next_box" id="error_time" aria-live="assertive"></span>
 	                        </div>
@@ -187,7 +192,7 @@
 	                                <div class="filebox">
 	                                    <input class="upload-name" value="파일선택" disabled="disabled">
 	                                    <label for="ex_filename">업로드</label>
-	                                    <input type="file" id="ex_filename" class="upload-hidden" name="p_file_name">
+	                                    <input type="file" id="ex_filename" class="upload-hidden" name="file" >
 	                                </div>    
 	                        </div>
 	                        

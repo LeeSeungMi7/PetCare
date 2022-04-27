@@ -3,9 +3,10 @@ package com.petcare.web.common.utils;
 import java.io.File;
 import java.io.InputStream;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import javax.annotation.PostConstruct;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.amazonaws.AmazonServiceException;
@@ -16,48 +17,46 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
-import com.amazonaws.services.s3.model.CopyObjectRequest;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.petcare.web.user.vo.S3KeyVO;
 
 @Component
-//@PropertySource("classpath:/config/s3key.properties")
 public class AwsS3{
 	
+	@Autowired
+	private SqlSessionTemplate sqlSessionTemplate;
+	
 	private AmazonS3 s3Client;
-//	@Value("${accessKey}")
-	private String access_key="AKIAXWJZHIQWLX3G5LAD";
-//	@Value("${secretKey}")
-	private String secret_accessKey="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";
+
+	private String access_key;
+	private String secret_accessKey;
 	private Regions regions=Regions.AP_NORTHEAST_2;
-//	@Value("${bucket}")
 	private String bucket = "petcarebuc";
 	
 	private AwsS3() {
-        createS3Client();
     }
-
-    //singleton pattern
-    static private AwsS3 instance = null;
-    
-    public static AwsS3 getInstance() {
-        if (instance == null) {
-            return new AwsS3();
-        } else {
-            return instance;
-        }
-    }
-
-    //aws S3 client 생성
+	
+	@PostConstruct
+	private void init() {
+		createS3Client();
+	}
+	
+	public AwsS3(SqlSessionTemplate sqlSessionTemplate) {
+		this.sqlSessionTemplate =sqlSessionTemplate;
+		createS3Client();
+	}
+  
+    //키 받아와서 생성
     private void createS3Client() {
 
-        AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_accessKey);
-        this.s3Client = AmazonS3ClientBuilder
-                .standard()
-                .withCredentials(new AWSStaticCredentialsProvider(credentials))
-                .withRegion(regions)
-                .build();
+    	S3KeyVO s3KeyVO = sqlSessionTemplate.selectOne("S3DAO.s3Key");
+		access_key = s3KeyVO.getAccess_key();
+		secret_accessKey = s3KeyVO.getSecret_accessKey();
+		AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_accessKey);
+		this.s3Client = AmazonS3ClientBuilder.standard().withCredentials(
+				new AWSStaticCredentialsProvider(credentials)).withRegion(regions).build();
     }
 
     public void upload(File file, String key) {
@@ -88,26 +87,7 @@ public class AwsS3{
         }
     }
 
-    public void copy(String orgKey, String copyKey) {
-        try {
-            //Copy 객체 생성
-            CopyObjectRequest copyObjRequest = new CopyObjectRequest(
-                    this.bucket,
-                    orgKey,
-                    this.bucket,
-                    copyKey
-            );
-            //Copy
-            this.s3Client.copyObject(copyObjRequest);
 
-            System.out.println(String.format("Finish copying [%s] to [%s]", orgKey, copyKey));
-
-        } catch (AmazonServiceException e) {
-            e.printStackTrace();
-        } catch (SdkClientException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void delete(String key) {
         try {

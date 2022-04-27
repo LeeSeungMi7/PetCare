@@ -1,5 +1,7 @@
 package com.petcare.web.user.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -19,7 +21,7 @@ public class MemberVO {
 	String m_role; // ENUM('0', '1') 0:일반사용자 1: 병원
 	String m_access;// ENUM('0', '1') 0: 로그인가능 1: 로그인불가
 	int m_auth; // 메일인증여부
-	String p_file_name = ""; // 사업자등록 파일명
+	String p_file_name; // 사업자등록 파일명
 	String p_file_path = ""; // 사업자등록 파일경로
 	String p_weekday = ""; // 평일 운영
 	String p_weekend = ""; // 주말 운영

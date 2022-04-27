@@ -24,7 +24,6 @@ public class MemberDAO {
 		 sqlSessionTemplate.insert("MemberDAO.partner_register", memberVO);
 	}
 	
-	
 	//메일 중복 체크
 	public int emailcheck(String email) {
 		return sqlSessionTemplate.selectOne("MemberDAO.checkemail", email);
