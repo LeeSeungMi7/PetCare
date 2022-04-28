@@ -16,6 +16,7 @@ a.button{
   max-width: 60%;
   min-height: 30%;
   background:#fff;
+  z-index:10;
 }
 .modal-con .title{
   font-size:15px;

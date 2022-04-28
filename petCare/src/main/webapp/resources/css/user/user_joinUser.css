@@ -92,13 +92,6 @@ input {
     width: 100%;
 }
 
-.list-group-item.active {
-    z-index: 2;
-    color: #fff;
-    background-color: grey;
-    border-color: grey;
-}
-
 select {
     -moz-appearance: none;
     -webkit-appearance: none;

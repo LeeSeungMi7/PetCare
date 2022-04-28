@@ -130,15 +130,3 @@ const invalids = {
     }
 }
 
-
-/** 서브밋 함수 **/
-function petsubmit() {
-    if (invalids.all()) {
-        // TODO: 모든 값들에 대해 유효성 통과
-        petuser.info();
-    } else {
-        for(let type in errorPetTypes) {
-            onInputInvalids(type);
-        }
-    }
-}
