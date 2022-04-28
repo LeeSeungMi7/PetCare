@@ -43,6 +43,7 @@
 
 .btn {
     border: 3px solid #3de00733;
+    height: 35px;
 }
 
 .btn::after {

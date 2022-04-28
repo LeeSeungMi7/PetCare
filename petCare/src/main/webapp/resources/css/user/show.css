@@ -1,0 +1,22 @@
+.getboard {
+    margin: 20px auto auto;
+    width: 750px;
+}
+.btns{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.btn-sm{
+    height:30px !important;
+}
+.card{
+    margin:10px 10px 10px 10px;
+}
+.mainboard{
+    display: flex;
+    flex-wrap: wrap !important;
+    flex-direction: row !important;
+    justify-content: space-around !important;
+}

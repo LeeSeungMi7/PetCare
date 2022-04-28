@@ -52,3 +52,6 @@ textarea {
 .outerBox{
   margin: 80px;
 }
+.sweet-alert button{
+  height:45px !important;
+}

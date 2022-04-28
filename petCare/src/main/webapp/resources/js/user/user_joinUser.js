@@ -21,6 +21,7 @@ const inputUserPhoneNumberPost = getElement('user_phone_number_post');
 const inputUserPost = getElement('user_post');
 const inputUserAddr = getElement('user_addr');
 const inputUserAddrDetail = getElement('user_addr_detail');
+/**주소 태그 */
 
 const errorTypes = {
     name: 'name',
@@ -258,3 +259,18 @@ function deletelist(e){
 
     return false;
 }
+<<<<<<< HEAD
+
+
+function openModal(modalname){
+    document.get
+    $("#modal").fadeIn(300);
+    $("."+modalname).fadeIn(300);
+  }
+  
+  $("#modal, .close").on('click',function(){
+    $("#modal").fadeOut(300);
+    $(".modal-con").fadeOut(300);
+  });
+=======
+>>>>>>> feature/회원가입_기능
