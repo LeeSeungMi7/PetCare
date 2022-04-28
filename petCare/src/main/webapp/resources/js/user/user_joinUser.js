@@ -91,7 +91,7 @@ function setError(id, message) {
     }
 }
 
-async function onInputInvalid(type) {
+function onInputInvalid(type) {
     let message = false;
     let errorId = '';
 
@@ -101,7 +101,7 @@ async function onInputInvalid(type) {
             errorId = 'error_name';
             break;
         case errorTypes.email:
-            message = await invalid.email();
+            message = invalid.email();
             errorId = 'error_email';
             break;
         case errorTypes.password:
@@ -143,7 +143,7 @@ const invalid = {
         }
         return;
     },
-    async email() {
+    email() {
         const emailFormat = /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/.test(user.email())
         if (!emailFormat) {
             return '이메일 형식이 잘못됐습니다.';
@@ -259,8 +259,6 @@ function deletelist(e){
 
     return false;
 }
-<<<<<<< HEAD
-
 
 function openModal(modalname){
     document.get
@@ -272,5 +270,4 @@ function openModal(modalname){
     $("#modal").fadeOut(300);
     $(".modal-con").fadeOut(300);
   });
-=======
->>>>>>> feature/회원가입_기능
+
