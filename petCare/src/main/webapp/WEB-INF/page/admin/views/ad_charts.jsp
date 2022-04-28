@@ -1,15 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
     <head>
-
         <!-- 제이쿼리 -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-        <link href="../../../../resources/css/user/datepicker.css" rel="stylesheet" type="text/css" media="all">
+        <link href="/resources/css/user/datepicker.css" rel="stylesheet" type="text/css" media="all">
         <!-- Air datepicker css -->
-        <script src="../../../../resources/js/user/datepicker.js"></script>
+        <script src="/resources/js/user/datepicker.js"></script>
         <!-- Air datepicker js -->
-        <script src="../../../../resources/js/user/datepicker.ko.js"></script>
+        <script src="/resources/js/user/datepicker.ko.js"></script>
         <!-- 달력 한글 추가를 위해 커스텀 -->
 
         <!-- 부트스트랩 CDN 로드 : 항상 최신 버전 사용 : maxcdn -->
@@ -24,14 +25,14 @@
         href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css"
         rel="stylesheet"/> -->
 
-        <link href="../../../../resources/css/admin/styles.css" rel="stylesheet"/>
-        <link href="../../../../resources/css/admin/morris.css" rel="stylesheet"/>
-        <link href="../../../../resources/css/admin/ad_charts.css" rel="stylesheet"/>
+        <link href="/resources/css/admin/styles.css" rel="stylesheet"/>
+        <link href="/resources/css/admin/morris.css" rel="stylesheet"/>
+        <link href="/resources/css/admin/ad_charts.css" rel="stylesheet"/>
 
     </head>
     <body class="sb-nav-fixed">
         <!--헤더 영역-->
-        <div id="admin_header"></div>
+        <%@ include file="/WEB-INF/page/admin/views/ad_header.jsp"%>
         <div id="layoutSidenav">
             <div id="layoutSidenav_content">
                 <main>
@@ -71,30 +72,30 @@
                     </div>
                 </main>
                 <!--푸터-->
-                <div id="admin_footer"></div>
+                <%@ include file="/WEB-INF/page/admin/views/ad_footer.jsp"%>
             </div>
         </div>
 
-        <script src="../../../../resources/js/admin/ad_common.js"></script>
+        <script src="/resources/js/admin/ad_common.js"></script>
         <script
             src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
             crossorigin="anonymous"></script>
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
             crossorigin="anonymous"></script>
-        <script src="../../../../resources/js/admin/scripts.js"></script>
+        <script src="/resources/js/admin/scripts.js"></script>
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
             crossorigin="anonymous"></script>
-        <script src="../../../../resources/assets/demo/chart-area-demo.js"></script>
-        <script src="../../../../resources/assets/demo/chart-bar-demo.js"></script>
+        <script src="/resources/assets/demo/chart-area-demo.js"></script>
+        <script src="/resources/assets/demo/chart-bar-demo.js"></script>
         <script
             src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"
             crossorigin="anonymous"></script>
-        <script src="../../../../resources//js/admin/datatables-simple-demo.js"></script>
-        <script src="../../../../resources/js/admin/morris.js"></script>
-        <script src="../../../../resources/js/admin/raphael.min.js"></script>
-        <script src="../../../../resources/js/admin/ad_charts.js"></script>
-        <script src="../../../../resources/js/user/ur_reservation.js"></script>
+        <script src="/resources/js/admin/datatables-simple-demo.js"></script>
+        <script src="/resources/js/admin/morris.js"></script>
+        <script src="/resources/js/admin/raphael.min.js"></script>
+        <script src="/resources/js/admin/ad_charts.js"></script>
+        <script src="/resources/js/user/ur_reservation.js"></script>
     </body>
 </html>
