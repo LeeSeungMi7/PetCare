@@ -62,7 +62,7 @@ function petsetError(id, message) {
     }
 }
 
-async function onInputInvalids(type) {
+function onInputInvalids(type) {
     let message = false;
     let errorId = '';
 
@@ -72,7 +72,7 @@ async function onInputInvalids(type) {
             errorId = 'error_pet';
             break;
         case errorPetTypes.animal:
-            message = await invalids.animal();
+            message = invalids.animal();
             errorId = 'error_animal';
             break;
         case errorPetTypes.old:
