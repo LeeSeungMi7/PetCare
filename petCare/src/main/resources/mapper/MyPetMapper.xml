@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+ <mapper namespace="MyPetDAO">
+	<insert id="add_pet" parameterType="MyPetVO">
+		<selectKey keyProperty="myPet_num" order="BEFORE" resultType="integer">
+    		 select * from MyPet_Table where mp_number is null;
+  		</selectKey>
+		INSERT INTO
+		MyPet_Table(mp_petName, mp_petType, mp_petAge, mp_petGender, mp_sugery)
+		VALUES(#{mp_petName},#{mp_petType},#{mp_petAge},#{mp_petGender},#{mp_sugery})
+	</insert>
+	
+</mapper>

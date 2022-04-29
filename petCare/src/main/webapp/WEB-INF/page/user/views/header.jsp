@@ -6,7 +6,7 @@
     </a>
     <div class="pet-header__join">
         <a href="javascript:openModal('modal1');" class="button modal-open text--14-normal">로그인</a>
-        <a href="signinForm.do" class="text--14-normal">회원가입</a>
+        <a href="signinForm.do" class="button text--14-normal">회원가입</a>
     </div>
 </div>
 <div class="pet-header__tabs pet-row">

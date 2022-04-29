@@ -133,12 +133,6 @@ input {
     width: 100%;
 }
 
-.list-group-item.active {
-    z-index: 2;
-    color: #fff;
-    background-color: grey;
-    border-color: grey;
-}
 
 select {
     -moz-appearance: none;
@@ -245,3 +239,13 @@ select:disabled {
   .addList:hover{
     text-decoration-line: none;
   }
+  
+  .myuser_css{
+  	background-color: #3de007;
+  }
+  
+  
+  .list-group-item:first-child {
+	border-top-left-radius: .25rem;
+	border-top-right-radius: .25rem
+}
