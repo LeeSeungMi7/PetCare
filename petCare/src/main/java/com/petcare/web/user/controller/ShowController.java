@@ -17,7 +17,7 @@ import com.petcare.web.user.vo.ShowVO;
 @SessionAttributes("show")
 public class ShowController {
 	
-	@Autowired
+	/* @Autowired */
 	private ShowService showService;
 	
 	
