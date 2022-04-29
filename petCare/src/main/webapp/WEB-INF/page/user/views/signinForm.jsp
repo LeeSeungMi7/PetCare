@@ -122,7 +122,7 @@ PetCare는 단체에 속한 여러 구성원들이 공동의 계정으로 PetCar
                 
 가. 개인정보취급 위탁관련
                 
-- 개인정보취급위탁을 받는 자 : (주)oooo
+- 개인정보취급위탁을 받는 자 : (주)펫케어서비스
 - 개인정보취급위탁을 하는 업무의 내용 : 회원관리 회원제 서비스 이용에 따른 회원정보 관리 및 웹사이트 시스템 관리
                 
 나. 개인정보제공 거부에 관한 사항
@@ -132,7 +132,8 @@ PetCare는 단체에 속한 여러 구성원들이 공동의 계정으로 PetCar
                             </tr>
                             <tr>
                               <td>
-                                <input type="checkbox" id="checkbox">이용약관에 동의합니다.<br><br><br><br>
+                              <br>
+                                <input type="checkbox" id="checkbox">&nbsp;&nbsp;&nbsp;이용약관에 동의합니다.<br><br><br><br>
                               </td>
                             </tr>
                           </table>

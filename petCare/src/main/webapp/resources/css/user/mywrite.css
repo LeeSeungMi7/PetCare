@@ -1,5 +1,5 @@
 .fontclass{
-  color: #3de007;
+  color: #c2edb4;
 }
 
 textarea {
@@ -23,12 +23,14 @@ textarea {
   cursor: pointer;
   background-image: none;
   border: 1px solid transparent;
-  border-radius: 4px;
+  border-radius: 20px;
+  margin-left: 43em;
+  font-weight: bold;
 }
 
 .button_class:hover{
-  background-color: #3de007;
-  color: white;
+  background-color: #c2edb4;
+  color: black;
 }
 
 .button_class_cancel{
@@ -55,4 +57,3 @@ textarea {
 .sweet-alert button{
   height:45px !important;
 }
-

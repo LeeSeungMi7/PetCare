@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-public class partner_singinController {
+public class Partner_singInController {
 	
 	@Autowired
 	private final MemberService memberService;
@@ -33,7 +33,7 @@ public class partner_singinController {
 	private FileUploadService fileUploadService;
 	
 	@Inject
-	public partner_singinController(MemberService memberService) {
+	public Partner_singInController(MemberService memberService) {
 		this.memberService = memberService;
 	}
 

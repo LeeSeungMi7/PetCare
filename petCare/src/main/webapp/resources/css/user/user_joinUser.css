@@ -86,6 +86,7 @@ input {
     outline: none;
     padding-left: 10px;
     background-color: rgb(233, 233, 233);
+    height: 40px
   }
 
 .mypet_box1 >button >img{
@@ -192,8 +193,7 @@ select:disabled {
 
   .addList{
     color: black;
-    margin-left: 10rem;
+    margin-left : 150px;
+    background-color: transparent
   }
-  .addList:hover{
-    text-decoration-line: none;
-  }
+  
