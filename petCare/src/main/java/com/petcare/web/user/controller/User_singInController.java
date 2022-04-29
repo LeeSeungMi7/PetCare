@@ -9,9 +9,9 @@ import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.petcare.web.user.service.MyPetService;
@@ -34,12 +34,22 @@ public class User_singInController {
 	
 	@RequestMapping(value="/petAdd.do" ,  method = RequestMethod.POST)
 	@ResponseBody
-	public void petAdd(MyPetVO mypetVO){
-
+	public List<MyPetVO> petAdd(MyPetVO mypetVO){
+		
+		MyPetVO petVO = mypetVO;
         List<MyPetVO> myPet = new ArrayList<MyPetVO>();
-
-        myPetService.petadd(mypetVO);
+        
+        myPet = myPetService.petadd(mypetVO);
+        
+        for(MyPetVO pet : myPet) {
+        	mypetVO.setMp_number(pet.getMp_number());
+        	mypetVO.setMp_petAge(pet.getMp_petAge());
+        }
         log.info("펫 등록 성공");
+        
+    
+        return myPet;
+		
         
 	}
 	

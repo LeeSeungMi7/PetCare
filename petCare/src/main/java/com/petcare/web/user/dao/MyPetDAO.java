@@ -15,7 +15,7 @@ public class MyPetDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	//펫 임시등록
-	public void petadd(MyPetVO myPetVO){
-		sqlSessionTemplate.insert("MyPetDAO.add_pet", myPetVO);
+	public List<MyPetVO> petadd(MyPetVO myPetVO){
+		return sqlSessionTemplate.selectList("MyPetDAO.add_pet", myPetVO);
 	}
 }

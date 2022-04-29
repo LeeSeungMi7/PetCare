@@ -1,5 +1,7 @@
 package com.petcare.web.user.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +15,8 @@ public class MyPetServiceImpl implements MyPetService {
 	private MyPetDAO mypetDAO;
 	
 	@Override
-	public void petadd(MyPetVO mypetVO) {
-		mypetDAO.petadd(mypetVO);
+	public List<MyPetVO> petadd(MyPetVO mypetVO) {
+		return mypetDAO.petadd(mypetVO);
 	}
 
 }

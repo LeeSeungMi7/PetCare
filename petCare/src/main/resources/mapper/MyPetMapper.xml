@@ -5,7 +5,7 @@
    
  <mapper namespace="MyPetDAO">
 	<insert id="add_pet" parameterType="MyPetVO">
-		<selectKey keyProperty="myPet_num" order="BEFORE" resultType="integer">
+		<selectKey keyProperty="myPet_num" order="BEFORE" resultType="MyPetVO">
     		 select * from MyPet_Table where mp_number is null;
   		</selectKey>
 		INSERT INTO
