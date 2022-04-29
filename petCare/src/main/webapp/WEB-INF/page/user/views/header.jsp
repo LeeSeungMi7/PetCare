@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<header class="pet-header background--white" id="header">
 <div class="pet-header__logo pet-row">
-    <a href="home.html">
+    <a href="home.do">
         <img class="logo" src="/resources/img/petcare_logo.png">
     </a>
     <div class="pet-header__join">
@@ -58,3 +59,4 @@
         </div>
     </div>
 </div>
+</header>
