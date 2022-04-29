@@ -8,11 +8,13 @@
 		<typeAlias alias="MemberVO" type="com.petcare.web.user.vo.MemberVO" />
 		<typeAlias alias="S3KeyVO"  type="com.petcare.web.user.vo.S3KeyVO"/>
 		<typeAlias alias="MyPetVO"  type="com.petcare.web.user.vo.MyPetVO" />
+		<typeAlias alias="AdminVO"  type="com.petcare.web.admin.vo.AdminVO" />
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mapper/MemberMapper.xml" />
 		<mapper resource="mapper/S3Key.xml"/>
 		<mapper resource="mapper/MyPetMapper.xml"/> 
+		<mapper resource="mapper/AdminMapper.xml" />
 	</mappers>
 </configuration>
