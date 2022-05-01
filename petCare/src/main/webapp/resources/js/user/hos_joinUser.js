@@ -39,7 +39,7 @@ const inputUserCheckPassword = getElement('user_check_password');
 /** 비밀번호 태그 **/
 
 /** 연락처 태그 **/
-const selectUserPhoneNumberPre = getElement('user_phone_number_pre');
+const inputUserPhoneNumberPre = getElement('user_phone_number_pre');
 const inputUserPhoneNumberIn = getElement('user_phone_number_in');
 const inputUserPhoneNumberPost = getElement('user_phone_number_post');
 /** 연락처 태그 **/
@@ -90,7 +90,7 @@ const user = {
         return inputUserName.val();
     },
     phoneNumber() {
-        return `${selectUserPhoneNumberPre.val()}${inputUserPhoneNumberIn.val()}${inputUserPhoneNumberPost.val()}`
+        return `${inputUserPhoneNumberPre.val()}${inputUserPhoneNumberIn.val()}${inputUserPhoneNumberPost.val()}`
     },
     password() {
         return inputUserPassword.val()
@@ -240,11 +240,14 @@ const invalid = {
     },
 
     phoneNumber() {
-        if (/^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/.test(user.phoneNumber())) {
+    
+        if (/^[0-9]+$/.test(user.phoneNumber())) {
+            
             return
         }
-
-        return '핸드폰 번호를 확인해주세요.';
+       
+        return '번호를 확인해주세요.';
+    	
     },
     address() {
         if (user.address() && user.addressPost() && user.addressDetail()) {
@@ -254,31 +257,12 @@ const invalid = {
         return '주소를 모두 입력해주세요.';
     },
     openingHours() {
-		/*const openingHours = `${user.weekdayStart()}${user.weekdayEnd()}${user.weekendStart()}${user.weekendEnd()}${user.lunchStart()}${user.lunchEnd()}`;
+		const openingHours = `${user.weekdayStart()}${user.weekdayEnd()}${user.weekendStart()}${user.weekendEnd()}${user.lunchStart()}${user.lunchEnd()}`;
         if (/^((([0-1][0-9])|(2[0-3])):[0-5][0-9]){6}$/.test(openingHours)) {
             return
         }
-        return '모든 진료시간을 00:00 형태로 입력해주세요';*/
-      	/*  if (/^((([0-1][0-9])|(2[0-3])):[0-5][0-9]){6}$/.test(user.weekendStart() && user.weekendEnd() && user.weekendEnd() && user.weekendStart() && user.lunchStart() && user.lunchEnd())) {
-            return
-        }
-        return '모든 진료시간을 00:00 형태로 입력해주세요';*/
-        
-       	if (/^(([0-1][0-9])|(2[0-3])):[0-5][0-9]$/.test(user.weekendStart())) {
-        	return;
-        }else if(/^(([0-1][0-9])|(2[0-3])):[0-5][0-9]$/.test(user.weekendEnd())){
-        	return;
-        }else if(/^(([0-1][0-9])|(2[0-3])):[0-5][0-9]$/.test(user.weekendStart())){
-        	return;
-        }else if(/^(([0-1][0-9])|(2[0-3])):[0-5][0-9]$/.test(user.weekendEnd())){
-        	return;
-        }else if(/^(([0-1][0-9])|(2[0-3])):[0-5][0-9]$/.test(user.lunchStart())){
-        	return;
-        }else if(/^(([0-1][0-9])|(2[0-3])):[0-5][0-9]$/.test(user.lunchEnd())){
-        	return;
-        }else{
-        	return '모든 진료시간을 00:00 형태로 입력해주세요';
-        }
+        return '모든 진료시간을 00:00 형태로 입력해주세요';
+      	
     },
     	
     all() {

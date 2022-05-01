@@ -8,7 +8,7 @@ const inputUserAnimal = getpetElement('user_animal');
 
 /** 나이 태그 **/
 const inputUserOld = getpetElement('user_old');
-/** 나이 태그 **/
+
 
 const errorPetTypes = {
     pet: 'pet',
@@ -62,7 +62,7 @@ function petsetError(id, message) {
     }
 }
 
-async function onInputInvalids(type) {
+function onInputInvalids(type) {
     let message = false;
     let errorId = '';
 
@@ -72,7 +72,7 @@ async function onInputInvalids(type) {
             errorId = 'error_pet';
             break;
         case errorPetTypes.animal:
-            message = await invalids.animal();
+            message = invalids.animal();
             errorId = 'error_animal';
             break;
         case errorPetTypes.old:
@@ -131,14 +131,4 @@ const invalids = {
 }
 
 
-/** 서브밋 함수 **/
-function petsubmit() {
-    if (invalids.all()) {
-        // TODO: 모든 값들에 대해 유효성 통과
-        petuser.info();
-    } else {
-        for(let type in errorPetTypes) {
-            onInputInvalids(type);
-        }
-    }
-}
+

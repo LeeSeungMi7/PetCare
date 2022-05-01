@@ -1,0 +1,59 @@
+.fontclass{
+  color: #c2edb4;
+}
+
+textarea {
+  height: 500px;
+  width: 40rem;
+}
+
+.button_class{
+  height: 40px;
+  display: inline-block;
+  padding: 6px 12px;
+  margin: 15px;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 2rem;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  margin-left: 43em;
+  font-weight: bold;
+}
+
+.button_class:hover{
+  background-color: #c2edb4;
+  color: black;
+}
+
+.button_class_cancel{
+    margin-left:34rem;
+    background-color: transparent;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 1.42857143;
+    vertical-align: middle;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.button_class_cancel:hover{
+  background-color: red;
+  color: white;
+}
+
+.outerBox{
+  margin: 80px;
+}
+.sweet-alert button{
+  height:45px !important;
+}

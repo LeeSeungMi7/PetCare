@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
     <head>
@@ -6,14 +8,14 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet"/>
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
-        <link href="../../../../resources/css/admin/styles.css" rel="stylesheet"/>
-        <link href="../../../../resources/css/admin/morris.css" rel="stylesheet"/>
-        <link href="../../../../resources/css/admin/ad_common.css" rel="stylesheet"/>
+        <link href="/resources/css/admin/styles.css" rel="stylesheet"/>
+        <link href="/resources/css/admin/morris.css" rel="stylesheet"/>
+        <link href="/resources/css/admin/ad_common.css" rel="stylesheet"/>
 
     </head>
     <body class="sb-nav-fixed">
         <!--헤더 영역-->
-        <div id="admin_header"></div>
+        <%@ include file="/WEB-INF/page/admin/views/ad_header.jsp"%>
         <div id="layoutSidenav">
             <div id="layoutSidenav_content">
                 <main>
@@ -60,7 +62,7 @@
                     </div>
                 </main>
                 <!--푸터-->
-                <div id="admin_footer"></div>
+                <%@ include file="/WEB-INF/page/admin/views/ad_footer.jsp"%>
             </div>
         </div>
 
@@ -70,11 +72,11 @@
         <!-- <script src="../assets/demo/chart-area-demo.js"></script>
         <script src="../assets/demo/chart-bar-demo.js"></script> -->
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-        <script src="../../../../resources/js/admin/datatables-simple-demo.js"></script>
-        <script src="../../../../resources/js/admin/morris.js"></script>
-        <script src="../../../../resources/js/admin/raphael.min.js"></script>
-        <script src="../../../../resources/js/admin/scripts.js"></script>
-        <script src="../../../../resources/js/admin/ad_common.js"></script>
+        <script src="/resources/js/admin/datatables-simple-demo.js"></script>
+        <script src="/resources/js/admin/morris.js"></script>
+        <script src="/resources/js/admin/raphael.min.js"></script>
+        <script src="/resources/js/admin/scripts.js"></script>
+        <script src="/resources/js/admin/ad_common.js"></script>
 
     </body>
 </html>

@@ -86,17 +86,11 @@ input {
     outline: none;
     padding-left: 10px;
     background-color: rgb(233, 233, 233);
+    height: 40px
   }
 
 .mypet_box1 >button >img{
     width: 100%;
-}
-
-.list-group-item.active {
-    z-index: 2;
-    color: #fff;
-    background-color: grey;
-    border-color: grey;
 }
 
 select {
@@ -199,8 +193,14 @@ select:disabled {
 
   .addList{
     color: black;
-    margin-left: 10rem;
+    margin-left : 150px;
+    background-color: transparent
   }
-  .addList:hover{
-    text-decoration-line: none;
+  
+  .petbox {
+    margin-bottom: 20px;
+    margin-top: 10px;
+    border: 1px solid #3de007;
+    padding: 10px;
   }
+  

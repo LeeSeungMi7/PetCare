@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.petcare.web.user.dao.MemberDAO;
 import com.petcare.web.user.vo.MemberVO;
+import com.petcare.web.user.vo.MyPetVO;
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -22,8 +23,8 @@ public class MemberServiceImpl implements MemberService{
 	
 	
 	@Override
-	public void user_register(MemberVO memberVO) {
-		 memberDAO.user_register(memberVO);
+	public int user_register(MemberVO memberVO) {
+		 return memberDAO.user_register(memberVO);
 	}
 
 	@Override
@@ -35,6 +36,12 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int idcheck(String email) {
 		return memberDAO.emailcheck(email);
+	}
+
+
+	@Override
+	public void userPet_register(MyPetVO mypetVO) {
+		memberDAO.userPet_register(mypetVO);
 	}
 	
 
