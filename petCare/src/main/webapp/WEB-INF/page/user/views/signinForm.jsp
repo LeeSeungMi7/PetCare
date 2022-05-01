@@ -68,7 +68,7 @@
                            </tr>
                            <tr>
                              <td align=center>
-                               <textarea disabled>
+                               <textarea class="form-control" style="width : 40rem; background-color:#F2FFED;" disabled>
 본 약관은 다양한 PetCare 서비스의 이용과 관련하여 PetCare 서비스를 제공하는 PetCare 주식회사(이하 PetCare)와 이를 이용하는 PetCare 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며, 아울러 여러분의 PetCare 서비스 이용에 도움이 될 수 있는 유익한 정보를 포함하고 있습니다.
                 
  PetCare 서비스를 이용하시거나 PetCare 서비스 회원으로 가입하실 경우 여러분은 본 약관 및 관련 운영 정책을 확인하거나 동의하게 되므로, 잠시 시간을 내시어 주의 깊게 살펴봐 주시기 바랍니다
@@ -133,8 +133,12 @@ PetCare는 단체에 속한 여러 구성원들이 공동의 계정으로 PetCar
                             <tr>
                               <td>
                               <br>
-                                <input type="checkbox" id="checkbox">&nbsp;&nbsp;&nbsp;이용약관에 동의합니다.<br><br><br><br>
-                              </td>
+									<div class="custom-control custom-checkbox">
+										<input type="checkbox" class="custom-control-input" id="checkbox"> 
+										<label class="custom-control-label" for="checkbox">
+										&nbsp;&nbsp;&nbsp;이용약관에 동의합니다.<br><br><br><br></label>
+									</div>
+							  </td>
                             </tr>
                           </table>
                 

@@ -1,5 +1,7 @@
 package com.petcare.web.user.vo;
 
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -18,7 +20,6 @@ public class MemberVO {
 	private String m_dong; // 동
 	private String m_role; // ENUM('0', '1') 0:일반사용자 1: 병원
 	private String m_access;// ENUM('0', '1') 0: 로그인가능 1: 로그인불가
-	private int m_auth; // 메일인증여부
 	private String p_file_name; // 사업자등록 파일명
 	private String p_file_path = ""; // 사업자등록 파일경로
 	private String p_weekday = ""; // 평일 운영
@@ -36,5 +37,7 @@ public class MemberVO {
 	private String p_breaktime1;
 	private String p_breaktime2;
 	
+	private List<MyPetVO> petList;
+	private MyPetVO mypetVO;
 	
 }

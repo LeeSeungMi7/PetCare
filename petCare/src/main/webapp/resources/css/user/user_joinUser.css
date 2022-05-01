@@ -197,3 +197,10 @@ select:disabled {
     background-color: transparent
   }
   
+  .petbox {
+    margin-bottom: 20px;
+    margin-top: 10px;
+    border: 1px solid #3de007;
+    padding: 10px;
+  }
+  

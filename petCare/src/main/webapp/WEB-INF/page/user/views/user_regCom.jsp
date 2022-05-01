@@ -38,8 +38,11 @@
 
         <!--본문-->
         <div class="partner_Reg_Com">
-	        <img src="/resources/img/partner.png">
-	        <button type = "button" class="button_class_RegCom" onclick="location.href='/home.do'"></button> 
+	        <img src="/resources/img/user.png">
+	        <div class="user_com">
+	        <button type = "button" class="user_com_button"  onclick="location.href='/home.do'"></button>  
+	        <a href="javascript:openModal('modal1');" class="button modal-open text--14-normal user_com_button"></a>
+        	</div>
         </div>
         <!--푸터-->
         <%@ include file="/WEB-INF/page/user/views/footer.jsp" %>

@@ -8,7 +8,7 @@ const inputUserAnimal = getpetElement('user_animal');
 
 /** 나이 태그 **/
 const inputUserOld = getpetElement('user_old');
-/** 나이 태그 **/
+
 
 const errorPetTypes = {
     pet: 'pet',

@@ -1,6 +1,7 @@
 package com.petcare.web.user.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.petcare.web.user.service.FileUploadService;
 import com.petcare.web.user.service.MemberService;
 import com.petcare.web.user.vo.MemberVO;
+import com.petcare.web.user.vo.MyPetVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -37,7 +39,7 @@ public class Partner_singInController {
 		this.memberService = memberService;
 	}
 
-	
+   //병원, 회원 이메일 중복체크
 	@RequestMapping(value = "/check_email.do" , method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> emailcheck(@RequestParam String email){
@@ -52,7 +54,7 @@ public class Partner_singInController {
 	}
 	
 
-	// 회원가입 처리
+	// 회원가입 처리(병원)
 	@RequestMapping(value = "/partner_register.do", method = RequestMethod.POST)
 	public String registerPOST(@ModelAttribute MemberVO memberVO, @RequestParam("file") MultipartFile file){
 		
@@ -67,8 +69,8 @@ public class Partner_singInController {
 		if(tempMemberVO.getM_address()!="" || tempMemberVO.getM_address()!=null) {
 			String address[] = tempMemberVO.getM_address().split(" ");
 			
-			tempMemberVO.setM_sido(address[0] + address[1]);
-			tempMemberVO.setM_dong(address[2] + address[3]);
+			tempMemberVO.setM_sido(address[0] +" "+ address[1]);
+			tempMemberVO.setM_dong(address[2] +" "+ address[3]);
 		}
 	
 		tempMemberVO.setM_access("1");

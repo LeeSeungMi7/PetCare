@@ -149,28 +149,6 @@ const invalid = {
             return '이메일 형식이 잘못됐습니다.';
         }
 
-
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                url: '/user/EmailCheck', //Controller에서 인식할 주소 EmailCheck는 가명
-                type: 'post',
-                data: {
-                    email: user.email()
-                },
-                success: function (cnt) {
-                    resolve(cnt === 1 ? '중복된 이메일 입니다.' : undefined);
-                },
-                error: function () {
-                    /** 서버 연동후 지후고 아래 주석 처리 되어 있는 코드 풀기 **/
-                    if (user.email() === 'kyungeun9718@daum.net') {
-                        resolve('중복된 이메일 입니다.');
-                    } else {
-                        resolve();
-                    }
-                    // resolve('알수 없는 에러 입니다.');
-                }
-            });
-        })
     },
     password() {
         const password = user.password();
@@ -231,34 +209,6 @@ function findAddr() {
     }).open();
 }
 
-/** 서브밋 함수 **/
-function submit() {
-    if (invalid.all()) {
-        // TODO: 모든 값들에 대해 유효성 통과
-        user.info();
-    } else {
-        for(let type in errorTypes) {
-            onInputInvalid(type);
-        }
-    }
-}
-function rainbow_btn(e){
-    swal('삭제되었습니다','반려동물 리스트에서 삭제되었습니다', 'info').then(function(){
-        deletelist(e);
-    }) 
-
-}
-
-function deletelist(e){
-   
-    var class_name = $(e).parents('li').attr('class');
-         
-    if (typeof(e) == "object" && class_name == "list-group-item") {
-        $(e).parents('li').remove();
-    } else
-
-    return false;
-}
 
 function openModal(modalname){
 		    document.get
@@ -271,7 +221,7 @@ function openModal(modalname){
 		    $(".modal-con").fadeOut(300);
 		   	
 });
-		  
+
 
 
 

@@ -1,0 +1,29 @@
+.partner_Reg_Com > img{
+    width: 100%;
+}
+
+.button_class_RegCom{
+    width: 31%;
+    height: 3.5rem;
+    position: absolute;
+    background-color: transparent;
+    left: 37%;
+    top: 49.5rem;
+}
+
+.user_com{
+    display: flex;
+    justify-content: space-between;
+    width: 75%;
+    margin-left: 7.5rem;
+    position: absolute;
+    top: 50.5rem;
+    
+}
+
+.user_com_button{
+    width: 16rem;
+    height: 3.5rem;
+    background-color: transparent;
+
+}
