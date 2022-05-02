@@ -31,5 +31,10 @@ public class MemberDAO {
 	public int emailcheck(String email) {
 		return sqlSessionTemplate.selectOne("MemberDAO.checkemail", email);
 	}
+	
+	//로그인 
+	public MemberVO user_login(String userId) {
+		return sqlSessionTemplate.selectOne("MemberDAO.user_login",userId);
+	}
    	
 }

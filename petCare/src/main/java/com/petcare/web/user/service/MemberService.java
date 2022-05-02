@@ -14,4 +14,6 @@ public interface MemberService {
 	
 	int idcheck(String email);
 
+	MemberVO user_login(String userId);
+
 }

@@ -43,6 +43,12 @@ public class MemberServiceImpl implements MemberService{
 	public void userPet_register(MyPetVO mypetVO) {
 		memberDAO.userPet_register(mypetVO);
 	}
+
+//	로그인
+	@Override
+	public MemberVO user_login(String userId) {
+		return memberDAO.user_login(userId);
+	}
 	
 
 }
