@@ -9,11 +9,13 @@ import javax.servlet.http.HttpSession;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -36,9 +38,11 @@ public class LoginController {
 	
 	@RequestMapping(value="/user_login.do", method=RequestMethod.POST)
 	@ResponseBody
-	public Map<String, String> user_login(@RequestParam String userId, @RequestParam String userPw, HttpSession session){
+	public Map<String, String> user_login(@RequestParam String userId, @RequestParam String userPw, HttpSession session, Model model){
 		
-		
+		//세션 유지시간 설정 
+		session.setMaxInactiveInterval(1800); // 1800 = 60s*30 (30분)
+
 		Map<String, String> map = new HashMap<String, String>();
 		System.out.println("id " + userId);
 		System.out.println("pw " + userPw);
@@ -69,12 +73,20 @@ public class LoginController {
 				return map;
 		}
 		if(vo.getM_role().equals("0") && vo.getM_access().equals("1")) {
-				System.out.println("탈퇴회원");
-				map.put("msg","idFail");
-				return map;
-		}
+			System.out.println("탈퇴회원");
+			map.put("msg","idFail");
+			return map;
+		};
+		session.setAttribute("user", vo);
 		map.put("msg","success");
 		return map;
+	}
+	
+	@RequestMapping(value="/logout.do", method=RequestMethod.POST)
+	public String logout(HttpSession session) {
+		System.out.println(session.getAttribute("user"));
+		memberService.logout(session);
+		return "/home";
 	}
 }
 
