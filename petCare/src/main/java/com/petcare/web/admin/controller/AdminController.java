@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.petcare.web.admin.service.AdminService;
@@ -71,11 +73,12 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value = "/update_hospital.mdo", method = RequestMethod.POST)
-	public String accHospital(MemberVO vo) throws Exception {
-		System.out.println(vo.getM_name());
-		String name = vo.getM_name();
+	@ResponseBody
+	public String accHospital(@RequestParam String m_name) throws Exception {
+		System.out.println(m_name);
+		String name = m_name;
 		adminService.updateUser(name);
-		return "redirect:/ad_hospital.mdo";
+		return "1";
 	}
 	
 	@RequestMapping(value = "/ad_user.mdo", method = RequestMethod.GET) 

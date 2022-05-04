@@ -42,7 +42,7 @@ public class AdminDAOImpl implements AdminDAO {
 	public void logout(HttpSession session) {
 	}
 	@Override 
-	public int updateUser(String name) throws Exception { 
-		return sqlSession.update("admin.AccHos", name);
+	public void updateUser(String name) throws Exception { 
+		sqlSession.update("admin.AccHos", name);
 	}
 }

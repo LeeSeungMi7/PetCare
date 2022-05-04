@@ -14,5 +14,5 @@ public interface AdminService {
 	public List<MemberVO> getUserList() throws Exception;
 	public List<MemberVO> getAccHosList() throws Exception;
 	public List<MemberVO> getUnAccHosList() throws Exception;
-	public int updateUser(String name) throws Exception;
+	public void updateUser(String name) throws Exception;
 }
