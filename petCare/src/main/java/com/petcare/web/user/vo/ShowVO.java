@@ -8,7 +8,7 @@ import lombok.Data;
 public class ShowVO {
 
 	private int board_num;
-	private int m_number;
+	private int b_number;
 	private String b_writer; //작성자
 	private String b_title; //제목
 	private Date b_date; //날짜

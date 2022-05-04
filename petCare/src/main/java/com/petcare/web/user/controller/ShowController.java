@@ -33,8 +33,14 @@ public class ShowController {
 	@Autowired
 	private FileUploadService fileUploadService;
 	
+	@Autowired
+	private ShowService showService;
+	
 	@Inject
-	ShowService showService;
+	public ShowController(ShowService showService) {
+		this.showService = showService;
+	}
+	
 	
 	//게시글 목록
 	@RequestMapping("/show.do")
@@ -48,20 +54,20 @@ public class ShowController {
 	
 	
 	//글 작성 화면
-	@GetMapping(value ="/show_write.do")
-	public String write(@ModelAttribute ShowVO showVO, @RequestParam("file") MultipartFile file){
-		System.out.println(showVO);
-		
-		ShowVO tempVO = showVO;
-		tempVO.setB_file_name(file.getOriginalFilename());
-		FileUploadService.FileUploadResult fileResult = fileUploadService.fileUpload(file, "자랑하기대표img/", tempVO.getB_file_name());
-		tempVO.setB_file_path(fileResult.getUrl());
-		
-		System.out.println(showVO);
-		showService.insert(showVO);
-		System.out.println("글작성cont");
-		return "/show";
-	}
+//	@GetMapping(value ="/show_write.do")
+//	public String write(@ModelAttribute ShowVO showVO, @RequestParam("file") MultipartFile file){
+//		System.out.println(showVO);
+//		
+//		ShowVO tempVO = showVO;
+//		tempVO.setB_file_name(file.getOriginalFilename());
+//		FileUploadService.FileUploadResult fileResult = fileUploadService.fileUpload(file, "자랑하기대표img/", tempVO.getB_file_name());
+//		tempVO.setB_file_path(fileResult.getUrl());
+//		
+//		System.out.println(showVO);
+//		showService.insert(showVO);
+//		System.out.println("글작성cont");
+//		return "/show";
+//	}
 	
 	
 	

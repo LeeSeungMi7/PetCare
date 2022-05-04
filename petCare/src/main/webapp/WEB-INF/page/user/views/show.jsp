@@ -50,8 +50,8 @@
 
 		<!--본문-->
         <div class="getboard">
-            <span class="badge badge-pill badge-success" style="font-size: 20px; margin-bottom: 10px; width: 100%;">자 랑 하
-                기</span>
+            <span class="badge badge-pill badge-success" style="font-size: 20px; margin-bottom: 10px; width: 100%;">자 랑 하기</span>
+             <a class="btn btn-success" href="javascript:void(0);" onclick="show_write_check();" role="button">글 작성</a>
             <div class="mainboard">
             <c:forEach var="show" items="${list}">
                 <div class="card"onclick="location.href='show_board.do'">
@@ -137,10 +137,31 @@
                 </ul>
             </nav>
         </div>
+       
 		<!--푸터-->
 		<%@ include file="/WEB-INF/page/user/views/footer.jsp"%>
 
 	</div>
+	
+<script type="text/javascript">
+function show_write_check(){
+
+		$.ajax({	
+		 	url: "/check_board.do",
+	        type: "GET",
+		 	success : function(data) {
+		 		if(data.user_ok=="0"){
+		 			swal('로그인 진행 요청.', '회원만 가능합니다', 'error');
+		 		}else{
+		 			window.location.href ="/show_write.do";
+		 		}
+			},
+			error : function(error) {
+				alert("error : " + error);
+			}
+		});
+}
+</script>
 </body>
 
 </html>

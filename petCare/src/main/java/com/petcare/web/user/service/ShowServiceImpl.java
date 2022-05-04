@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.petcare.web.user.dao.ShowDAO;
@@ -14,8 +15,8 @@ import com.petcare.web.user.vo.ShowVO;
 @Service
 public class ShowServiceImpl implements ShowService{
 
-	@Inject
-	ShowDAO showDao;
+	@Autowired
+	private ShowDAO showDao;
 	
 	//게시글 쓰기
 	@Override

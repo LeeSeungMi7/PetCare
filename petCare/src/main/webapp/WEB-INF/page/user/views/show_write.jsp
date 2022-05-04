@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.petcare.web.user.vo.MemberVO" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,12 +56,12 @@ function onclickOk(){
 			alert("제목을 입력하세요.");
 			document.getElementById("title").focus();
 			console.log
-			return;
+			return false;
 		}
 		if(content == ""){
 			alert("내용을 입력하세요.");
 			oEdiotrs.getById["ir1"].exec("FOCUS")
-			return;
+			return false;
 		}
 		alert("등록되었습니다.")
 		document.getElementById("form1").submit();
@@ -75,7 +76,7 @@ function onclickOk(){
 		<%@ include file="/WEB-INF/page/user/views/header.jsp"%>
 		<!--본문-->
 		<%-- <%@ include file="/WEB-INF/page/user/views/show_write.jsp" %> --%>
-		<form id="form1" name="showVO" method="GET" action="/show_write.do">
+		<form id="form1" name="showVO" method="GET" onsubmit="return onclickOk()" action="/show_insert.do" enctype="multipart/form-data">
 			<div class="eidtor">
 				<!--제목-->
 				<div class="mb-3">
@@ -99,7 +100,10 @@ function onclickOk(){
 				</div>
 				<!--버튼-->
 				<div>
-					<button class="btn btn-success" type="button" id="btnSave" onClick="onclickOk()">등록</button>
+					<input type="hidden" name="b_writer" value="${user.m_name}">
+					<input type="hidden" name="b_number" value="${user.m_number}">
+					<input type="submit" class="btn btn-success" id="btnSave" value="등록">
+					<!-- <button class="btn btn-success" type="button" id="btnSave" ">등록</button> -->
 					<a class="btn btn-danger" href="show.do" role="button" onclick="Cancel()">취소</a>
 				</div>
 			</div>

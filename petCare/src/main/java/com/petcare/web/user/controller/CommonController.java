@@ -36,23 +36,21 @@ public class CommonController {
 	public String showGet() {
 		return "show";
 	}
-	
-	//자랑하기 글 상세
-	@GetMapping("/show_board.do")
-	public String show_boardGet() {
-		return "show_board";
-	}
-	
-	//자랑하기 글 수정
-	@GetMapping("/show_rewrite.do")
-	public String show_rewrite() {
-		return "show_rewrite";
-	}
-	//자랑하기 글 작성
+//	
+//	//자랑하기 글 상세
+//	@GetMapping("/show_board.do")
+//	public String show_boardGet() {
+//		return "show_board";
+//	}
+//	
+//	//자랑하기 글 수정
+//	@GetMapping("/show_rewrite.do")
+//	public String show_rewrite() {
+//		return "show_rewrite";
+//	}
+	//자랑하기 목록
 	@GetMapping("/show_write.do")
 	public String show_write() {
 		return "show_write";
 	}
-	
-	
 }

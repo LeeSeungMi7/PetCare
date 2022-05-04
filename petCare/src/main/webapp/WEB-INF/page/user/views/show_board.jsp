@@ -137,7 +137,7 @@
             <a class="btn btn-secondary" href="show.do" role="button">목록으로</a>
             <a class="btn btn-secondary" href="show_rewrite.do" role="button" >수정</a>
             <a class="btn btn-danger" href="#" role="button">삭제</a>
-            <a class="btn btn-success" href="show_write.do" role="button">글 작성</a>
+            <a class="btn btn-success" href="#" role="button">글 작성</a>
         </div>
 
 		<!--푸터-->
