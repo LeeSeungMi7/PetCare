@@ -191,6 +191,7 @@
 <script type="application/javascript" src="/resources/js/user/user_joinUser.js"></script>
 <script type="application/javascript" src="/resources/js/user/pet_joinUser.js"></script>
 <script type="text/javascript">
+
 var pet_idx = 0;
 
 /* 모달창 닫으면 input text 초기화 */	  
@@ -315,6 +316,7 @@ function checkemail() {
 	}
 
 }
+
 </script>
 </body>
 </html>

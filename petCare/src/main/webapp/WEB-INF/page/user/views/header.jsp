@@ -2,8 +2,25 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.petcare.web.user.vo.MemberVO" %>
+
 <link rel="mainicon" href="/resources/img/petcare_logo.png">
 <script src="/resources/js/user/header.js"></script>
+<style>
+.dropdown {
+			position: relative;
+			display: inline-block;
+		}
+		.dropdown-content {
+			display: none;
+			position: absolute;
+			background-color: #F9F9F9;
+			min-width: 160px;
+			padding: 8px;
+			box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+		}
+		.dropdown:hover .dropdown-content { display: block; }
+</style>
+
 <header class="pet-header background--white" id="header">
 <div class="pet-header__logo pet-row">
     <a href="home.do">
@@ -34,20 +51,36 @@
    
    <!-- 마이페이지 -->
    <c:if test="${user.m_role=='0'}">
-    <a class="pet-header__tab text--16-normal color--black" role="button" id="user_myPage" data-bs-toggle="dropdown" aria-expanded="false">내정보</a>
-	    <ul id="user_mypage" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-	        <li><a class="dropdown-item" href="/user_myPage_update.do">내 정보 수정</a></li>
-	        <li><a class="dropdown-item" href="/user_myPage_resevation.do">내 예약 관리</a></li>
-	    </ul>
-	</c:if>
-	
+    <div class="dropdown pet-header__tab text--16-normal color--black">
+		<span>내정보</span>
+		<div class="dropdown-content">
+			<form action="/user_myPage_update.do" method="POST">
+	        	<input type="hidden" name=m_number value="${user.m_number}">
+	        	<input type="submit" class="dropdown-item" value="내 정보 수정">
+	        </form>
+	        <form action="/user_myPage_update.do" method="POST">
+	        	<input type="hidden" name=m_number value="${user.m_number}">
+	        	<input type="submit" class="dropdown-item" value="내 예약 관리">
+	        </form>
+		</div>
+	</div>
+   </c:if>
+
 	<!-- 병원페이지 -->
 	<c:if test="${user.m_role=='1'}">
-	<a class="pet-header__tab text--16-normal color--black" role="button" id="partner_myPage" data-bs-toggle="dropdown" aria-expanded="true">내정보</a>
-	    <ul id="partner_mypage" class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-	        <li><a class="dropdown-item" href="/partner_myPage_update.do">병원 정보 수정</a></li>
-	        <li><a class="dropdown-item" href="/partner_myPage_resevation.do">예약자 현황</a></li>
-	    </ul>
+	<div class="dropdown pet-header__tab text--16-normal color--black">
+		<span>내정보</span>
+		<div class="dropdown-content">
+			<form action="/user_myPage_update.do" method="POST">
+	        	<input type="hidden" name=m_number value="${user.m_number}">
+	        	<input type="submit" class="dropdown-item" value="병원 정보 수정">
+	        </form>
+	        <form action="/user_myPage_update.do" method="POST">
+	        	<input type="hidden" name=m_number value="${user.m_number}">
+	        	<input type="submit" class="dropdown-item" value="병원 예약 관리">
+	        </form>
+		</div>
+	</div>
 	</c:if>
 	<c:if test="${empty user.m_role}">
 	<!-- 로그인 안할때 -->
@@ -93,5 +126,3 @@
 
 
 </header>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>

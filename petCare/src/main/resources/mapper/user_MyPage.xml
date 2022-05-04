@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="User_MyPage">
+	<!-- 회원정보 검색  -->
+	<select id="user_mypageInfo" parameterType="integer" resultType="MemberVO">
+		select * from Member_Table where m_number=#{m_number};
+	</select>
+	
+	<!-- 회원 펫 검색 -->
+	<select id="user_myPetList" parameterType="integer" resultType="MyPetVO">
+		select * from MyPet_Table where mp_number=#{m_number};
+	</select>
+</mapper>

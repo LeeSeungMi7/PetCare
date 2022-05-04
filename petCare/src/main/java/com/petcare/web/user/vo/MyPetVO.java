@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class MyPetVO {
+	private int myPet_num;
 	private int mp_number;
 	private String mp_petName;
 	private String mp_petType;

@@ -1,10 +1,3 @@
-/*뒤로가기 막기*/
-window.history.forward(); 
-
-function noBack(){
-	window.history.forward();
-}
-
 function fn_loginCheck() {
    var check_id = $("input[name='m_id']").val();
    var check_pw = $("input[name='m_pw']").val();

@@ -63,7 +63,7 @@ public class Partner_singInController {
 		String hashedPw = BCrypt.hashpw(tempMemberVO.getM_pw(), BCrypt.gensalt());
 		tempMemberVO.setM_pw(hashedPw);
 		
-		tempMemberVO.setM_tel(tempMemberVO.getM_tel1()+tempMemberVO.getM_tel2()+tempMemberVO.getM_tel3());
+		tempMemberVO.setM_tel(tempMemberVO.getM_tel1()+"-"+tempMemberVO.getM_tel2()+"-"+tempMemberVO.getM_tel3());
 		tempMemberVO.setP_file_name(tempMemberVO.getP_file_name());
 		
 		if(tempMemberVO.getM_address()!="" || tempMemberVO.getM_address()!=null) {
