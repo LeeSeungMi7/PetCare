@@ -36,5 +36,6 @@ public class MemberDAO {
 	public MemberVO user_login(String userId) {
 		return sqlSessionTemplate.selectOne("MemberDAO.user_login",userId);
 	}
+	
    	
 }

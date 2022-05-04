@@ -28,8 +28,15 @@ public class UserMyPageServiceImpl implements UserMyPageService {
 	}
 	
 	//펫 병원 예약 가져오기
+	@Override
 	public List<ReservationVO> reservation(int m_number){
 		return mypage.reservation(m_number);
+	}
+	
+	//병원 이름 가져오기
+	@Override
+	public String reservation_partnername(int partner_num) {
+		return mypage.reservation_partner_name(partner_num);
 	}
 
 

@@ -27,4 +27,9 @@ public class MyPageDAO {
 	public List<ReservationVO> reservation(int m_number){
 		return sqlSessionTemplate.selectList("User_MyPage.reservationList", m_number);
 	}
+	
+//	병원 이름가져오기
+	public String reservation_partner_name(int partner_num) {
+		return sqlSessionTemplate.selectOne("User_MyPage.user_mypageInfo", partner_num);
+	}
 }

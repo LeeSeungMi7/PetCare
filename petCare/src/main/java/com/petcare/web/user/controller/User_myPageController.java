@@ -105,7 +105,11 @@ public class User_myPageController {
 		
 		reservationList = user_mypageService.reservation(m_number);
 		
-		for( )
+		for(int i=0; i<=reservationList.size(); i++) {
+			reservationList.get(i).getPartner_name();
+			String name = user_mypageService.reservation_partnername(m_number);
+			System.out.println(name);
+		}
 		
 		mav.addObject("reservationList", reservationList);
 		mav.setViewName("/myreservation");

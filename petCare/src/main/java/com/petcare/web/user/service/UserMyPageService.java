@@ -13,4 +13,6 @@ public interface UserMyPageService {
 	List<MyPetVO> user_myPet(int m_number);
 	
 	List<ReservationVO> reservation(int m_number);
+	
+	String reservation_partnername(int partner_num);
 }

@@ -54,12 +54,7 @@
 					</tr>
 				</thead>
 				<tbody>
-				private int rv_number;
-	private int rv_partner_number;
-	private String rv_date;
-	private String rv_time;
-	private String rv_access;
-	private String rv_petName;
+
 				<c:forEach var="reservationList" items="reservationList">
 					<tr>
 						<th scope="row">1</th>
