@@ -49,92 +49,94 @@
 		<%@ include file="/WEB-INF/page/user/views/header.jsp"%>
 
 		<!--본문-->
-		<div class="getboard">
-			<span class="badge badge-pill badge-success"
-				style="font-size: 20px; margin-bottom: 10px; width: 100%;">자
-				랑 하 기</span>
-			<button type="button" class="button_class"
-				onclick="location.href='qna_write.do'">저도 질문있어요</button>
-			<div class="mainboard">
-				<div class="card" style="width: 20rem;">
-					<img src="/resources/img/동물자랑1.jpg" class="card-img-top" alt="...">
-					<div class="card-body">
-						<h5 class="card-title" value="${show.title}">제목</h5>
-						<p class="card-text" value="${show.content}">내용</p>
-					</div>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item" value="${show.write}">작성자 :</li>
-						<li class="list-group-item" value="${show.date}">작성일 :</li>
-					</ul>
-					<div class="card-body btns">
-						<a href="#" class="card-link">
-							<button type="button" class="btn btn-success btn-sm"
-								onclick="location.href='show_board.html'">게시글 보기</button>
-						</a>
-					</div>
-				</div>
-				<div class="card" style="width: 20rem;">
-					<img src="/resources/img/동물자랑1.jpg" class="card-img-top" alt="...">
-					<div class="card-body">
-						<h5 class="card-title">제목</h5>
-						<p class="card-text">내용</p>
-					</div>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item">작성자 :</li>
-						<li class="list-group-item">작성일 :</li>
-					</ul>
-					<div class="card-body btns">
-						<a href="#" class="card-link">
-							<button type="button" class="btn btn-success btn-sm">게시글
-								보기</button>
-						</a>
-					</div>
-				</div>
-
-				<div class="card" style="width: 20rem;">
-					<img src="/resources/img/동물자랑1.jpg" class="card-img-top" alt="...">
-					<div class="card-body">
-						<h5 class="card-title">제목</h5>
-						<p class="card-text">내용</p>
-					</div>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item">작성자 :</li>
-						<li class="list-group-item">작성일 :</li>
-					</ul>
-					<div class="card-body btns">
-						<a href="#" class="card-link">
-							<button type="button" class="btn btn-success btn-sm"
-								onclick="location.href='show_board.html'">게시글 보기</button>
-						</a>
-					</div>
-				</div>
-
-				<div class="card" style="width: 20rem;">
-					<img src="/resources/img/동물자랑1.jpg" class="card-img-top" alt="...">
-					<div class="card-body">
-						<h5 class="card-title">제목</h5>
-						<p class="card-text">내용</p>
-					</div>
-					<ul class="list-group list-group-flush">
-						<li class="list-group-item">작성자 :</li>
-						<li class="list-group-item">작성일 :</li>
-					</ul>
-					<div class="card-body btns">
-						<a href="#" class="card-link">
-							<button type="button" class="btn btn-success btn-sm">게시글
-								보기</button>
-						</a>
-					</div>
-				</div>
-			</div>
-			<nav aria-label="Page navigation example">
-				<ul class="pagination justify-content-center">
-					<li class="page-item disabled"><a class="page-link">이전</a></li>
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">다음</a></li>
-				</ul>
-			</nav>
-		</div>
+        <div class="getboard">
+            <span class="badge badge-pill badge-success" style="font-size: 20px; margin-bottom: 10px; width: 100%;">자 랑 하
+                기</span>
+            <div class="mainboard">
+            <c:forEach var="show" items="${list}">
+                <div class="card"onclick="location.href='show_board.do'">
+                    <img src="/resources/img//동물자랑1.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="rowpoint">
+                        <h5 class="card-title">${show.b_title} 우리집강아지좀보세요 자랑하고싶어요</h5>
+                        <h6 class="look">LOOK ${show.b_hit}15</h6>
+                    </div>
+                        <p class="card-text">${show.b_content }우리집강아지는 복슬강아지</p>
+                    </div>
+                    <ul class="list-group list-group-flush rowpoint" >
+                        <li class="list-group-item writer">WRITER : ${show.b_writer }
+                        </li>
+                        <li class="list-group-item date">${show.b_date }
+                        </li>
+                    </ul>
+                </div>
+                </c:forEach>
+        
+                <div class="card"onclick="location.href='show_board.do'">
+                    <img src="/resources/img//동물자랑1.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="rowpoint">
+                        <h5 class="card-title">우리집 강아지좀 보세요 </h5>
+                        <h6 class="look">LOOK 15</h6>
+                    </div>
+                        <p class="card-text">우리집 강아지 이름은 멍멍이에요 기엽죠?</p>
+                    </div>
+                    <ul class="list-group list-group-flush rowpoint" >
+                        <li class="list-group-item writer">WRITER :
+                        </li>
+                        <li class="list-group-item date">2022-05-01
+                        </li>
+                    </ul>
+                </div>
+        
+                <div class="card"onclick="location.href='show_board.do'">
+                    <img src="/resources/img//동물자랑1.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="rowpoint">
+                        <h5 class="card-title">우리집 강아지좀 보세요 </h5>
+                        <h6 class="look">LOOK 15</h6>
+                    </div>
+                        <p class="card-text">우리집 강아지 이름은 멍멍이에요 기엽죠?</p>
+                    </div>
+                    <ul class="list-group list-group-flush rowpoint" >
+                        <li class="list-group-item writer">WRITER :
+                        </li>
+                        <li class="list-group-item date">2022-05-01
+                        </li>
+                    </ul>
+                </div>
+        
+                <div class="card"onclick="location.href='show_board.do'">
+                    <img src="/resources/img//동물자랑1.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="rowpoint">
+                        <h5 class="card-title">우리집 강아지좀 보세요 </h5>
+                        <h6 class="look">LOOK 15</h6>
+                    </div>
+                        <p class="card-text">우리집 강아지 이름은 멍멍이에요 기엽죠?</p>
+                    </div>
+                    <ul class="list-group list-group-flush rowpoint" >
+                        <li class="list-group-item writer">WRITER :
+                        </li>
+                        <li class="list-group-item date">2022-05-01
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link">이전</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">다음</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
 		<!--푸터-->
 		<%@ include file="/WEB-INF/page/user/views/footer.jsp"%>
 

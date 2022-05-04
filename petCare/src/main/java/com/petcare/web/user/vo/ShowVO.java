@@ -2,42 +2,19 @@ package com.petcare.web.user.vo;
 
 import java.util.Date;
 
+import lombok.Data;
+
+@Data
 public class ShowVO {
 
-	private String writer; //작성자
-	private String title; //제목
-	private Date date; //날짜
-	private String content; //내용
-	private int hit; //조회수
-	public String getWriter() {
-		return writer;
-	}
-	public void setWriter(String writer) {
-		this.writer = writer;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
-	public String getContent() {
-		return content;
-	}
-	public void setContent(String content) {
-		this.content = content;
-	}
-	public int getHit() {
-		return hit;
-	}
-	public void setHit(int hit) {
-		this.hit = hit;
-	}
-
+	private int board_num;
+	private int m_number;
+	private String b_writer; //작성자
+	private String b_title; //제목
+	private Date b_date; //날짜
+	private String b_content; //내용
+	private int b_hit; //조회수
+	private String b_file_name; //파일이름
+	private String b_file_path; //파일경로
+	
 }

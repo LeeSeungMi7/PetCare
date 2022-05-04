@@ -12,6 +12,7 @@
 <link href="/resources/css/user/button.css" rel="stylesheet">
 <link href="/resources/css/user/loginForm.css" rel="stylesheet">
 <link href="/resources/css/user/write.css" rel="stylesheet">
+
 <!--부트스트랩-->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -39,6 +40,33 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1e818982c81810e2470dd6b0b339e676&libraries=services"></script>
 
+
+<script>
+
+function onclickOk(){
+		var title= $("#input_title").val();
+		console.log(title);
+		
+		oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", [])
+		var content = document.getElementById("ir1").value
+		console.log(content);
+
+		if(title == ""){
+			alert("제목을 입력하세요.");
+			document.getElementById("title").focus();
+			console.log
+			return;
+		}
+		if(content == ""){
+			alert("내용을 입력하세요.");
+			oEdiotrs.getById["ir1"].exec("FOCUS")
+			return;
+		}
+		alert("등록되었습니다.")
+		document.getElementById("form1").submit();
+	}
+
+</script>
 </head>
 
 <body>
@@ -47,40 +75,47 @@
 		<%@ include file="/WEB-INF/page/user/views/header.jsp"%>
 		<!--본문-->
 		<%-- <%@ include file="/WEB-INF/page/user/views/show_write.jsp" %> --%>
-     <section>
-        <div class="eidtor">
-            <!--제목-->
-            <div class="mb-3">
-                <label for="formGroupExampleInput" class="form-label">제목</label>
-                <input type="text" class="datebox form-control" maxlength="20" placeholder="" style="max-width: 300px;">
-            </div>
-            <!--날짜-->
-            <div class="mb-3">
-                <label for="formGroupExampleInput2" class="form-label">날짜</label>
-                <input type="text" class="datebox form-control" placeholder="" style="max-width: 300px;">
-            </div>
-            <!--내용-->
-            <div>
-                <label>내용</label>
-                <textarea name="ir1" id="ir1" rows="10" cols="100" style="max-width: 650px;"></textarea>
-            </div>
+		<form id="form1" name="showVO" method="GET" action="/show_write.do">
+			<div class="eidtor">
+				<!--제목-->
+				<div class="mb-3">
+					<label for="formGroupExampleInput" class="form-label" id="title">제목</label> 
+					<input
+						type="text" class="datebox form-control" maxlength="20"
+						placeholder="" style="max-width: 300px;" name="b_title" id="input_title">
+				</div>
+				<!--대표이미지-->
+				<div class="mb-3">
+					<label for="formGroupExampleInput2" class="form-label">대표이미지</label>
+					<div>
+					<input type="file" name="file" id="profile_pt" onchange="previewImage(this,'View_area')"/>
+					<div id='View_area' style='position:relative;  border: 0px solid black; dispaly: inline; '></div>
+					</div>
+				</div>
+				<!--내용-->
+				<div>
+					<label>내용</label>
+					<textarea id="ir1" rows="10" cols="100" style="max-width: 650px;" name="b_content"></textarea>
+				</div>
+				<!--버튼-->
+				<div>
+					<button class="btn btn-success" type="button" id="btnSave" onClick="onclickOk()">등록</button>
+					<a class="btn btn-danger" href="show.do" role="button" onclick="Cancel()">취소</a>
+				</div>
+			</div>
 
-            <!--버튼-->
-            <div>
-                <a class="btn btn-success" href="show.do" role="button"  onclick="Ok();">등록</a>
-                <a class="btn btn-danger" href="show.do" role="button" onclick="Cancel()">취소</a>
-            </div>
-        </div>
-
-    </section>
-    <script type="text/javascript" src="/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
-    <script src="/resources/js/user/write.js"></script>
-    <script src="/resources/js/user/qna_write.js"></script>
+		</form>
+		</div>
+		<script type="text/javascript" src="/se2/js/service/HuskyEZCreator.js"
+			charset="utf-8"></script>
+		<script src="/resources/js/user/write.js"></script>
+		<script src="/resources/js/user/show_write.js"></script>
 
 
 		<!--푸터-->
 		<%@ include file="/WEB-INF/page/user/views/footer.jsp"%>
-
+		
+		
 </body>
 </html>
 
