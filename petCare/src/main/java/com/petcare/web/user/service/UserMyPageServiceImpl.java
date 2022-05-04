@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.petcare.web.user.dao.MyPageDAO;
 import com.petcare.web.user.vo.MemberVO;
 import com.petcare.web.user.vo.MyPetVO;
+import com.petcare.web.user.vo.ReservationVO;
 
 @Service
 public class UserMyPageServiceImpl implements UserMyPageService {
@@ -24,6 +25,11 @@ public class UserMyPageServiceImpl implements UserMyPageService {
 	@Override
 	public List<MyPetVO> user_myPet(int m_number) {
 		return mypage.user_mypage_pet(m_number);
+	}
+	
+	//펫 병원 예약 가져오기
+	public List<ReservationVO> reservation(int m_number){
+		return mypage.reservation(m_number);
 	}
 
 

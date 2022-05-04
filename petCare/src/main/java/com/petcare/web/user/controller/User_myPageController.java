@@ -8,7 +8,6 @@ import javax.inject.Inject;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.petcare.web.user.service.UserMyPageService;
 import com.petcare.web.user.vo.MemberVO;
 import com.petcare.web.user.vo.MyPetVO;
+import com.petcare.web.user.vo.ReservationVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,10 +26,11 @@ import lombok.extern.slf4j.Slf4j;
 public class User_myPageController {
 	
 	@Autowired
-	private UserMyPageService user_mypage;
+	private UserMyPageService user_mypageService;
+	
 	
 	@Inject User_myPageController( UserMyPageService user_mypage ){
-		this.user_mypage = user_mypage;
+		this.user_mypageService = user_mypage;
 	}
 	
 	
@@ -41,8 +42,8 @@ public class User_myPageController {
 		List<MyPetVO> myPetVO = new ArrayList<MyPetVO>();
 		ModelAndView mav = new ModelAndView();
 		
-		memberVO = user_mypage.user_mypage(m_number);
-		myPetVO = user_mypage.user_myPet(m_number);
+		memberVO = user_mypageService.user_mypage(m_number);
+		myPetVO = user_mypageService.user_myPet(m_number);
 				
 	    String tel[] = memberVO.getM_tel().split("-");
 	    memberVO.setM_tel1(tel[0]);
@@ -58,6 +59,7 @@ public class User_myPageController {
 		
 	}
 	
+	//user 내정보 수정
 	@RequestMapping(value="/user_mofify.do", method=RequestMethod.POST)
 	public void user_mypage_modify(@ModelAttribute MemberVO memberVO){
 		
@@ -79,6 +81,7 @@ public class User_myPageController {
 		tempMemberVO.setM_role("0");
 		
 		System.out.println(tempMemberVO.getMypetVO());
+		
 //		memberService.user_register(tempMemberVO);
 //
 //		if(tempMemberVO.getPetList() != null) {
@@ -89,6 +92,23 @@ public class User_myPageController {
 //				memberService.userPet_register(pet);
 //			}
 //		}
-
+		
 	}
+	
+	//내 예약 현황
+	@RequestMapping("/user_myreservation.do")
+	public ModelAndView myreservation(@RequestParam int m_number) {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		List<ReservationVO> reservationList = new ArrayList<ReservationVO>();
+		
+		reservationList = user_mypageService.reservation(m_number);
+		
+		mav.addObject("reservationList", reservationList);
+		mav.setViewName("/myreservation");
+		
+		return mav;
+	}
+	
 }

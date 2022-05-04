@@ -45,7 +45,7 @@
 				<div class="pet-body pet-home">
 					<!-- 홈 최상단 슬라이더 -->
 					<section name="f" class="pet-home__boards">
-					<form onsubmit=" fn_submit(); return false;" method="post" action="/partner_register.do" enctype="multipart/form-data">
+					<form onsubmit=" return fn_submit();" method="post" action="/partner_register.do" enctype="multipart/form-data">
 	                   	 <div class="join-user" style="align-items: center">
 	                        <!--병원이름-->
 	                        <div class="join-user__items">

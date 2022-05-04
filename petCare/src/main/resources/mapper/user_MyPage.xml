@@ -13,4 +13,9 @@
 	<select id="user_myPetList" parameterType="integer" resultType="MyPetVO">
 		select * from MyPet_Table where mp_number=#{m_number};
 	</select>
+	
+	<!-- 병원 예약 펫 검색 -->
+	<select id="reservationList" parameterType="integer" resultType="ReservationVO">
+		select * from Reservation_Table where rv_number=#{m_number};
+	</select>
 </mapper>

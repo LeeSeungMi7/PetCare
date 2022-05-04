@@ -58,7 +58,7 @@
 	        	<input type="hidden" name=m_number value="${user.m_number}">
 	        	<input type="submit" class="dropdown-item" value="내 정보 수정">
 	        </form>
-	        <form action="/user_myPage_update.do" method="POST">
+	        <form action="/user_myreservation.do" method="POST">
 	        	<input type="hidden" name=m_number value="${user.m_number}">
 	        	<input type="submit" class="dropdown-item" value="내 예약 관리">
 	        </form>

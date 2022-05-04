@@ -89,7 +89,7 @@ function onclickOk(){
 				<div class="mb-3">
 					<label for="formGroupExampleInput2" class="form-label">대표이미지</label>
 					<div>
-					<input type="file" name="file" id="profile_pt" onchange="previewImage(this,'View_area')"/>
+					<input type="file" name="file1" id="profile_pt" onchange="previewImage(this,'View_area')"/>
 					<div id='View_area' style='position:relative;  border: 0px solid black; dispaly: inline; '></div>
 					</div>
 				</div>

@@ -1,5 +1,6 @@
 package com.petcare.web.user.controller;
 
+import java.lang.reflect.Member;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.petcare.web.user.service.BoardService;
 import com.petcare.web.user.vo.ShowVO;
@@ -45,9 +48,10 @@ public class BoardController {
 		return map;
 	}
 	
-	@RequestMapping(value = "/show_insert.do" , method=RequestMethod.GET)
-	public String board_write(@ModelAttribute ShowVO showVO) {
-		System.out.println(showVO.toString());
+	@RequestMapping(value = "/show_insert.do" , method=RequestMethod.POST)
+	public String board_write(@ModelAttribute ShowVO showVO ,@RequestParam("file1") MultipartFile file) {
+		System.out.println(file.toString());
+		System.out.println("show" + showVO.toString());
 		boardService.boardInsert(showVO);
 		return "/show";
 	}

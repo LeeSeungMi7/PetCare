@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.petcare.web.user.vo.MemberVO;
 import com.petcare.web.user.vo.MyPetVO;
+import com.petcare.web.user.vo.ReservationVO;
 
 @Repository
 public class MyPageDAO {
@@ -21,5 +22,9 @@ public class MyPageDAO {
 	
 	public List<MyPetVO> user_mypage_pet(int m_number) {
 		return sqlSessionTemplate.selectList("User_MyPage.user_myPetList", m_number);
+	}
+	
+	public List<ReservationVO> reservation(int m_number){
+		return sqlSessionTemplate.selectList("User_MyPage.reservationList", m_number);
 	}
 }

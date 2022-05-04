@@ -10,6 +10,8 @@
 		<typeAlias alias="S3KeyVO"  type="com.petcare.web.user.vo.S3KeyVO"/>	
 		<typeAlias alias="AdminVO"  type="com.petcare.web.admin.vo.AdminVO"/>
 		<typeAlias alias="ShowVO"  type="com.petcare.web.user.vo.ShowVO"/>
+		<typeAlias alias="ReservationVO"  type="com.petcare.web.user.vo.ReservationVO"/>
+
 	</typeAliases>
 	
 	<mappers>
