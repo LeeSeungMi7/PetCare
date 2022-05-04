@@ -1,5 +1,7 @@
 package com.petcare.web.admin.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.petcare.web.admin.dao.AdminDAO;
 import com.petcare.web.admin.vo.AdminVO;
+import com.petcare.web.user.vo.MemberVO;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -24,7 +27,22 @@ public class AdminServiceImpl implements AdminService {
 		}
 		return result;
 	}
-
+	
+	@Override 
+	public List<MemberVO> getUserList() throws Exception { 
+		return adminDAO.getUserList(); 
+	}
+	
+	@Override 
+	public List<MemberVO> getAccHosList() throws Exception { 
+		return adminDAO.getAccHosList(); 
+	}
+	
+	@Override 
+	public List<MemberVO> getUnAccHosList() throws Exception { 
+		return adminDAO.getUnAccHosList(); 
+	}
+	
 	@Override
 	public AdminVO getAdmin(AdminVO vo) {
 		return adminDAO.getAdmin(vo);
@@ -34,5 +52,8 @@ public class AdminServiceImpl implements AdminService {
 	public void logout(HttpSession session) {
 		session.invalidate();
 	}
-
+	@Override 
+	public int updateUser(String name) throws Exception { 
+		return adminDAO.updateUser(name); 
+	}
 }
