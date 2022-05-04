@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.petcare.web.user.vo.ReservationVO" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -52,6 +54,13 @@
 					</tr>
 				</thead>
 				<tbody>
+				private int rv_number;
+	private int rv_partner_number;
+	private String rv_date;
+	private String rv_time;
+	private String rv_access;
+	private String rv_petName;
+				<c:forEach var="reservationList" items="reservationList">
 					<tr>
 						<th scope="row">1</th>
 						<td>멍멍이 동물병원</td>
@@ -75,52 +84,8 @@
 								onclick="deleteRowFunction(this)">예약 취소</button>
 						</td>
 					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td>종합 동물병원</td>
-						<td>야옹이</td>
-						<td>22-04-26</td>
-						<td><select class="form-select form-select-sm">
-								<option value="오전 9시">오전 9시</option>
-								<option value="오전 10시">오전 10시</option>
-								<option value="오전 11시">오전 11시</option>
-								<option value="오후 1시">오후 1시</option>
-								<option value="오후 2시">오후 2시</option>
-								<option value="오후 3시">오후 3시</option>
-								<option value="오후 4시">오후 4시</option>
-								<option value="오후 5시">오후 5시</option>
-								<option value="오후 6시">오후 6시</option>
-						</select></td>
-						<td>
-							<button type="button" class="btn-success btn-sm"
-								onclick="deleteRowFunction(this)">예약 수정</button>
-							<button type="button" class="btn-danger btn-sm"
-								onclick="deleteRowFunction(this)">예약 취소</button>
-						</td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td>야옹이 동물병원</td>
-						<td>멍멍이</td>
-						<td>22-04-27</td>
-						<td><select class="form-select form-select-sm">
-								<option value="오전 9시">오전 9시</option>
-								<option value="오전 10시">오전 10시</option>
-								<option value="오전 11시">오전 11시</option>
-								<option value="오후 1시">오후 1시</option>
-								<option value="오후 2시">오후 2시</option>
-								<option value="오후 3시">오후 3시</option>
-								<option value="오후 4시">오후 4시</option>
-								<option value="오후 5시">오후 5시</option>
-								<option value="오후 6시">오후 6시</option>
-						</select></td>
-						<td>
-							<button type="button" class="btn-success btn-sm"
-								onclick="deleteRowFunction(this)">예약 수정</button>
-							<button type="button" class="btn-danger btn-sm"
-								onclick="deleteRowFunction(this)">예약 취소</button>
-						</td>
-					</tr>
+					
+				</c:forEach>
 				</tbody>
 			</table>
 		</div>
