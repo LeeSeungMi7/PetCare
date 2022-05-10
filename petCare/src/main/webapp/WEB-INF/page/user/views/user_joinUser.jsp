@@ -255,7 +255,7 @@ function deletelist(e){
     
     if (class_name == "list-group-item") {
         $(e).parents('li').remove();
-        pat_idx--;
+        pet_idx--;
     } else 
 
     return false;
