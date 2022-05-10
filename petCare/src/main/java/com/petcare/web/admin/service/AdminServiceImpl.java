@@ -56,4 +56,8 @@ public class AdminServiceImpl implements AdminService {
 	public void updateUser(String name) throws Exception { 
 		adminDAO.updateUser(name); 
 	}
+	@Override
+	public void deleteUser(String name) throws Exception { 
+		adminDAO.deleteUser(name); 
+	}
 }
