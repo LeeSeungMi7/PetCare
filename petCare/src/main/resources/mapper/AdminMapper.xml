@@ -21,4 +21,7 @@
 	<update id="AccHos" parameterType="String"> 
 		update Member_Table set m_access = '0' where m_name = #{name}
 	</update>
+	<update id="DelHos" parameterType="String"> 
+		delete from Member_Table where m_name = #{name}
+	</update>
 </mapper>

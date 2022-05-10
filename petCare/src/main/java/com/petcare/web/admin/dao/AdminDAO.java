@@ -15,4 +15,5 @@ public interface AdminDAO {
 	public List<MemberVO> getAccHosList() throws Exception;
 	public List<MemberVO> getUnAccHosList() throws Exception;
 	public void updateUser(String name) throws Exception;
+	public void deleteUser(String name) throws Exception;
 }
