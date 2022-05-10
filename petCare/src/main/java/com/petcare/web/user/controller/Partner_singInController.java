@@ -87,9 +87,7 @@ public class Partner_singInController {
 		tempMemberVO.setP_file_path(fileResult.getUrl());
 		
 	
-		memberService.partner_register(tempMemberVO);
-		
-		log.info("사업자 등록증 된건가?");
+		memberService.partner_register(tempMemberVO);	
 		
 		return "/partner_regCom";
 		

@@ -40,7 +40,6 @@ function fn_loginCheck() {
                 swal({
 					title: "로그인 성공.",
 					icon : "success",
-					text: "환영합니다"
 				}, function(){			
 					window.location.href ="/home.do";
 					$("#login_Div").hide();
@@ -58,7 +57,6 @@ function fn_loginCheck() {
                 swal({
 					title: "로그인 성공.",
 					icon : "success",
-					text: "환영합니다."
 				}, function(){
 					window.location.href ="/home.do";					
 				});
@@ -96,3 +94,4 @@ function logout(){
          }
       });
 }
+

@@ -1,9 +1,12 @@
 package com.petcare.web.user.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +15,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.petcare.web.user.service.UserMyPageService;
+import com.petcare.web.user.vo.Criteria;
 import com.petcare.web.user.vo.MemberVO;
 import com.petcare.web.user.vo.MyPetVO;
 import com.petcare.web.user.vo.ReservationVO;
@@ -61,7 +66,7 @@ public class User_myPageController {
 	
 	//user 내정보 수정
 	@RequestMapping(value="/user_mofify.do", method=RequestMethod.POST)
-	public void user_mypage_modify(@ModelAttribute MemberVO memberVO){
+	public String user_mypage_modify(@ModelAttribute MemberVO memberVO, HttpSession session){
 		
 		MemberVO tempMemberVO = memberVO;
 
@@ -76,45 +81,97 @@ public class User_myPageController {
 			tempMemberVO.setM_sido(address[0] +" "+ address[1]);
 			tempMemberVO.setM_dong(address[2] +" "+ address[3]);
 		}
+		
+		user_mypageService.userModify(tempMemberVO);
+					
+		if(tempMemberVO.getPetList() != null) {
+			
+			for(MyPetVO pet : tempMemberVO.getPetList()) {
+//				펫 없을때
+				if(pet.getMyPet_num() == 0) {
+				   pet.setMp_number(tempMemberVO.getM_number());
+				   user_mypageService.insertAddPet(pet);
+				}
+				
+			}
+		}
+		return "home";
+	}
 	
-		tempMemberVO.setM_access("0");
-		tempMemberVO.setM_role("0");
+	//내펫 삭제
+	@RequestMapping(value="/delete_MyPet.do",  method=RequestMethod.GET)
+	@ResponseBody
+	public int delete_Mypet(@RequestParam String petNum) {
 		
-		System.out.println(tempMemberVO.getMypetVO());
-		
-//		memberService.user_register(tempMemberVO);
-//
-//		if(tempMemberVO.getPetList() != null) {
-//			log.info("tempMemberVO.getPetList() : " + tempMemberVO.getPetList().toString());
-//			log.info("tempMemberVO.getPetList() : " + tempMemberVO.getPetList().size());
-//			for(MyPetVO pet : tempMemberVO.getPetList()) {
-//				pet.setMp_number(tempMemberVO.getM_number());
-//				memberService.userPet_register(pet);
-//			}
-//		}
-		
+		int deleteMyPet;
+		deleteMyPet = user_mypageService.deleteMyPet(petNum);
+		return deleteMyPet;
 	}
 	
 	//내 예약 현황
 	@RequestMapping("/user_myreservation.do")
-	public ModelAndView myreservation(@RequestParam int m_number) {
+	public ModelAndView myreservation(@RequestParam int m_number, @RequestParam(defaultValue="0") int pageNum) {
+		int total; //총 글 수
+		Criteria criteria;
 		
 		ModelAndView mav = new ModelAndView();
+	
+		if(pageNum == 0) {
+			criteria = new Criteria(1,10); //10글까지 보이게
+		}else {
+			criteria = new Criteria(pageNum,10);
+		}
+		criteria.setM_number(m_number);
 		
 		List<ReservationVO> reservationList = new ArrayList<ReservationVO>();
+        
+		reservationList = user_mypageService.reservation(criteria);
+		total = user_mypageService.totalpage(criteria);
+//		log.info("total : " + total);
+//		log.info("criteria.getSize() : " + criteria.getSize());
+//		log.info("(int)Math.ceil(total/criteria.getSize()) : " + (int)Math.ceil(total *1.0/criteria.getSize()));
 		
-		reservationList = user_mypageService.reservation(m_number);
+		criteria.setTotal_page((int)Math.ceil(total *1.0/criteria.getSize()));
+		criteria.setBlock_num((int)Math.ceil(criteria.getSize() / 10));
+		criteria.setBlock_start(((criteria.getBlock_num() -1) *5)+1);
+		criteria.setBlock_end(criteria.getBlock_start()+5 -1);
 		
-		for(int i=0; i<=reservationList.size(); i++) {
-			reservationList.get(i).getPartner_name();
-			String name = user_mypageService.reservation_partnername(m_number);
-			System.out.println(name);
+		if(criteria.getBlock_end() > criteria.getTotal_page()) {
+			criteria.setBlock_end(criteria.getTotal_page());
 		}
-		
-		mav.addObject("reservationList", reservationList);
+//		System.out.println(criteria.toString());
+		mav.addObject("reser", reservationList);
+		mav.addObject("criteria", criteria);
 		mav.setViewName("/myreservation");
 		
+
 		return mav;
 	}
+	
+	//예약 수정
+	@RequestMapping(value="/reservation_modify.do" , method=RequestMethod.GET)
+	@ResponseBody
+	public int reservation_modify(@RequestParam String index, String time) {
+		
+		int update;
+		
+		Map<String, String> map = new HashMap<String,String>();
+		
+		map.put("index", index);
+		map.put("time", time);
+		
+		update = user_mypageService.reservation_modify(map);
+		
+		return update;
+	}
+	
+	//예약 삭제
+	@RequestMapping(value="/reservation_delete.do" , method= RequestMethod.GET)
+	@ResponseBody
+	public int reservation_delete(@RequestParam int index) {
+		int result = user_mypageService.reservation_delete(index);
+		return result;
+	}
+	
 	
 }

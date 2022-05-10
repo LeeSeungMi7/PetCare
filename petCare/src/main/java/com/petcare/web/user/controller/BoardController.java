@@ -1,6 +1,7 @@
 package com.petcare.web.user.controller;
 
 import java.lang.reflect.Member;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,15 +45,10 @@ public class BoardController {
 //			로그인할때
 			map.put("user_ok","1");
 		}
+
 		System.out.println(map);
 		return map;
 	}
-	
-	@RequestMapping(value = "/show_insert.do" , method=RequestMethod.POST)
-	public String board_write(@ModelAttribute ShowVO showVO ,@RequestParam("file1") MultipartFile file) {
-		System.out.println(file.toString());
-		System.out.println("show" + showVO.toString());
-		boardService.boardInsert(showVO);
-		return "/show";
-	}
 }
+	
+

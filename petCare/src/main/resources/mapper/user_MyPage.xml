@@ -14,13 +14,33 @@
 		select * from MyPet_Table where mp_number=#{m_number};
 	</select>
 	
-	<!-- 병원 예약 펫 검색 -->
+	<!-- 병원 예약 검색 -->
 	<select id="reservationList" parameterType="integer" resultType="ReservationVO">
-		select * from Reservation_Table where rv_number=#{m_number};
+		select rt.* , mt.m_name as partner_name from Reservation_Table rt join Member_Table mt on mt.m_number = rt.rv_partner_number where rv_number=#{m_number} limit ${skip}, ${size}
 	</select>
 	
-	<!-- 병원 이름 검색 -->
-	<select id="reservationList" parameterType="integer" resultType="String">
-		select m_name from Member_Table where m_number=#{m_number};
+	
+	<!-- 예약 수정 -->
+	<update id="reservation_modify" parameterType="hashmap">
+	update Reservation_Table set rv_time=#{time} where Reservation_num =#{index};
+	</update>
+	
+	<!-- 펫 삭제 -->
+	<delete id="deleteMyPet" parameterType="String">
+	DELETE FROM MyPet_Table  WHERE myPet_num=#{petNum}
+	</delete>
+	
+	<!-- 회원정보 수정 -->
+	<update id="modifyUser" parameterType="MemberVO">
+	update Member_Table set m_pw=#{m_pw}, m_tel=#{m_tel},m_zipcode=#{m_zipcode}, m_address=#{m_address},m_address_detail=#{m_address_detail}, m_sido=#{m_sido},m_dong=#{m_dong} where m_number=#{m_number}	
+	</update>
+	
+	<delete id="reservation_delete">
+	delete from Reservation_Table where reservation_num=#{index};
+	</delete>
+	
+	<!-- 마이페이지 페이징 처리위해 전체 글수 -->
+	<select id="totalpage" resultType="int">
+	select count(*) from Reservation_Table where rv_number=#{m_number};
 	</select>
 </mapper>

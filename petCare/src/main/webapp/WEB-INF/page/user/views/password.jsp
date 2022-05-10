@@ -11,7 +11,6 @@
     <link href="../../../../resources/css/user/footer.css" rel="stylesheet">
     <link href="../../../../resources/css/user/button.css" rel="stylesheet">
     <link href="../../../../resources/css/user/loginForm.css" rel="stylesheet">
-    <link href="../../../../resources/css/user/password.css" rel="stylesheet">
     
   <!--부트스트랩-->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"  crossorigin="anonymous">
@@ -26,7 +25,7 @@
   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <!-- 카카오 MAP API-KEY -->
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1e818982c81810e2470dd6b0b339e676&libraries=services"></script>
-
+  <link href="../../../../resources/css/user/password.css" rel="stylesheet">
 </head>
 
 <body>
@@ -37,7 +36,8 @@
     <!--본문-->
 		<div class="password-body">
 			<div class="password-body-form">
-				<div class="card shadow-lg border-0 rounded-lg mt-5">
+			<img class="password_back" src="/resources/img/password.png">
+				<div>
 					<div class="card-header">
 						<h3 class="text-center font-weight-light my-4">비밀번호 찾기</h3>
 					</div>
@@ -50,18 +50,16 @@
 									placeholder="name@example.com" /> <label for="inputEmail">이메일
 									입력</label>
 							</div>
-							<div
-								class="d-flex align-items-center justify-content-between mt-4 mb-0">
-								<a class="btn btn-primary" href="login.html">비밀번호 발송</a>
+							<div class="d-flex align-items-center justify-content-between mt-4 mb-0">
+								<a class="singform_go" href="/signinForm.do">회원가입으로 이동</a>
+								<a class="btn btn-primary email_send" href="login.html">비밀번호 발송</a>
 							</div>
 						</form>
 					</div>
 					<div class="card-footer text-center py-3">
-						<div class="small">
-							<a href="/signinForm.do">회원가입으로 이동</a>
-						</div>
+						
 					</div>
-				</div>
+				</div> 
 			</div>
 		</div>
 

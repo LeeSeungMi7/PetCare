@@ -44,8 +44,7 @@ public class LoginController {
 		session.setMaxInactiveInterval(1800); // 1800 = 60s*30 (30분)
 
 		Map<String, String> map = new HashMap<String, String>();
-		System.out.println("id " + userId);
-		System.out.println("pw " + userPw);
+
 		MemberVO vo = memberService.user_login(userId);
 		
 		if (vo == null) {
@@ -53,7 +52,7 @@ public class LoginController {
 			map.put("msg","idFail");
 			return map;	
 		}
-		System.out.println(vo.getM_pw());
+
 		boolean password = BCrypt.checkpw(userPw, vo.getM_pw());
 		if(!password) {
 			System.out.println("비번 다름");
@@ -84,7 +83,6 @@ public class LoginController {
 	
 	@RequestMapping(value="/logout.do", method=RequestMethod.POST)
 	public String logout(HttpSession session) {
-		System.out.println(session.getAttribute("user"));
 		memberService.logout(session);
 		return "/home";
 	}

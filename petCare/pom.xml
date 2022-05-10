@@ -155,7 +155,12 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
-
+		<!-- 문자서비스 -->
+		<dependency>
+			<groupId>net.nurigo</groupId>
+			<artifactId>javaSDK</artifactId>
+			<version>2.2</version>
+		</dependency>
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>

@@ -54,4 +54,5 @@ public class CommonController {
 		return "show_write";
 	}
 	
+	
 }

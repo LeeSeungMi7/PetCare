@@ -9,4 +9,16 @@
 	<select id="getAdmin" resultType="com.petcare.web.admin.vo.AdminVO">
 		SELECT * FROM Admin_Table where ad_id = #{ad_id} and CONVERT(AES_DECRYPT(unhex(ad_pw), 'a') USING utf8) = #{ad_pw}
 	</select>
+	<select id="getUser" resultType="com.petcare.web.user.vo.MemberVO">
+		select * from Member_Table where not m_role = '1'
+	</select>
+	<select id="getAccHospital" resultType="com.petcare.web.user.vo.MemberVO">
+		select * from Member_Table where not m_role = '0' and not m_access = '1'
+	</select>
+	<select id="getUnAccHospital" resultType="com.petcare.web.user.vo.MemberVO">
+		select * from Member_Table where not m_role = '0' and not m_access = '0'
+	</select>
+	<update id="AccHos" parameterType="String" > 
+		update Member_Table set m_access = '0' where m_name = #{name}
+	</update>
 </mapper>

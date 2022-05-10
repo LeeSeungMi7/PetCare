@@ -10,8 +10,3 @@
         © 2022 PetCare All right reserved
     </div>
 </div>
-<script type="text/javascript" src="/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="/resources/js/user/loginForm.js"></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
