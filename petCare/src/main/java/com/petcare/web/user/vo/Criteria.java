@@ -12,6 +12,7 @@ public class Criteria {
 	private int block_num; //현재 페이지 블록
 	private int block_start; //블록시작
 	private int block_end; //블록 마지막
+	private int total; //총 글 수
 	
 	public Criteria() {
 		this(1,5);

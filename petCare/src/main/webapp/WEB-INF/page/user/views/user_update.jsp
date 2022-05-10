@@ -157,7 +157,7 @@
 								<input type="hidden" value="${member.m_number}" name="m_number">
 								<input type="submit" class="buttonOk button_class" value="수정">
 								<button class="buttonOk button_class" onClick="location.href='home.do'">취소</button>
-								<button class="buttonOk button_class" onClick="location.href='#'">탈퇴</button>
+								<button class="buttonOk button_class deleteMember">탈퇴</button>
 							</div>
 						</div>
 					</div>
@@ -365,7 +365,46 @@ function modify_submit() {
 	}
 
 } 
+$(".deleteMember").click(function(){
+	
+	var m_number = $("input[name='m_number']").val();
 
+	swal({
+		title : "정말로 탈퇴하시겠습니까?",
+		text : "동일 E_mail로 가입 불가능하며,\n 6개월 이후 모든 데이터 복구가 불가능합니다.",
+		type : "warning",
+		showCancelButton : true, 
+		confirmButtonClass : "btn-danger", 
+		confirmButtonText : "예",
+		cancelButtonText : "아니오",
+		closeOnConfirm : false,
+	    closeOnCancel : true  
+	}, function(isConfirm) {
+		
+		$.ajax({
+			type : "POST",
+			data : {"m_number" : m_number},
+			url : "/delete_member.do", 
+			dataType : "json",
+			success : function(data) {
+				if(data==1){
+					 swal({
+							title: "성공적으로 탈퇴되었습니다.",
+							text:"그동안 이용해 주셔서 감사합니다.",
+							closeOnClickOutside: false
+						}, function(){
+							window.location.href ="/home.do";
+					});
+				}
+			},
+			error : function(error) {
+				alert("error : " + error);
+			}
+		});
+
+	});
+
+})
 </script>
 </body>
 </html>

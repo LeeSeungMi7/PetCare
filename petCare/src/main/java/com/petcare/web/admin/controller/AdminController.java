@@ -80,6 +80,15 @@ public class AdminController {
 		adminService.updateUser(name);
 		return "1";
 	}
+	@RequestMapping(value = "/delete_hospital.mdo", method = RequestMethod.POST)
+	@ResponseBody
+	public String delHospital(@RequestParam String m_name) throws Exception {
+		System.out.println(m_name);
+		String name = m_name;
+		adminService.deleteUser(name);
+		return "1";
+	}
+	
 	
 	@RequestMapping(value = "/ad_user.mdo", method = RequestMethod.GET) 
 	public String ad_userGet(Model model) throws Exception{

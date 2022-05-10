@@ -217,11 +217,10 @@ select:disabled {
 /* 버튼 */
 .button_class{
     display: inline-block;
-    padding: 6px 12px;
-    margin: 15px;
+    padding: 0 12px;
+    line-height: 1;
     font-size: 14px;
     font-weight: normal;
-    line-height: 2rem;
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;

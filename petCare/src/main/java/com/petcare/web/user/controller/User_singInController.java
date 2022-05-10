@@ -2,6 +2,9 @@ package com.petcare.web.user.controller;
 
 
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import javax.inject.Inject;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -50,6 +53,12 @@ public class User_singInController {
 	
 		tempMemberVO.setM_access("0");
 		tempMemberVO.setM_role("0");
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
+		Calendar c1 = Calendar.getInstance(); 
+		String strToday = sdf.format(c1.getTime()); 
+		
+		tempMemberVO.setSingin_Member_Date(strToday);		
 		
 		memberService.user_register(tempMemberVO);
 

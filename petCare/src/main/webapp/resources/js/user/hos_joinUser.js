@@ -57,6 +57,9 @@ const inputUserWeekendEnd = getElement('user_weekend_end');
 const inputUserLunchStart = getElement('user_lunch_start');
 const inputUserLunchEnd = getElement('user_lunch_end');
 
+/** 병원 맵 고유 아이디 **/
+const inputUserMapId = getElement('user_map_id');
+
 
 const errorTypes = {
     name: 'name',
@@ -125,6 +128,9 @@ const user = {
     lunchEnd() {
         return inputUserLunchEnd.val();
     },
+    mapId() {
+        return inputUserMapId.val();
+    },
     info() {
         return {
             name: this.name(),
@@ -140,6 +146,7 @@ const user = {
             weekendEnd: this.weekendEnd(),
             lunchStart: this.lunchStart(),
             lunchEnd: this.lunchEnd(),
+            mapId: this.mapId()
         }
     }
 }
@@ -160,6 +167,7 @@ function setError(id, message) {
 
     switch (type) {
         case errorTypes.name:
+            resetMapId()
             message = invalid.name();
             errorId = 'error_name';
             break;
@@ -264,9 +272,16 @@ const invalid = {
         return '모든 진료시간을 00:00 형태로 입력해주세요';
       	
     },
-    	
+    mapId() {
+        if (user.mapId()) {
+            return
+        }
+
+        alert('병원 정보가 정확한지 조회해주세요.', 'error')
+    },
+
     all() {
-        return !this.name() && !this.phoneNumber() && !this.password() && !this.passwordCheck() && !this.address() && !this.openingHours();
+        return !this.name() && !this.phoneNumber() && !this.password() && !this.passwordCheck() && !this.address() && !this.openingHours() && !this.mapId();
     }
 }
 
@@ -284,6 +299,7 @@ function findAddr() {
             if (!!roadAddr || !!jibunAddr) {
                 inputUserAddr.val(roadAddr || jibunAddr);
             }
+            resetMapId()
         }
     }).open();
 }
@@ -314,3 +330,45 @@ function Cancel() {
     alert('취소되었습니다', 'error');
 }
 
+
+const mapContainer = document.getElementById('map'), // 지도를 표시할 div
+    mapOption = {
+        center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+        level: 3, // 지도의 확대 레벨
+    };
+
+// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+const map = new kakao.maps.Map(mapContainer, mapOption);
+const ps = new kakao.maps.services.Places();
+
+function searchPlaces() {
+    ps.keywordSearch(`${user.address()} ${user.name()}`, placesSearchCB);
+}
+
+// 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
+function placesSearchCB(data, status, pagination) {
+    console.error(status)
+    if (status === kakao.maps.services.Status.OK) {
+        if (data.length > 0) {
+            const position = new kakao.maps.LatLng(data[0].y, data[0].x);
+
+            new kakao.maps.Marker({
+                map: map,
+                position: position
+            });
+            map.panTo(position);
+            inputUserMapId.val(data[0].id)
+        } else {
+            alert('병원 정보를 찾을수 없습니다.', 'error')
+        }
+
+    } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+        alert('병원 정보를 찾을수 없습니다.', 'error')
+    } else if (status === kakao.maps.services.Status.ERROR) {
+        // 에러로 인해 검색결과가 나오지 않은 경우 해야할 처리가 있다면 이곳에 작성해 주세요
+    }
+}
+
+function resetMapId() {
+    inputUserMapId.val('');
+}

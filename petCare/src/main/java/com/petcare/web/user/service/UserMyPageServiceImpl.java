@@ -74,6 +74,17 @@ public class UserMyPageServiceImpl implements UserMyPageService {
 	public int totalpage(Criteria critera) {
 		return mypage.totalpage(critera);
 	}
+	
+	//회원 탈퇴
+	@Override
+	public int delete_member(Map<String,String> map) {
+		return mypage.delete_member(map);
+	}
+	//디비 삭제
+	@Override
+	public void delete_DB_member() {
+		mypage.delete_DB_member();
+	}
 
 
 }
