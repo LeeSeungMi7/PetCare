@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Partner_MyPage">
+
+	<!-- 파트너 정소 수정(파일변경) -->
+	<update id="modifypartner_file" parameterType="MemberVO">
+	update Member_Table set m_pw=#{m_pw},
+	m_name=#{m_name},
+	m_tel=#{m_tel}, 
+	m_zipcode=#{m_zipcode}, 
+	m_address=#{m_address},
+	m_address_detail=#{m_address_detail}, 
+	m_sido=#{m_sido},
+	m_dong=#{m_dong},
+	p_file_name=#{p_file_name},
+	p_file_path=#{p_file_path},
+	p_weekday=#{p_weekday},
+	p_weekend=#{p_weekend},
+	p_breaktime=#{p_breaktime},
+	p_24hour=#{p_24hour}
+	where m_number=#{m_number}
+	</update>
+	
+	<update id="modifypartner" parameterType="MemberVO">
+	update Member_Table set m_pw=#{m_pw},
+	m_name=#{m_name},
+	m_tel=#{m_tel}, 
+	m_zipcode=#{m_zipcode}, 
+	m_address=#{m_address},
+	m_address_detail=#{m_address_detail}, 
+	m_sido=#{m_sido},
+	m_dong=#{m_dong},
+	p_weekday=#{p_weekday},
+	p_weekend=#{p_weekend},
+	p_breaktime=#{p_breaktime},
+	p_24hour=#{p_24hour}
+	where m_number=#{m_number}
+	</update>
+	
+	<select id="slectReservation" resultType="ReservationVO">
+	select rt.*, mt.m_name as reservation_name, mt.m_tel as reservation_tel
+	from Reservation_Table rt
+	join Member_Table mt on mt.m_number = rt.rv_number
+	where rt.rv_partner_number=#{m_number} 
+	and rt.rv_access='0'
+	limit ${skip}, ${size}
+	</select>
+	
+	<select id="dateSearch" resultType="ReservationVO">
+	select rt.*, mt.m_name as reservation_name, mt.m_tel as reservation_tel
+	from Reservation_Table rt
+	join Member_Table mt on mt.m_number = rt.rv_number
+	where rt.rv_partner_number=#{number} 
+	and rt.rv_access='2' and rt.rv_date=#{date}
+	</select>
+	
+	<update id="reservation_ok">
+	update Reservation_Table set rv_access='2' where reservation_num=#{petNum};
+	</update>
+	
+	<update id="reservation_no">
+	update Reservation_Table set rv_access='1' where reservation_num=#{petNum};
+	</update>
+	
+	<select id="totalpage" resultType="int">
+	select count(*) from Reservation_Table where rv_partner_number=#{m_number};
+	</select>
+</mapper>

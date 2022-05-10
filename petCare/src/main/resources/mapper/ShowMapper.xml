@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Show">
+	<!-- TEST START -->
+	
+	<!-- 게시글 목록-->
+	<select id="listAll" resultType="com.petcare.web.user.dao.ShowDAO">
+	SELECT b_hit, b_title, b_content, board_num, m_number, b_date
+	FROM Board_Table ORDER BY b_hit desc, b_date desc
+	</select>
+	
+	<!-- 게시글 작성 -->
+	<insert id = "insert">
+	INSERT INTO Board_Table(b_title, b_content, b_file_name, b_file_path) VALUES({#b_title}, {#b_content}, {#b_file_name}, {#b_file_path})
+	</insert>
+	
+	<!-- 게시글 상세보기 조회 -->
+	<select id="view" resultType="com.petcare.web.user.dao.ShowDAO">
+	SELECT * FROM Board_Table
+	WHERE h_hit = #{h_hit}
+	</select>
+	
+	<!-- 게시글 조회수 증가처리 -->
+	<update id="increaseViewcnt">
+	UPDATE Board_Table SET
+		title = #{h_title},
+		content = #{h_content}
+	WHERE h_hit = #{h_hit}
+	</update>
+	
+	<!-- 게시글 수정처리 -->
+	<update id="updateArticle">
+	UPDATE Board_Table SET
+		title=#{b_title},
+		content=#{b_content},
+		file_name = #{b_file_name},
+		file_path = #{b_file_path}
+	WHERE h_hit = #{h_hit}
+	</update>
+	
+	<!--게시글 삭제 -->
+	<delete id="deleteArticle">
+	DELETE FROM Board_Table
+	WHERE b_hit = #{b_hit}
+	</delete>
+
+	<!-- TEST END -->
+
+		
+</mapper>
+      

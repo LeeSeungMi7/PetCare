@@ -23,3 +23,6 @@ a{
     min-height: 500px;
     white-space: pre-line !important;
 }
+#image_container {
+	max-width: 200px;
+}

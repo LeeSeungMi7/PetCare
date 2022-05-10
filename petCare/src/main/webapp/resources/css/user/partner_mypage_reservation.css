@@ -41,13 +41,13 @@ table{
 }
 
 .btn{
-    width:40%;
+    width:20%;
+    margin-left:37%;
 }
 
-/* 달력 */
-#datepicker{
-    width: 7rem;
-    text-align: center;
+.btn:hover{
+    border: white;
+    background-color : green;
 }
 
 /* 엑셀 버튼 */
@@ -68,13 +68,9 @@ table{
     width: 20px;
 }
 
-.w-btn-green {
-    background-color: #85cab3;
+
+.table_box{
+	margin: 5%;
+    min-height: 40rem;
 }
-
-.outerBox{
-    margin: 80px;
-}
-
-
 

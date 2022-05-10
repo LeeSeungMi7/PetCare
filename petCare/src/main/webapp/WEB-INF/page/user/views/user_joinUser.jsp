@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -190,6 +191,7 @@
 <script type="application/javascript" src="/resources/js/user/user_joinUser.js"></script>
 <script type="application/javascript" src="/resources/js/user/pet_joinUser.js"></script>
 <script type="text/javascript">
+
 var pet_idx = 0;
 
 /* 모달창 닫으면 input text 초기화 */	  
@@ -253,7 +255,7 @@ function deletelist(e){
     
     if (class_name == "list-group-item") {
         $(e).parents('li').remove();
-        pat_idx--;
+        pet_idx--;
     } else 
 
     return false;
@@ -314,6 +316,7 @@ function checkemail() {
 	}
 
 }
+
 </script>
 </body>
 </html>

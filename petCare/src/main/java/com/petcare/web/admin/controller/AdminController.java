@@ -4,13 +4,18 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.petcare.web.admin.service.AdminService;
 import com.petcare.web.admin.vo.AdminVO;
+import com.petcare.web.user.vo.MemberVO;
 
 @Controller
 public class AdminController {
@@ -59,14 +64,27 @@ public class AdminController {
 		return "ad_encyclopedia";
 	}
 
-	@GetMapping("/ad_hospital.mdo")
-	public String ad_hospitalGet() {
-		return "ad_hospital";
+	@RequestMapping(value = "/ad_hospital.mdo", method = RequestMethod.GET)
+	public ModelAndView ad_hospitalGet(Model model) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("AccHosList", adminService.getAccHosList());
+		mav.addObject("UnAccHosList", adminService.getUnAccHosList());
+		return mav;
 	}
-
-	@GetMapping("/ad_user.mdo")
-	public String ad_userGet() {
-		return "ad_user";
+	
+	@RequestMapping(value = "/update_hospital.mdo", method = RequestMethod.POST)
+	@ResponseBody
+	public String accHospital(@RequestParam String m_name) throws Exception {
+		System.out.println(m_name);
+		String name = m_name;
+		adminService.updateUser(name);
+		return "1";
+	}
+	
+	@RequestMapping(value = "/ad_user.mdo", method = RequestMethod.GET) 
+	public String ad_userGet(Model model) throws Exception{
+		model.addAttribute("userList", adminService.getUserList()); 
+		return "ad_user"; 
 	}
 
 	@GetMapping("/comm_getBoard.mdo")

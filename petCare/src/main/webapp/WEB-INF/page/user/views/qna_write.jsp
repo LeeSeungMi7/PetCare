@@ -61,6 +61,13 @@
 						type="text" class="datebox form-control" placeholder=""
 						style="max-width: 300px;">
 				</div>
+				<!--대표이미지-->
+				<div class="mb-3">
+					<label for="formGroupExampleInput2" class="form-label">대표이미지</label>
+					<form action="" method="post" enctype="multipart/form-data" name="">
+						<input type="file" name="FileName">
+					</form>
+				</div>
 				<!--내용-->
 				<div>
 					<label>내용</label>
@@ -70,8 +77,9 @@
 
 				<!--버튼-->
 				<div>
-					<a class="btn btn-success" href="qna.do" role="button" onclick="Ok();">등록</a>
-					<a class="btn btn-danger" href="qna.do" role="button" onclick="Cancel()">취소</a>
+					<a class="btn btn-success" href="qna.do" role="button"
+						onclick="Ok();">등록</a> <a class="btn btn-danger" href="qna.do"
+						role="button" onclick="Cancel()">취소</a>
 				</div>
 			</div>
 

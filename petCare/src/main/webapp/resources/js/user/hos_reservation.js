@@ -1,30 +1,18 @@
-function deleteRowFunction(btn) {
 
-    var class_name = $(btn).attr('class');
 
-    if (typeof (btn) == "object" && class_name == "btn-success btn-sm") {
-        $(btn)
-            .closest("tr")
-            .remove();
-        swal('예약을 승인하였습니다.', '보호자에게 문자가 발송되었습니다.', 'success');
+$.datepicker.setDefaults({
+  	  dateFormat: 'yy-mm-dd',
+  	  prevText: '이전 달',
+  	  nextText: '다음 달',
+  	  monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+  	  monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+  	  dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+  	  dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+  	  dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+  	  showMonthAfterYear: true,
+  	  yearSuffix: '년'
+});
 
-    } else if (typeof (btn) == "object" && class_name == "btn-danger btn-sm") {
-        $(btn)
-            .closest("tr")
-            .remove();
-        swal('예약을 기각하였습니다.', '보호자에게 문자가 발송되었습니다.', 'error');
-    } else
-
-        return false;
-}
-function ReportToExcelConverter() {
-    $("#resevtable").table2excel({
-        exclude: ".noExl", 
-        name: "총 예약 현황", 
-        filename: "총 예약 현황.xls", //확장자를 여기서 붙여줘야한다.
-        fileext: ".xls",
-        exclude_img: true,
-        exclude_links: true,
-        exclude_inputs: true
-    });
-};
+$( function() { 
+  		$( "#datepicker" ).datepicker(); 
+} ); 

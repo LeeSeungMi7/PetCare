@@ -38,6 +38,7 @@ public class MemberVO {
 	private String p_breaktime2;
 	
 	private List<MyPetVO> petList;
+	private List<MyPetVO> deletepetList;
 	private MyPetVO mypetVO;
 	
 }

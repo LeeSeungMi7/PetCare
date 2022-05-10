@@ -31,7 +31,9 @@
       WHERE m_id = #{email}
 	</select>
 	
-
-		
+	<!-- 로그인 -->
+	<select id="user_login" parameterType="String" resultType="MemberVO">
+      SELECT * FROM Member_Table WHERE m_id= #{userId}
+	</select>
 </mapper>
       

@@ -1,11 +1,3 @@
-/** 이름 태그 **/
-const inputUserName = getElement('user_name');
-/** 이름 태그 **/
-
-/** 이메일 태그 **/
-const inputUserEmail = getElement('user_email');
-/** 이메일 태그 **/
-
 /** 비밀번호 태그 **/
 const inputUserPassword = getElement('user_password');
 const inputUserCheckPassword = getElement('user_check_password');
@@ -24,8 +16,6 @@ const inputUserAddrDetail = getElement('user_addr_detail');
 /**주소 태그 */
 
 const errorTypes = {
-    name: 'name',
-    email: 'email',
     password: 'password',
     passwordCheck: 'passwordCheck',
     phoneNumber: 'phoneNumber',
@@ -50,18 +40,14 @@ function debounce(func, wait) {
 
 
 const user = {
-    name() {
-        return inputUserName.val();
-    },
+    
     phoneNumber() {
         return `${selectUserPhoneNumberPre.val()}${inputUserPhoneNumberIn.val()}${inputUserPhoneNumberPost.val()}`
     },
     password() {
         return inputUserPassword.val()
     },
-    email() {
-        return inputUserEmail.val();
-    },
+    
     address() {
         return inputUserAddr.val();
     },
@@ -91,19 +77,12 @@ function setError(id, message) {
     }
 }
 
-async function onInputInvalid(type) {
+function onInputInvalid(type) {
     let message = false;
     let errorId = '';
 
     switch (type) {
-        case errorTypes.name:
-            message = invalid.name();
-            errorId = 'error_name';
-            break;
-        case errorTypes.email:
-            message = await invalid.email();
-            errorId = 'error_email';
-            break;
+        
         case errorTypes.password:
             message = invalid.password();
             errorId = 'error_password';
@@ -127,51 +106,7 @@ async function onInputInvalid(type) {
 
 /** 유효성 체크 함수 **/
 const invalid = {
-    name() {
-        /** 영/한 이외의 값이 있는지 체크(공백/특수문자/숫자 등등) **/
-        const name = user.name();
-        if (!name) {
-            return '이름을 입력해주세요.';
-        }
-
-        if (name.length > 10) {
-            return '이름은 10자리 이하여야 합니다.';
-        }
-
-        if (/[^a-zA-Z가-힣ㄱ-ㅎ]/g.test(name)) {
-            return '이름에 영문/한글 이외의 값은 입력 할 수 없습니다.';
-        }
-        return;
-    },
-    async email() {
-        const emailFormat = /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/.test(user.email())
-        if (!emailFormat) {
-            return '이메일 형식이 잘못됐습니다.';
-        }
-
-
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                url: '/user/EmailCheck', //Controller에서 인식할 주소 EmailCheck는 가명
-                type: 'post',
-                data: {
-                    email: user.email()
-                },
-                success: function (cnt) {
-                    resolve(cnt === 1 ? '중복된 이메일 입니다.' : undefined);
-                },
-                error: function () {
-                    /** 서버 연동후 지후고 아래 주석 처리 되어 있는 코드 풀기 **/
-                    if (user.email() === 'kyungeun9718@daum.net') {
-                        resolve('중복된 이메일 입니다.');
-                    } else {
-                        resolve();
-                    }
-                    // resolve('알수 없는 에러 입니다.');
-                }
-            });
-        })
-    },
+   
     password() {
         const password = user.password();
         if (password.length < 7 || password.length > 15) {
@@ -209,7 +144,7 @@ const invalid = {
         return '주소를 모두 입력해주세요.';
     },
     all() {
-        return !this.name() && !this.phoneNumber() && !this.password() && !this.passwordCheck() && !this.address() && !this.openingHours();
+        return !this.phoneNumber() && !this.password() && !this.passwordCheck() && !this.address() && !this.openingHours();
     }
 }
 
@@ -229,35 +164,6 @@ function findAddr() {
             }
         }
     }).open();
-}
-
-/** 서브밋 함수 **/
-function submit() {
-    if (invalid.all()) {
-        // TODO: 모든 값들에 대해 유효성 통과
-        user.info();
-    } else {
-        for(let type in errorTypes) {
-            onInputInvalid(type);
-        }
-    }
-}
-function rainbow_btn(e){
-    swal('삭제되었습니다','반려동물 리스트에서 삭제되었습니다', 'info').then(function(){
-        deletelist(e);
-    }) 
-
-}
-
-function deletelist(e){
-   
-    var class_name = $(e).parents('li').attr('class');
-         
-    if (typeof(e) == "object" && class_name == "list-group-item") {
-        $(e).parents('li').remove();
-    } else
-
-    return false;
 }
 
 
