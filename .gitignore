@@ -112,6 +112,7 @@ buildNumber.properties
 database.properties
 s3key.properties
 mail.properties
+sms.properies
 
 .project
 # JDT-specific (Eclipse Java Development Tools)
