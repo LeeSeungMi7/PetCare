@@ -35,7 +35,6 @@
 						<i class="fas fa-table me-1"></i> 신청 병원(대기중)
 					</div>
 					<div class="card-body">
-					<form action="/update_hospital.mdo" method="post">
 						<table id="datatablesSimple">
 							<thead>
 								<tr>
@@ -87,7 +86,7 @@
 										</td>
 										<td>
 											<div class="btngroup">
-												<button class="btn1 save" type="submit">승인</button>
+												<button class="btn1 save" type="button">승인</button>
 												<button class="btn1 cancel"
 													onclick="deleteRowFunction(this)">기각</button>
 											</div>
@@ -185,8 +184,34 @@
 	<script src="/resources/js/admin/datatables-simple-demo.js"></script>
 	<script>
 	$(document).ready(function() {
-		$('swal-button').click(function() {
+		$('.swal-button').click(function() {
 			location.reload();
+		});
+		$(".save").click(function(){
+			var checkBtn = $(this);
+			
+			// checkBtn.parent() : checkBtn의 부모는 <td>이다.
+			// checkBtn.parent().parent() : <td>의 부모이므로 <tr>이다.
+			var tr = checkBtn.parent().parent().parent();
+			var td = tr.children();
+			var hosid = td.eq(1).text();
+			console.log("클릭한 Row의 이름 데이터 : " + hosid);
+			$("#ex2_Result1").html(" * 클릭한 Row의 모든 데이터 = " + hosid);
+			$.ajax({
+		         type : "post",
+		         data : {
+		            "m_name" : hosid
+		         },
+		         url : "/update_hospital.mdo",
+		         dataType : "json",
+		         success : function(data) {
+		        	 if(data=="1"){
+		        		 location.reload();	 
+		        	 }
+		         },
+		         error : function(error) {
+		         }
+		      });
 		});
 	});
 	</script>

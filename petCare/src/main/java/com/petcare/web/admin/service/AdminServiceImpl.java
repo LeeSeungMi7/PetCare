@@ -53,7 +53,7 @@ public class AdminServiceImpl implements AdminService {
 		session.invalidate();
 	}
 	@Override 
-	public int updateUser(String name) throws Exception { 
-		return adminDAO.updateUser(name); 
+	public void updateUser(String name) throws Exception { 
+		adminDAO.updateUser(name); 
 	}
 }
