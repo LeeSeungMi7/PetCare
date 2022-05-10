@@ -1,5 +1,7 @@
 package com.petcare.web.user.controller;
 
+import java.lang.reflect.Member;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,7 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.petcare.web.user.service.BoardService;
 import com.petcare.web.user.vo.ShowVO;
@@ -41,14 +45,10 @@ public class BoardController {
 //			로그인할때
 			map.put("user_ok","1");
 		}
+
 		System.out.println(map);
 		return map;
 	}
-	
-	@RequestMapping(value = "/show_insert.do" , method=RequestMethod.GET)
-	public String board_write(@ModelAttribute ShowVO showVO) {
-		System.out.println(showVO.toString());
-		boardService.boardInsert(showVO);
-		return "/show";
-	}
 }
+	
+

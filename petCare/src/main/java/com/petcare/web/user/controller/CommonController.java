@@ -53,4 +53,6 @@ public class CommonController {
 	public String show_write() {
 		return "show_write";
 	}
+	
+	
 }

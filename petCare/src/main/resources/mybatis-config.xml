@@ -10,6 +10,8 @@
 		<typeAlias alias="S3KeyVO"  type="com.petcare.web.user.vo.S3KeyVO"/>	
 		<typeAlias alias="AdminVO"  type="com.petcare.web.admin.vo.AdminVO"/>
 		<typeAlias alias="ShowVO"  type="com.petcare.web.user.vo.ShowVO"/>
+		<typeAlias alias="ReservationVO" type="com.petcare.web.user.vo.ReservationVO"/>
+
 	</typeAliases>
 	
 	<mappers>
@@ -18,5 +20,6 @@
 		<mapper resource="mapper/AdminMapper.xml"/>
 		<mapper resource="mapper/user_MyPage.xml"/>
 		<mapper resource="mapper/board.xml"/>
+		<mapper resource="mapper/Partner_MyPage.xml"/>
 	</mappers>
 </configuration>

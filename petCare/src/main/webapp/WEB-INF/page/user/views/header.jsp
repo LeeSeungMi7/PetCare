@@ -58,7 +58,7 @@
 	        	<input type="hidden" name=m_number value="${user.m_number}">
 	        	<input type="submit" class="dropdown-item" value="내 정보 수정">
 	        </form>
-	        <form action="/user_myPage_update.do" method="POST">
+	        <form action="/user_myreservation.do" method="POST">
 	        	<input type="hidden" name=m_number value="${user.m_number}">
 	        	<input type="submit" class="dropdown-item" value="내 예약 관리">
 	        </form>
@@ -71,11 +71,11 @@
 	<div class="dropdown pet-header__tab text--16-normal color--black">
 		<span>내정보</span>
 		<div class="dropdown-content">
-			<form action="/user_myPage_update.do" method="POST">
+			<form action="/partner_mypage_update.do" method="POST">
 	        	<input type="hidden" name=m_number value="${user.m_number}">
 	        	<input type="submit" class="dropdown-item" value="병원 정보 수정">
 	        </form>
-	        <form action="/user_myPage_update.do" method="POST">
+	        <form action="/hos_reservation.do" method="POST">
 	        	<input type="hidden" name=m_number value="${user.m_number}">
 	        	<input type="submit" class="dropdown-item" value="병원 예약 관리">
 	        </form>

@@ -58,6 +58,7 @@ public class Partner_singInController {
 	@RequestMapping(value = "/partner_register.do", method = RequestMethod.POST)
 	public String registerPOST(@ModelAttribute MemberVO memberVO, @RequestParam("file") MultipartFile file){
 		
+		System.out.println("ee");
 		MemberVO tempMemberVO = memberVO;
 
 		String hashedPw = BCrypt.hashpw(tempMemberVO.getM_pw(), BCrypt.gensalt());
@@ -86,9 +87,7 @@ public class Partner_singInController {
 		tempMemberVO.setP_file_path(fileResult.getUrl());
 		
 	
-		memberService.partner_register(tempMemberVO);
-		
-		log.info("사업자 등록증 된건가?");
+		memberService.partner_register(tempMemberVO);	
 		
 		return "/partner_regCom";
 		

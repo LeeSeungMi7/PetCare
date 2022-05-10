@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page import="com.petcare.web.user.vo.MemberVO" %>
 <%@ page import="com.petcare.web.user.vo.MyPetVO" %>
 <!DOCTYPE html>
@@ -50,7 +51,7 @@
 						<!--사용자이름-->
 						<div class="join-user__items">
 							<label>이름</label> 
-							<input type="text" value=${member.m_name} readonly="readonly" >
+							<input type="text" value="${member.m_name}" readonly="readonly" >
 							<span class="error_next_box" id="error_email" aria-live="assertive">
 							이름은 수정 불가능 합니다.</span>
 						</div>
@@ -58,10 +59,11 @@
 						<!--이메일-->
 						<div class="join-user__items">
 							<label>이메일</label>
-							<div class="join-user__items--row" style="justify-content: space-between">
-							<input type="email" oninput="onInputInvalid('email')" name="m_id" value=${member.m_id} readonly="readonly" />
-							</div>
+							<div class="join-user__items" style="justify-content: space-between">
+							<input type="email" oninput="onInputInvalid('email')" name="m_id" value="${member.m_id}" readonly="readonly" />
 							<span class="error_next_box" id="error_email" aria-live="assertive">이메일은 수정 불가능 합니다.</span>
+							</div>
+							
 						</div>
 						<!--비밀번호-->
 						<div class="join-user__items">
@@ -77,9 +79,9 @@
 								style="justify-content: space-between">
 								<select id="user_phone_number_pre" style="min-width: 90px;"name="m_tel1">
 									
-									<option value="010" <c:if test="${member.m_tel1 == 010}">selected</c:if>>010</option>
-									<option value="011" <c:if test="${member.m_tel1 == 011}">selected</c:if>>011</option>
-									<option value="016" <c:if test="${member.m_tel1 == 016}">selected</c:if>>016</option>
+									<option value="010" <c:if test="${member.m_tel1 == '010'}">selected</c:if>>010</option>
+									<option value="011" <c:if test="${member.m_tel1 == '011'}">selected</c:if>>011</option>
+									<option value="016" <c:if test="${member.m_tel1 == '016'}">selected</c:if>>016</option>
 								</select> - 
 								<input id="user_phone_number_in" style="max-width: 90px" maxlength="4" oninput="onInputInvalid('phoneNumber')" name="m_tel2" value="${member.m_tel2}"> 
 								- 
@@ -104,20 +106,46 @@
 									<button type="button" class="addList" data-bs-toggle="modal" data-bs-target="#exampleModal">추가</button>
 								</li>
 								
-								<c:forEach var ="mypet" items="${mypet}"> 
-								<li class="list-group-item">
-								<div class="petbox">
-	    						<div class="mypet_box1">	
-		    					<a href="javascript:myPet_modify();" id="petdetail">이름 : ${mypet.mp_petName} 😸</a>
-			    				<button onclick="petdelete_btn(this)"><img src="/resources/img/minus.png"></button>
-		        				</div>
-								<div class="mypet_box2">
-	            					<div>나이 : ${mypet.mp_petAge}</div>
-	            					<div>성별 : ${mypet.mp_petGender}</div>
-	        					</div>
-	        					</div>
-	        					</li>
-	        					<input  type="hidden" id="myPet_num" name="Pnum" value="${mypet.myPet_num}">
+								<c:forEach var ="mypet" items="${mypet}" varStatus="status"> 
+									<li class="list-group-item">
+									<div class="petbox">
+		    						<div class="mypet_box1">	
+			    					<a href="javascript:myPet_modify();" id="petdetail">
+			    					이름 : ${mypet.mp_petName} 
+			    					<c:if test="${mypet.mp_petType == '강아지'}">
+			    					🐶
+			    					</c:if>
+			    					<c:if test="${mypet.mp_petType == '고양이'}">
+			    					😺
+			    					</c:if>
+			    					<c:if test="${mypet.mp_petType != '고양이' && mypet.mp_petType != '강아지'}">
+			    					❔
+			    					</c:if>
+			    					</a>
+				    					<input type="hidden" name="petList[${status.index}].myPet_num" id="petNum" value="${mypet.myPet_num}">
+										<input type="hidden" name="petList[${status.index}].mp_petName" value="${mypet.mp_petName}">
+						        		<input type="hidden" name="petList[${status.index}].mp_petAge" value="${mypet.mp_petAge}">
+						        		<input type="hidden" name="petList[${status.index}].mp_petGender" value="${mypet.mp_petGender}">
+						        		<input type="hidden" name="petList[${status.index}].mp_sugery" value="${mypet.mp_sugery}">
+						        		<input type="hidden" name="petList[${status.index}].mp_petType" value="${mypet.mp_petType}">
+				    				<button type="button" class="delete_myPetBtn">
+				    				<img src="/resources/img/minus.png">
+				    				</button>
+			        				</div>
+									<div class="mypet_box2">
+		            					<div>나이 : ${mypet.mp_petAge}</div>
+		            					<div>성별 : ${mypet.mp_petGender}</div>
+		            					<div>중성화 : 
+		            					<c:if test="${mypet.mp_sugery == '0'}">
+		            					&nbsp;X
+		            					</c:if>
+		            					<c:if test="${mypet.mp_sugery == '1'}">
+		            					&nbsp;O
+		            					</c:if>
+		            					</div>
+		        					</div>
+		        					</div>
+		        					</li>
 								</c:forEach>
 								
 							</ul>
@@ -126,6 +154,7 @@
 						<!--완료-->
 						<div class="join-user__items">
 							<div class="join-user__items--row" style="justify-content: space-between">
+								<input type="hidden" value="${member.m_number}" name="m_number">
 								<input type="submit" class="buttonOk button_class" value="수정">
 								<button class="buttonOk button_class" onClick="location.href='home.do'">취소</button>
 								<button class="buttonOk button_class" onClick="location.href='#'">탈퇴</button>
@@ -150,38 +179,33 @@
 						<div class="modal-body">
 							<!--반려동물 이름-->
 							<div class="join-user__items">
-								<label>반려동물 이름</label> <input type="text" id="pet_name"
-									oninput="onInputInvalids('pet')" /> <span
-									class="error_next_box" id="error_pet" aria-live="assertive"></span>
+								<label>반려동물 이름</label> <input type="text" id="pet_name" oninput="onInputInvalids('pet')" /> 
+								<span class="error_next_box" id="error_pet" aria-live="assertive"></span>
 							</div>
 
 							<!--어떤 동물인가요?-->
 							<div class="join-user__items">
-								<label>어떤 동물인가요?</label> <input id="user_animal" type="text"
-									maxlength="20" placeholder="예) 강아지, 고양이"
-									oninput="onInputInvalids('animal')" /> <span
-									class="error_next_box" id="error_animal" aria-live="assertive"></span>
+								<label>어떤 동물인가요?</label> 
+								<input id="user_animal" type="text" maxlength="20" placeholder="예) 강아지, 고양이" oninput="onInputInvalids('animal')" /> 
+								<span class="error_next_box" id="error_animal" aria-live="assertive"></span>
 							</div>
 							<!--몇살인가요?-->
 							<div class="join-user__items">
 								<label>몇살인가요?</label>
 								<div class="join-user__items--row"
 									style="justify-content: space-between">
-									<input id="user_old" type="text" maxlength="5"
-										oninput="onInputInvalids('old')" style="padding-right: 40px;">
+									<input id="user_old" type="text" maxlength="5" oninput="onInputInvalids('old')" style="padding-right: 40px;">
 									살
 								</div>
-								<span class="error_next_box" id="error_old"
-									aria-live="assertive"></span>
+								<span class="error_next_box" id="error_old" aria-live="assertive"></span>
 							</div>
 							<!--성별-->
 							<div class="join-user__items">
 								<label>성별</label>
 								<div class="join-user__items--row"
 									style="justify-content: space-between">
-									<input type="radio" name="mp_petGender" value="남아"
-										checked="checked" /> 수컷입니다. <input type="radio"
-										name="mp_petGender" value="여아" /> 암컷입니다.
+									<input type="radio" name="mp_petGender" value="남아" checked="checked" /> 수컷입니다. 
+									<input type="radio" name="mp_petGender" value="여아" /> 암컷입니다.
 								</div>
 							</div>
 							<!--중성화수술은 했나요?-->
@@ -189,17 +213,15 @@
 								<label>중성화수술은 했나요?</label>
 								<div class="join-user__items--row"
 									style="justify-content: space-between">
-									<input type="radio" name="mp_sugery" value="0"
-										checked="checked" /> 수술&nbsp;&nbsp;전. <input type="radio"
-										name="mp_sugery" value="1" /> 수술완료.
+									<input type="radio" name="mp_sugery" value="0" checked="checked" /> 수술&nbsp;&nbsp;전.
+									<input type="radio" name="mp_sugery" value="1" /> 수술완료.
 								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
 
 							<input type="button" class="btn btn-success" onclick="petsubmit()" value="추가">
-							<button type="button" class="btn btn-secondary"
-								data-bs-dismiss="modal">닫기</button>
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
 						</div>
 					</div>
 				</div>
@@ -212,8 +234,7 @@
 <script type="application/javascript" src="/resources/js/user/pet_joinUser.js"></script>
 <script type="application/javascript" src="/resources/js/user/userupdate.js"></script>
 <script type="text/javascript">
-var pet_idx = 0;
-var pet_delete_idx=0;
+var pet_idx = ${fn:length(mypet)};
 
 /* 모달창 닫으면 input text 초기화 */	  
 var myModalEl = document.getElementById('exampleModal')
@@ -270,16 +291,6 @@ function rainbow_btn(e){
 			deletelist(e);
 		});
 }
-/* 펫 리스트에서 해당 펫 삭제(내펫) */
-function petdelete_btn(e){
-	swal({
-		title: "삭제되었습니다.",
-		icon : "info",
-		closeOnClickOutside: false
-	}, function(){
-		myPet_deletelist(e);
-	});
-}
 
 function deletelist(e){
 	   
@@ -287,25 +298,58 @@ function deletelist(e){
     
     if (class_name == "list-group-item") {
         $(e).parents('li').remove();
-        pat_idx--;
+        pet_idx--; 
     } else 
 
     return false;
 }
 
-/* 펫 리스트에서 해당 펫 삭제(내펫) */
-function myPet_deletelist(e){
+/* 내펫 삭제 */
+$(".delete_myPetBtn").click(function(){ 
+	var petNum = $(this).parent().find("#petNum").val();
 	
-    var class_name = $(e).parents('li').attr('class');
-    if (class_name == "list-group-item") {
-        $(e).parents('li').remove();
-     
-    } else 
+	swal({
+		title : "정말로 삭제하시겠습니까?",
+		text : "확인을 누르면 내펫 리스트에서 없어지게 됩니다",
+		type : "warning",
+		showCancelButton : true, 
+		confirmButtonClass : "btn-danger", 
+		confirmButtonText : "예",
+		cancelButtonText : "아니오",
+		closeOnConfirm : false,
+	    closeOnCancel : true  
+	}, function(isConfirm) {
+		if (isConfirm) {
+			
+			$.ajax({
+				type:"GET",
+				data : {
+					"petNum" : petNum
+				},
+				url : "/delete_MyPet.do",
+				dataType : "json",
+				success : function(data) {
+					if(data == 1){
+						swal({
+							title: "삭제되었습니다.",
+							icon : "success",
+							closeOnClickOutside: false
+						}, function(){
+							location.reload();
+						});
+	
+					}
+				},
+				error : function(error) {
+					alert("error : " + error);
+				}
+			})
+		}else{
+		}
 
-    return false;
-}
+	});
 
-
+});
 
 function modify_submit() {
 	
