@@ -1,6 +1,8 @@
 package com.petcare.web.user.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -111,7 +113,7 @@ public class User_myPageController {
 	//내 예약 현황
 	@RequestMapping("/user_myreservation.do")
 	public ModelAndView myreservation(@RequestParam int m_number, @RequestParam(defaultValue="0") int pageNum) {
-		int total; //총 글 수
+
 		Criteria criteria;
 		
 		ModelAndView mav = new ModelAndView();
@@ -126,12 +128,12 @@ public class User_myPageController {
 		List<ReservationVO> reservationList = new ArrayList<ReservationVO>();
         
 		reservationList = user_mypageService.reservation(criteria);
-		total = user_mypageService.totalpage(criteria);
+		criteria.setTotal(user_mypageService.totalpage(criteria));
 //		log.info("total : " + total);
 //		log.info("criteria.getSize() : " + criteria.getSize());
 //		log.info("(int)Math.ceil(total/criteria.getSize()) : " + (int)Math.ceil(total *1.0/criteria.getSize()));
 		
-		criteria.setTotal_page((int)Math.ceil(total *1.0/criteria.getSize()));
+		criteria.setTotal_page((int)Math.ceil(criteria.getTotal() *1.0/criteria.getSize()));
 		criteria.setBlock_num((int)Math.ceil(criteria.getSize() / 10));
 		criteria.setBlock_start(((criteria.getBlock_num() -1) *5)+1);
 		criteria.setBlock_end(criteria.getBlock_start()+5 -1);
@@ -173,5 +175,25 @@ public class User_myPageController {
 		return result;
 	}
 	
+	//회원 탈퇴(병원, 유저 공통)
+	@RequestMapping(value="/delete_member.do", method= RequestMethod.POST)
+	@ResponseBody
+	public int delete_member(@RequestParam String m_number, HttpSession session) {
+		
+		Map<String, String> map = new HashMap();
+		
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String deleteMemberDate= sdf.format(date);
+
+		map.put("m_number", m_number);
+		map.put("deleteMemberDate", deleteMemberDate);
+		
+		int result = user_mypageService.delete_member(map); //로그인 비활성화
+		user_mypageService.delete_DB_member();
+		
+		session.invalidate(); //세션 날리기
+		return result;
+	}
 	
 }

@@ -8,8 +8,8 @@
 	<insert id="user_register" useGeneratedKeys="true"
 		keyProperty="m_number" parameterType="MemberVO">
 		INSERT INTO
-		Member_Table(m_id, m_pw, m_name, m_tel, m_address_class, m_zipcode, m_address, m_address_detail, m_sido, m_dong, m_role, m_access)
-		VALUES(#{m_id},#{m_pw},#{m_name},#{m_tel},#{m_address_class},#{m_zipcode},#{m_address},#{m_address_detail},#{m_sido},#{m_dong},#{m_role},#{m_access})
+		Member_Table(m_id, m_pw, m_name, m_tel, m_address_class, m_zipcode, m_address, m_address_detail, m_sido, m_dong, m_role, m_access, Singin_Member_Date)
+		VALUES(#{m_id},#{m_pw},#{m_name},#{m_tel},#{m_address_class},#{m_zipcode},#{m_address},#{m_address_detail},#{m_sido},#{m_dong},#{m_role},#{m_access}, #{Singin_Member_Date})
 	</insert>
 	
 	<insert id="userPet_register" useGeneratedKeys="true" parameterType="MyPetVO">

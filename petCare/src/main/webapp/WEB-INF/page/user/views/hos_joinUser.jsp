@@ -190,8 +190,8 @@
 											onclick="searchPlaces()">조회하기</button>
 									</div>
 									<div class="join-user__items--row__time">
-										<label>병원고유 아이디</label> <input id="user_map_id" type="text"
-											readonly name="user_map_id" required>
+										<label>병원고유 아이디</label> 
+										<input id="user_map_id" type="text" readonly name="m_address_class" required>
 									</div>
 									<div id="map" style="width: 100%; height: 300px;"></div>
 								</div>

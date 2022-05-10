@@ -60,7 +60,7 @@
 				<c:forEach var="reservation" items="${reser}" varStatus ="status">
 					<tr>
 						<th scope="row">
-						<c:out value="${criteria.pageNum + (status.count)}">
+						<c:out value="${(criteria.total-status.index)-(criteria.total_page -1) * criteria.pageNum}" >
 						</c:out>
 						</th>
 						<td>${reservation.partner_name}</td>

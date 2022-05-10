@@ -80,8 +80,7 @@ public class Partner_singInController {
 		tempMemberVO.setP_weekday(tempMemberVO.getP_weekday1() + "/" + tempMemberVO.getP_weekday2());
 		tempMemberVO.setP_weekend(tempMemberVO.getP_weekend1() + "/" + tempMemberVO.getP_weekend2());
 		tempMemberVO.setP_breaktime(tempMemberVO.getP_breaktime1() + "/" + tempMemberVO.getP_breaktime2());
-		
-		
+				
 		tempMemberVO.setP_file_name(file.getOriginalFilename());
 		FileUploadService.FileUploadResult fileResult = fileUploadService.fileUpload(file, "사업자등록증/", tempMemberVO.getP_file_name());
 		tempMemberVO.setP_file_path(fileResult.getUrl());

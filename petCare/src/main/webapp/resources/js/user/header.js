@@ -53,6 +53,14 @@ function fn_loginCheck() {
 				}, function(){
 					location.reload();
 				});
+            } else if(result.msg == "deleteMember"){
+            	swal({
+					title: "로그인 실패.",
+					icon : "error",
+					text: "탈퇴 된 E_mail입니다.\n 회원가입으로 이동합니다."
+				}, function(){
+					window.location.href ="/signinForm.do";
+				});
             } else {
                 swal({
 					title: "로그인 성공.",

@@ -29,4 +29,8 @@ public interface UserMyPageService {
 	int reservation_delete(int index);
 	
 	int totalpage(Criteria critera);
+	
+	int delete_member(Map<String,String> map);
+	
+	void delete_DB_member();
 }

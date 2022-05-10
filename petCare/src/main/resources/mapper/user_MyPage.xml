@@ -16,7 +16,7 @@
 	
 	<!-- 병원 예약 검색 -->
 	<select id="reservationList" parameterType="integer" resultType="ReservationVO">
-		select rt.* , mt.m_name as partner_name from Reservation_Table rt join Member_Table mt on mt.m_number = rt.rv_partner_number where rv_number=#{m_number} limit ${skip}, ${size}
+		select rt.* , mt.m_name as partner_name from Reservation_Table rt join Member_Table mt on mt.m_number = rt.rv_partner_number where rv_number=#{m_number} order by reservation_num desc limit ${skip}, ${size}
 	</select>
 	
 	
@@ -36,11 +36,23 @@
 	</update>
 	
 	<delete id="reservation_delete">
-	delete from Reservation_Table where reservation_num=#{index};
+	delete from Reservation_Table where reservation_num=#{index}
 	</delete>
 	
 	<!-- 마이페이지 페이징 처리위해 전체 글수 -->
 	<select id="totalpage" resultType="int">
-	select count(*) from Reservation_Table where rv_number=#{m_number};
+	select count(*) from Reservation_Table where rv_number=#{m_number}
 	</select>
+	
+	<!-- 로그인 불가 만들기 -->
+	<update id="delete_member" parameterType="Map">
+	update Member_Table set m_access='2',delete_Member_date=#{deleteMemberDate} where m_number=#{m_number}
+	</update>
+	
+	<delete id="delete_DB_member">
+	  <![CDATA[
+    DELETE FROM Member_Table WHERE delete_Member_Date < DATE_SUB(NOW(), INTERVAL 180 DAY) 
+    ]]>
+	</delete>
+	
 </mapper>

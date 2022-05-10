@@ -121,17 +121,15 @@ public class Partner_myPageController {
 
 		criteria.setM_number(m_number);
 		
-		int total ;
-		
 		ModelAndView mav = new ModelAndView();
 	
 		List<ReservationVO> rv = partnerMapage.partner_reservationPage(criteria);
-		total = partnerMapage.totalpage(criteria); //총 글 몇개인지 (디비갔다와~)
+		criteria.setTotal(partnerMapage.totalpage(criteria)); //총 글 몇개인지 (디비갔다와~)
 		
 //		log.info("total : " + total);
 //		log.info("criteria.getSize() : " + criteria.getSize());
 //		log.info("(int)Math.ceil(total/criteria.getSize()) : " + (int)Math.ceil(total*1.0/criteria.getSize()));
-		criteria.setTotal_page((int)Math.ceil(total *1.0/criteria.getSize())); //총 페이지수 = 게시글수 / 한화면에 보여질 사이즈 (올림)
+		criteria.setTotal_page((int)Math.ceil(criteria.getTotal() *1.0/criteria.getSize())); //총 페이지수 = 게시글수 / 한화면에 보여질 사이즈 (올림)
 		
 		criteria.setBlock_num((int)Math.ceil(criteria.getSize()/ 5)); // 블록 넘버 구하기 double이라 int로 캐스팅 후 올림 (5는 블록 수)
 		criteria.setBlock_start(((criteria.getBlock_num() -1) * 5 ) +1 ); //블록 start (예 : 1, 6, 11)

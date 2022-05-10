@@ -46,6 +46,7 @@
 	join Member_Table mt on mt.m_number = rt.rv_number
 	where rt.rv_partner_number=#{m_number} 
 	and rt.rv_access='0'
+	order by reservation_num asc
 	limit ${skip}, ${size}
 	</select>
 	

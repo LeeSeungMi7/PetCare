@@ -71,9 +71,9 @@ public class LoginController {
 			map.put("msg","hos_success");
 				return map;
 		}
-		if(vo.getM_role().equals("0") && vo.getM_access().equals("1")) {
+		if(vo.getM_access().equals("2")) {
 			System.out.println("탈퇴회원");
-			map.put("msg","idFail");
+			map.put("msg","deleteMember");
 			return map;
 		};
 		session.setAttribute("user", vo);

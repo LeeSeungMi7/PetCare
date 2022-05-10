@@ -63,4 +63,13 @@ public class MyPageDAO {
 	public int totalpage(Criteria criteria) {
 		return sqlSessionTemplate.selectOne("User_MyPage.totalpage", criteria);
 	}
+	
+//	회원탈퇴
+	public int delete_member(Map<String,String> map) {
+		return sqlSessionTemplate.update("User_MyPage.delete_member",map);
+	}
+	
+	public void delete_DB_member() {
+		sqlSessionTemplate.delete("User_MyPage.delete_DB_member");
+	}
 }
