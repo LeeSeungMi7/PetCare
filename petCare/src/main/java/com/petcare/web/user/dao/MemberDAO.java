@@ -1,5 +1,7 @@
 package com.petcare.web.user.dao;
 
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -35,6 +37,10 @@ public class MemberDAO {
 	//로그인 
 	public MemberVO user_login(String userId) {
 		return sqlSessionTemplate.selectOne("MemberDAO.user_login",userId);
+	}
+	
+	public int newPassword(Map<String,String> map) {
+		return sqlSessionTemplate.update("MemberDAO.newPassword", map);
 	}
 	
    	

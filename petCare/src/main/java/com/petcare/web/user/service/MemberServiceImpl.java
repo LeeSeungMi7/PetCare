@@ -1,5 +1,7 @@
 package com.petcare.web.user.service;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +17,6 @@ public class MemberServiceImpl implements MemberService{
 
 	@Autowired
 	private MemberDAO memberDAO;
-
-	private JavaMailSender mailSender;
-	
 
 	public MemberServiceImpl(MemberDAO memberDAO) {
 		this.memberDAO = memberDAO;
@@ -58,6 +57,11 @@ public class MemberServiceImpl implements MemberService{
 	public void logout(HttpSession session) {
 		session.invalidate();
 		
+	}
+
+	@Override
+	public int newPassword(Map<String, String> map) {
+		return memberDAO.newPassword(map);
 	}
 	
 

@@ -1,5 +1,7 @@
 package com.petcare.web.user.service;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import com.petcare.web.user.vo.MemberVO;
@@ -22,5 +24,10 @@ public interface MemberService {
 	
 	//로그아웃
 	void logout(HttpSession session);
+	
+	//new password
+	int newPassword(Map<String,String> map);
+	
+	
 	
 }

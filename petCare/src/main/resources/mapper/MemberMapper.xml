@@ -35,5 +35,10 @@
 	<select id="user_login" parameterType="String" resultType="MemberVO">
       SELECT * FROM Member_Table WHERE m_id= #{userId}
 	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<update id="newPassword" parameterType="Map">
+	update Member_Table set m_pw =#{m_pw} where m_id=#{m_id}
+	</update>
 </mapper>
       
