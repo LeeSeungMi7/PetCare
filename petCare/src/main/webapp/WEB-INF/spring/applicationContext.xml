@@ -20,10 +20,17 @@
 
 	<context:component-scan
 		base-package="com.petcare.web"></context:component-scan>
-
+	<!-- 프로퍼티 -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+    <property name="locations">
+    <list>
+        <value>classpath:config/database.properties</value>
+        <value>classpath:config/mail.properties</value>
+    </list>
+    </property>
+ 	</bean>
 	<!-- datasource -->
-	<context:property-placeholder
-		location="classpath:config/database.properties" />
+	<!-- <context:property-placeholder location="classpath:config/database.properties" /> -->
 
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp2.BasicDataSource"
@@ -34,7 +41,7 @@
 		<property name="password" value="${jdbc.password}" />
 	</bean>
 
-
+	
 	<!-- Transaction 관리자 설정 -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
@@ -64,5 +71,27 @@
 	<property name="maxInMemorySize" value="1048576"/> 
 	<!-- 1MB --> 
 	</bean>
+	
+	<!-- 메일 -->
+		<!-- <context:property-placeholder location="classpath:config/mail.properties" /> -->
+	
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="465" /><!-- 465 -->
+		<property name="defaultEncoding" value="utf-8"/>
+		<property name="username" value="${email.account}" />
+		<property name="password" value="${email.password}" />
+	
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+				<prop key="ail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+		
 
 </beans>
