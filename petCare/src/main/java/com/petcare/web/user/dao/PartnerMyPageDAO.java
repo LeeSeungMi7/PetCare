@@ -32,7 +32,7 @@ public class PartnerMyPageDAO {
 	
 	public List<ReservationVO> partner_reservationPage(Criteria criteria){
 
-		return sqlSessionTemplate.selectList("Partner_MyPage.slectReservation", criteria);
+		return sqlSessionTemplate.selectList("Partner_MyPage.Reservationlist", criteria);
 	}
 	
 	public List<ReservationVO> dateSearch(Map<String,String> mav){

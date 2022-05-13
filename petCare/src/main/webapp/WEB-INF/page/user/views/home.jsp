@@ -114,8 +114,7 @@
 			</div>
 			<div class="pet-home__boards pet-row">
 				<div class="pet-home__board pet-column">
-					<img
-						src="https://blog.kakaocdn.net/dn/bTEhUV/btqECug9iOs/mxgZUk4MLJVCK3xtcNe6NK/img.jpg" />
+					<img src="https://blog.kakaocdn.net/dn/bTEhUV/btqECug9iOs/mxgZUk4MLJVCK3xtcNe6NK/img.jpg" />
 					<div class="pet-home__board-title text--16-bold">우리 쪼꼬 귀엽죠?</div>
 					<div class="pet-home__board-description text--14-normal">우리
 						쪼꼬가 세상에서 제일 귀엽고 이쁘고, 사랑스럽고 동글동글해요 우리 쪼꼬가 세상에서 제일 귀엽고 이쁘고, 사랑스럽고

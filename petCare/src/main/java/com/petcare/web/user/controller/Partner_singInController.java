@@ -58,7 +58,7 @@ public class Partner_singInController {
 	@RequestMapping(value = "/partner_register.do", method = RequestMethod.POST)
 	public String registerPOST(@ModelAttribute MemberVO memberVO, @RequestParam("file") MultipartFile file){
 		
-		System.out.println("ee");
+//		System.out.println("ee");
 		MemberVO tempMemberVO = memberVO;
 
 		String hashedPw = BCrypt.hashpw(tempMemberVO.getM_pw(), BCrypt.gensalt());

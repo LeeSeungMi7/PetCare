@@ -21,5 +21,6 @@
 		<mapper resource="mapper/user_MyPage.xml"/>
 		<mapper resource="mapper/board.xml"/>
 		<mapper resource="mapper/Partner_MyPage.xml"/>
+		<mapper resource="mapper/Kakao_login.xml"/>
 	</mappers>
 </configuration>

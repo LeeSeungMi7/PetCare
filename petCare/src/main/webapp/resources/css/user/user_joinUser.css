@@ -213,3 +213,12 @@ select:disabled {
   	text-decoration:none;
   }
   
+  .deleteMember{
+  background-color: #F15F5F;
+  }
+  
+  .deleteMember:hover{
+  background-color: red;
+  color:white;
+  }
+  

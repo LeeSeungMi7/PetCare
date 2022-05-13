@@ -4,6 +4,7 @@ package com.petcare.web.user.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -38,10 +39,10 @@ public class User_singInController {
 	public String registerPOST(@ModelAttribute MemberVO memberVO){
 		
 		MemberVO tempMemberVO = memberVO;
-
+		
 		String hashedPw = BCrypt.hashpw(tempMemberVO.getM_pw(), BCrypt.gensalt());
 		tempMemberVO.setM_pw(hashedPw);
-		
+
 		tempMemberVO.setM_tel(tempMemberVO.getM_tel1()+"-"+tempMemberVO.getM_tel2()+"-"+tempMemberVO.getM_tel3());
 		
 		if(tempMemberVO.getM_address()!= "" || tempMemberVO.getM_address()!= null) {
@@ -54,9 +55,10 @@ public class User_singInController {
 		tempMemberVO.setM_access("0");
 		tempMemberVO.setM_role("0");
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); 
-		Calendar c1 = Calendar.getInstance(); 
-		String strToday = sdf.format(c1.getTime()); 
+		
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String strToday= sdf.format(date);
 		
 		tempMemberVO.setSingin_Member_Date(strToday);		
 		
@@ -70,9 +72,7 @@ public class User_singInController {
 				memberService.userPet_register(pet);
 			}
 		}
-		
-		
-		
+	
 		return "/user_regCom";
 	}
 	

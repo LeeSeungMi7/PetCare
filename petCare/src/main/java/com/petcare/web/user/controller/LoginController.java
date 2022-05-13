@@ -52,7 +52,7 @@ public class LoginController {
 			map.put("msg","idFail");
 			return map;	
 		}
-
+		
 		boolean password = BCrypt.checkpw(userPw, vo.getM_pw());
 		if(!password) {
 			System.out.println("비번 다름");
@@ -81,7 +81,7 @@ public class LoginController {
 		return map;
 	}
 	
-	@RequestMapping(value="/logout.do", method=RequestMethod.POST)
+	@RequestMapping(value="/logout.do")
 	public String logout(HttpSession session) {
 		memberService.logout(session);
 		return "/home";
