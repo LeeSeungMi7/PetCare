@@ -203,7 +203,7 @@
 										style="justify-content: space-between">
 										<input type="submit" class="button_class buttonOk" value="신청">
 										<button class="button_class buttonOk"
-											onclick="location.href='home.html'">취소</button>
+											onclick="location.href='/home.do'">취소</button>
 									</div>
 								</div>
 							</div>

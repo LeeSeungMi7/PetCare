@@ -19,7 +19,8 @@
 .pet-home__cards {
     padding: 0 20px;
     display: flex;
-    overflow: scroll;
+   /*  overflow: scroll; */
+    overflow: hidden;
 }
 
 .pet-home__card {

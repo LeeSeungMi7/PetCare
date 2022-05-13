@@ -1,5 +1,6 @@
 package com.petcare.web.user.vo;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import lombok.Data;
@@ -26,8 +27,9 @@ public class MemberVO {
 	private String p_weekend = ""; // 주말 운영
 	private String p_breaktime = ""; // 점심 시간
 	private String p_24hour = ""; // ENUM('0', '1') 0:24시 아님 1: 24시
-	private String Singin_Member_Date=""; //회원가입날쨔
-	
+	private String Singin_Member_Date; //회원가입날쨔
+	private String kakao_member="N";
+	private Timestamp delete_Member_Date;
 	private String m_tel1;
 	private String m_tel2;
 	private String m_tel3;

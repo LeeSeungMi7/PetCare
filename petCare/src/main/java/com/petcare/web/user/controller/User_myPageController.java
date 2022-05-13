@@ -52,10 +52,12 @@ public class User_myPageController {
 		memberVO = user_mypageService.user_mypage(m_number);
 		myPetVO = user_mypageService.user_myPet(m_number);
 				
-	    String tel[] = memberVO.getM_tel().split("-");
-	    memberVO.setM_tel1(tel[0]);
-	    memberVO.setM_tel2(tel[1]);
-	    memberVO.setM_tel3(tel[2]);
+		if(memberVO.getM_tel() != null) {
+		    String tel[] = memberVO.getM_tel().split("-");
+		    memberVO.setM_tel1(tel[0]);
+		    memberVO.setM_tel2(tel[1]);
+		    memberVO.setM_tel3(tel[2]);
+		}
 		
 		mav.addObject("member",memberVO);
 		mav.addObject("mypet",myPetVO);
@@ -71,9 +73,11 @@ public class User_myPageController {
 	public String user_mypage_modify(@ModelAttribute MemberVO memberVO, HttpSession session){
 		
 		MemberVO tempMemberVO = memberVO;
-
-		String hashedPw = BCrypt.hashpw(tempMemberVO.getM_pw(), BCrypt.gensalt());
-		tempMemberVO.setM_pw(hashedPw);
+	
+		if(tempMemberVO.getM_pw()!=null) {
+			String hashedPw = BCrypt.hashpw(tempMemberVO.getM_pw(), BCrypt.gensalt());
+			tempMemberVO.setM_pw(hashedPw);
+		}
 		
 		tempMemberVO.setM_tel(tempMemberVO.getM_tel1()+"-"+tempMemberVO.getM_tel2()+"-"+tempMemberVO.getM_tel3());
 		

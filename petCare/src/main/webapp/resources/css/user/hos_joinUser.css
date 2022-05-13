@@ -55,6 +55,8 @@ section {
 
 .join-user__items > :first-child {
     margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .join-user__items > label {
@@ -79,7 +81,7 @@ section {
 } 
 
 .join-user__items > .join-user__items--row > .buttonOk {
-    width: 150px;
+    width: 100px;
     font-size: larger;
 }
 

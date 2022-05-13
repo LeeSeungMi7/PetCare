@@ -85,10 +85,10 @@ public class PasswordController {
 				
 				try {
 					emailSender.SendEmail(email);
-					System.out.println("발송 완료");
+//					System.out.println("발송 완료");
 					data.put("data","발송완료");
 				} catch (Exception e) {
-					System.out.println("발송 실패");
+//					System.out.println("발송 실패");
 					e.printStackTrace();
 					data.put("data","발송실패");
 				}

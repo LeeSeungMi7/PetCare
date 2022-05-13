@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="KakaoDAO">
+
+<select id="check_id" resultType="MemberVO">
+select * from Member_Table where m_id = #{kakao_id}
+</select>
+
+<update id="reset_Delete">
+update Member_Table set delete_Member_Date=null where m_number=#{m_number}
+</update>
+
+</mapper>
