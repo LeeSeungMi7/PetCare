@@ -16,7 +16,15 @@
 	
 	<!-- 병원 예약 검색 -->
 	<select id="reservationList" parameterType="integer" resultType="ReservationVO">
-		select rt.* , mt.m_name as partner_name from Reservation_Table rt join Member_Table mt on mt.m_number = rt.rv_partner_number where rv_number=#{m_number} order by reservation_num desc limit ${skip}, ${size}
+		select rt.* , mt.m_name as partner_name, group_concat(pt.mp_petName order by ar.reservation_num, ",")as rv_petName
+		from Animal_Reservation_Table ar
+		join MyPet_Table pt on ar.animal_num = pt.myPet_num
+        join Reservation_Table rt on rt.reservation_num = ar.reservation_num
+        join Member_Table mt on mt.m_number = rt.rv_partner_number 
+		where rv_number=#{m_number} 
+        group by ar.reservation_num
+        order by reservation_num desc 
+		limit ${skip}, ${size}
 	</select>
 	
 	

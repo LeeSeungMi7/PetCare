@@ -64,7 +64,7 @@
 						</c:out>
 						</th>
 						<td>${reservation.partner_name}</td>
-						<td>${reservation.rv_petName}</td>
+						<td class="petName_box">${reservation.rv_petName}</td>
 						<td>${reservation.rv_date}</td>
 						<c:if test="${reservation.rv_access == '0'}">
 						<td><select class="form-select form-select-sm" id="time">

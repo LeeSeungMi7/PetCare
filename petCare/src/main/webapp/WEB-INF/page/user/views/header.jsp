@@ -113,8 +113,7 @@ function kakaoLogout() {
 		<span>내정보</span>
 		<div class="dropdown-content">
 			<c:if test="${user.kakao_member == 'N'}">
-			<form action="/user_myPage_update.do" method="POST">
-	        	<input type="hidden" name=m_number value="${user.m_number}">
+			<form action="/user_mypage_password.do" method="POST">
 	        	<input type="submit" class="dropdown-item" value="내 정보 수정">
 	        </form>
 			</c:if>
@@ -139,8 +138,7 @@ function kakaoLogout() {
 	<div class="dropdown pet-header__tab text--16-normal color--black">
 		<span>내정보</span>
 		<div class="dropdown-content">
-			<form action="/partner_mypage_update.do" method="POST">
-	        	<input type="hidden" name=m_number value="${user.m_number}">
+			<form action="/partner_mypage_password.do" method="POST">
 	        	<input type="submit" class="dropdown-item" value="병원 정보 수정">
 	        </form>
 	        <form action="/hos_reservation.do" method="POST">

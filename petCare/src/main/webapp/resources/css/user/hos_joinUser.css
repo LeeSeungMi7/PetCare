@@ -241,7 +241,9 @@ select:disabled {
 
   .addList{
     color: black;
-    margin-left: 10rem;
+    margin-left : 8rem;
+    background-color: transparent;
+
   }
   .addList:hover{
     text-decoration-line: none;
@@ -261,3 +263,16 @@ select:disabled {
     margin: 26px 5px 0 5px;
     cursor: pointer;
 }
+
+  .deleteMember{
+  	background-color: #FFA0A0;
+  }
+  
+  .deleteMember:hover{
+	background-color: #FB3232;
+	color:white;
+  }
+  
+
+  
+  

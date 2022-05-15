@@ -1,10 +1,14 @@
 package com.petcare.web.common.utils;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.Reader;
+import java.util.Properties;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.ibatis.io.Resources;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,15 +29,12 @@ import com.petcare.web.user.vo.S3KeyVO;
 @Component
 public class AwsS3{
 	
-	@Autowired
-	private SqlSessionTemplate sqlSessionTemplate;
-	
 	private AmazonS3 s3Client;
 
 	private String access_key;
 	private String secret_accessKey;
 	private Regions regions=Regions.AP_NORTHEAST_2;
-	private String bucket = "petcarebuc";
+	private String bucket;
 	
 	private AwsS3() {
     }
@@ -43,20 +44,26 @@ public class AwsS3{
 		createS3Client();
 	}
 	
-	public AwsS3(SqlSessionTemplate sqlSessionTemplate) {
-		this.sqlSessionTemplate =sqlSessionTemplate;
-		createS3Client();
-	}
   
     //키 받아와서 생성
     private void createS3Client() {
-
-    	S3KeyVO s3KeyVO = sqlSessionTemplate.selectOne("S3DAO.s3Key");
-		access_key = s3KeyVO.getAccess_key();
-		secret_accessKey = s3KeyVO.getSecret_accessKey();
-		AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_accessKey);
-		this.s3Client = AmazonS3ClientBuilder.standard().withCredentials(
-				new AWSStaticCredentialsProvider(credentials)).withRegion(regions).build();
+    	Reader reader;
+    	try {
+    		Properties properties = new Properties();
+    		reader = Resources.getResourceAsReader("config/aws.properties");
+    		properties.load(reader);
+    		
+    		this.access_key = properties.getProperty("aws.access_key");
+    	    this.secret_accessKey = properties.getProperty("aws.secret_accessKey");  
+    	    this.bucket = properties.getProperty("aws.bucket");  
+    	    AWSCredentials credentials = new BasicAWSCredentials(access_key, secret_accessKey);
+    		this.s3Client = AmazonS3ClientBuilder.standard().withCredentials(
+    				new AWSStaticCredentialsProvider(credentials)).withRegion(regions).build();
+    	} catch (IOException e) {
+    		
+    		e.printStackTrace();
+    	}
+    	
     }
 
     public void upload(File file, String key) {
