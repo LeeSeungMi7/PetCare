@@ -143,7 +143,7 @@
 								<input type="hidden" value="${member.m_number}" name="m_number">
 								<input type="submit" class="buttonOk button_class" value="수정">
 								<button class="buttonOk button_class" onClick="location.href='home.do'">취소</button>
-								<button class="buttonOk button_class deleteMember">동의 철회</button>
+								<button class="buttonOk button_class deleteMember_kakao"><img class="kakao_img_update" src="/resources/img/kakao.png" width="20" >동의 철회</button>
 							</div>
 						</div>
 					</div>
@@ -351,7 +351,7 @@ function modify_submit() {
 	}
 
 } 
-$(".deleteMember").click(function(){
+$(".deleteMember_kakao").click(function(){
 	
 	var m_number = $("input[name='m_number']").val();
 	

@@ -58,12 +58,9 @@
 
 						<!--이메일-->
 						<div class="join-user__items">
-							<label>이메일</label>
-							<div class="join-user__items" style="justify-content: space-between">
+							<label>이메일</label>		
 							<input type="email" oninput="onInputInvalid('email')" name="m_id" value="${member.m_id}" readonly="readonly" />
-							<span class="error_next_box" id="error_email" aria-live="assertive">이메일은 수정 불가능 합니다.</span>
-							</div>
-							
+							<span class="error_next_box" id="error_email" aria-live="assertive">이메일은 수정 불가능 합니다.</span>	
 						</div>
 						<!--비밀번호-->
 						<div class="join-user__items">
@@ -380,27 +377,30 @@ $(".deleteMember").click(function(){
 		closeOnConfirm : false,
 	    closeOnCancel : true  
 	}, function(isConfirm) {
-		
-		$.ajax({
-			type : "POST",
-			data : {"m_number" : m_number},
-			url : "/delete_member.do", 
-			dataType : "json",
-			success : function(data) {
-				if(data==1){
-					 swal({
-							title: "성공적으로 탈퇴되었습니다.",
-							text:"그동안 이용해 주셔서 감사합니다.",
-							closeOnClickOutside: false
-						}, function(){
-							window.location.href ="/home.do";
-					});
+		if (isConfirm) {
+			$.ajax({
+				type : "POST",
+				data : {"m_number" : m_number},
+				url : "/delete_member.do", 
+				dataType : "json",
+				success : function(data) {
+					if(data==1){
+						 swal({
+								title: "성공적으로 탈퇴되었습니다.",
+								text:"그동안 이용해 주셔서 감사합니다.",
+								closeOnClickOutside: false
+							}, function(){
+								window.location.href ="/home.do";
+						});
+					}
+				},
+				error : function(error) {
+					alert("error : " + error);
 				}
-			},
-			error : function(error) {
-				alert("error : " + error);
-			}
-		});
+			});
+		}else{
+			
+		}
 
 	});
 

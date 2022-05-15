@@ -47,7 +47,7 @@
     join MyPet_Table pt on ar.animal_num = pt.myPet_num
 	join Reservation_Table rt on rt.reservation_num = ar.reservation_num
 	join Member_Table mt on mt.m_number = rt.rv_number
-	where rv_partner_number=102 and rt.rv_access='0'
+	where rv_partner_number=#{m_number} and rt.rv_access='0'
 	group by ar.reservation_num
 	limit ${skip}, ${size}
 	</select>

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.mail.Session;
 import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -40,8 +41,27 @@ public class User_myPageController {
 		this.user_mypageService = user_mypage;
 	}
 	
+	@RequestMapping(value="/user_mypage_password.do")
+	public String user_mypage_password() {
+		return "now_password";
+	}
 	
-	@RequestMapping(value="/user_myPage_update.do", method=RequestMethod.POST)
+	@RequestMapping(value="/password_check.do")
+	@ResponseBody
+	public Map<String,Integer> password_check(@RequestParam int m_number, String password, HttpSession session) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		MemberVO member = (MemberVO) session.getAttribute("user");
+		
+		boolean pass = BCrypt.checkpw(password, member.getM_pw());
+		if(!pass) {
+			map.put("mas", 0);
+		}else {
+			map.put("mas", 1);
+		}
+		return map;
+	}
+	
+	@RequestMapping(value="/user_myPage_update.do")
 	public ModelAndView user_myPage_update(@RequestParam int m_number) {
 		
 		
@@ -145,7 +165,7 @@ public class User_myPageController {
 		if(criteria.getBlock_end() > criteria.getTotal_page()) {
 			criteria.setBlock_end(criteria.getTotal_page());
 		}
-//		System.out.println(criteria.toString());
+//		System.out.println(reservationList.toString());
 		mav.addObject("reser", reservationList);
 		mav.addObject("criteria", criteria);
 		mav.setViewName("/myreservation");

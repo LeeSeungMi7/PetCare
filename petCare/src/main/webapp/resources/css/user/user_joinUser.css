@@ -54,6 +54,8 @@ section {
 
 .join-user__items > :first-child {
     margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .join-user__items > label {
@@ -193,8 +195,8 @@ select:disabled {
 
   .addList{
     color: black;
-    margin-left : 150px;
-    background-color: transparent
+    margin-left : 8rem;
+    background-color: transparent;
   }
   
   .petbox {
@@ -214,11 +216,24 @@ select:disabled {
   }
   
   .deleteMember{
-  background-color: #F15F5F;
+  	background-color: #FFA0A0;
   }
   
   .deleteMember:hover{
-  background-color: red;
-  color:white;
+	background-color: #FB3232;
+	color:white;
   }
   
+  .deleteMember_kakao{
+  	background-color: #FEE500;
+  }
+  
+  .deleteMember_kakao:hover{
+	background-color: #FEE500;
+	color:white;
+  }
+  
+  .kakao_img_update{
+    margin-right: 10px;
+    margin-bottom: 5px;
+  }

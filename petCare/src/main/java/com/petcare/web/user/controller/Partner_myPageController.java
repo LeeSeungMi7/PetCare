@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,26 @@ public class Partner_myPageController {
 	public Partner_myPageController(PartnerMyPageService partnerMapage) {
 		this.partnerMapage = partnerMapage;
 	}
-
+	
+	@RequestMapping(value="/partner_mypage_password.do")
+	public String user_mypage_password() {
+		return "partner_now_password";
+	}
+	
+	@RequestMapping(value="/Partner_password_check.do")
+	@ResponseBody
+	public Map<String,Integer> password_check(@RequestParam int m_number, String password, HttpSession session) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		MemberVO member = (MemberVO) session.getAttribute("user");
+		
+		boolean pass = BCrypt.checkpw(password, member.getM_pw());
+		if(!pass) {
+			map.put("mas", 0);
+		}else {
+			map.put("mas", 1);
+		}
+		return map;
+	}
 //	마이페이지 연결
 	@RequestMapping(value="/partner_mypage_update.do" , method=RequestMethod.POST)
 	public ModelAndView partner_mypage(@RequestParam int m_number) {
