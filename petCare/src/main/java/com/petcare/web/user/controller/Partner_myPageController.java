@@ -66,7 +66,6 @@ public class Partner_myPageController {
 	public ModelAndView partner_mypage(@RequestParam int m_number) {
 		
 		ModelAndView mav = new ModelAndView();
-		
 		MemberVO memberVO = partnerMapage.partner_mypage(m_number);
 		
 		String tel[] = memberVO.getM_tel().split("-");
@@ -95,6 +94,12 @@ public class Partner_myPageController {
 //	병원 마이페이지 수정
 	@RequestMapping(value="/partner_modify.do", method=RequestMethod.POST)
 	public String partner_modify(@ModelAttribute MemberVO memberVO, @RequestParam("file") MultipartFile file) {
+		
+		if(memberVO.getP_24hour()!="") {
+			memberVO.setP_24hour("1");
+		}else {
+			memberVO.setP_24hour("0");
+		}
 		
 		String hashedPw = BCrypt.hashpw(memberVO.getM_pw(), BCrypt.gensalt());
 		memberVO.setM_pw(hashedPw);
