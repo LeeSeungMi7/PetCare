@@ -18,6 +18,7 @@
     display: flex !important;
     flex-direction: row !important;
     justify-content: space-between;
+    font-size: smaller !important;
 }
 .writer, .card-title{
     font-weight: bold;
@@ -33,3 +34,9 @@
 .card-text{
     color: darkslategray;
 }
+
+.card-body{
+	text-overflow: ellipsis;
+    overflow: hidden;
+ }
+

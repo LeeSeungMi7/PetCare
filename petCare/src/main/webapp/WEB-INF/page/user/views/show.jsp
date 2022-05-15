@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -14,6 +15,7 @@
 <link href="/resources/css/user/loginForm.css" rel="stylesheet">
 <link href="/resources/css/user/show.css" rel="stylesheet">
 <link href="/resources/css/user/mywrite.css" rel="stylesheet">
+<link href="/resources/css/user/myreservation.css" rel="stylesheet">
 <!--부트스트랩-->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -51,97 +53,61 @@
 		<!--본문-->
         <div class="getboard">
             <span class="badge badge-pill badge-success" style="font-size: 20px; margin-bottom: 10px; width: 100%;">자 랑 하기</span>
-             <a class="btn btn-success" href="javascript:void(0);" onclick="show_write_check();" role="button">글 작성</a>
+             <a class="button_class" href="javascript:void(0);" onclick="show_write_check();" role="button">나도 자랑하기</a>
             <div class="mainboard">
-            <c:forEach var="show" items="${list}">
-                <div class="card"onclick="location.href='show_board.do'">
-                    <img src="/resources/img//동물자랑1.jpg" class="card-img-top" alt="...">
+            <c:forEach var="showPageList" items="${showPageList}" varStatus ="status">
+                <div class="card"onclick="location.href='show_board.do?board_num=${showPageList.board_num}'">
+               <c:if test="${showPageList.b_file_path != null}">
+               <div style="    display: flex;height: 318px;width: 318px; overflow: hidden; align-items: center;">
+                    <img src="${showPageList.b_file_path}" class="card-img-top" alt="...">
+                </div>
+               </c:if>
                     <div class="card-body">
                         <div class="rowpoint">
-                        <h5 class="card-title">${show.b_title} 우리집강아지좀보세요 자랑하고싶어요</h5>
-                        <h6 class="look">LOOK ${show.b_hit}15</h6>
-                    </div>
-                        <p class="card-text">${show.b_content }우리집강아지는 복슬강아지</p>
+                        <h5 class="card-title">${showPageList.b_title} </h5>
+                        <h6 class="look">LOOK ${showPageList.b_hit}</h6>
+                    	</div>
+                        <p class="card-text">${showPageList.b_content }</p>
                     </div>
                     <ul class="list-group list-group-flush rowpoint" >
-                        <li class="list-group-item writer">WRITER : ${show.b_writer }
+                        <li class="list-group-item writer">WRITER : ${showPageList.b_writer }
                         </li>
-                        <li class="list-group-item date">${show.b_date }
+                        <li class="list-group-item date">${showPageList.b_date}
                         </li>
                     </ul>
                 </div>
                 </c:forEach>
-        
-                <div class="card"onclick="location.href='show_board.do'">
-                    <img src="/resources/img//동물자랑1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="rowpoint">
-                        <h5 class="card-title">우리집 강아지좀 보세요 </h5>
-                        <h6 class="look">LOOK 15</h6>
-                    </div>
-                        <p class="card-text">우리집 강아지 이름은 멍멍이에요 기엽죠?</p>
-                    </div>
-                    <ul class="list-group list-group-flush rowpoint" >
-                        <li class="list-group-item writer">WRITER :
-                        </li>
-                        <li class="list-group-item date">2022-05-01
-                        </li>
-                    </ul>
-                </div>
-        
-                <div class="card"onclick="location.href='show_board.do'">
-                    <img src="/resources/img//동물자랑1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="rowpoint">
-                        <h5 class="card-title">우리집 강아지좀 보세요 </h5>
-                        <h6 class="look">LOOK 15</h6>
-                    </div>
-                        <p class="card-text">우리집 강아지 이름은 멍멍이에요 기엽죠?</p>
-                    </div>
-                    <ul class="list-group list-group-flush rowpoint" >
-                        <li class="list-group-item writer">WRITER :
-                        </li>
-                        <li class="list-group-item date">2022-05-01
-                        </li>
-                    </ul>
-                </div>
-        
-                <div class="card"onclick="location.href='show_board.do'">
-                    <img src="/resources/img//동물자랑1.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <div class="rowpoint">
-                        <h5 class="card-title">우리집 강아지좀 보세요 </h5>
-                        <h6 class="look">LOOK 15</h6>
-                    </div>
-                        <p class="card-text">우리집 강아지 이름은 멍멍이에요 기엽죠?</p>
-                    </div>
-                    <ul class="list-group list-group-flush rowpoint" >
-                        <li class="list-group-item writer">WRITER :
-                        </li>
-                        <li class="list-group-item date">2022-05-01
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link">이전</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">다음</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-       
+       	</div>
+				<div class="page1">
+					<ul class="pagination1 modal1">
+
+
+						<c:if test="${showPageVO.pageNum > 1 }">
+							<li><a
+								href="javascript:fnSubmitForm(${showPageVO.block_start-1});"
+								class="arrow1 left1">[처음]</a></li>
+						</c:if>
+
+						<c:forEach var="i" begin="${showPageVO.block_start}" end="${showPageVO.block_end}">
+							<li><a href="javascript:fnSubmitForm(${i});" class="num1">[${i}]</a>
+							<li>
+						</c:forEach>
+
+						<c:if test="${!(showPageVO.block_num >= showPageVO.total_block)}">
+							<li><a href="javascript:fnSubmitForm(${showPageVO.block_end+1});" class="arrow1 right1">[마지막]</a></li>
+						</c:if>
+
+
+					</ul>
+				</div>
+
+				<form action="/show.do" method="post" name="pageNumform">
+					<input type="hidden" name="pageNum" id="pageNumId" value="">
+				</form>
+	</div>
+</div>
 		<!--푸터-->
 		<%@ include file="/WEB-INF/page/user/views/footer.jsp"%>
-
-	</div>
 	
 <script type="text/javascript">
 function show_write_check(){
@@ -161,6 +127,10 @@ function show_write_check(){
 			}
 		});
 }
+function fnSubmitForm(page){
+	document.getElementById("pageNumId").value =page;
+	document.pageNumform.submit();
+}	
 </script>
 </body>
 

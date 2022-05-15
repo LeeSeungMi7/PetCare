@@ -31,11 +31,11 @@ public class CommonController {
 	public String petGet() {
 		return "pet_joinUser";
 	}
-	//자랑하기 목록
-	@GetMapping("/show.do")
-	public String showGet() {
-		return "show";
-	}
+//	//자랑하기 목록
+//	@GetMapping("/show.do")
+//	public String showGet() {
+//		return "show";
+//	}
 //	
 //	//자랑하기 글 상세
 //	@GetMapping("/show_board.do")

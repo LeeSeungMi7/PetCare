@@ -4,8 +4,49 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board">
 	<insert id="boardinsert" parameterType="ShowVO">
-		insert into Board_Table(b_number, b_writer, b_title, b_content, b_hit ) 
-		values(#{b_number}, #{b_writer}, #{b_title} ,#{b_content}, #{b_hit});
+		insert into
+		Board_Table(b_number, b_writer, b_title, b_content, b_hit, b_file_name, b_file_path, b_date) 
+		values(#{b_number}, #{b_writer}, #{b_title} ,#{b_content}, #{b_hit}, #{b_file_name},#{b_file_path}, #{b_date});
 	</insert>
+	<select id="board_view" resultType="ShowVO">
+	select * from Board_Table Where board_num = #{board_num}
+	</select>
+	<update id="increaseViewcnt" parameterType="ShowVO">
+	update Board_Table set b_hit = b_hit +1 where board_num = #{board_num}
+	</update>
+	<select id="rewrite_view" resultType="ShowVO">
+	select * from Board_Table Where board_num = #{board_num}
+	</select>
+	<update id="board_update">
+	update Board_Table set b_title = #{b_title},
+	b_content = #{b_content},
+	b_file_name = #{b_file_name},
+	b_file_path = #{b_file_path} where board_num = #{board_num}
+	</update>
+	<delete id="board_delete">
+	delete from Board_Table where board_num = #{board_num}
+	</delete>
+	<!-- 페이징처리를 위한 전체 글 수 -->
+	<select id="board_totalpage" resultType="int">
+	select count(*) from Board_Table
+	</select>
+	<select id="board_page" resultType="showVO">
+	select * from Board_Table order by board_num desc limit ${skip}, ${size}
+	</select>
 	
+	<select id="boardComment" resultType="CommentVO">
+	select ct.*,  mt.m_name as c_writer from Comment_Table ct join Member_Table mt on ct.c_member_num = mt.m_number where c_num=#{baord_num} and c_kind='1' order by Comment_num desc limit ${skip}, ${size}
+	</select>
+	
+	<select id="showTotal" resultType="int">
+	select count(*) from Comment_Table where c_num=#{baord_num} and c_kind='1'
+	</select>
+	
+	<insert id="board_reply_write">
+	insert into Comment_Table (c_num, c_member_num, c_kind, c_content, c_date, c_pro)
+	values(#{c_num}, #{c_member_num}, #{c_kind}, #{c_content}, #{c_date}, #{c_pro})
+	</insert>
+	<delete id="board_reply_delete">
+	delete from Comment_Table where comment_num = #{Comment_num}
+	</delete>
 </mapper>
