@@ -165,7 +165,7 @@
 								<!--24시간 병원인지 체크-->
 								<div class="join-user__items">
 									<div class="custom-control custom-checkbox">
-										<input type="checkbox" id="jb-checkbox"
+										<input type="checkbox" id="jb-checkbox" name="p_24hour"
 											class="custom-control-input"> <label
 											class="custom-control-label" for="jb-checkbox">24시 병원</label>
 									</div>
@@ -207,8 +207,8 @@
 									</div>
 								</div>
 							</div>
-							<input type="hidden" name="emailcheck" value="0"> <input
-								type="hidden" id="p_24hour" name="p_24hour" value="0">
+							<input type="hidden" name="emailcheck" value="0"> 
+							
 						</form>
 					</section>
 
