@@ -64,6 +64,7 @@ function fn_loginCheck() {
             } else {
                 swal({
 					title: "로그인 성공.",
+					text: "성공적으로 로그인 되었습니다.",
 					icon : "success",
 				}, function(){
 					window.location.href ="/home.do";					
