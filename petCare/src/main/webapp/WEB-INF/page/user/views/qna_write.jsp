@@ -39,6 +39,33 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1e818982c81810e2470dd6b0b339e676&libraries=services"></script>
 
+<script>
+
+function onclickOk(){
+		var title= $("#input_title").val();
+		console.log(title);
+		
+		oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", [])
+		var content = document.getElementById("ir1").value
+		console.log(content);
+
+		if(title == ""){
+			alert("제목을 입력하세요.");
+			document.getElementById("title").focus();
+			console.log
+			return false;
+		}
+		if(content == ""){
+			alert("내용을 입력하세요.");
+			oEdiotrs.getById["ir1"].exec("FOCUS")
+			return false;
+		}
+		alert("등록되었습니다.")
+		document.getElementById("form1").submit();
+	}
+
+
+</script>
 </head>
 
 <body>
@@ -46,44 +73,42 @@
 		<!--헤더-->
 		<%@ include file="/WEB-INF/page/user/views/header.jsp"%>
 		<!--본문-->
-		<%-- <%@ include file="/WEB-INF/page/user/views/qna_write.jsp" %> --%>
-		<section>
+		<%-- <%@ include file="/WEB-INF/page/user/views/show_write.jsp" %> --%>
+		<form id="form1" name="qnaVO" method="POST" onsubmit="return onclickOk()" action="/qna_insert.do" enctype="multipart/form-data">
 			<div class="eidtor">
 				<!--제목-->
 				<div class="mb-3">
-					<label for="formGroupExampleInput" class="form-label">제목</label> <input
+					<label for="formGroupExampleInput" class="form-label" id="title">TITLE</label> 
+					<input
 						type="text" class="datebox form-control" maxlength="20"
-						placeholder="" style="max-width: 300px;">
-				</div>
-				<!--날짜-->
-				<div class="mb-3">
-					<label for="formGroupExampleInput2" class="form-label">날짜</label> <input
-						type="text" class="datebox form-control" placeholder=""
-						style="max-width: 300px;">
+						placeholder="" style="max-width: 300px;" name="f_title" id="input_title">
 				</div>
 				<!--대표이미지-->
 				<div class="mb-3">
-					<label for="formGroupExampleInput2" class="form-label">대표이미지</label>
-					<form action="" method="post" enctype="multipart/form-data" name="">
-						<input type="file" name="FileName">
-					</form>
+					<label for="formGroupExampleInput2" class="form-label">IMAGE</label>
+					<div>
+					<input type="file" name="qna_file" id="profile_pt" onchange="previewImage(this,'View_area')"/>
+					<div id='View_area' style='position:relative;  border: 0px solid black; dispaly: inline; '></div>
+					</div>
 				</div>
 				<!--내용-->
 				<div>
-					<label>내용</label>
-					<textarea name="ir1" id="ir1" rows="10" cols="100"
-						style="max-width: 650px;"></textarea>
+					<label>CONTENT</label>
+					<textarea id="ir1" rows="10" cols="100" style="max-width: 650px;" name="f_content"></textarea>
 				</div>
-
 				<!--버튼-->
 				<div>
-					<a class="btn btn-success" href="qna.do" role="button"
-						onclick="Ok();">등록</a> <a class="btn btn-danger" href="qna.do"
-						role="button" onclick="Cancel()">취소</a>
+					<input type="hidden" name="f_writer" value="${user.m_name}">
+					<input type="hidden" name="f_number" value="${user.m_number}">
+					<input type="hidden" name="f_pro" value="${user.m_role}">
+					<input type="submit" class="btn btn-success" id="btnSave" value="등록">
+					<!-- <button class="btn btn-success" type="button" id="btnSave" ">등록</button> -->
+					<a class="btn btn-danger" href="qna.do" role="button" onclick="Cancel()">취소</a>
 				</div>
 			</div>
 
-		</section>
+		</form>
+		</div>
 
 		<script type="text/javascript" src="/se2/js/service/HuskyEZCreator.js"
 			charset="utf-8"></script>

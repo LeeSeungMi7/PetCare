@@ -186,6 +186,7 @@ public class BoardController {
 	   mav.addObject("showPageList", showList);
 	   mav.addObject("showPageVO", showPageVO);
 	   mav.setViewName("/show");
+	   System.out.println("showPageList" +showList.toString());
 
 	   
 	return mav;

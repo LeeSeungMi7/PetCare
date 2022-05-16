@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qna">
+	<insert id="qnainsert" parameterType="QnaVO">
+	insert into
+	FAQ_Table(f_number, f_writer, f_title, f_content, f_hit, f_file_name, f_file_path, f_date) 
+	values(#{f_number}, #{f_writer}, #{f_title} ,#{f_content}, #{f_hit}, #{f_file_name},#{f_file_path}, #{f_date});
+	</insert>
+	<!--
+	<select id="qna_page" resultType="QnaVO">
+	select * from FAQ_Table order by faq_num desc limit ${skip}, ${size}
+	</select>
+	<select id="maintotalpage" resultType="int">
+	select count(*) from FAQ_Table
+	</select>-->
+</mapper>
