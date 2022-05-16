@@ -304,7 +304,7 @@ function deletelist(e){
 /* 내펫 삭제 */
 $(".delete_myPetBtn").click(function(){ 
 	var petNum = $(this).parent().find("#petNum").val();
-	
+
 	swal({
 		title : "정말로 삭제하시겠습니까?",
 		text : "확인을 누르면 내펫 리스트에서 없어지게 됩니다",
@@ -338,7 +338,7 @@ $(".delete_myPetBtn").click(function(){
 					}
 				},
 				error : function(error) {
-					alert("error : " + error);
+					swal('삭제 불가.', '해당 반려동물은 병원예약이 되어있어요.', 'info');
 				}
 			})
 		}else{

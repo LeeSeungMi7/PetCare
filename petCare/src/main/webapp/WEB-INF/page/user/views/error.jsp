@@ -10,23 +10,21 @@
 }
 .error_button{
 	background-color: transparent;
-    width: 10rem;
-    height: 3rem;
+    width: 15rem;
+    height: 3.5rem;
     position: absolute;
-    left: 55%;
-    top: 45%;
+    left: 45%;
+    top: 43.5%;
     font-size: 20px;
-    color: #6F4F28;
-    border: 2px solid #6F4F28;
-    border-radius: 15px;
+    border: transparent;
 }
 </style>
 </head>
 
 <body>
     <div align="center" class="error_box">
-		<img src="/resources/img/error.png" width="920">
-		<button class="error_button" onclick='location.href="/home.do";'>홈으로 이동</button>
+		<img src="/resources/img/errorpage.png" width="920">
+		<button class="error_button" onclick='location.href="/home.do";'></button>
     </div>
 </body>
 </html>

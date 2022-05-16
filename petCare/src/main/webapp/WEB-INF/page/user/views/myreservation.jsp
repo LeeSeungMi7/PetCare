@@ -49,7 +49,7 @@
 					<tr class="table-success">
 						<th scope="col">번호</th>
 						<th scope="col">병원명</th>
-						<th scope="col">반려동물 이름</th>
+						<th scope="col">반려동물</th>
 						<th scope="col">날짜</th>
 						<th scope="col">시간</th>
 						<th scope="col"></th>
