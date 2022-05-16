@@ -51,8 +51,8 @@
         <div class="eidtor">
             <!--제목-->
             <div class="mb-3">
-                <label for="formGroupExampleInput" class="form-label">제목</label>
-                <input type="text" class="datebox form-control" maxlength="20" placeholder="" style="max-width: 300px;">
+                <label for="formGroupExampleInput" class="form-label">TITLE</label>
+                <input type="text" class="datebox form-control" maxlength="20" style="max-width: 300px;" >
             </div>
             <!--날짜-->
             <div class="mb-3">

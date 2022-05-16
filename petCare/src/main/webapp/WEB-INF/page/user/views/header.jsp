@@ -104,7 +104,7 @@ function kakaoLogout() {
     <a class="pet-header__tab text--16-normal color--black active" href="home.do">홈</a>
     <a class="pet-header__tab text--16-normal color--black" href="hospital.html">내주변 병원</a>
     <a class="pet-header__tab text--16-normal color--black" href="show.do">자랑하기</a>
-    <a class="pet-header__tab text--16-normal color--black" href="qna.html">QnA</a>
+    <a class="pet-header__tab text--16-normal color--black" href="qna.do">QnA</a>
     <a class="pet-header__tab text--16-normal color--black" href="ency_boardList.html">동물백과</a>
    
    <!-- 마이페이지 -->

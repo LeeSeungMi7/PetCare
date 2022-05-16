@@ -67,6 +67,7 @@ function onclickOk(){
 		document.getElementById("form1").submit();
 	}
 
+
 </script>
 </head>
 
@@ -76,26 +77,26 @@ function onclickOk(){
 		<%@ include file="/WEB-INF/page/user/views/header.jsp"%>
 		<!--본문-->
 		<%-- <%@ include file="/WEB-INF/page/user/views/show_write.jsp" %> --%>
-		<form id="form1" name="showVO" method="GET" onsubmit="return onclickOk()" action="/show_insert.do" enctype="multipart/form-data">
+		<form id="form1" name="showVO" method="POST" onsubmit="return onclickOk()" action="/show_insert.do" enctype="multipart/form-data">
 			<div class="eidtor">
 				<!--제목-->
 				<div class="mb-3">
-					<label for="formGroupExampleInput" class="form-label" id="title">제목</label> 
+					<label for="formGroupExampleInput" class="form-label" id="title">TITLE</label> 
 					<input
 						type="text" class="datebox form-control" maxlength="20"
 						placeholder="" style="max-width: 300px;" name="b_title" id="input_title">
 				</div>
 				<!--대표이미지-->
 				<div class="mb-3">
-					<label for="formGroupExampleInput2" class="form-label">대표이미지</label>
+					<label for="formGroupExampleInput2" class="form-label">IMAGE</label>
 					<div>
-					<input type="file" name="file1" id="profile_pt" onchange="previewImage(this,'View_area')"/>
+					<input type="file" name="show_file" id="profile_pt" onchange="previewImage(this,'View_area')"/>
 					<div id='View_area' style='position:relative;  border: 0px solid black; dispaly: inline; '></div>
 					</div>
 				</div>
 				<!--내용-->
 				<div>
-					<label>내용</label>
+					<label>CONTENT</label>
 					<textarea id="ir1" rows="10" cols="100" style="max-width: 650px;" name="b_content"></textarea>
 				</div>
 				<!--버튼-->

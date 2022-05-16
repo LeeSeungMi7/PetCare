@@ -14,6 +14,7 @@
 <link href="/resources/css/user/loginForm.css" rel="stylesheet">
 <link href="/resources/css/user/qna.css" rel="stylesheet">
 <link href="/resources/css/user/mywrite.css" rel="stylesheet">
+<link href="/resources/css/user/myreservation.css" rel="stylesheet">
 <!--부트스트랩-->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -51,62 +52,20 @@
 		<!--본문-->
 		<div class="getboard">
 			<ul class="list-group">
-				<span class="badge badge-pill badge-success"
-					style="font-size: 20px; margin-bottom: 10px;">Q n A</span>
-				<button type="button" class="button_class" onclick="location.href='qna_write.do'">저도 질문있어요</button>
-				<li class="list-group-item"
-					onclick="location.href='qna_board.do'">
+				<span class="badge badge-pill badge-success" style="font-size: 20px; margin-bottom: 10px;">Q n A</span>
+				<a class="button_class" href="javascript:void(0);" onclick="qna_write_check();" role="button"> 저도 질문 있어요</a>
+				<li class="list-group-item" onclick="location.href='qna_board.do'">
 					<div class="card mb-3" style="margin-top: 10px;">
 						<div class="row g-0">
 							<div class="col-md-4">
-								<img src="/resources/img/다운로드.jpg"
-									class="img-fluid rounded-start" alt="...">
+                   				<img src="${qnaPageList.f_file_path}" class="card-img-top" alt="...">
 							</div>
 							<div class="col-md-8">
 								<div class="card-body">
-									<h5 class="card-title">우리집 고양이가 이상해요</h5>
-									<p class="card-text">우리집 고양이가 밥을 안먹어요</p>
+									<h5 class="card-title">${qnaPageList.f_title}</h5>
+									<p class="card-text">${qnaPageList.f_content}</p>
 									<p class="card-text">
-										<small class="text-muted">Last updated 3 mins ago</small>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</li>
-				<li class="list-group-item">
-					<div class="card mb-3" style="margin-top: 10px;">
-						<div class="row g-0">
-							<div class="imgbox col-md-4">
-								<img
-									src="/resources/img/_104454565_mary-mcgowan_caught-in-the-act_00001294.jpg"
-									class="img-fluid rounded-start" alt="...">
-							</div>
-							<div class="col-md-8">
-								<div class="card-body">
-									<h5 class="card-title">다람쥐 질문입니다.</h5>
-									<p class="textbox card-text">다람쥐는 간식으로 무엇을 줘야할까요?</p>
-									<p class="card-text">
-										<small class="text-muted">Last updated 3 mins ago</small>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</li>
-				<li class="list-group-item">
-					<div class="card mb-3" style="margin-top: 10px;">
-						<div class="row g-0">
-							<div class="col-md-4">
-								<img src="/resources/img/다운로드 (1).jpg"
-									class="img-fluid rounded-start" alt="...">
-							</div>
-							<div class="col-md-8">
-								<div class="card-body">
-									<h5 class="card-title">고양이 질문입니다.</h5>
-									<p class="card-text">고양이가 자꾸 밥을 안먹어요.</p>
-									<p class="card-text">
-										<small class="text-muted">Last updated 3 mins ago</small>
+										<small class="text-muted">${qnaPageList.f_date}</small>
 									</p>
 								</div>
 							</div>
@@ -124,6 +83,29 @@
 		</div>
 		<!--푸터-->
 		<%@ include file="/WEB-INF/page/user/views/footer.jsp"%>
+<script type="text/javascript">
+function qna_write_check(){
+
+		$.ajax({	
+		 	url: "/check_qna.do",
+	        type: "GET",
+		 	success : function(data) {
+		 		if(data.user_ok=="0"){
+		 			swal('로그인 진행 요청.', '회원만 가능합니다', 'error');
+		 		}else{
+		 			window.location.href ="/qna_write.do";
+		 		}
+			},
+			error : function(error) {
+				alert("error : " + error);
+			}
+		});
+}
+function fnSubmitForm(page){
+	document.getElementById("pageNumId").value =page;
+	document.pageNumform.submit();
+}	
+</script>
 
 	</div>
 </body>
