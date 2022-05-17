@@ -31,6 +31,7 @@ a {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
 .insert .insertdate {
     border: 1px solid #dbdbdb;
     padding: 5px 7px;

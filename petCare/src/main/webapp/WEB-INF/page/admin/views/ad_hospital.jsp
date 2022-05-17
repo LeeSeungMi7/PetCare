@@ -219,13 +219,13 @@
 			// checkBtn.parent().parent() : <td>의 부모이므로 <tr>이다.
 			var tr = checkBtn.parent().parent().parent();
 			var td = tr.children();
-			var hosid = td.eq(1).text();
+			var hosid = td.eq(3).text();
 			console.log("클릭한 Row의 이름 데이터 : " + hosid);
 			$("#ex2_Result1").html(" * 클릭한 Row의 모든 데이터 = " + hosid);
 			$.ajax({
 		         type : "post",
 		         data : {
-		            "m_name" : hosid
+		            "m_id" : hosid
 		         },
 		         url : "/delete_hospital.mdo",
 		         dataType : "json",

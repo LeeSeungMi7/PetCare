@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,7 +85,6 @@ function onClickComment(index) {
 		<!--헤더-->
 		<%@ include file="/WEB-INF/page/user/views/header.jsp"%>
 		<!--본문-->
-		<%-- <%@ include file="/WEB-INF/page/user/views/show_board_body.jsp" %> --%>
 		<div >
 		
 			<div class="board shadow p-3 mb-5 bg-body rounded">
@@ -124,20 +124,20 @@ function onClickComment(index) {
 								<tr>
 									<th scope="row">
 									<c:out value="${criteria.pageNum + (status.count)}"></c:out></th>
-									<td>${comment.f_writer}
-									<c:if test="${comment.f_pro == 1 }">
+									<td>${comment.c_writer}
+									<c:if test="${comment.c_pro == 1 }">
 									<img src = "/resources/img/hos.jpg" style="width: 20px;">
 									</c:if>
 									</td>
 									<td class="sb-sidenav-collapse-arrow" style="width: 450px;">
 										<div class="comment-text comment-min" onclick="onClickComment(${status.index})">
-											${comment.f_content}
+											${comment.c_content}
 										</div>
 									</td>
-									<td>${comment.f_date}</td>
-									<c:if test="${user.m_number == comment.f_member_num}">
+									<td>${comment.c_date}</td>
+									<c:if test="${user.m_number == comment.c_member_num}">
 									<td>
-										<a role="button" href="${path}/board_reply_delete.do?comment_num=${comment.comment_num }" class="btn-close cancle" aria-label="Close"></a>
+										<a role="button" href="${path}/qna_reply_delete.do?comment_num=${comment.comment_num }" class="btn-close cancle" aria-label="Close"></a>
 									</td>
 									</c:if>
 								</tr>
@@ -175,34 +175,33 @@ function onClickComment(index) {
 				</div>
 				<hr>
 				<c:if test="${user.m_number != null}">
-					<form id="form12" name="ReplyVO" method="POST" onsubmit="return onclickOk()" action="/board_reply_write.do" enctype="multipart/form-data">
+					<form id="form12" name="ReplyVO" method="POST" onsubmit="return onclickOk()" action="/qna_reply_write.do" enctype="multipart/form-data">
 						<div>
 							<input type="hidden" name="faq_num" value="${view.faq_num}">
 							<div class="form-floating">
-								<textarea class="commentbox form-control" id="floatingTextarea2" name="f_content"></textarea>
+								<textarea class="commentbox form-control" id="floatingTextarea2" name="c_content"></textarea>
 								<label for="floatingTextarea2">댓글 작성</label>
 							</div>
 						
-						<input type="hidden" name="f_pro" value="${user.m_role}">
-						<input type="hidden" name="f_num" value="${view.faq_num}">
-						<input type="hidden" name="f_writer" value="${user.m_name}">
-						<input type="hidden" name="f_member_num" value="${user.m_number}">
+						<input type="hidden" name="c_pro" value="${user.m_role}">
+						<input type="hidden" name="c_num" value="${view.faq_num}">
+						<input type="hidden" name="c_writer" value="${user.m_name}">
+						<input type="hidden" name="c_member_num" value="${user.m_number}">
 					
 							<input type="submit" class="btn btn-success" id="btnReply" role="button" value="댓글 등록">
 						</div>
 					</form>
 				</c:if>
 				<hr>
-				<a class="btn btn-secondary" href="show.do" role="button">목록으로</a>
+				<a class="btn btn-secondary" href="qna.do" role="button">목록으로</a>
 
 				<c:if test="${user.m_number == view.f_number}">
 					<a class="btn btn-secondary"
-						href="#"
+						href="${path}/qna_rewrite.do?faq_num=${view.faq_num}"
 						role="button">수정</a>
 					<a class="btn btn-danger "
-						href="#"
+						href="${path}/qna_delete.do?faq_num=${view.faq_num}"
 						role="button">삭제</a>
-					<!-- <a class="btn btn-danger deletebtn" href="javascript:void(0);" role="button">삭제</a> -->
 				</c:if>
 				<c:if test="${user.m_number != null}">
 					<a class="btn btn-success" href="#" role="button">글 작성</a>
@@ -211,7 +210,7 @@ function onClickComment(index) {
 		</div>
 
 		<!-- 페이징 처리 폼 -->
-		<form action="/show_board.do" name="pageNumform">
+		<form action="/qna_board.do" name="pageNumform">
 			<input type="hidden" name="pageNum" id="pageNumId" value="">
 			<input type="hidden" name="faq_num" value="${view.faq_num}">
 		</form>

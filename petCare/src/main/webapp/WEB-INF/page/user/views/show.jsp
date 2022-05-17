@@ -58,7 +58,7 @@
             <c:forEach var="showPageList" items="${showPageList}" varStatus ="status">
                 <div class="card"onclick="location.href='show_board.do?board_num=${showPageList.board_num}'">
                <c:if test="${showPageList.b_file_path != null}">
-               <div style="    display: flex;height: 318px;width: 318px; overflow: hidden; align-items: center;">
+               <div style="    display: flex;height: 318px;width: 318px; align-items: center;">
                     <img src="${showPageList.b_file_path}" class="card-img-top" alt="...">
                 </div>
                </c:if>

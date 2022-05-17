@@ -75,9 +75,9 @@
 	<!-- 메일 -->
 		<!-- <context:property-placeholder location="classpath:config/mail.properties" /> -->
 	
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	<!-- <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
-		<property name="port" value="465" /><!-- 465 -->
+		<property name="port" value="465" />465
 		<property name="defaultEncoding" value="utf-8"/>
 		<property name="username" value="${email.account}" />
 		<property name="password" value="${email.password}" />
@@ -91,7 +91,22 @@
 				<prop key="mail.debug">true</prop>
 			</props>
 		</property>
-	</bean>
-		
+	</bean>  -->
+	
+	<bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl" >
+        <property name="host" value="smtp.gmail.com" />
+        <property name="port" value="587" />
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="username" value="${email.account}" />
+        <property name="password" value="${email.password}" />
+       
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.smtp.auth">true</prop>
+            </props>
+        </property>
+       
+    </bean>
 	
 </beans>
