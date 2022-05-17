@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="ko">
     <head>
         <!-- 제이쿼리 -->
@@ -10,7 +11,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
        
-        <link href="/resources/css/admin/ad_commboard.css" rel="stylesheet"/>
+        <link href="/resources/css/admin/ad_commboard.css?after" rel="stylesheet"/>
         <link href="/resources/css/admin/styles.css" rel="stylesheet"/>
         <link href="/resources/css/admin/morris.css" rel="stylesheet"/>
         
@@ -27,14 +28,15 @@
                         <div class="insertEn">
                             <div class="insert" style="height: 93vh;">
                                 <form action="./boardInsert" method="POST">
-                                    <input class="title" type="text" name="title" placeholder="제목"/>
-                                    <textarea class="content" name="content" placeholder="내용"></textarea>
+                                    <input class="title" type="text" name="title" placeholder="제목" value="${CM_view.b_title }" readonly/>
+                                    <input class="username" type="text" name="name" placeholder="작성자" value="${CM_view.b_writer }" readonly/>
+                                    <input class="insertdate" type="text" name="insertdate" placeholder="작성일" value="${CM_view.b_date }" readonly/>
+                                    <img class="boardthumbnail" src="${CM_view.b_file_path }">
+                                    <div class="content" name="content" placeholder="내용" readonly>${CM_view.b_content }</div>
                                     <div class="file-hidden-list"></div>
                                 </form>
-                                <button id="addFile" class="add-button">파일 첨부</button>
-                                <div class="file-list"></div>
                                 <div class="buttonarea">
-                                    <button type="button" class="btn btn-danger"><a href="">삭제</a></button>
+                                    <button type="button" class="btn btn-danger"><a href="${path}/board_delete.mdo?board_num=${CM_view.board_num }">삭제</a></button>
                                     <button type="button" class="btn btn-secondary">
                                         <a href="ad_community.mdo">취소</a>
                                     </button>

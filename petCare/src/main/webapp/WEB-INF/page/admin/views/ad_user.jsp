@@ -48,13 +48,15 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                    <c:forEach var="list" items="${userList}" varStatus="status">
                                         <tr>
-                                            <td>홍길동</td>
-                                            <td>hong1234@naver.com</td>
-                                            <td>010-1233-1235</td>
-                                            <td>서울특별시 종로구 돈화문로 26</td>
-                                            <td>단성사 빌딩 403호</td>
+                                            <td><c:out value="${list.m_name}" /></td>
+                                            <td><c:out value="${list.m_id}" /></td>
+                                            <td><c:out value="${list.m_tel}" /></td>
+                                            <td><c:out value="${list.m_address}" /></td>
+                                            <td><c:out value="${list.m_address_detail}" /></td>
                                         </tr>
+                                       </c:forEach>
                                     </tbody>
                                 </table>
                             </div>

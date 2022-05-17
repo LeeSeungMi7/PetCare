@@ -49,20 +49,15 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                    <c:forEach var="list" items="${En_BoardList}" varStatus="status">
                                         <tr>
-                                            <td>1</td>
-                                            <td><a href="en_getBoard.mdo">백과사전 테스트</a></td>
-                                            <td>글 내용 테스트입니다 최대한 길게 작성</td>
-                                            <td>2022/04/17</td>
-                                            <td>61</td>
+                                            <td><c:out value="${status.count}" /></td>
+                                            <td onclick="location.href='en_getboard.mdo?en_number=${list.en_number}'"><c:out value="${list.en_title}" /></a></td>
+                                            <td><c:out value="${list.en_content}" /></td>
+                                            <td><c:out value="${list.en_date}" /></td>
+                                            <td><c:out value="${list.en_hit}" /></td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td><a href="en_getBoard.mdo">백과사전 테스트2</a></td>
-                                            <td>글 내용 테스트2입니다 최대한 길게 작성</td>
-                                            <td>2022/04/18</td>
-                                            <td>51</td>
-                                        </tr>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div>

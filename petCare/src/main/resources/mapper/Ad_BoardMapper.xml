@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ad_board">
+	<select id="getCm_boardList" resultType="com.petcare.web.admin.vo.Ad_boardVO">
+		select * from Board_Table;
+	</select>
+	<select id="getCM_view" resultType="com.petcare.web.admin.vo.Ad_boardVO">
+		select * from Board_Table Where board_num = #{board_num}
+	</select>
+	<select id="getEn_view" resultType="com.petcare.web.admin.vo.Ad_encyVO">
+		select * from Encyclopedia_Table Where en_number = #{en_number}
+	</select>
+	<select id="getEn_boardList" resultType="com.petcare.web.admin.vo.Ad_encyVO">
+		select * from Encyclopedia_Table;
+	</select>
+	<insert id="enboardinsert" parameterType="com.petcare.web.admin.vo.Ad_encyVO">
+		insert into
+		Encyclopedia_Table(en_number, en_title, en_content, en_hit, en_date, en_file_name, en_file_path) 
+		values(#{en_number}, #{en_title} ,#{en_content}, #{en_hit}, #{en_date}, #{en_file_name}, #{en_file_path});
+	</insert>
+	<delete id="enboard_delete">
+		delete from Encyclopedia_Table where en_number = #{en_number}
+	</delete>
+	<delete id="coboard_delete">
+		delete from Board_Table where board_num = #{board_num}
+	</delete>
+	<update id="enboard_update" parameterType="com.petcare.web.admin.vo.Ad_encyVO">
+		update Encyclopedia_Table set en_title=#{en_title}, en_content=#{en_content}, en_file_name=#{en_file_name}, en_file_path=#{en_file_path}  where en_number=#{en_number}
+	</update>
+</mapper>
