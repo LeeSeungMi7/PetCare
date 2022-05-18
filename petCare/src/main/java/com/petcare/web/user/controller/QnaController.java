@@ -85,7 +85,7 @@ public class QnaController {
 	@RequestMapping(value="qna.do")
 	public ModelAndView qna_page(@RequestParam(defaultValue="0") int pageNum) {
 		Criteria qnaPage;
-			System.out.println("a");
+//			System.out.println("a");
 		   ModelAndView mav = new ModelAndView();
 
 		   if(pageNum == 0) {
@@ -95,24 +95,24 @@ public class QnaController {
 		   }
 
 		   List<QnaVO> qnaList = new ArrayList<QnaVO>();
-		   System.out.println("b"+ qnaList.toString());
+//		   System.out.println("b"+ qnaList.toString());
 		   qnaList = qnaService.qna_page(qnaPage);
 		   
-		   System.out.println("c"+ qnaList.toString());
+//		   System.out.println("c"+ qnaList.toString());
 		   
 		   qnaPage.setTotal(qnaService.maintotalpage(qnaPage));	   
 		   qnaPage.setTotal_page((int)Math.ceil(qnaPage.getTotal() * 1.0/qnaPage.getSize()));
 		   qnaPage.setBlock_num((int)Math.ceil(qnaPage.getSize()/ 3));
 		   qnaPage.setBlock_start(((qnaPage.getBlock_num() -1) *5)+1);
 		   qnaPage.setBlock_end((qnaPage.getBlock_start()+5 -1));
-		   System.out.println("d"+ qnaList.toString());
+//		   System.out.println("d"+ qnaList.toString());
 		   if(qnaPage.getBlock_end() > qnaPage.getTotal_page()) {
 			   qnaPage.setBlock_end(qnaPage.getTotal_page());
 		   }
 		   mav.addObject("qnaPageList", qnaList);
 		   mav.addObject("qnaPage", qnaPage);
 		   mav.setViewName("/qna");
-		   System.out.println("qnaPageList" + qnaList.toString());
+//		   System.out.println("qnaPageList" + qnaList.toString());
 		return mav;
 		
 	}

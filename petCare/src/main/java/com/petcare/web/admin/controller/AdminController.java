@@ -80,7 +80,7 @@ public class AdminController {
 	@RequestMapping(value = "/delete_hospital.mdo", method = RequestMethod.POST)
 	@ResponseBody
 	public String delHospital(@RequestParam String m_id) throws Exception {
-		System.out.println(m_id);
+//		System.out.println(m_id);
 		String id = m_id;
 		adminService.deleteUser(id);
 		email.setContent("현재 제휴 병원 승인 자격 미달로 회원가입을 실패하였습니다. 다시 가입 부탁드립니다.");

@@ -1,15 +1,44 @@
 package com.petcare.web.user.controller;
 
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.petcare.web.admin.vo.Ad_encyVO;
+import com.petcare.web.user.service.HomeService;
+import com.petcare.web.user.vo.QnaVO;
+import com.petcare.web.user.vo.ShowVO;
 
 @Controller
 public class CommonController {
+	
+	@Autowired
+	private HomeService homeService;
+	
+	@Inject
+	public CommonController(HomeService homeService) {
+		this.homeService = homeService;
+	}
+	
 	@RequestMapping("/home.do")
-	public String homeGet() {
-		return "home";
+	public ModelAndView home() {
+		ModelAndView mav = new ModelAndView();
+		
+		List<ShowVO> show = homeService.show();
+		List<QnaVO> qna = homeService.qna();
+		List<Ad_encyVO> ency = homeService.ency();
+		
+		mav.addObject("show",show);
+		mav.addObject("qna",qna);
+		mav.addObject("ency",ency);
+		mav.setViewName("home");
+		return mav;
 	}
 	
 	@GetMapping("/signinForm.do")

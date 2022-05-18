@@ -48,36 +48,36 @@ public class LoginController {
 		MemberVO vo = memberService.user_login(userId);
 		
 		if (vo == null) {
-			System.out.println("없당");
+//			System.out.println("없당");
 			map.put("msg","idFail");
 			return map;	
 		}
 		
 		boolean password = BCrypt.checkpw(userPw, vo.getM_pw());
 		if(!password) {
-			System.out.println("비번 다름");
+//			System.out.println("비번 다름");
 			map.put("msg","pwFail");
 			return map;
 		}
 		
 		if(vo.getM_role().equals("1") && vo.getM_access().equals("1")) {
-			System.out.println("병원 비활성화");
+//			System.out.println("병원 비활성화");
 			map.put("msg","status");
 			return map;
 		}
 		if(vo.getM_role().equals("1") && vo.getM_access().equals("0")) {
 			session.setAttribute("user", vo);
-			System.out.println("병원 로그인");
+//			System.out.println("병원 로그인");
 			map.put("msg","hos_success");
 				return map;
 		}
 		if(vo.getM_access().equals("2")) {
-			System.out.println("탈퇴회원");
+//			System.out.println("탈퇴회원");
 			map.put("msg","deleteMember");
 			return map;
 		};
 		session.setAttribute("user", vo);
-		System.out.println("일반회원");
+//		System.out.println("일반회원");
 		map.put("msg","success");
 		return map;
 	}

@@ -30,7 +30,7 @@ public class EncyController {
 	// 페이징+show 나타내기
 	@RequestMapping(value = "/ency_BoardList.do")
 	public ModelAndView encyboard_page(@RequestParam(defaultValue = "0") int enpageNum) {
-		System.out.println(enpageNum);
+//		System.out.println(enpageNum);
 		Criteria cr;
 
 		ModelAndView mav = new ModelAndView();
