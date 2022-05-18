@@ -13,7 +13,7 @@
 <link href="/resources/css/user/footer.css" rel="stylesheet">
 <link href="/resources/css/user/button.css" rel="stylesheet">
 <link href="/resources/css/user/loginForm.css" rel="stylesheet">
-<link href="/resources/css/user/show.css" rel="stylesheet">
+<link href="/resources/css/user/show.css?after" rel="stylesheet">
 <link href="/resources/css/user/mywrite.css" rel="stylesheet">
 <link href="/resources/css/user/myreservation.css" rel="stylesheet">
 <!--부트스트랩-->
@@ -52,22 +52,24 @@
 
 		<!--본문-->
         <div class="getboard">
-            <span class="badge badge-pill badge-success" style="font-size: 20px; margin-bottom: 10px; width: 100%;">자 랑 하기</span>
+            <span class="badge badge-pill badge-success" >자 랑 하기</span>
              <a class="button_class" href="javascript:void(0);" onclick="show_write_check();" role="button">나도 자랑하기</a>
             <div class="mainboard">
             <c:forEach var="showPageList" items="${showPageList}" varStatus ="status">
-                <div class="card"onclick="location.href='show_board.do?board_num=${showPageList.board_num}'">
-               <c:if test="${showPageList.b_file_path != null}">
-               <div style="    display: flex;height: 318px;width: 318px; align-items: center;">
-                    <img src="${showPageList.b_file_path}" class="card-img-top" alt="...">
-                </div>
-               </c:if>
+                <div class="card"onclick="location.href='show_board.do?board_num=${showPageList.board_num}'" style="max-height:445px;">
+           		<c:choose>
+                   <c:when test="${showPageList.b_file_path != null }">
+                   <img src="${showPageList.b_file_path}" class="card-img-top show-im" alt="...">
+                   	</c:when>
+                   <c:otherwise>
+                   	  <img class ="show-img" src = "/resources/img/no_image.png">
+                   	</c:otherwise>
+                 </c:choose>
                     <div class="card-body">
-                        <div class="rowpoint">
-                        <h5 class="card-title">${showPageList.b_title} </h5>
+                        <div>
                         <h6 class="look">LOOK ${showPageList.b_hit}</h6>
+                        <h5 class="card-title">${showPageList.b_title} </h5>
                     	</div>
-                        <p class="card-text">${showPageList.b_content }</p>
                     </div>
                     <ul class="list-group list-group-flush rowpoint" >
                         <li class="list-group-item writer">WRITER : ${showPageList.b_writer }

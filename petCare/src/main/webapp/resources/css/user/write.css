@@ -26,7 +26,9 @@ a{
 #image_container {
 	max-width: 200px;
 }
-
+.rewrite-row{
+	display: flex; flex-direction: row;align-items: center;
+}
 
 .filebox label{
     width: 100px;
@@ -62,4 +64,19 @@ a{
 .title_date_image{
     display: flex;
     flex-direction: row;
+}
+.rewrite-column{
+	display: flex;flex-direction: column;
+}
+.qna-text, .show-text{
+	max-width: 300px;
+}
+.show-row{
+	display: flex; flex-direction: row;align-items: center;
+}
+.show-im{
+	align-items: center;
+}
+.content{
+	max-width: 650px;
 }

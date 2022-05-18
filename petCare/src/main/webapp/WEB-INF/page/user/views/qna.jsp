@@ -13,7 +13,7 @@
 <link href="/resources/css/user/footer.css" rel="stylesheet">
 <link href="/resources/css/user/button.css" rel="stylesheet">
 <link href="/resources/css/user/loginForm.css" rel="stylesheet">
-<link href="/resources/css/user/qna.css" rel="stylesheet">
+<link href="/resources/css/user/qna.css?after" rel="stylesheet">
 <link href="/resources/css/user/mywrite.css" rel="stylesheet">
 <link href="/resources/css/user/myreservation.css" rel="stylesheet">
 <!--부트스트랩-->
@@ -53,25 +53,33 @@
 		<!--본문-->
 		<div class="getboard">
 			 
-				<span class="badge badge-pill badge-success" style="font-size: 20px; margin-bottom: 10px; width: 100%;">Q n A</span>
+				<span class="badge badge-pill badge-success">Q n A</span>
 				<a class="button_class" href="javascript:void(0);" onclick="qna_write_check();" role="button"> 저도 질문 있어요</a>
 				<ul class="list-group">
 				<c:forEach var="qnaPageList" items="${qnaPageList}" varStatus ="status">
 				<li class="list-group-item" onclick="location.href='qna_board.do?faq_num=${qnaPageList.faq_num}'">
-					<div class="card mb-3" style="margin-top: 10px;">
+					<div class="card mb-3">
 						<div class="row g-0">
 							<div class="col-md-4">
-                   				<img src="${qnaPageList.f_file_path}" class="card-img-top" alt="...">
+							<c:choose>
+                   				<c:when test="${qnaPageList.f_file_path == null }">
+                   				<img class="no-image" src = "/resources/img/no_image_dogs.png">
+                   				</c:when>
+                   				<c:otherwise>
+                   				<img class="image-path"src="${qnaPageList.f_file_path}" class="card-img-top" alt="...">
+                   				</c:otherwise>
+                   			</c:choose>
 							</div>
 							<div class="col-md-8">
 								<div class="card-body">
+								<h6 class="text-muted look">LOOK ${qnaPageList.f_hit}</h6>
+								<div class ="qna-board">
 									<h5 class="card-title">${qnaPageList.f_title}</h5>
-									<p class="card-text" style="text-overflow: ellipsis, white-space: nowrap,overflow: hidden;">${qnaPageList.f_content}</p>
-									<p class="card-text">
+									<div class="qna-board-row">
+										<small class="text-muted writer">WRITER : ${qnaPageList.f_writer}</small>
 										<small class="text-muted">${qnaPageList.f_date}</small>
-										<small class="text-muted">${qnaPageList.f_writer}</small>
-										<small class="text-muted">${qnaPageList.f_hit}</small>
-									</p>
+									</div>
+								</div>
 								</div>
 							</div>
 						</div>

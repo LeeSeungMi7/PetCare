@@ -39,4 +39,12 @@
 	text-overflow: ellipsis;
     overflow: hidden;
  }
-
+.badge-success{
+	font-size: 20px !important; margin-bottom: 10px; width: 100%;
+}
+.show-im, .show-img{
+height: 280px; max-width: 280px; margin-left: 20px; margin-top: 20px;
+}
+.look{
+	margin-left: 230px;
+}

@@ -74,19 +74,19 @@ function onclickOk2(){
 		<form id="form2" name="qnaVO" method="POST" onsubmit="return onclickOk2()" action="/qna_update.do" enctype="multipart/form-data">
 			<div class="eidtor">
 				<!--제목-->
-				<div style="display: flex; flex-direction: row;align-items: center;">
-					<div style="display: flex;flex-direction: column;">
+				<div class="rewrite-row">
+					<div class="rewrite-column">
 					<div class="mb-3">
 						<label for="formGroupExampleInput" class="form-label">TITLE</label>
-						<input type="text" class="datebox form-control" maxlength="20"
-							name="f_title" style="max-width: 300px;"
+						<input type="text" class="datebox form-control qna-text" maxlength="20"
+							name="f_title"
 							value="${rewrite_view.f_title }">
 					</div>
 					<!--날짜-->
 					<div class="mb-3">
 						<label for="formGroupExampleInput2" class="form-label">DATE</label>
-						<input type="text" class="datebox form-control"
-							style="max-width: 300px;" value="${rewrite_view.f_date }" disabled>
+						<input type="text" class="datebox form-control qna-text"
+							value="${rewrite_view.f_date }" disabled>
 					</div>
 					<!--대표이미지-->
 					<div class="mb-3">
@@ -119,8 +119,8 @@ function onclickOk2(){
 			<!--내용-->
 				<div>
 					<label>CONTENT</label>
-					<textarea id="ir1" rows="10" cols="100" name="f_content"
-						style="max-width: 650px;">${rewrite_view.f_content }</textarea>
+					<textarea class="content" id="ir1" rows="10" cols="100" name="f_content"
+						>${rewrite_view.f_content }</textarea>
 				</div>
 				<!--버튼-->
 				<div>

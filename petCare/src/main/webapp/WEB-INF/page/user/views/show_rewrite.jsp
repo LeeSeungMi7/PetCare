@@ -84,19 +84,19 @@ function onclickOk2(){
 			enctype="multipart/form-data">
 			<div class="eidtor">
 				<!--제목-->
-				<div style="display: flex; flex-direction: row;align-items: center;">
-					<div style="display: flex;flex-direction: column;">
+				<div class="show-row">
+					<div class="rewrite-column">
 					<div class="mb-3">
 						<label for="formGroupExampleInput" class="form-label">TITLE</label>
-						<input type="text" class="datebox form-control" maxlength="20"
-							name="b_title" style="max-width: 300px;"
+						<input type="text" class="datebox form-control show-text" maxlength="20"
+							name="b_title"
 							value="${rewrite_view.b_title }">
 					</div>
 					<!--날짜-->
 					<div class="mb-3">
 						<label for="formGroupExampleInput2" class="form-label">DATE</label>
-						<input type="text" class="datebox form-control"
-							style="max-width: 300px;" value="${rewrite_view.b_date }" disabled>
+						<input type="text" class="datebox form-control show-text"
+						value="${rewrite_view.b_date }" disabled>
 					</div>
 					<!--대표이미지-->
 					<div class="mb-3">
@@ -113,7 +113,7 @@ function onclickOk2(){
 					</div>
 					<c:if test="${rewrite_view.b_file_path != null }">
 					<div >
-					<label for="formGroupExampleInput2" class="form-label" style="align-items: center;"id="before-image">BEFORE IMAGE</label>
+					<label for="formGroupExampleInput2" class="form-label show-im" id="before-image">BEFORE IMAGE</label>
 					<img id="board_img" src="${rewrite_view.b_file_path}" class="file_img">
 					</div>
 					</c:if>
@@ -132,8 +132,8 @@ function onclickOk2(){
 				<!--내용-->
 				<div>
 					<label>CONTENT</label>
-					<textarea id="ir1" rows="10" cols="100" name="b_content"
-						style="max-width: 650px;">${rewrite_view.b_content }</textarea>
+					<textarea class="content"id="ir1" rows="10" cols="100" name="b_content"
+						>${rewrite_view.b_content }</textarea>
 				</div>
 
 
