@@ -11,7 +11,11 @@
 		<typeAlias alias="AdminVO"  type="com.petcare.web.admin.vo.AdminVO"/>
 		<typeAlias alias="ShowVO"  type="com.petcare.web.user.vo.ShowVO"/>
 		<typeAlias alias="ReservationVO" type="com.petcare.web.user.vo.ReservationVO"/>
-
+		<typeAlias alias="CommentVO" type="com.petcare.web.user.vo.CommentVO"/>
+		<typeAlias alias="QnaVO" type="com.petcare.web.user.vo.QnaVO"/>
+		<typeAlias alias="Ad_boardVO" type="com.petcare.web.admin.vo.Ad_boardVO"/>
+		<typeAlias alias="Ad_encyVO" type="com.petcare.web.admin.vo.Ad_encyVO"/>
+		
 	</typeAliases>
 	
 	<mappers>
@@ -22,5 +26,8 @@
 		<mapper resource="mapper/board.xml"/>
 		<mapper resource="mapper/Partner_MyPage.xml"/>
 		<mapper resource="mapper/Kakao_login.xml"/>
+		<mapper resource="mapper/Qna.xml"/>
+		<mapper resource="mapper/Ad_BoardMapper.xml"/>
+		<mapper resource="mapper/Home.xml"/>
 	</mappers>
 </configuration>

@@ -83,7 +83,7 @@ public class AwsS3{
 
         try {
             this.s3Client.putObject(putObjectRequest);
-            System.out.println(String.format("[%s] upload complete", putObjectRequest.getKey()));
+//            System.out.println(String.format("[%s] upload complete", putObjectRequest.getKey()));
 
         } catch (AmazonServiceException e) {
             e.printStackTrace();

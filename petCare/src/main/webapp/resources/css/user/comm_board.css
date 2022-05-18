@@ -19,7 +19,7 @@ a{
 }
 .contentbox{
     margin-bottom:10px;
-    height:auto;
+    height:auto !important;
     min-height: 500px !important;
 }
 .commentbox{
@@ -29,10 +29,21 @@ a{
 .form-label{
     font-size: 16px !important;
     font-weight: normal !important;
+    font-weight: bold !important;
 }
 .menu a{
     cursor:pointer;
 }
 li{
     list-style: none !important;
+}
+text, textarea{
+background-color: white !important;
+}
+
+.file_img{
+	width: 320px;
+}
+.formGroupExampleInput2{
+background-color: white !important;
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -12,8 +13,9 @@
 <link href="/resources/css/user/footer.css" rel="stylesheet">
 <link href="/resources/css/user/button.css" rel="stylesheet">
 <link href="/resources/css/user/loginForm.css" rel="stylesheet">
-<link href="/resources/css/user/qna.css" rel="stylesheet">
+<link href="/resources/css/user/qna.css?after" rel="stylesheet">
 <link href="/resources/css/user/mywrite.css" rel="stylesheet">
+<link href="/resources/css/user/myreservation.css" rel="stylesheet">
 <!--부트스트랩-->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -50,80 +52,95 @@
 
 		<!--본문-->
 		<div class="getboard">
-			<ul class="list-group">
-				<span class="badge badge-pill badge-success"
-					style="font-size: 20px; margin-bottom: 10px;">Q n A</span>
-				<button type="button" class="button_class" onclick="location.href='qna_write.do'">저도 질문있어요</button>
-				<li class="list-group-item"
-					onclick="location.href='qna_board.do'">
-					<div class="card mb-3" style="margin-top: 10px;">
+			 
+				<span class="badge badge-pill badge-success">Q n A</span>
+				<a class="button_class" href="javascript:void(0);" onclick="qna_write_check();" role="button"> 저도 질문 있어요</a>
+				<ul class="list-group">
+				<c:forEach var="qnaPageList" items="${qnaPageList}" varStatus ="status">
+				<li class="list-group-item" onclick="location.href='qna_board.do?faq_num=${qnaPageList.faq_num}'">
+					<div class="card mb-3">
 						<div class="row g-0">
 							<div class="col-md-4">
-								<img src="/resources/img/다운로드.jpg"
-									class="img-fluid rounded-start" alt="...">
+							<c:choose>
+                   				<c:when test="${qnaPageList.f_file_path == null }">
+                   				<img class="no-image" src = "/resources/img/no_image_dogs.png">
+                   				</c:when>
+                   				<c:otherwise>
+                   				<img class="image-path"src="${qnaPageList.f_file_path}" class="card-img-top" alt="...">
+                   				</c:otherwise>
+                   			</c:choose>
 							</div>
 							<div class="col-md-8">
 								<div class="card-body">
-									<h5 class="card-title">우리집 고양이가 이상해요</h5>
-									<p class="card-text">우리집 고양이가 밥을 안먹어요</p>
-									<p class="card-text">
-										<small class="text-muted">Last updated 3 mins ago</small>
-									</p>
+								<h6 class="text-muted look">LOOK ${qnaPageList.f_hit}</h6>
+								<div class ="qna-board">
+									<h5 class="card-title">${qnaPageList.f_title}</h5>
+									<div class="qna-board-row">
+										<small class="text-muted writer">WRITER : ${qnaPageList.f_writer}</small>
+										<small class="text-muted">${qnaPageList.f_date}</small>
+									</div>
+								</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</li>
-				<li class="list-group-item">
-					<div class="card mb-3" style="margin-top: 10px;">
-						<div class="row g-0">
-							<div class="imgbox col-md-4">
-								<img
-									src="/resources/img/_104454565_mary-mcgowan_caught-in-the-act_00001294.jpg"
-									class="img-fluid rounded-start" alt="...">
-							</div>
-							<div class="col-md-8">
-								<div class="card-body">
-									<h5 class="card-title">다람쥐 질문입니다.</h5>
-									<p class="textbox card-text">다람쥐는 간식으로 무엇을 줘야할까요?</p>
-									<p class="card-text">
-										<small class="text-muted">Last updated 3 mins ago</small>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</li>
-				<li class="list-group-item">
-					<div class="card mb-3" style="margin-top: 10px;">
-						<div class="row g-0">
-							<div class="col-md-4">
-								<img src="/resources/img/다운로드 (1).jpg"
-									class="img-fluid rounded-start" alt="...">
-							</div>
-							<div class="col-md-8">
-								<div class="card-body">
-									<h5 class="card-title">고양이 질문입니다.</h5>
-									<p class="card-text">고양이가 자꾸 밥을 안먹어요.</p>
-									<p class="card-text">
-										<small class="text-muted">Last updated 3 mins ago</small>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</li>
+				</c:forEach>
 			</ul>
-			<nav aria-label="Page navigation example">
-				<ul class="pagination justify-content-center">
-					<li class="page-item disabled"><a class="page-link">이전</a></li>
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">다음</a></li>
-				</ul>
-			</nav>
+
+				<div class="page1">
+					<ul class="pagination1 modal1">
+
+
+						<c:if test="${qnaPage.pageNum > 1 }">
+							<li><a
+								href="javascript:fnSubmitForm(${qnaPage.block_start-1});"
+								class="arrow1 left1">[처음]</a></li>
+						</c:if>
+
+						<c:forEach var="i" begin="${qnaPage.block_start}" end="${qnaPage.block_end}">
+							<li><a href="javascript:fnSubmitForm(${i});" class="num1">[${i}]</a>
+							<li>
+						</c:forEach>
+
+						<c:if test="${!(qnaPage.block_num >= qnaPage.total_block)}">
+							<li><a href="javascript:fnSubmitForm(${qnaPage.block_end+1});" class="arrow1 right1">[마지막]</a></li>
+						</c:if>
+
+
+					</ul>
+				</div>
+				
+				<form action="/qna.do" method="post" name="pageNumform">
+					<input type="hidden" name="pageNum" id="pageNumId" value="">
+				</form>
+
 		</div>
 		<!--푸터-->
 		<%@ include file="/WEB-INF/page/user/views/footer.jsp"%>
+<script type="text/javascript">
+function qna_write_check(){
+
+		$.ajax({	
+		 	url: "/check_qna.do",
+	        type: "GET",
+		 	success : function(data) {
+		 		if(data.user_ok=="0"){
+		 			swal('로그인 진행 요청.', '회원만 가능합니다', 'error');
+		 		}else{
+		 			window.location.href ="/qna_write.do";
+		 		}
+			},
+			error : function(error) {
+				alert("error : " + error);
+			}
+		});
+}
+function fnSubmitForm(page){
+	document.getElementById("pageNumId").value =page;
+	document.pageNumform.submit();
+}	
+</script>
 
 	</div>
 </body>

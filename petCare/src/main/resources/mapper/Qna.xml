@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qna">
+	<insert id="qnainsert" parameterType="QnaVO">
+	insert into
+	FAQ_Table(f_number, f_writer, f_title, f_content, f_hit, f_file_name, f_file_path, f_date) 
+	values(#{f_number}, #{f_writer}, #{f_title} ,#{f_content}, #{f_hit}, #{f_file_name},#{f_file_path}, #{f_date});
+	</insert>
+
+	<select id="qna_page" resultType="QnaVO">
+	select * from FAQ_Table order by faq_num desc limit ${skip}, ${size}
+	</select>
+	
+	<select id="maintotalpage" resultType="int">
+	select count(*) from FAQ_Table
+	</select>
+	<update id="increaseViewcnt" parameterType="QnaVO">
+	update FAQ_Table set f_hit = f_hit +1 where faq_num = #{faq_num}
+	</update>
+	<select id="commentList" resultType="CommentVO">
+	select ct.*,  mt.m_name as c_writer from Comment_Table ct join Member_Table mt on ct.c_member_num = mt.m_number where c_num=#{faq_num} and c_kind='0' order by Comment_num desc limit ${skip}, ${size}
+	</select>
+	<select id="totalpage" resultType="int">
+	select count(*) from Comment_Table where c_num=#{faq_num} and c_kind='0'
+	</select>
+	<select id="read" resultType="QnaVO">
+	select * from FAQ_Table Where faq_num = #{faq_num}
+	</select>
+	<insert id="qna_reply_write">
+	insert into Comment_Table (c_num, c_member_num, c_kind, c_content, c_date, c_pro)
+	values(#{c_num}, #{c_member_num}, #{c_kind}, #{c_content}, #{c_date}, #{c_pro})
+	</insert>
+	<delete id="qna_reply_delete">
+	delete from Comment_Table where comment_num = #{Comment_num}
+	</delete>
+	<select id="rewrite_view" resultType="qnaVO">
+	select * from FAQ_Table Where faq_num = #{faq_num}
+	</select>
+	<update id="qna_update">
+	update FAQ_Table set f_title = #{f_title},
+	f_content = #{f_content},
+	f_file_name = #{f_file_name},
+	f_file_path = #{f_file_path} where faq_num = #{faq_num}
+	</update>
+	<delete id="qna_delete">
+	delete from FAQ_Table where faq_num = #{faq_num}
+	</delete>
+
+</mapper>

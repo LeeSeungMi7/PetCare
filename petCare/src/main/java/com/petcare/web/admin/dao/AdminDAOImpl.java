@@ -46,7 +46,7 @@ public class AdminDAOImpl implements AdminDAO {
 		sqlSession.update("admin.AccHos", name);
 	}
 	@Override 
-	public void deleteUser(String name) throws Exception { 
-		sqlSession.delete("admin.DelHos", name);
+	public void deleteUser(String id) throws Exception { 
+		sqlSession.delete("admin.DelHos", id);
 	}
 }

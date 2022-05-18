@@ -39,6 +39,31 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1e818982c81810e2470dd6b0b339e676&libraries=services"></script>
 
+
+<script>
+function onclickOk2(){
+      var title= $("#input_title").val();
+      console.log(title);
+      
+      oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", [])
+      var content = document.getElementById("ir1").value
+      console.log(content);
+
+      if(title == ""){
+         alert("제목을 입력하세요.");
+         document.getElementById("title").focus();
+         console.log
+         return false;
+      }
+      if(content == ""){
+         alert("내용을 입력하세요.");
+         oEdiotrs.getById["ir1"].exec("FOCUS")
+         return false;
+      }
+      alert("등록되었습니다.")
+      document.getElementById("form2").submit();
+   }
+</script>
 </head>
 
 <body>
@@ -46,37 +71,78 @@
 		<!--헤더-->
 		<%@ include file="/WEB-INF/page/user/views/header.jsp"%>
 		<!--본문-->
-		<%-- <%@ include file="/WEB-INF/page/user/views/qna_rewrite.jsp" %> --%>
-   <section>
-        <div class="eidtor">
-            <!--제목-->
-            <div class="mb-3">
-                <label for="formGroupExampleInput" class="form-label">제목</label>
-                <input type="text" class="datebox form-control" maxlength="20" placeholder="" style="max-width: 300px;">
-            </div>
-            <!--날짜-->
-            <div class="mb-3">
-                <label for="formGroupExampleInput2" class="form-label">날짜</label>
-                <input type="text" class="datebox form-control" placeholder="" style="max-width: 300px;" disabled>
-            </div>
-            <!--내용-->
-            <div>
-                <label>내용</label>
-                <textarea name="ir1" id="ir1" rows="10" cols="100" style="max-width: 650px;"></textarea>
-            </div>
+		<form id="form2" name="qnaVO" method="POST" onsubmit="return onclickOk2()" action="/qna_update.do" enctype="multipart/form-data">
+			<div class="eidtor">
+				<!--제목-->
+				<div class="rewrite-row">
+					<div class="rewrite-column">
+					<div class="mb-3">
+						<label for="formGroupExampleInput" class="form-label">TITLE</label>
+						<input type="text" class="datebox form-control qna-text" maxlength="20"
+							name="f_title"
+							value="${rewrite_view.f_title }">
+					</div>
+					<!--날짜-->
+					<div class="mb-3">
+						<label for="formGroupExampleInput2" class="form-label">DATE</label>
+						<input type="text" class="datebox form-control qna-text"
+							value="${rewrite_view.f_date }" disabled>
+					</div>
+					<!--대표이미지-->
+					<div class="mb-3">
+						<label for="formGroupExampleInput2" class="form-label">IMAGE</label>
+						<div>
+						<div class="filebox">
+		               <input id="file_name" class="upload-name" value="파일선택" disabled="disabled">
+		               <label for="ex_filename">수정</label>
+		               <input type="file" id="ex_filename" class="upload-hidden" name="qna_update_file">	
+		                </div>
+						</div>
+					</div>
+					
+					</div>
+					<c:if test="${rewrite_view.f_file_path != null }">
+					<div >
+					<label for="formGroupExampleInput2" class="form-label" style="align-items: center;"id="before-image">BEFORE IMAGE</label>
+					<img id="board_img" src="${rewrite_view.f_file_path}" class="file_img">
+					</div>
+					</c:if>
+				</div>
+				
+               <script type="text/javascript">
+	               document.getElementById('ex_filename').oninput = (e) => {
+	            	   
+	   				document.getElementById('file_name').value = e.target.files[0].name;
+	   				console.error(e.target.files[0]);
+	               }
+               </script>
+			<!--내용-->
+				<div>
+					<label>CONTENT</label>
+					<textarea class="content" id="ir1" rows="10" cols="100" name="f_content"
+						>${rewrite_view.f_content }</textarea>
+				</div>
+				<!--버튼-->
+				<div>
+				<input type="hidden" name="c_num" value="${rewrite_view.faq_num}">
+				<input type="hidden" name="f_writer" value="${rewrite_view.f_writer}">
+				<input type="hidden" name="f_number" value="${rewrite_view.f_number}">
+				<input type="hidden" name="f_file_name" value="${rewrite_view.f_file_name}">
+				<input type="hidden" name="f_file_path" value="${rewrite_view.f_file_path}">
+				<input type="hidden" name="faq_num" value="${rewrite_view.faq_num}">
+				<input type="submit" class="btn btn-success" id="btnSave" value="수정완료">
+				<a class="btn btn-danger" href="qna.do" role="button" onclick="Cancel()">취소</a>
+				</div>
+			</div>
 
-            <!--버튼-->
-            <div>
-                <a class="btn btn-success" href="qna.do" role="button"  onclick="Ok();">수정완료</a>
-                <a class="btn btn-danger" href="qna.do" role="button" onclick="Cancel()">취소</a>
-            </div>
-        </div>
+		</form>
+</div>
 
-    </section>
 
-    <script type="text/javascript" src="/se2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
-    <script src="/resources/js/user/write.js"></script>
-    <script src="/resources/js/user/qna_rewrite.js"></script>
+		<script type="text/javascript" src="/se2/js/service/HuskyEZCreator.js"
+			charset="utf-8"></script>
+		<script src="/resources/js/user/write.js"></script>
+		<script src="/resources/js/user/qna_rewrite.js"></script>
 
 		<!--푸터-->
 		<%@ include file="/WEB-INF/page/user/views/footer.jsp"%>
