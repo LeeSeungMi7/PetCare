@@ -19,7 +19,7 @@ a{
 }
 .contentbox{
     margin-bottom:10px;
-    height:auto;
+    height:auto !important;
     min-height: 500px !important;
 }
 .commentbox{

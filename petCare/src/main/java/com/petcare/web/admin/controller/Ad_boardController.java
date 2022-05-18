@@ -57,7 +57,7 @@ public class Ad_boardController {
 		return mav;
 	}
 
-	// 자랑하기 글 상세보기 + 조회수 증가
+	// 자랑하기 글 상세보기
 	@RequestMapping("/comm_getboard.mdo")
 	public ModelAndView board_view(@RequestParam int board_num) {
 		Ad_boardVO ad_boardVO;

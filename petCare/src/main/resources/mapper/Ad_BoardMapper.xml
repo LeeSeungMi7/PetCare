@@ -13,7 +13,10 @@
 		select * from Encyclopedia_Table Where en_number = #{en_number}
 	</select>
 	<select id="getEn_boardList" resultType="com.petcare.web.admin.vo.Ad_encyVO">
-		select * from Encyclopedia_Table;
+		select * from Encyclopedia_Table
+	</select>
+	<select id="UserEn_boardList" resultType="com.petcare.web.admin.vo.Ad_encyVO">
+		select * from Encyclopedia_Table limit ${skip}, ${size}
 	</select>
 	<insert id="enboardinsert" parameterType="com.petcare.web.admin.vo.Ad_encyVO">
 		insert into
@@ -29,4 +32,10 @@
 	<update id="enboard_update" parameterType="com.petcare.web.admin.vo.Ad_encyVO">
 		update Encyclopedia_Table set en_title=#{en_title}, en_content=#{en_content}, en_file_name=#{en_file_name}, en_file_path=#{en_file_path}  where en_number=#{en_number}
 	</update>
+	<update id="EnincreaseViewcnt" parameterType="com.petcare.web.admin.vo.Ad_encyVO">
+		update Encyclopedia_Table set en_hit = en_hit +1 where en_number = #{en_number}
+	</update>
+	<select id="Enboard_totalpage" resultType="int">
+		select count(*) from Encyclopedia_Table
+	</select>
 </mapper>
