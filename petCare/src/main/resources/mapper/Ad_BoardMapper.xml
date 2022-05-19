@@ -16,7 +16,7 @@
 		select * from Encyclopedia_Table
 	</select>
 	<select id="UserEn_boardList" resultType="com.petcare.web.admin.vo.Ad_encyVO">
-		select * from Encyclopedia_Table limit ${skip}, ${size}
+		select * from Encyclopedia_Table limit ${skip}, ${size} order by en_number desc
 	</select>
 	<insert id="enboardinsert" parameterType="com.petcare.web.admin.vo.Ad_encyVO">
 		insert into

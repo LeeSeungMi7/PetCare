@@ -40,8 +40,6 @@ a.button{
 
 .btn-primary:hover {
   color: #fff;
-  background-color:#3de007;
-  border-color: #3de007;
 }
 
 /* 카카오 버튼 재정의 */
@@ -77,14 +75,9 @@ label > p{
 }
 
 a {
-  color: black;
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
-}
-a:hover {
-  color: black;
-  text-decoration: none;
 }
 
 
