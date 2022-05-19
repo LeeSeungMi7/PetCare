@@ -13,8 +13,8 @@
     width: 15rem;
     height: 3.5rem;
     position: absolute;
-    left: 45%;
-    top: 43.5%;
+    left: 43%;
+    top: 26rem;
     font-size: 20px;
     border: transparent;
 }

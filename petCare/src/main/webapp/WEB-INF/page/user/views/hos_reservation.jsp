@@ -107,15 +107,20 @@
         <input type="hidden" value="${user.m_number}" id="m_number">
         <input type="text" id="datepicker" >
 
-        <button type="button" class="btn" id="excelDownload" >Excel</button>
-        
+        <button type="button" class="btn" id="excelDownload" onclick="excel_function()">Excel</button>
+	        
+	    <form action="/excel_down.do" method="GET" name="excel">
+        	<input type="hidden" name=date id="date_picker" value="">
+        	<input type="hidden" name="number" value="${user.m_number}">
+        </form>
+	        
         <table class="table table-bordered" id="resevtable">
             <thead>
                 <tr class="table-success">
                     <th scope="col">번호</th>
                     <th scope="col">날짜</th>
                     <th scope="col">시간</th>
-                    <th scope="col">예약자 정보</th>
+                    <th scope="col">보호자</th>
                     <th scope="col">전화번호</th>
                     <th scope="col">반려동물</th>
                 </tr>
@@ -237,6 +242,13 @@ $("#datepicker").on("change", function(){
 function fnSubmitForm(page){
 	document.getElementById("pageNumId").value =page;
 	document.pageNumform.submit();
+}
+
+function excel_function(){
+	
+	document.getElementById("date_picker").value = $("#datepicker").val() ;
+	document.excel.submit();
+	
 }
 </script>
 </body>

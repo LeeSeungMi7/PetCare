@@ -1,12 +1,27 @@
 package com.petcare.web.user.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.output.ByteArrayOutputStream;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +39,6 @@ import com.petcare.web.user.vo.Criteria;
 import com.petcare.web.user.vo.MemberVO;
 import com.petcare.web.user.vo.ReservationVO;
 
-import jdk.internal.org.jline.utils.Log;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -184,6 +198,135 @@ public class Partner_myPageController {
 
 		return rv;
 		
+	}
+	
+//	엑셀
+	@RequestMapping("/excel_down.do")
+	public void excel_down(@RequestParam String date, String number, HttpServletResponse response) throws IOException {
+		
+		Map<String, String> mav = new HashMap<String,String>();
+		
+		mav.put("date", date);
+		mav.put("number", number);
+		List<ReservationVO> rv = partnerMapage.dateSearch(mav);
+		
+
+		Workbook wb = new HSSFWorkbook();
+        Sheet sheet = wb.createSheet();
+		
+		Font font = wb.createFont();
+
+		font.setFontName("맑은 고딕");
+		font.setFontHeight((short)(14*20)); //사이즈
+		font.setBoldweight(Font.BOLDWEIGHT_BOLD); //볼드 (굵게)
+
+
+		sheet.setDefaultColumnWidth(20); 
+		sheet.setDefaultRowHeightInPoints(20); 
+	
+		Row titleRow = sheet.createRow(0); 
+		int titleColNum = 0;
+
+		Cell titleCell = titleRow.createCell(titleColNum); 
+		titleCell.setCellValue("우리병원 예약 목록 [ " + date + "]");
+		
+		
+		Row headRow = sheet.createRow(2);
+		int headerCol = 0;
+
+		CellStyle dataStyle = wb.createCellStyle();
+		
+		dataStyle.setAlignment(CellStyle.ALIGN_CENTER); //가운데 정렬
+		dataStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER); //높이 가운데 정렬
+		//배경색
+		dataStyle.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+		dataStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+		//테두리 선 (우,좌,위,아래)
+		dataStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);
+		dataStyle.setBorderLeft(HSSFCellStyle.BORDER_THIN);
+		dataStyle.setBorderTop(HSSFCellStyle.BORDER_THIN);
+		dataStyle.setBorderBottom(HSSFCellStyle.BORDER_THIN);
+		
+		CellStyle cell = wb.createCellStyle();
+		cell.setAlignment(CellStyle.ALIGN_LEFT); //가운데 정렬
+		cell.setVerticalAlignment(CellStyle.VERTICAL_CENTER); //높이 가운데 정렬
+		
+		//테두리 선 (우,좌,위,아래)
+		cell.setBorderRight(HSSFCellStyle.BORDER_THIN);
+		cell.setBorderLeft(HSSFCellStyle.BORDER_THIN);
+		cell.setBorderTop(HSSFCellStyle.BORDER_THIN);
+		cell.setBorderBottom(HSSFCellStyle.BORDER_THIN);
+		
+		
+		Cell headerCell = headRow.createCell(headerCol++);
+		headerCell.setCellValue("번호");
+		headerCell.setCellStyle(dataStyle);
+
+		headerCell = headRow.createCell(headerCol++);
+		headerCell.setCellValue("날짜");
+		headerCell.setCellStyle(dataStyle);
+
+		headerCell = headRow.createCell(headerCol++);
+		headerCell.setCellValue("예약시간");
+		headerCell.setCellStyle(dataStyle);
+
+		headerCell = headRow.createCell(headerCol++);
+		headerCell.setCellValue("보호자 이름");
+		headerCell.setCellStyle(dataStyle);
+
+		headerCell = headRow.createCell(headerCol++);
+		headerCell.setCellValue("전화 번호");
+		headerCell.setCellStyle(dataStyle);
+
+		headerCell = headRow.createCell(headerCol++);
+		headerCell.setCellValue("반려동물");
+		headerCell.setCellStyle(dataStyle);
+
+		// 데이터 삽입
+		int rowNum = 3;
+		int cellNum = 0;
+		Row dataRow = null; // 반복문으로 돌릴거양
+		Cell dataCell = null;
+
+		
+		 for (int i=0; i <rv.size(); i++) { 
+		 cellNum = 0; dataRow =
+		 sheet.createRow(rowNum++);
+
+		  dataCell = dataRow.createCell(cellNum++); // 열 한줄씩 추가
+		  dataCell.setCellValue(i+1);
+		  dataCell.setCellStyle(cell);
+		  
+		  dataCell = dataRow.createCell(cellNum++);
+		  dataCell.setCellValue(rv.get(i).getRv_date());
+		  dataCell.setCellStyle(cell);
+		  
+		  dataCell = dataRow.createCell(cellNum++);
+		  dataCell.setCellValue(rv.get(i).getRv_time());
+		  dataCell.setCellStyle(cell);
+		  
+		  dataCell = dataRow.createCell(cellNum++);
+		  dataCell.setCellValue(rv.get(i).getReservation_name());
+		  dataCell.setCellStyle(cell);
+		  
+		  dataCell = dataRow.createCell(cellNum++);
+		  dataCell.setCellValue(rv.get(i).getReservation_tel());
+		  dataCell.setCellStyle(cell);
+		  
+		  dataCell = dataRow.createCell(cellNum++);
+		  dataCell.setCellValue(rv.get(i).getRv_petName());
+		  dataCell.setCellStyle(cell);
+
+		  
+		 }
+
+		 	response.setContentType("ms-vnd/excel");
+			response.setHeader("Content-Disposition", "attachment;filename=list.xls");
+			wb.write(response.getOutputStream());
+		 
+		   
+
+		 
 	}
 	
 }

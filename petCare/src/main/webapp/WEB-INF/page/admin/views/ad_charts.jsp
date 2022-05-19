@@ -44,28 +44,30 @@
 						<div class="card-header" style="white-space: nowrap">
 							<i class="fas fa-chart-area me-1"></i> 제휴 병원 등록 <br> <br>
 							<div class="dateselect">
-								날짜 선택 : <input type="text" id="datepicker1" class="datepick" readonly>&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;
-								<input type="text" id="datepicker2" class="datepick" readonly>
+								날짜 선택 : <input type="text" id="datepicker1" class="datepick"
+									readonly>&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp; <input
+									type="text" id="datepicker2" class="datepick" readonly>
 							</div>
 						</div>
 						<div class="card-body">
 							<canvas id="myAreaChart" width="100%" height="30"></canvas>
 						</div>
 						<div class="card-footer small text-muted" onload="showClock1()">
-							<p id="divClock1" style="color:black; height:8px;"></p>
+							<p id="divClock1" style="color: black; height: 8px;"></p>
 						</div>
 					</div>
 					<div class="card mb-4">
 						<div class="card-header" style="white-space: nowrap">
 							<i class="fas fa-chart-bar me-1">></i> 게시글 활성도 <br> <br>
 							<div>
-								날짜 선택 : <input type="text" id="datepicker3" class="datepick" readonly>&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;
-								<input type="text" id="datepicker4" class="datepick" readonly>
+								날짜 선택 : <input type="text" id="datepicker3" class="datepick"
+									readonly>&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp; <input
+									type="text" id="datepicker4" class="datepick" readonly>
 							</div>
 						</div>
 						<div id="bar-example" style="width: 100%;"></div>
 						<div class="card-footer small text-muted" onload="showClock2()">
-							<p id="divClock2" style="color:black; height:8px;"></p>
+							<p id="divClock2" style="color: black; height: 8px;"></p>
 						</div>
 					</div>
 				</div>
@@ -85,8 +87,6 @@
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
 		crossorigin="anonymous"></script>
-	<script src="/resources/assets/demo/chart-area-demo.js"></script>
-	<script src="/resources/assets/demo/chart-bar-demo.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"
 		crossorigin="anonymous"></script>
 	<script src="/resources/js/admin/datatables-simple-demo.js"></script>
@@ -95,6 +95,47 @@
 	<script src="/resources/js/admin/ad_charts.js"></script>
 	<script src="/resources/js/user/ur_reservation.js"></script>
 	<script>
+		$(document).ready(function(){
+			getGraph();
+		});
+		function getGraph(){
+			let timeList = [];
+			let posList = [];
+			
+			$.ajax({
+				url:"/ad_charts.mdo",
+				type:"get",
+				data:{date:"{chartone.date}", pos_type:"승인 병원"},
+				dataType:"json",
+				success:function(data){
+					for (let i = 0; i<data.length; i++){
+						timeList.push(data[i].pos_time);
+						posList.push(data[i].pos_count);
+					}
+					new Chart(document.getElementById("myAreaChart"),{
+						type:'line',
+						data:{
+							labels:timeList,
+							datasets:[{
+								data:posList,
+								label:"승인 병원",
+								borderColor:"#3e95cd",
+								fill:false
+							}]
+						},
+						option:{
+							title:{
+								display:true,
+								text: '주간 승인 병원'
+							}
+						}
+					});
+				},
+				error:function(){
+					alert("실패");
+				}
+			})
+		}
 		function showClock() {
 			var today = new Date();
 			var month = ('0' + (today.getMonth() + 1)).slice(-2);
@@ -110,7 +151,7 @@
 			var divClock2 = document.getElementById('divClock2');
 			divClock2.innerText = timeString;
 		}
-        showClock();
+		showClock();
 	</script>
 </body>
 </html>

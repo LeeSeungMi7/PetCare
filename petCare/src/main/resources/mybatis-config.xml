@@ -15,7 +15,7 @@
 		<typeAlias alias="QnaVO" type="com.petcare.web.user.vo.QnaVO"/>
 		<typeAlias alias="Ad_boardVO" type="com.petcare.web.admin.vo.Ad_boardVO"/>
 		<typeAlias alias="Ad_encyVO" type="com.petcare.web.admin.vo.Ad_encyVO"/>
-		
+		<typeAlias alias="ChartVO" type="com.petcare.web.admin.vo.ChartVO"/>
 	</typeAliases>
 	
 	<mappers>
@@ -29,5 +29,6 @@
 		<mapper resource="mapper/Qna.xml"/>
 		<mapper resource="mapper/Ad_BoardMapper.xml"/>
 		<mapper resource="mapper/Home.xml"/>
+		<mapper resource="mapper/Ad_ChartMapper.xml"/>
 	</mappers>
 </configuration>

@@ -53,11 +53,14 @@
 	</select>
 	
 	<select id="dateSearch" resultType="ReservationVO">
-	select rt.*, mt.m_name as reservation_name, mt.m_tel as reservation_tel
+	select rt.*, mt.m_name as reservation_name, mt.m_tel as reservation_tel , pt.mp_petName as rv_petName
 	from Reservation_Table rt
 	join Member_Table mt on mt.m_number = rt.rv_number
+    join Animal_Reservation_Table ar on ar.reservation_num = rt.reservation_num
+    join MyPet_Table pt on ar.animal_num = pt.myPet_num
 	where rt.rv_partner_number=#{number} 
 	and rt.rv_access='2' and rt.rv_date=#{date}
+
 	</select>
 	
 	<update id="reservation_ok">
