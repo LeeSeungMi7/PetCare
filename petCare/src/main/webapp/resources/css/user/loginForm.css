@@ -40,12 +40,16 @@ a.button{
 
 .btn-primary:hover {
   color: #fff;
+  background-color:#3de007;
+  border-color: #3de007;
 }
 
 /* 카카오 버튼 재정의 */
 .btn-primary {
   color: #fff;
   height: 45px;
+  background-color: #AAF0D1;
+  border-color: #AAF0D1;
 }
 .btn-primary_kakao {
   color: #fff;

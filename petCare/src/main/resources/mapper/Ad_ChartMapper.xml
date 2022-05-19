@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ad_chart">
+	<select id="getChartList" resultType="com.petcare.web.admin.vo.ChartVO">
+		SELECT DATE_FORMAT(Singin_Member_date, '%Y%m%d') AS date, count(*) AS cnt FROM Member_Table GROUP BY DATE_FORMAT(Singin_Member_date, '%Y%m%d') ORDER BY date DESC;
+	</select>
+	<!-- MemberVO가 아닌 date와 cnt값을 새로 담아야함 -->
+</mapper>
