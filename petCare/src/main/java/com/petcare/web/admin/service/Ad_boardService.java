@@ -5,6 +5,7 @@ import java.util.List;
 import com.petcare.web.admin.vo.Ad_boardVO;
 import com.petcare.web.admin.vo.Ad_encyVO;
 import com.petcare.web.user.vo.Criteria;
+import com.petcare.web.user.vo.MemberVO;
 
 public interface Ad_boardService {
 	public List<Ad_boardVO> ad_board_page(Criteria cr);

@@ -56,11 +56,6 @@ public class AdminController {
 		mav.addObject("msg", "logout");
 		return mav;
 	}
-	
-	@GetMapping("/ad_charts.mdo")
-	public String ad_chartsGet() {
-		return "ad_charts";
-	}
 
 	@RequestMapping(value = "/ad_hospital.mdo", method = RequestMethod.GET)
 	public ModelAndView ad_hospitalGet(Model model) throws Exception{
