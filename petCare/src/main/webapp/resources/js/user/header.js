@@ -40,6 +40,7 @@ function fn_loginCheck() {
                 swal({
 					title: "로그인 성공.",
 					icon : "success",
+					text: "Pet Care 로그인이 성공되었습니다.",
 				}, function(){			
 					window.location.href ="/home.do";
 					$("#login_Div").hide();
