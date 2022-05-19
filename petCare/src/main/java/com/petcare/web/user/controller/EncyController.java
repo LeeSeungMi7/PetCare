@@ -54,7 +54,6 @@ public class EncyController {
 		mav.addObject("showEnList", showenList);
 		mav.addObject("showPageVO", cr);
 		mav.setViewName("/ency_BoardList");
-		System.out.println(cr.toString());
 		return mav;
 	}
 

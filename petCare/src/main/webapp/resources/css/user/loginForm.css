@@ -48,14 +48,10 @@ a.button{
 .btn-primary {
   color: #fff;
   height: 45px;
-  background-color: #AAF0D1;
-  border-color: #AAF0D1;
 }
 .btn-primary_kakao {
   color: #fff;
   height: 45px;
-  background-color: #f1e31457;
-  border-color: #f1e31457;
 }
 
 .btn-primary_kakao:hover {
