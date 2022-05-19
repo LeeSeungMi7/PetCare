@@ -89,7 +89,7 @@ public class Ad_boardController {
 		FileUploadService.FileUploadResult fileResult = fileUploadService.fileUpload(file, "백과사전/", ad_encyVO.getEn_file_name());
 		ad_encyVO.setEn_file_path(fileResult.getUrl());
 		ad_boardService.ad_enboardInsert(ad_encyVO);
-		System.out.println(ad_encyVO.toString());
+//		System.out.println(ad_encyVO.toString());
 		return "redirect:/ad_encyclopedia.mdo";
 	}
 

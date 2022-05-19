@@ -28,5 +28,6 @@
 		<mapper resource="mapper/Kakao_login.xml"/>
 		<mapper resource="mapper/Qna.xml"/>
 		<mapper resource="mapper/Ad_BoardMapper.xml"/>
+		<mapper resource="mapper/Home.xml"/>
 	</mappers>
 </configuration>

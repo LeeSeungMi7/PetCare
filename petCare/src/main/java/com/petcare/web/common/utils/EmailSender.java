@@ -17,7 +17,7 @@ public class EmailSender {
 	
 	public void SendEmail(Email email)throws Exception{
 		MimeMessage msg = mailSender.createMimeMessage();
-		System.out.println("메일보내기");
+//		System.out.println("메일보내기");
 		
 		try {
 			msg.setSubject(email.getSubject()); //제목

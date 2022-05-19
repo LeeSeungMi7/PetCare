@@ -70,7 +70,7 @@ public class BoardController {
 	   if(file.getOriginalFilename() == "" || file.getOriginalFilename() == null) {
 		   showVO.setB_file_name(null);
 		   showVO.setB_file_path(null);
-		   System.out.println(showVO.toString());
+//		   System.out.println(showVO.toString());
 		   boardService.boardInsert(showVO);
 		   
 	   }else {
@@ -78,7 +78,7 @@ public class BoardController {
       FileUploadService.FileUploadResult fileResult = fileUploadService.fileUpload(file, "자랑하기/", showVO.getB_file_name());
       showVO.setB_file_path(fileResult.getUrl());
       boardService.boardInsert(showVO);
-      System.out.println("글작성: " + showVO.toString());
+//      System.out.println("글작성: " + showVO.toString());
 	   }
       return "redirect:/show.do";
    }

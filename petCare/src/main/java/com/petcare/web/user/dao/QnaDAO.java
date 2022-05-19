@@ -26,7 +26,7 @@ public class QnaDAO {
 	}
 
 	public int maintotalpage(Criteria qnaPage) {
-		System.out.println("dao" + qnaPage.toString());
+//		System.out.println("dao" + qnaPage.toString());
 		return sqlSessionTemplate.selectOne("qna.maintotalpage", qnaPage);
 	}
 	//qna_board

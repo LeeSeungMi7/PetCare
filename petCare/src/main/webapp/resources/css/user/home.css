@@ -63,3 +63,7 @@
     white-space: nowrap;
     overflow: hidden;
 }
+
+.list_board{
+	background-color:red;
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Home">
+
+	<select id="Show" resultType="ShowVO">
+	select * from Board_Table order by board_num desc limit 0, 4;
+	</select>
+	
+	<select id="Qna" resultType="QnaVO">
+	select * from FAQ_Table order by faq_num desc limit 0, 4;
+	</select>
+	
+	<select id="Ency" resultType="Ad_encyVO">
+	select * from Encyclopedia_Table order by en_number desc limit 0, 4;
+	</select>
+</mapper>
