@@ -80,6 +80,20 @@
 								<option value="오후 6시" <c:if test="${reservation.rv_time == '오후 6시'}">selected</c:if>>오후 6시</option>					
 						</select></td>
 						</c:if>
+						<c:if test="${reservation.rv_access != '0'}">
+						<td><select class="form-select form-select-sm" id="time" disabled>
+								<option value="오전 9시" <c:if test="${reservation.rv_time == '오전 9시'}">selected</c:if>>오전 9시</option>
+								<option value="오전 10시" <c:if test="${reservation.rv_time == '오전 10시'}">selected</c:if>>오전 10시</option>
+								<option value="오전 11시" <c:if test="${reservation.rv_time == '오전 11시'}">selected</c:if>>오전 11시</option>
+								<option value="오전 12시" <c:if test="${reservation.rv_time == '오전 12시'}">selected</c:if>>오전 12시</option>
+								<option value="오후 1시" <c:if test="${reservation.rv_time == '오후 1시'}">selected</c:if>>오후 1시</option>
+								<option value="오후 2시" <c:if test="${reservation.rv_time == '오후 2시'}">selected</c:if>>오후 2시</option>
+								<option value="오후 3시" <c:if test="${reservation.rv_time == '오후 3시'}">selected</c:if>>오후 3시</option>
+								<option value="오후 4시" <c:if test="${reservation.rv_time == '오후 4시'}">selected</c:if>>오후 4시</option>
+								<option value="오후 5시" <c:if test="${reservation.rv_time == '오후 5시'}">selected</c:if>>오후 5시</option>
+								<option value="오후 6시" <c:if test="${reservation.rv_time == '오후 6시'}">selected</c:if>>오후 6시</option>					
+						</select></td>
+						</c:if>
 						<td align="center">
 							<input type="hidden" name="idx" value="${reservation.reservation_num}"/>
 							<c:if test="${reservation.rv_access == '0'}">
@@ -93,7 +107,7 @@
 							</td>
 							</c:if>
 							<c:if test="${reservation.rv_access == '2'}">
-							<span class="reservation_o" > 예약 가능</span>
+							<span class="reservation_o" > 예약 확정</span>
 
 							</c:if>
 						</td>
