@@ -36,7 +36,7 @@
     <!--본문-->
 		<div class="password-body">
 			<div class="password-body-form">
-			<img class="password_back" src="/resources/img/password.png">
+			<img class="password_back" src="/resources/img/now_password.png">
 				<div>
 					
 					<div class="card-body">

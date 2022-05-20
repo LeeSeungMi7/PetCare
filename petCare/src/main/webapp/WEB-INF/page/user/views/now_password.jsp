@@ -46,7 +46,7 @@
 					<!--비밀번호-->
 					<div class="now_password_box">
 					<div class="join-user__items">
-						<label>비밀번호 확인.</label> 
+					<label>현재 비밀번호를 입력해주세요.</label>
 						<input id="user_password" type="password" maxlength="15" placeholder="현재 비밀번호를 입력하세요" > 
 						<span class="error_next_box" id="error_password" aria-live="assertive"></span>
 					</div>

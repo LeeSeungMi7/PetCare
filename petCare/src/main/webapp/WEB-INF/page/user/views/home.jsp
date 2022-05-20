@@ -27,7 +27,25 @@
     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <!-- 카카오 MAP API-KEY -->
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1e818982c81810e2470dd6b0b339e676&libraries=services"></script>
-	
+
+<script type="text/javascript">
+var imgs = 3;
+var now = 0;
+
+function slide() {
+    now = now == imgs ? 0 : now += 1; 
+
+    $(".imgs>img").eq(now - 1).css({"margin-left": "-800px"});
+    $(".imgs>img").eq(now).css({"margin-left": "0px"});
+}
+
+function start() {
+    $(".imgs>img").eq(0).siblings().css({"margin-left":"0px"});
+    
+    setInterval(function () { slide()}, 4000);
+}
+start();
+</script>
 </head>
 
 <body>
@@ -37,8 +55,11 @@
 
 		<!--본문-->
 		<!-- 홈 최상단 슬라이더 -->
-		<div class="pet-home__slider pet-column">
-			<img src="https://cdn.imweb.me/thumbnail/20220413/4a11551a2ff7f.jpg" />
+		<div class="pet-home__slider pet-column imgs">
+			<img src="https://cdn.imweb.me/thumbnail/20220413/4a11551a2ff7f.jpg" style="margin-left:0px;" />
+			<img src="/resources/img/home_banner.img1.png" />
+			<img src="/resources/img/home_banner.img2.jpg" />
+			<img src="/resources/img/home_banner.img3.png" />
 		</div>
 		<!-- 홈 최상단 슬라이더 -->
 
@@ -90,10 +111,10 @@
 		</div>
 		<!-- 우리 가족 이야기 🐶😺 -->
 		<hr>
-		<!-- 도움이 필요해요... 💉 -->
+		<!-- 도움이 필요해요... 😢 -->
 		<div class="pet-home__qna">
 			<div class="pet-home__title pet-row">
-				<div class="text--18-bold">도움이 필요해요... 💉</div>
+				<div class="text--18-bold">도움이 필요해요... 😢</div>
 				<div class="text--14-normal center" onclick="location.href='qna.do'">더보기 ></div>
 			</div>
 			<div class="pet-home__boards pet-row">
@@ -108,7 +129,7 @@
 				
 			</div>
 		</div>
-		<!-- 도움이 필요해요...💉 -->
+		<!-- 도움이 필요해요...😢 -->
 		<hr>
 		<!-- 지식 백과사전 📚 -->
 		<div class="pet-home__encyclopedia">

@@ -29,18 +29,19 @@
     </list>
     </property>
  	</bean>
-	<!-- datasource -->
-	<!-- <context:property-placeholder location="classpath:config/database.properties" /> -->
-
-	<bean id="dataSource"
-		class="org.apache.commons.dbcp2.BasicDataSource"
-		destroy-method="close">
-		<property name="driverClassName" value="${jdbc.driver}" />
-		<property name="url" value="${jdbc.url}" />
-		<property name="username" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
+	
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+		<property name="driverClassName" value="${jdbc.driver}"></property>
+		<property name="jdbcUrl" value="${jdbc.url}"></property>
+		<property name="username" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
 	</bean>
-
+	
+	<!-- HikariCP Configuration -->
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+		<constructor-arg ref="hikariConfig"></constructor-arg>
+	</bean>
+	
 	
 	<!-- Transaction 관리자 설정 -->
 	<bean id="transactionManager"
@@ -49,13 +50,13 @@
 
 
 	<!-- myBatis 사용을 위한 설정 -->
-	<bean id="sqlSessionFactoryBean"
-		class="org.mybatis.spring.SqlSessionFactoryBean">
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation"
 			value="classpath:mybatis-config.xml" />
 	</bean>
 
+	
 	<bean id="sqlSessionTemplate"
 		class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg name="sqlSessionFactory"
@@ -73,26 +74,6 @@
 	</bean>
 	
 	<!-- 메일 -->
-		<!-- <context:property-placeholder location="classpath:config/mail.properties" /> -->
-	
-	<!-- <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="host" value="smtp.gmail.com" />
-		<property name="port" value="465" />465
-		<property name="defaultEncoding" value="utf-8"/>
-		<property name="username" value="${email.account}" />
-		<property name="password" value="${email.password}" />
-	
-		<property name="javaMailProperties">
-			<props>
-				<prop key="mail.transport.protocol">smtp</prop>
-				<prop key="mail.smtp.auth">true</prop>
-				<prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
-				<prop key="ail.smtp.starttls.enable">true</prop>
-				<prop key="mail.debug">true</prop>
-			</props>
-		</property>
-	</bean>  -->
-	
 	<bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl" >
         <property name="host" value="smtp.gmail.com" />
         <property name="port" value="587" />
