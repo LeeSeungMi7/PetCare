@@ -77,8 +77,6 @@ function onclickOk2(){
 		<%@ include file="/WEB-INF/page/user/views/header.jsp"%>
 		<!--본문-->
 		<%-- <%@ include file="/WEB-INF/page/user/views/show_rewrite_body.jsp" %> --%>
-				<input type="hidden" name="board_num" value="${rewrite_view.board_num}">
-				<input type="hidden" name="c_num" value="${rewrite_view.board_num}">
 		<form id="form2" name="showVO" method="POST"
 			onsubmit="return onclickOk2()" action="/board_update.do"
 			enctype="multipart/form-data">
@@ -141,10 +139,12 @@ function onclickOk2(){
 
 				<!--버튼-->
 				<div>
+				<input type="hidden" name="c_num" value="${rewrite_view.board_num}">
 				<input type="hidden" name="b_writer" value="${rewrite_view.b_writer}">
 				<input type="hidden" name="b_number" value="${rewrite_view.b_number}">
 				<input type="hidden" name="b_file_name" value="${rewrite_view.b_file_name}">
 				<input type="hidden" name="b_file_path" value="${rewrite_view.b_file_path}">
+				<input type="hidden" name="board_num" value="${rewrite_view.board_num}">
 				<input type="submit" class="btn btn-success" id="btnSave" value="수정완료">
 				<a class="btn btn-danger" href="show.do" role="button" onclick="Cancel()">취소</a>
 				</div>
