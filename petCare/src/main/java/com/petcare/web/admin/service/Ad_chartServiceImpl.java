@@ -17,4 +17,12 @@ public class Ad_chartServiceImpl implements Ad_chartService {
 	public List<ChartVO> ad_chart(ChartVO vo){
 		return ad_chartDAO.ad_chart(vo);
 	}
+	@Override
+	public List<ChartVO> barcommchart(ChartVO vo){
+		return ad_chartDAO.barcommchart(vo);
+	}
+	@Override
+	public List<ChartVO> barfaqchart(ChartVO vo){
+		return ad_chartDAO.barfaqchart(vo);
+	}
 }

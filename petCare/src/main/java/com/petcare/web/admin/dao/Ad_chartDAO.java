@@ -16,4 +16,10 @@ public class Ad_chartDAO {
 	public List<ChartVO> ad_chart(ChartVO vo) {
 		return sqlSessionTemplate.selectList("ad_chart.getChartList", vo);
 	}
+	public List<ChartVO> barcommchart(ChartVO vo) {
+		return sqlSessionTemplate.selectList("ad_chart.getCommentChart", vo);
+	}
+	public List<ChartVO> barfaqchart(ChartVO vo) {
+		return sqlSessionTemplate.selectList("ad_chart.getFAQChart", vo);
+	}
 }

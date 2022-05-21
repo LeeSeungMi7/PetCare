@@ -48,6 +48,7 @@ public class AdminController {
 		return mav;
 	}
 	
+	
 	@GetMapping("/logout.mdo")
 	public ModelAndView logout(HttpSession session) {
 		adminService.logout(session);

@@ -6,4 +6,6 @@ import com.petcare.web.admin.vo.ChartVO;
 
 public interface Ad_chartService {
 	public List<ChartVO> ad_chart(ChartVO vo);
+	public List<ChartVO> barcommchart(ChartVO vo);
+	public List<ChartVO> barfaqchart(ChartVO vo);
 }

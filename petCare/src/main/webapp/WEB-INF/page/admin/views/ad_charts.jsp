@@ -47,6 +47,8 @@
 								날짜 선택 : <input type="text" id="datepicker1" class="datepick"
 									readonly>&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp; <input
 									type="text" id="datepicker2" class="datepick" readonly>
+								<button type="button" class="btn btn-success btn-sm linebtn"
+									style="margin-bottom: 5px;">선 택</button>
 							</div>
 						</div>
 						<div class="card-body">
@@ -63,9 +65,13 @@
 								날짜 선택 : <input type="text" id="datepicker3" class="datepick"
 									readonly>&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp; <input
 									type="text" id="datepicker4" class="datepick" readonly>
+								<button type="button" class="btn btn-success btn-sm barbtn"
+									style="margin-bottom: 5px;">선 택</button>
 							</div>
 						</div>
-						<div id="bar-example" style="width: 100%;"></div>
+						<div class="card-body">
+							<canvas id="bar-example" width="100%" height="30"></canvas>
+						</div>
 						<div class="card-footer small text-muted" onload="showClock2()">
 							<p id="divClock2" style="color: black; height: 8px;"></p>
 						</div>
@@ -97,20 +103,21 @@
 	<script>
 		$(document).ready(function(){
 			getGraph();
+			getBarGraph();
 		});
 		function getGraph(){
 			let timeList = [];
 			let posList = [];
 			
 			$.ajax({
-				url:"/ad_charts.mdo",
+				url:"/ad_chart.mdo",
 				type:"get",
 				data:{date:"{chartone.date}", pos_type:"승인 병원"},
 				dataType:"json",
 				success:function(data){
 					for (let i = 0; i<data.length; i++){
-						timeList.push(data[i].pos_time);
-						posList.push(data[i].pos_count);
+						timeList.push(data[i].date);
+						posList.push(data[i].cnt);
 					}
 					new Chart(document.getElementById("myAreaChart"),{
 						type:'line',
@@ -128,6 +135,91 @@
 								display:true,
 								text: '주간 승인 병원'
 							}
+						}
+					});
+				},
+				error:function(){
+					alert("실패");
+				}
+			})
+		}
+		function getBarGraph(){
+			let timeList = [];
+			let pos1List = [];
+			let pos2List = [];
+			
+			$.ajax({
+				url:"/ad_barchart.mdo",
+				type:"get",
+				data:{date2:"{barcomm.date2}", pos_type:"갯수"},
+				dataType:"json",
+				success:function(data){
+					for (let i = 0; i<data.barcomm.length; i++){
+						pos2List.push(data.barcomm[i].commentcnt);
+					}
+					for (let i = 0; i<data.barfaq.length; i++){
+						timeList.push(data.barfaq[i].date2);
+						pos1List.push(data.barfaq[i].faqcnt);
+					}
+					new Chart(document.getElementById("bar-example"),{
+						type:'bar',
+						data:{
+							labels:timeList,
+							datasets:[{
+								data:pos1List,
+								label:"질문",
+								borderColor:"#00FF40",
+								backgroundColor:"#2EFE9A",
+								borderWidth:3
+							},{
+								data:pos2List,
+								label:"답변",
+								borderColor:"#58FA82",
+								backgroundColor:"#81F7D8",
+								borderWidth:3
+							}
+							]
+						},
+						option:{
+							responsive: false,
+							scales: {
+								yAxes: [{
+									ticks: {
+										beginAtZero: true,
+									}
+								}]
+							},
+							x: {
+					            title: {
+					                display: true,
+					                text: '글 수 and 답변 수'
+					            }
+					        },
+					        'y-left': {
+					            type: 'linear',
+					            position: 'left',
+					            title: {
+					                display: true,
+					                text: '질문'
+					            },
+					            grid: {
+					                display: false
+					            }
+					        },
+					        'y-right': {
+					            type: 'linear',
+					            position: 'right',
+					            title: {
+					                display: true,
+					                text: '답변'
+					            },
+					            ticks: {
+					                callback: (val) => (val.toExponential())
+					            },
+					            grid: {
+					                display: false
+					            }
+					        }
 						}
 					});
 				},
