@@ -115,3 +115,13 @@ color: #fff;
 	cursor: pointer;
 }
 
+/* 테이블 재정의 */
+.table-success, .table-success>td, .table-success>th {
+    background-color: #28a745;
+}
+
+thead th {
+    border-bottom-width: 2px;
+    color:#fff;
+    font-size:15px;
+}

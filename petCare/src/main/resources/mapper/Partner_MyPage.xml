@@ -64,14 +64,19 @@
 	</select>
 	
 	<update id="reservation_ok">
-	update Reservation_Table set rv_access='2' where reservation_num=#{petNum};
+	update Reservation_Table set rv_access='2' where reservation_num=#{petNum}
 	</update>
 	
 	<update id="reservation_no">
-	update Reservation_Table set rv_access='1' where reservation_num=#{petNum};
+	update Reservation_Table set rv_access='1' where reservation_num=#{petNum}
 	</update>
 	
 	<select id="totalpage" resultType="int">
-	select count(*) from Reservation_Table where rv_partner_number=#{m_number};
+	select count(*)
+	from Animal_Reservation_Table ar
+    join MyPet_Table pt on ar.animal_num = pt.myPet_num
+	join Reservation_Table rt on rt.reservation_num = ar.reservation_num
+	join Member_Table mt on mt.m_number = rt.rv_number
+	where rv_partner_number=#{m_number} and rt.rv_access='0'
 	</select>
 </mapper>

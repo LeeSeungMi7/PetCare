@@ -65,7 +65,9 @@ function kakaoLogout() {
 
 <style>
 .dropdown {position: relative; display: inline-block;}
-.dropdown-content { display: none; position: absolute; background-color: #F9F9F9; min-width: 160px; padding: 8px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);}
+.dropdown-content { display: none; position: absolute; background-color: #F9F9F9; width: 134.33px; height:100px; padding: 3px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);}
+.dropdown-content > form > input {margin-top:10px;}
+.dropdown-content > form > input:hover {background-color:#3de00733; color:#007BFF;}
 .dropdown:hover .dropdown-content { display: block; }
 .btn-block { display: block; width: 222px; height: 54.58px;}
 </style>
@@ -139,11 +141,11 @@ function kakaoLogout() {
 		<span>내정보</span>
 		<div class="dropdown-content">
 			<form action="/partner_mypage_password.do" method="POST">
-	        	<input type="submit" class="dropdown-item" value="병원 정보 수정">
+	        	<input type="submit" class="dropdown-item" value="정보 수정">
 	        </form>
 	        <form action="/hos_reservation.do" method="POST">
 	        	<input type="hidden" name=m_number value="${user.m_number}">
-	        	<input type="submit" class="dropdown-item" value="병원 예약 관리">
+	        	<input type="submit" class="dropdown-item" value="예약 관리">
 	        </form>
 		</div>
 	</div>
