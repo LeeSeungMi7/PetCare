@@ -69,7 +69,7 @@ public class BoardController {
 	   
 	   if(file.getOriginalFilename() == "" || file.getOriginalFilename() == null) {
 		   showVO.setB_file_name(null);
-		   showVO.setB_file_path(null);
+		   showVO.setB_file_path("https://seungbuc.s3.ap-northeast-2.amazonaws.com/null_img.png");
 //		   System.out.println(showVO.toString());
 		   boardService.boardInsert(showVO);
 		   
@@ -141,12 +141,17 @@ public class BoardController {
    //수정하기
    @RequestMapping(value="board_update.do", method=RequestMethod.POST)
    public String board_update(@ModelAttribute ShowVO showVO, @RequestParam("show_update_file") MultipartFile file) {
-      showVO.setB_file_name(file.getOriginalFilename());
+     
+	   if(file.getOriginalFilename() == "" || file.getOriginalFilename()== null) {
+		   boardService.update(showVO);
+	   }else {
+	   
+	   showVO.setB_file_name(file.getOriginalFilename());
       FileUploadService.FileUploadResult fileResult = fileUploadService.fileUpload(file, "자랑하기/", showVO.getB_file_name());
       showVO.setB_file_path(fileResult.getUrl());
 
       boardService.update(showVO);
-
+	   }
       return "redirect:show_board.do?board_num=" + showVO.getBoard_num();
    }
    
