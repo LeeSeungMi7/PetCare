@@ -50,17 +50,16 @@ function onclickOk(){
 		console.log(content);
 
 		if(title == ""){
-			alert("제목을 입력하세요.");
+			swal('제목을 입력해주세요.', 'error');
 			document.getElementById("title").focus();
 			console.log
 			return false;
 		}
 		if(content == ""){
-			alert("내용을 입력하세요.");
 			oEdiotrs.getById["ir1"].exec("FOCUS")
 			return false;
 		}
-		alert("등록되었습니다.")
+		swal('등록되었습니다.');
 		document.getElementById("form1").submit();
 	}
 
