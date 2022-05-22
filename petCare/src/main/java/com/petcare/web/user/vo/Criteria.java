@@ -9,6 +9,7 @@ public class Criteria {
 	private int m_number; //회원 번호
 	private int baord_num;
 	private int faq_num;
+	private int rw_partner_number;
 	private int total_page;//페이지 전체
 	private int total_block; //페이지 블록 전체
 	private int block_num; //현재 페이지 블록

@@ -41,7 +41,18 @@ function placesSearchCB(data, status, pagination) {
 }
 
 function createHospitalLayout() {
-    const {address_name, phone, place_name, place_url, road_address_name, x, y} = hospitalInfo;
+    const {
+        place_url,
+        place_name,
+        road_address_name,
+        address_name, phone,
+        y, x,
+        p_weekday, p_weekend,
+        m_address_class,
+        p_24hour,
+        p_breaktime,
+        m_number
+    } = hospitalInfo;
     let contents = ``
 
     if (road_address_name) {
@@ -53,47 +64,61 @@ function createHospitalLayout() {
     }
 
     /** 나중에 평일,주말 점심시간 연동 되면 구현하기 **/
-    if (true) {
         contents += `
             <div class="pet-hospital-detail__times">
                 <div class="pet-hospital-detail__text text--16-bold">진료시간</div>
                 <ul>
+                    ${!!m_address_class ? '' : `
                     <li>
                         <span class="text--14-bold color--red">제휴병원만 진료정보를 제공합니다.</span>
-                    </li>
+                    </li>`}
+                    
+                    ${p_24hour !== "1" ? '' : `
+                    <li>
+                        <div class="pet-row">
+                            <span class="text--14-bold color--gray">365일</span>
+                            <span class="text--14 color--gray">24시간</span>
+                        </div>
+                    </li>`}
+                    
+                    ${!p_weekday && p_24hour !== "1" ? '' : `
                     <li>
                         <div class="pet-row">
                             <span class="text--14-bold color--gray">평일</span>
-                            <span class="text--14 color--gray">10:00~19:00</span>
+                            <span class="text--14 color--gray">${p_weekday.replace(/\//g, '~')}</span>
                         </div>
-                    </li>
+                    </li>`}
+                    
+                    ${!p_weekend && p_24hour !== "1" ? '' : `
                     <li>
                         <div class="pet-row">
                             <span class="text--14-bold color--gray">주말</span>
-                            <span class="text--14 color--gray">10:00~19:00</span>
+                            <span class="text--14 color--gray">${p_weekend.replace(/\//g, '~')}</span>
                         </div>
-                    </li>
+                    </li>`}
+                    
+                    ${!p_breaktime ? '' : `
                     <li>
                         <div class="pet-row">
                             <span class="text--14-bold color--gray">점심시간</span>
-                            <span class="text--14 color--gray">13:00~14:00</span>
+                            <span class="text--14 color--gray">${p_breaktime.replace(/\//g, '~')}</span>
                         </div>
-                    </li>
+                    </li>`}
                 </ul>
             </div>
         `
-    }
 
     if (phone) {
         contents += `<div class="pet-hospital-detail__text text--16-bold">전화번호: <a class="color--gray" href="tel:${phone}">${phone}</a></div>`
     }
 
     /** 예약 가능 버튼 **/
-    if (true) {
-        contents += `<button type="button" class="button--sm" style="margin-top: 10px">예약가능</button>`
+    if (m_address_class) {
+        contents += `<
+        button type="button" class="button--sm" style="margin-top: 10px">예약가능</button>`
     }
 
-    document.getElementById('title').innerHTML = place_name;
+    document.getElementById('title').innerHTML = `${place_name} ${m_address_class ? '<span class="hos-badge">제휴</span>' : ''}`;
     document.getElementById('infos').innerHTML = contents;
 }
 

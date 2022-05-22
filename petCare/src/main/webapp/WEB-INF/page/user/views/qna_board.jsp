@@ -47,7 +47,7 @@ function onclickOk(){
 	console.log(c_content);
 
 	if(c_content == ""){
-		swal('제목을 입력해주세요.', 'error');
+		swal('내용을 입력해주세요.', 'error');
 		document.getElementById("c_content").focus();
 		console.log
 		return false;

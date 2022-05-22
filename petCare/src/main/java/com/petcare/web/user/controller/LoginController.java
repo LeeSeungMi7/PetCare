@@ -79,6 +79,7 @@ public class LoginController {
 		session.setAttribute("user", vo);
 //		System.out.println("일반회원");
 		map.put("msg","success");
+		map.put("m_sido", vo.getM_sido());
 		return map;
 	}
 	

@@ -6,6 +6,21 @@ function getElement(id) {
     return $(`#${id}`);
 }
 
+function debounce(func, wait) {
+    let inDebounce;
+    return function () {
+        const context = this;
+        const args = arguments;
+
+        // setTimeout이 실행된 Timeout의 ID를 반환하고, clearTimeout()으로 이를 해제할 수 있음을 이용
+        clearTimeout(inDebounce);
+        inDebounce = setTimeout(() => func.apply(context, arguments), wait);
+    };
+}
+
+// 'search-address', 'current-location', 'filter-24hour', 'reservation'
+let filter = '';
+
 // 마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다
 let placeOverlay = new kakao.maps.CustomOverlay({zIndex: 1});
 let contentNode = document.createElement('div'); // 커스텀 오버레이의 컨텐츠 엘리먼트 입니다
@@ -57,9 +72,6 @@ function searchPlaces(address) {
 
     placeOverlay.setMap(null);
 
-    // 지도에 표시되고 있는 마커를 제거합니다
-    removeMarker();
-
     ps.keywordSearch(keyword, placesSearchCB,
         {
             useMapCenter: !address
@@ -68,14 +80,43 @@ function searchPlaces(address) {
 
 // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 function placesSearchCB(data, status, pagination) {
-    console.error(data)
     if (status === kakao.maps.services.Status.OK) {
 
-        // 정상적으로 검색이 완료됐으면 지도에 마커를 표출합니다
-        displayPlaces(data);
         if (data.length > 0) {
             map.panTo(new kakao.maps.LatLng(data[0].y, data[0].x));
         }
+
+        const mapIds = data.map((info) => {
+            return info.id
+        })
+
+        let hospitalInfos = data;
+
+        $.ajax(`/hospital_alliance.do?mapIds=${mapIds.join(',')}`, {
+            // contentType: 'application/json; charset=utf-8',
+            // dataType: 'json',
+            success: (response) => {
+                // 정상적으로 검색이 완료됐으면 지도에 마커를 표출합니다
+                response.forEach(member => {
+                    hospitalInfos = data.map(info => {
+                        if (member.m_address_class === Number(info.id)) {
+                            return {
+                                ...info,
+                                ...member
+                            }
+                        }
+                        return info;
+                    })
+                })
+
+
+                displayPlaces(hospitalInfos);
+            },
+            fail: (error) => {
+                console.error('error', error)
+            }}
+        )
+
 
     } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
         // 검색결과가 없는경우 해야할 처리가 있다면 이곳에 작성해 주세요
@@ -86,21 +127,38 @@ function placesSearchCB(data, status, pagination) {
     }
 }
 
+function resetMap() {
+    hospitalList.children().remove();
+    removeMarker();
+}
+
 // 지도에 마커를 표출하는 함수입니다
 function displayPlaces(places) {
-    console.error(places);
-    // 병원 리스트에 지도에 보이는 병원들을 표시한다.
-    hospitalList.children().remove();
+    resetMap()
 
-    for (let i = 0; i < places.length; i++) {
-        addListItem(places[i]);
+    // 병원 리스트에 지도에 보이는 병원들을 표시한다.
+    const filterPlaces = places.filter((place) => {
+        if (filter === 'filter-24hour') {
+            return place['p_24hour'] === '1';
+        }
+
+        if (filter === 'reservation') {
+            return !!place['m_address_class'];
+        }
+
+        return true;
+    });
+
+    for (let i = 0; i < filterPlaces.length; i++) {
+        addListItem(filterPlaces[i]);
     }
 
 
-    for (let i = 0; i < places.length; i++) {
+    for (let i = 0; i < filterPlaces.length; i++) {
 
         // 마커를 생성하고 지도에 표시합니다
-        let marker = addMarker(new kakao.maps.LatLng(places[i].y, places[i].x));
+        const isAlliance = !!filterPlaces[i]['m_address_class'];
+        let marker = addMarker(new kakao.maps.LatLng(places[i].y, places[i].x), isAlliance);
 
         // 마커와 검색결과 항목을 클릭 했을 때
         // 장소정보를 표출하도록 클릭 이벤트를 등록합니다
@@ -108,18 +166,32 @@ function displayPlaces(places) {
             kakao.maps.event.addListener(marker, 'click', function () {
                 displayPlaceInfo(place);
             });
-        })(marker, places[i]);
+        })(marker, filterPlaces[i]);
     }
 }
 
 // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
-function addMarker(position, order) {
-    marker = new kakao.maps.Marker({
-        position: position, // 마커의 위치
-        // image: markerImage
-    });
+function addMarker(position, isAlliance) {
+    let marker
+    if(isAlliance) {
+        const imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다
+            imageSize = new kakao.maps.Size(29, 42), // 마커이미지의 크기입니다
+            imageOption = {offset: new kakao.maps.Point(27, 69)};
+        const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+
+        marker = new kakao.maps.Marker({
+            position: position, // 마커의 위치
+            image: markerImage
+        });
+    } else {
+        marker = new kakao.maps.Marker({
+            position: position, // 마커의 위치
+            // image: markerImage
+        });
+    }
 
     marker.setMap(map); // 지도 위에 마커를 표출합니다
+    marker.isAlliance = isAlliance;
     markers.push(marker);  // 배열에 생성된 마커를 추가합니다
 
     return marker;
@@ -133,12 +205,28 @@ function removeMarker() {
     markers = [];
 }
 
-function addListItem({place_url, place_name, road_address_name, address_name, phone, y, x}) {
-    const paramsToString = getParamsToString({place_url, place_name, road_address_name, address_name, phone, y, x});
+function addListItem(places) {
+    /** 다음 지도 기본 정보 **/
+    const { place_url, place_name, road_address_name, address_name, phone, y, x } = places;
+    /** 서버 정보 **/
+    const { p_weekday, p_weekend, m_address_class, p_24hour, p_breaktime, m_number } = places;
+
+    const paramsToString = getParamsToString({
+            place_url,
+            place_name,
+            road_address_name,
+            address_name, phone,
+            y, x,
+            p_weekday, p_weekend,
+            m_address_class,
+            p_24hour,
+            p_breaktime,
+            m_number: m_number ?? 0
+    });
 
     let item = `
         <div class="pet-hospital__list-item" onclick="moveHospitalDetail('${paramsToString}')">
-            <div class="text--16-bold">${place_name}</div>
+            <div class="text--16-bold">${place_name} ${m_address_class ? '<span class="hos-badge">제휴</span>' : ''}</div>
     `
 
     if (road_address_name) {
@@ -152,9 +240,20 @@ function addListItem({place_url, place_name, road_address_name, address_name, ph
         `
     }
 
+    /** 해당 값이 있으면 제휴 병원임 **/
+    if (m_address_class) {
+        if (p_24hour === "1") {
+            item += `<div class="text--14-normal">365일 24시간 진료</div>`
+        } else {
+            item += `<div class="text--14-normal">평일 진료 시간 : ${p_weekday.replace(/\//g, '~')}</div>`
+            item += `<div class="text--14-normal">주말 진료 시간 : ${p_weekend.replace(/\//g, '~')}</div>`
+        }
+        item += `<div class="text--14-normal">점심시간 : ${p_breaktime.replace(/\//g, '~')}</div>`
+    }
+
     item += `
             <div class="text--14-bold">${phone}</div>
-        </div>    
+        </div>
     `
 
     hospitalList.append(item)
@@ -163,7 +262,7 @@ function addListItem({place_url, place_name, road_address_name, address_name, ph
 function getParamsToString(params) {
     let paramsUrl = '';
 
-    for(let key in params) {
+    for (let key in params) {
         if (!!params[key]) {
             paramsUrl += `${key}=${encodeURIComponent(params[key])}&`;
         }
@@ -173,7 +272,10 @@ function getParamsToString(params) {
 }
 
 // 클릭한 마커에 대한 장소 상세정보를 커스텀 오버레이로 표시하는 함수입니다
-function displayPlaceInfo({place_url, place_name, road_address_name, address_name, phone, y, x}) {
+function displayPlaceInfo(places) {
+    const {place_url, place_name, road_address_name, address_name, phone, y, x} = places;
+    const { p_weekday, p_weekend, m_address_class, p_24hour, p_breaktime } = places;
+
     let content = `
         <div class="pet-map-placeinfo pet-column background--white">
             <a class="text--16-bold color--black" href="${place_url}" target="_blank" title="${place_name}">${place_name}</a>
@@ -187,6 +289,17 @@ function displayPlaceInfo({place_url, place_name, road_address_name, address_nam
     } else {
         content += `<span class="text--14-normal" title="${address_name}">${address_name}</span>`;
     }
+
+    if (m_address_class) {
+        if (p_24hour === "1") {
+            content += `<div class="text--14-normal">365일 24시간 진료</div>`
+        } else {
+            content += `<div class="text--14-normal">평일 진료 시간 : ${p_weekday.replace(/\//g, '~')}</div>`
+            content += `<div class="text--14-normal">주말 진료 시간 : ${p_weekend.replace(/\//g, '~')}</div>`
+        }
+        content += `<div class="text--14-normal">점심시간 : ${p_breaktime.replace(/\//g, '~')}</div>`
+    }
+
 
     content += `
             <span class="text--14-normal" class="tel">${phone}</span>
@@ -203,9 +316,6 @@ searchPlaces();
 function findAddr() {
     new daum.Postcode({
         oncomplete: function (data) {
-
-            console.log(data);
-
             const roadAddr = data.roadAddress; // 도로명 주소 변수
             const jibunAddr = data.jibunAddress; // 지번 주소 변수
 
@@ -220,14 +330,39 @@ function findAddr() {
     }).open();
 }
 
-function currentLocation() {
+function onClickFilter(type) {
+    setActiveFilter(filter === type ? '' : type);
+    filter = filter === type ? '' : type;
+    searchPlaces();
+}
 
+function setActiveFilter(type) {
+    const filters = ['filter-24hour', 'reservation'];
+
+    for (let i = 0; i < filters.length; i++) {
+        const filterBtn = document.getElementById(filters[i]);
+        if (filters[i] === type) {
+            filterBtn.classList.add('active');
+        } else {
+            filterBtn.classList.remove('active');
+        }
+    }
 }
 
 function moveHospitalDetail(params) {
-    window.location.href = `./hospital_detail.html?${params}`
+    window.location.href = `./hospital_detail.do?${params}`
 }
 
-window.onload = function() {
+function currentLocation() {
+    const m_sido = sessionStorage.getItem('m_sido');
+    if (m_sido) {
+        searchPlaces(m_sido);
+    }
+}
+
+
+window.onload = function () {
     map.relayout();
 }
+
+debounce(searchPlaces, 1000);

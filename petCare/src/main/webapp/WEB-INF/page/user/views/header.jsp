@@ -25,6 +25,7 @@ function loginWithKakao() {
 		             data:{"kakao_id" : kakao_id},
 		             success:function(result){
 		             	if(result.msg=="로그인"){
+		             		sessionStorage.setItem('m_sido', result.m_sido);
 		             		swal({
 		     					title: "로그인 성공.",
 		     					text: "카카로 로그인으로 성공되었습니다",
@@ -104,7 +105,7 @@ function kakaoLogout() {
 </div>
 <div class="pet-header__tabs pet-row">
     <a class="pet-header__tab text--16-normal color--black active" href="home.do">홈</a>
-    <a class="pet-header__tab text--16-normal color--black" href="hospital.html">내주변 병원</a>
+    <a class="pet-header__tab text--16-normal color--black" href="hospital.do">내주변 병원</a>
     <a class="pet-header__tab text--16-normal color--black" href="show.do">자랑하기</a>
     <a class="pet-header__tab text--16-normal color--black" href="qna.do">QnA</a>
     <a class="pet-header__tab text--16-normal color--black" href="ency_BoardList.do">동물백과</a>
