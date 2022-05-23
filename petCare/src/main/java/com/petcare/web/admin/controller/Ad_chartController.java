@@ -12,8 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.petcare.web.admin.service.Ad_chartService;
 import com.petcare.web.admin.vo.ChartVO;
@@ -31,6 +31,17 @@ public class Ad_chartController {
 		model.addAttribute("chartone", chart);
 		return chart;
 	}
+	@RequestMapping("/updatelinechart.mdo")
+	@ResponseBody
+	public List<ChartVO> updatelinechart(Model model, ChartVO vo,@RequestParam String updatedate1, String updatedate2) throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("updateline", vo);
+		map.put("updatedate1", updatedate1);
+		map.put("updatedate2", updatedate2);
+		List<ChartVO> chart = ad_chartService.updatelinechart(map);
+		model.addAttribute("updatelinechart", chart);
+		return chart;
+	}
 	@GetMapping("/ad_charts.mdo")
 	public String ad_chartsGet() {
 		return "ad_charts";
@@ -43,7 +54,20 @@ public class Ad_chartController {
 		
 		List<ChartVO> barcommchart = ad_chartService.barcommchart(vo);
 		List<ChartVO> barfaqchart = ad_chartService.barfaqchart(vo);
-		ModelAndView mav = new ModelAndView();
+		map.put("barcomm", barcommchart);
+		map.put("barfaq", barfaqchart);
+		return map;
+	}
+	@RequestMapping("/updatebarchart.mdo")
+	@ResponseBody
+	public Map<String, Object> updatebarchart(ChartVO vo,@RequestParam String updatedate3, String updatedate4) {
+		
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("updatebar", vo);
+		map.put("updatedate3", updatedate3);
+		map.put("updatedate4", updatedate4);
+		List<ChartVO> barcommchart = ad_chartService.updatecommchart(map);
+		List<ChartVO> barfaqchart = ad_chartService.updatefaqchart(map);
 		map.put("barcomm", barcommchart);
 		map.put("barfaq", barfaqchart);
 		return map;
