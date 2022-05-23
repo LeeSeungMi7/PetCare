@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,6 +26,7 @@ public class Ad_chartController {
 	@RequestMapping("/ad_chart.mdo")
 	@ResponseBody
 	public List<ChartVO> ad_chartget(Model model, ChartVO vo) throws Exception{
+		
 		List<ChartVO> chart = ad_chartService.ad_chart(vo);
 		model.addAttribute("chartone", chart);
 		return chart;

@@ -81,6 +81,22 @@
 		<location>/WEB-INF/page/user/views/error.jsp</location>
 	</error-page>
 	<error-page>
+		<error-code>400</error-code>
+		<location>/WEB-INF/page/user/views/error.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>401</error-code>
+		<location>/WEB-INF/page/user/views/error.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>405</error-code>
+		<location>/WEB-INF/page/user/views/error.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>406</error-code>
+		<location>/WEB-INF/page/user/views/error.jsp</location>
+	</error-page>
+	<error-page>
 		<error-code>500</error-code>
 		<location>/WEB-INF/page/user/views/error.jsp</location>
 	</error-page> 

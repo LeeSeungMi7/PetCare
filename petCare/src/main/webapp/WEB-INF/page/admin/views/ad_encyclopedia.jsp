@@ -9,7 +9,7 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet"/>
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 
-        <link href="/resources/css/admin/ad_board.css" rel="stylesheet"/>
+        <link href="/resources/css/admin/new_ad_board.css" rel="stylesheet"/>
         <link href="/resources/css/admin/styles.css" rel="stylesheet"/>
         <link href="/resources/css/admin/morris.css" rel="stylesheet"/>
     </head>
@@ -26,7 +26,8 @@
                             <div class="card-header">
                                 <i class="fas fa-table me-1"></i>
                                 백과사전 관리
-                                <button class="en_insertBtn shadow-sm bg-body rounded" id=""><a href = "en_insert.mdo">백과사전 등록</a></button>
+                                <button class="en_insertBtn1 shadow-sm bg-body rounded" id="">
+                                <a style="color:#3CB371" href = "en_insert.mdo">백과사전 등록</a></button>
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
@@ -80,7 +81,6 @@
         <script src="/resources/js/admin/morris.js"></script>
         <script src="/resources/js/admin/raphael.min.js"></script>
         <script src="/resources/js/admin/scripts.js"></script>
-        <script src="/resources/js/admin/ad_common.js"></script>
 
     </body>
 </html>

@@ -11,7 +11,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
        
-        <link href="/resources/css/admin/ad_commboard.css?after" rel="stylesheet"/>
+        <link href="/resources/css/admin/new_ad_commboard.css?after" rel="stylesheet"/>
         <link href="/resources/css/admin/styles.css" rel="stylesheet"/>
         <link href="/resources/css/admin/morris.css" rel="stylesheet"/>
         
@@ -59,7 +59,6 @@
         <script src="/resources/js/admin/morris.js"></script>
         <script src="/resources/js/admin/raphael.min.js"></script>
         <script src="/resources/js/admin/scripts.js"></script>
-        <script src="/resources/js/admin/ad_common.js"></script>
         <script src="/resources/js/user/write.js"></script>
 		<script src="/resources/js/user/show_write.js"></script>
         <script>
