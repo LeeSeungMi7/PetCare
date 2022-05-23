@@ -5,22 +5,43 @@
 <mapper namespace="ad_chart">
 	<select id="getChartList"
 		resultType="com.petcare.web.admin.vo.ChartVO">
-		SELECT DATE_FORMAT(Singin_Member_date, '%Y%m%d') AS date,
+		SELECT DATE_FORMAT(Singin_Member_date, '%Y-%m-%d') AS date,
 		count(*) AS cnt FROM Member_Table where m_role = '1'
 		and m_access = '0'
-		GROUP BY DATE_FORMAT(Singin_Member_date, '%Y%m%d')
+		GROUP BY DATE_FORMAT(Singin_Member_date, '%Y-%m-%d')
 		ORDER BY date
 	</select>
 	<select id="getCommentChart"
 		resultType="com.petcare.web.admin.vo.ChartVO">
-		select DATE_FORMAT(c_date, '%Y%m%d') AS date2, count(*) AS
-		commentcnt from Comment_Table where c_kind = '0' GROUP BY
-		DATE_FORMAT(c_date, '%Y%m%d') ORDER BY date2
+		select DATE_FORMAT(c_date, '%Y-%m-%d') AS date2, count(*)
+		AS commentcnt from Comment_Table where c_kind = '0' GROUP BY
+		DATE_FORMAT(c_date, '%Y-%m-%d') ORDER BY date2
 	</select>
 	<select id="getFAQChart"
 		resultType="com.petcare.web.admin.vo.ChartVO">
-		select DATE_FORMAT(f_date, '%Y%m%d') AS date2, count(*) AS
-		faqcnt from FAQ_Table GROUP BY DATE_FORMAT(f_date, '%Y%m%d') ORDER BY
-		date2
+		select DATE_FORMAT(f_date, '%Y-%m-%d') AS date2, count(*)
+		AS faqcnt from FAQ_Table GROUP BY DATE_FORMAT(f_date, '%Y-%m-%d') ORDER
+		BY date2
+	</select>
+	<select id="updateLinechart"
+		resultType="com.petcare.web.admin.vo.ChartVO" parameterType="Map">
+		SELECT DATE_FORMAT(Singin_Member_date, '%Y-%m-%d') AS date,
+		count(*) AS cnt FROM Member_Table where m_role = '1'
+		and m_access = '0' and Singin_Member_Date between #{updatedate1} and
+		DATE_ADD(#{updatedate2}, INTERVAL 1 DAY)
+		GROUP BY DATE_FORMAT(Singin_Member_date, '%Y-%m-%d')
+		ORDER BY date
+	</select>
+	<select id="updateCommentchart" resultType="com.petcare.web.admin.vo.ChartVO" parameterType="Map">
+		select DATE_FORMAT(c_date, '%Y-%m-%d') AS date2, count(*)
+		AS commentcnt from Comment_Table where c_kind = '0' and c_date between #{updatedate3} and
+		DATE_ADD(#{updatedate4}, INTERVAL 1 DAY) GROUP BY
+		DATE_FORMAT(c_date, '%Y-%m-%d') ORDER BY date2
+	</select>
+	<select id="updateFAQchart" resultType="com.petcare.web.admin.vo.ChartVO" parameterType="Map">
+		select DATE_FORMAT(f_date, '%Y-%m-%d') AS date2, count(*)
+		AS faqcnt from FAQ_Table where f_date between #{updatedate3} and
+		DATE_ADD(#{updatedate4}, INTERVAL 1 DAY) GROUP BY DATE_FORMAT(f_date, '%Y-%m-%d') ORDER
+		BY date2
 	</select>
 </mapper>

@@ -47,7 +47,7 @@
 								날짜 선택 : <input type="text" id="datepicker1" class="datepick"
 									readonly>&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp; <input
 									type="text" id="datepicker2" class="datepick" readonly>
-								<button type="button" class="btn btn-success btn-sm linebtn"
+								<button type="button" id="drawlinechart" class="btn btn-success btn-sm linebtn"
 									style="margin-bottom: 5px;">선 택</button>
 							</div>
 						</div>
@@ -65,7 +65,7 @@
 								날짜 선택 : <input type="text" id="datepicker3" class="datepick"
 									readonly>&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp; <input
 									type="text" id="datepicker4" class="datepick" readonly>
-								<button type="button" class="btn btn-success btn-sm barbtn"
+								<button type="button" id="drawbarchart" class="btn btn-success btn-sm barbtn"
 									style="margin-bottom: 5px;">선 택</button>
 							</div>
 						</div>
@@ -101,6 +101,10 @@
 	<script src="/resources/js/admin/ad_charts.js"></script>
 	<script src="/resources/js/user/ur_reservation.js"></script>
 	<script>
+		var updatedate1;
+		var updatedate2;
+		var updatedate3;
+		var updatedate4;
 		$(document).ready(function(){
 			getGraph();
 			getBarGraph();
@@ -134,6 +138,15 @@
 							title:{
 								display:true,
 								text: '주간 승인 병원'
+							},
+							scales: {
+								yAxes: [{
+									display: true,
+									ticks: {
+										beginAtZero: true,
+										stepSize: 1
+									}
+								}]
 							}
 						}
 					});
@@ -152,6 +165,148 @@
 				url:"/ad_barchart.mdo",
 				type:"get",
 				data:{date2:"{barcomm.date2}", pos_type:"갯수"},
+				dataType:"json",
+				success:function(data){
+					for (let i = 0; i<data.barcomm.length; i++){
+						pos2List.push(data.barcomm[i].commentcnt);
+					}
+					for (let i = 0; i<data.barfaq.length; i++){
+						timeList.push(data.barfaq[i].date2);
+						pos1List.push(data.barfaq[i].faqcnt);
+					}
+					new Chart(document.getElementById("bar-example"),{
+						type:'bar',
+						data:{
+							labels:timeList,
+							datasets:[{
+								data:pos1List,
+								label:"질문",
+								borderColor:"#00FF40",
+								backgroundColor:"#2EFE9A",
+								borderWidth:3
+							},{
+								data:pos2List,
+								label:"답변",
+								borderColor:"#58FA82",
+								backgroundColor:"#81F7D8",
+								borderWidth:3
+							}
+							]
+						},
+						option:{
+							responsive: false,
+							scales: {
+								yAxes: [{
+									ticks: {
+										beginAtZero: true,
+									}
+								}]
+							},
+							x: {
+					            title: {
+					                display: true,
+					                text: '글 수 and 답변 수'
+					            }
+					        },
+					        'y-left': {
+					            type: 'linear',
+					            position: 'left',
+					            title: {
+					                display: true,
+					                text: '질문'
+					            },
+					            grid: {
+					                display: false
+					            }
+					        },
+					        'y-right': {
+					            type: 'linear',
+					            position: 'right',
+					            title: {
+					                display: true,
+					                text: '답변'
+					            },
+					            ticks: {
+					                callback: (val) => (val.toExponential())
+					            },
+					            grid: {
+					                display: false
+					            }
+					        }
+						}
+					});
+				},
+				error:function(){
+					alert("실패");
+				}
+			})
+		}
+		$("#drawlinechart").click(function(){
+			updatedate1 = $("#datepicker1").val();
+			updatedate2 = $("#datepicker2").val();
+			updatelinegraph();
+		});
+		function updatelinegraph(){
+			let timeList = [];
+			let posList = [];
+			$.ajax({
+				url:"/updatelinechart.mdo",
+				type:"get",
+				data:{date:"{chartone.date}", pos_type:"승인 병원", "updatedate1":updatedate1, "updatedate2":updatedate2},
+				async:false,
+				dataType:"json",
+				success:function(data){
+					for (let i = 0; i<data.length; i++){
+						timeList.push(data[i].date);
+						posList.push(data[i].cnt);
+					}
+					new Chart(document.getElementById("myAreaChart"),{
+						type:'line',
+						data:{
+							labels:timeList,
+							datasets:[{
+								data:posList,
+								label:"승인 병원",
+								borderColor:"#3e95cd",
+								fill:false
+							}]
+						},
+						option:{
+							title:{
+								display:true,
+								text: '주간 승인 병원'
+							},
+							scales: {
+								yAxes: [{
+									display: true,
+									ticks: {
+										beginAtZero: true,
+										stepSize: 1
+									}
+								}]
+							}
+						}
+					});
+				},
+				error:function(){
+					alert("실패");
+				}
+			})
+		}
+		$("#drawbarchart").click(function(){
+			updatedate3 = $("#datepicker3").val();
+			updatedate4 = $("#datepicker4").val();
+			updatebargraph();
+		});
+		function updatebargraph(){
+			let timeList = [];
+			let pos1List = [];
+			let pos2List = [];
+			
+			$.ajax({
+				url:"/updatebarchart.mdo",
+				type:"get",
+				data:{date2:"{barcomm.date2}", pos_type:"갯수","updatedate3":updatedate3, "updatedate4":updatedate4},
 				dataType:"json",
 				success:function(data){
 					for (let i = 0; i<data.barcomm.length; i++){
