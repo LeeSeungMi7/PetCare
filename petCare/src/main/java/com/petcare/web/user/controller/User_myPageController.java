@@ -124,7 +124,7 @@ public class User_myPageController {
 				
 			}
 		}
-		return "home";
+		return "redirect:/logout.do";
 	}
 	
 	//내펫 삭제

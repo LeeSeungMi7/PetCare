@@ -143,7 +143,7 @@ public class Partner_myPageController {
 		
 			partnerMapage.partner_modifyfile(memberVO);
 		}
-		return "/home";
+		return "redirect:/logout.do";
 		
 	}
 	
