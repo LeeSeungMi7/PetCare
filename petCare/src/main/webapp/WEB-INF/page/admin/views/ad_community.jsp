@@ -55,7 +55,7 @@
 										<td><c:out value="${status.count}" /></td>
 										<td onclick="location.href='comm_getboard.mdo?board_num=${list.board_num}'"><c:out value="${list.b_title}" /></td>
 										<td><c:out value="${list.b_writer}" /></td>
-										<td><c:out value="${list.b_content}" /></td>
+										<td><div><c:out value="${list.b_content}" /></div></td>
 										<td><c:out value="${list.b_date}" /></td>
 										<td><c:out value="${list.b_hit}" /></td>
 									</tr>

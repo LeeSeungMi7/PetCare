@@ -43,8 +43,14 @@ public class Ad_chartController {
 		return chart;
 	}
 	@GetMapping("/ad_charts.mdo")
-	public String ad_chartsGet() {
-		return "ad_charts";
+	public String ad_chartsGet(HttpSession session) {
+		String url ="";
+		if(session.getAttribute("admin")== null) {
+			url="/ad_login";
+		}else {
+			url="/ad_charts";
+		}
+		return url;
 	}
 	@RequestMapping("/ad_barchart.mdo")
 	@ResponseBody

@@ -91,7 +91,7 @@
 		crossorigin="anonymous"></script>
 	<script src="/resources/js/admin/scripts.js"></script>
 	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+		src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"
 		crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"
 		crossorigin="anonymous"></script>
@@ -105,6 +105,8 @@
 		var updatedate2;
 		var updatedate3;
 		var updatedate4;
+		var mylinechart;
+		var mybarchart;
 		$(document).ready(function(){
 			getGraph();
 			getBarGraph();
@@ -123,7 +125,7 @@
 						timeList.push(data[i].date);
 						posList.push(data[i].cnt);
 					}
-					new Chart(document.getElementById("myAreaChart"),{
+					mylinechart = new Chart(document.getElementById("myAreaChart"),{
 						type:'line',
 						data:{
 							labels:timeList,
@@ -134,21 +136,14 @@
 								fill:false
 							}]
 						},
-						option:{
-							title:{
-								display:true,
-								text: '주간 승인 병원'
-							},
+						options: {
 							scales: {
-								yAxes: [{
-									display: true,
-									ticks: {
-										beginAtZero: true,
-										stepSize: 1
-									}
-								}]
-							}
-						}
+					            y: {
+					                beginAtZero: true,
+					                stepSize : 1
+					            }
+					        }
+					    }
 					});
 				},
 				error:function(){
@@ -174,7 +169,7 @@
 						timeList.push(data.barfaq[i].date2);
 						pos1List.push(data.barfaq[i].faqcnt);
 					}
-					new Chart(document.getElementById("bar-example"),{
+					mybarchart = new Chart(document.getElementById("bar-example"),{
 						type:'bar',
 						data:{
 							labels:timeList,
@@ -196,12 +191,11 @@
 						option:{
 							responsive: false,
 							scales: {
-								yAxes: [{
-									ticks: {
-										beginAtZero: true,
-									}
-								}]
-							},
+					            y: {
+					                beginAtZero: true,
+					                stepSize : 1
+					            }
+					        },
 							x: {
 					            title: {
 					                display: true,
@@ -226,9 +220,6 @@
 					                display: true,
 					                text: '답변'
 					            },
-					            ticks: {
-					                callback: (val) => (val.toExponential())
-					            },
 					            grid: {
 					                display: false
 					            }
@@ -242,6 +233,7 @@
 			})
 		}
 		$("#drawlinechart").click(function(){
+			mylinechart.destroy();
 			updatedate1 = $("#datepicker1").val();
 			updatedate2 = $("#datepicker2").val();
 			updatelinegraph();
@@ -260,7 +252,7 @@
 						timeList.push(data[i].date);
 						posList.push(data[i].cnt);
 					}
-					new Chart(document.getElementById("myAreaChart"),{
+					mylinechart = new Chart(document.getElementById("myAreaChart"),{
 						type:'line',
 						data:{
 							labels:timeList,
@@ -272,19 +264,12 @@
 							}]
 						},
 						option:{
-							title:{
-								display:true,
-								text: '주간 승인 병원'
-							},
 							scales: {
-								yAxes: [{
-									display: true,
-									ticks: {
-										beginAtZero: true,
-										stepSize: 1
-									}
-								}]
-							}
+					            y: {
+					                beginAtZero: true,
+					                stepSize : 1
+					            }
+					        }
 						}
 					});
 				},
@@ -294,6 +279,7 @@
 			})
 		}
 		$("#drawbarchart").click(function(){
+			mybarchart.destroy();
 			updatedate3 = $("#datepicker3").val();
 			updatedate4 = $("#datepicker4").val();
 			updatebargraph();
@@ -316,7 +302,7 @@
 						timeList.push(data.barfaq[i].date2);
 						pos1List.push(data.barfaq[i].faqcnt);
 					}
-					new Chart(document.getElementById("bar-example"),{
+					mybarchart = new Chart(document.getElementById("bar-example"),{
 						type:'bar',
 						data:{
 							labels:timeList,
@@ -338,12 +324,11 @@
 						option:{
 							responsive: false,
 							scales: {
-								yAxes: [{
-									ticks: {
-										beginAtZero: true,
-									}
-								}]
-							},
+					            y: {
+					                beginAtZero: true,
+					                stepSize : 1
+					            }
+					        },
 							x: {
 					            title: {
 					                display: true,
@@ -367,9 +352,6 @@
 					            title: {
 					                display: true,
 					                text: '답변'
-					            },
-					            ticks: {
-					                callback: (val) => (val.toExponential())
 					            },
 					            grid: {
 					                display: false
