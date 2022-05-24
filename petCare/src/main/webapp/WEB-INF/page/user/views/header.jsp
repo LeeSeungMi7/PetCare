@@ -164,9 +164,6 @@ function kakaoLogout() {
 			<a href="javascript:;" class="close">X</a>
 			<p class="title">로그인</p>
 		   <div class="con">
-
-				로그인 창
-
 				<div class="card align-middle "
 					style="width: 20rem; border-radius: 20px;">
 

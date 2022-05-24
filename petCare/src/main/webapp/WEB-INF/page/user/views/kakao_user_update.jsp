@@ -49,12 +49,23 @@
 				<section name="f">
 					<div class="join-user" style="align-items: center">
 						<!--사용자이름-->
+						<c:if test="${member.m_name=='카카오회원'}">
 						<div class="join-user__items">
 							<label>이름</label> 
-							<input type="text" value="${member.m_name}" id="user_name">
+							<input type="text" value="${member.m_name}" id="user_name" name="m_name">
+							<span class="error_next_box" id="error_email" aria-live="assertive">카카오회원의 경우 초기 한 번만 이름 변경 가능합니다.</span>
+							
+						</div>
+						</c:if>
+						
+						<c:if test="${member.m_name!='카카오회원'}">
+						<div class="join-user__items">
+							<label>이름</label> 
+							<input type="text" value="${member.m_name}" id="user_name" readonly="readonly" name="m_name">
 							<span class="error_next_box" id="error_email" aria-live="assertive"></span>
 							
 						</div>
+						</c:if>
 
 						
 						
