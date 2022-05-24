@@ -11,7 +11,7 @@ function debounce(func, wait) {
     return function () {
         const context = this;
         const args = arguments;
-		console.log(inDebounce);
+
         // setTimeout이 실행된 Timeout의 ID를 반환하고, clearTimeout()으로 이를 해제할 수 있음을 이용
         clearTimeout(inDebounce);
         inDebounce = setTimeout(() => func.apply(context, arguments), wait);
@@ -97,16 +97,18 @@ function placesSearchCB(data, status, pagination) {
             // dataType: 'json',
             success: (response) => {
                 // 정상적으로 검색이 완료됐으면 지도에 마커를 표출합니다
-                response.forEach(member => {
-                    hospitalInfos = data.map(info => {
+                hospitalInfos = data.map(info => {
+                    let mapInfo = info;
+                    response.forEach(member => {
                         if (member.m_address_class === Number(info.id)) {
-                            return {
+                            mapInfo = {
                                 ...info,
                                 ...member
                             }
                         }
-                        return info;
                     })
+
+                    return mapInfo
                 })
 
 

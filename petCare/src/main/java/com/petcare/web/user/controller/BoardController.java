@@ -69,7 +69,7 @@ public class BoardController {
 	   
 	   if(file.getOriginalFilename() == "" || file.getOriginalFilename() == null) {
 		   showVO.setB_file_name(null);
-		   showVO.setB_file_path("https://seungbuc.s3.ap-northeast-2.amazonaws.com/null_img.png");
+		   showVO.setB_file_path("https://petcarebuc.s3.ap-northeast-2.amazonaws.com/null_img.png");
 //		   System.out.println(showVO.toString());
 		   boardService.boardInsert(showVO);
 		   
