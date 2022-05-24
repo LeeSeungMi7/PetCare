@@ -76,7 +76,7 @@
 										style="justify-content: space-between">
 										<input id="user_email" type="email"
 											oninput="onInputInvalid('email')" name="m_id" required />
-										<button class="button_class" type="button"
+										<button type="button" class="button_class" type="button"
 											onclick="checkemail()">인증</button>
 									</div>
 									<span class="error_next_box" id="error_email"
@@ -253,7 +253,7 @@
 			const emailFormat = /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/
 					.test(email)
 			if (!emailFormat) {
-				return;
+				return false;
 			} else {
 				$.ajax({
 					type : "post",
@@ -278,6 +278,7 @@
 					}
 				});
 			}
+			return false;
 
 		}
 		

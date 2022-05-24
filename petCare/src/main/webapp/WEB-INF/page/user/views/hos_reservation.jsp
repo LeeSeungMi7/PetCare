@@ -46,7 +46,7 @@
 
         <!--본문-->
         <div class="table_box">
-        <h4 style="margin-left:20px; padding-top: 20px;">예약 신청 목록</h4>
+        <Label style="margin-left:20px; padding-top: 20px;" class="text--20-normal">예약 신청 목록</Label>
         <table class="table table-bordered" style="margin-top: 20px; margin-bottom: 20px;">
             <thead>
                 <tr class="table-success">
@@ -101,10 +101,10 @@
         </form>
         
         <hr style="margin-bottom: 20px;">
-        <h4 style="margin-left:20px; padding-top: 20px; margin-bottom: 20px;">확정자 명단</h4>
+        <Label style="margin-left:20px; padding-top: 20px;" class="text--20-normal">확정자 명단</Label><br>
         
-        <label for="formGroupExampleInput2" class="form-label">날짜 선택 : </label>
-        <input type="hidden" value="${user.m_number}" id="m_number">
+        <label for="formGroupExampleInput2" class="text--16-normal">날짜 선택 : </label>
+        <input type="hidden" style="width:9rem; height:25px;" value="${user.m_number}" id="m_number">
         <input type="text" id="datepicker" >
 
         <button type="button" class="btn" id="excelDownload" onclick="excel_function()">Excel</button>

@@ -31,16 +31,17 @@ function fn_loginCheck() {
             } else if (result.msg == "idFail") {
                swal({
 					title: "로그인 실패.",
-					text: "E_mail을 확인하세요",
+					text: "E_mail이 없습니다. E_mail을 확인해 주세요.",
 					icon : "error",
 				}, function(){
 					location.reload();
 				});
             } else if (result.msg == "hos_success") {
+            sessionStorage.setItem('m_sido', result.m_sido);
                 swal({
 					title: "로그인 성공.",
 					icon : "success",
-					text: "[제휴 병원]으로 로그인 되었습니다.",
+					text: "환영합니다. 제휴병원에서 로그인 되었습니다.",
 				}, function(){			
 					window.location.href ="/home.do";
 					$("#login_Div").hide();
@@ -50,7 +51,7 @@ function fn_loginCheck() {
                swal({
 					title: "로그인 실패.",
 					icon : "error",
-					text: "비밀번호를 확인하세요"
+					text: "비밀번호가 일치하지 않습니다. 비밀번호를 확인하세요."
 				}, function(){
 					location.reload();
 				});
@@ -58,14 +59,15 @@ function fn_loginCheck() {
             	swal({
 					title: "로그인 실패.",
 					icon : "error",
-					text: "탈퇴 된 E_mail입니다.\n 회원가입으로 이동합니다."
+					text: "탈퇴 된 E_mail입니다.\n 6개월 후 사용가능하며, 다른 E_mail로 가입해주세요 \n 회원가입으로 이동합니다."
 				}, function(){
 					window.location.href ="/signinForm.do";
 				});
             } else {
+            sessionStorage.setItem('m_sido', result.m_sido);
                 swal({
 					title: "로그인 성공.",
-					text: "[일반 회원]으로 로그인 되었습니다.",
+					text: "환영합니다. 성공적으로 로그인 되었습니다.",
 					icon : "success",
 				}, function(){
 					window.location.href ="/home.do";					

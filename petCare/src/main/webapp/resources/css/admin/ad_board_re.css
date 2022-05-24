@@ -9,9 +9,10 @@ a{
 .en_insertBtn a{
     color: mediumseagreen;
 }
-.en_insertBtn{
+.en_insertBtn1{
     border : 0px;
     position: absolute;
     right: 1.5%;
     align-items: center;
+    background-color: red;
 }

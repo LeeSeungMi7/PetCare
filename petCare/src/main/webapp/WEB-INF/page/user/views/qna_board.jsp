@@ -42,20 +42,19 @@
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1e818982c81810e2470dd6b0b339e676&libraries=services"></script>
 
 <script>
-
 function onclickOk(){
-		var c_content= $("#c_content").val();
-		console.log(c_content);
+	var c_content= $("#c_content").val();
+	console.log(c_content);
 
-		if(c_content == ""){
-			alert("내용을 입력하세요.");
-			document.getElementById("c_content").focus();
-			console.log
-			return false;
-		}
-		alert("등록되었습니다.")
-		document.getElementById("form12").submit();
+	if(c_content == ""){
+		swal('내용을 입력해주세요.', 'error');
+		document.getElementById("c_content").focus();
+		console.log
+		return false;
 	}
+	swal('등록되었습니다.');
+	document.getElementById("form12").submit();
+}
 
 function onClickComment(index) {
 	const comment = document.getElementsByClassName('comment-text')[index]
@@ -204,7 +203,7 @@ function onClickComment(index) {
 						role="button">삭제</a>
 				</c:if>
 				<c:if test="${user.m_number != null}">
-					<a class="btn btn-success" href="#" role="button">글 작성</a>
+					<a class="btn btn-success" href="qna_write.do" role="button">글 작성</a>
 				</c:if>
 			</div>
 		</div>

@@ -69,7 +69,7 @@ public class QnaController {
 	public String qna_write(@ModelAttribute QnaVO qnaVO, @RequestParam("qna_file")MultipartFile file) {
 		if(file.getOriginalFilename() == "" || file.getOriginalFilename()== null) {
 			qnaVO.setF_file_name(null);
-			qnaVO.setF_file_path(null);
+			qnaVO.setF_file_path("https://seungbuc.s3.ap-northeast-2.amazonaws.com/null_img.png");
 			qnaService.qnaInsert(qnaVO);
 		}else {
 		qnaVO.setF_file_name(file.getOriginalFilename());
@@ -182,9 +182,7 @@ public class QnaController {
 		ModelAndView mav = new ModelAndView();
 		qnaVO = qnaService.rewrite_view(faq_num);
 		mav.addObject("rewrite_view", qnaVO);
-		System.out.println("rewrite.do1" + qnaVO.toString());
 		mav.setViewName("/qna_rewrite");
-		System.out.println("rewrite.do2" + qnaVO.toString());
 		return mav;
 	}
 	@RequestMapping(value="qna_update.do", method=RequestMethod.POST)

@@ -41,12 +41,14 @@ public class AdminController {
 		if(result == true) {
 			mav.setViewName("ad_charts");
 			mav.addObject("msg", "success");
+			session.setAttribute("admin", result);
 		}else {
 			mav.setViewName("ad_login");
 			mav.addObject("msg", "failure");
 		}
 		return mav;
 	}
+	
 	
 	@GetMapping("/logout.mdo")
 	public ModelAndView logout(HttpSession session) {

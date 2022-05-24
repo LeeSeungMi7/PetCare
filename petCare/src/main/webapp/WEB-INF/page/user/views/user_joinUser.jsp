@@ -57,7 +57,7 @@
 			                <label>이메일</label>
 			                <div class="join-user__items--row" style="justify-content: space-between">
 			                    <input id="user_email" type="email" oninput="onInputInvalid('email')" name="m_id" />
-			                    <button class="button_class" onclick="checkemail()">인증</button>
+			                    <button type="button" class="button_class" onclick="checkemail()">인증</button>
 			                </div>
 			                <span class="error_next_box" id="error_email" aria-live="assertive"></span>
 			            </div>
@@ -289,7 +289,7 @@ function checkemail() {
 	const emailFormat = /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/
 			.test(email)
 	if (!emailFormat) {
-		return;
+		return false;
 	} else {
 		$.ajax({
 			type : "post",
@@ -313,8 +313,9 @@ function checkemail() {
 				alert("error : " + error);
 			}
 		});
+		return false;
 	}
-
+	return false;
 }
 
 </script>

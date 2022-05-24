@@ -20,7 +20,7 @@
 <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
 	crossorigin="anonymous"></script>
 
-<link href="/resources/css/admin/ad_commboard.css?after" rel="stylesheet" />
+<link href="/resources/css/admin/new_ad_commboard.css?after" rel="stylesheet" />
 <link href="/resources/css/admin/styles.css" rel="stylesheet" />
 <link href="/resources/css/admin/morris.css" rel="stylesheet" />
 

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hospital"> 
+	<select id="commentList" resultType="HospitalVO">
+		select RT.*, MT.m_name as rw_writer
+		from (select * from Review_Table
+		where rw_partner_number = #{rw_partner_number}) RT join Member_Table MT
+		where MT.m_number = RT.rw_number
+		order by RT.rw_date desc limit ${skip}, ${size}
+	</select>
+	<select id="totalpage" resultType="int">
+	select count(*) from Review_Table where rw_partner_number =#{rw_partner_number}
+	</select>
+	<insert id="hospital_reply_write">
+	insert into Review_Table (rw_number, rw_content, rw_date, rw_partner_number)
+	values(#{rw_number}, #{rw_content}, #{rw_date}, #{rw_partner_number})
+	</insert>
+	<select id="hospital_alliance">
+	select * from Member_Table where m_address_class=#{m_address_class}
+	</select>
+	<select id="hospital_reservation_mypet" parameterType="integer" resultType="MyPetVO">
+		select * from MyPet_Table where mp_number=#{m_number};
+	</select>
+	<select id="search_for_map_ids" resultType="MemberVO">
+		select * from Member_Table where m_address_class in (
+		<foreach collection="array" item="item" index="index" separator=",">
+			${item}
+		</foreach>)
+	</select>
+</mapper>

@@ -62,28 +62,31 @@ public class User_myPageController {
 	}
 	
 	@RequestMapping(value="/user_myPage_update.do")
-	public ModelAndView user_myPage_update(@RequestParam int m_number) {
-		
-		
-		MemberVO memberVO;
-		List<MyPetVO> myPetVO = new ArrayList<MyPetVO>();
+	public ModelAndView user_myPage_update(@RequestParam int m_number, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-		
-		memberVO = user_mypageService.user_mypage(m_number);
-		myPetVO = user_mypageService.user_myPet(m_number);
-				
-		if(memberVO.getM_tel() != null) {
-		    String tel[] = memberVO.getM_tel().split("-");
-		    memberVO.setM_tel1(tel[0]);
-		    memberVO.setM_tel2(tel[1]);
-		    memberVO.setM_tel3(tel[2]);
+		MemberVO member = (MemberVO) session.getAttribute("user");
+		if(member.getM_number() != m_number) {
+			mav.setViewName("/home");
+		}else {
+			MemberVO memberVO;
+			List<MyPetVO> myPetVO = new ArrayList<MyPetVO>();
+	
+			
+			memberVO = user_mypageService.user_mypage(m_number);
+			myPetVO = user_mypageService.user_myPet(m_number);
+					
+			if(memberVO.getM_tel() != null) {
+			    String tel[] = memberVO.getM_tel().split("-");
+			    memberVO.setM_tel1(tel[0]);
+			    memberVO.setM_tel2(tel[1]);
+			    memberVO.setM_tel3(tel[2]);
+			}
+			
+			mav.addObject("member",memberVO);
+			mav.addObject("mypet",myPetVO);
+	
+			mav.setViewName("/user_update");
 		}
-		
-		mav.addObject("member",memberVO);
-		mav.addObject("mypet",myPetVO);
-
-		mav.setViewName("/user_update");
-
 		return mav;
 		
 	}
@@ -121,7 +124,7 @@ public class User_myPageController {
 				
 			}
 		}
-		return "home";
+		return "redirect:/logout.do";
 	}
 	
 	//내펫 삭제
@@ -136,40 +139,45 @@ public class User_myPageController {
 	
 	//내 예약 현황
 	@RequestMapping("/user_myreservation.do")
-	public ModelAndView myreservation(@RequestParam int m_number, @RequestParam(defaultValue="0") int pageNum) {
-
-		Criteria criteria;
-		
+	public ModelAndView myreservation(@RequestParam int m_number, @RequestParam(defaultValue="0") int pageNum, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
-	
-		if(pageNum == 0) {
-			criteria = new Criteria(1,10); //10글까지 보이게
+		
+		MemberVO member = (MemberVO) session.getAttribute("user");
+		
+		if(member.getM_number()!= m_number) {
+			mav.setViewName("/home");
 		}else {
-			criteria = new Criteria(pageNum,10);
+			Criteria criteria;
+			
+		
+			if(pageNum == 0) {
+				criteria = new Criteria(1,10); //10글까지 보이게
+			}else {
+				criteria = new Criteria(pageNum,10);
+			}
+			criteria.setM_number(m_number);
+			
+			List<ReservationVO> reservationList = new ArrayList<ReservationVO>();
+	        
+			reservationList = user_mypageService.reservation(criteria);
+			criteria.setTotal(user_mypageService.totalpage(criteria));
+	//		log.info("total : " + total);
+	//		log.info("criteria.getSize() : " + criteria.getSize());
+	//		log.info("(int)Math.ceil(total/criteria.getSize()) : " + (int)Math.ceil(total *1.0/criteria.getSize()));
+			
+			criteria.setTotal_page((int)Math.ceil(criteria.getTotal() *1.0/criteria.getSize()));
+			criteria.setBlock_num((int)Math.ceil(criteria.getSize() / 10));
+			criteria.setBlock_start(((criteria.getBlock_num() -1) *5)+1);
+			criteria.setBlock_end(criteria.getBlock_start()+5 -1);
+			
+			if(criteria.getBlock_end() > criteria.getTotal_page()) {
+				criteria.setBlock_end(criteria.getTotal_page());
+			}
+	//		System.out.println(reservationList.toString());
+			mav.addObject("reser", reservationList);
+			mav.addObject("criteria", criteria);
+			mav.setViewName("/myreservation");
 		}
-		criteria.setM_number(m_number);
-		
-		List<ReservationVO> reservationList = new ArrayList<ReservationVO>();
-        
-		reservationList = user_mypageService.reservation(criteria);
-		criteria.setTotal(user_mypageService.totalpage(criteria));
-//		log.info("total : " + total);
-//		log.info("criteria.getSize() : " + criteria.getSize());
-//		log.info("(int)Math.ceil(total/criteria.getSize()) : " + (int)Math.ceil(total *1.0/criteria.getSize()));
-		
-		criteria.setTotal_page((int)Math.ceil(criteria.getTotal() *1.0/criteria.getSize()));
-		criteria.setBlock_num((int)Math.ceil(criteria.getSize() / 10));
-		criteria.setBlock_start(((criteria.getBlock_num() -1) *5)+1);
-		criteria.setBlock_end(criteria.getBlock_start()+5 -1);
-		
-		if(criteria.getBlock_end() > criteria.getTotal_page()) {
-			criteria.setBlock_end(criteria.getTotal_page());
-		}
-//		System.out.println(reservationList.toString());
-		mav.addObject("reser", reservationList);
-		mav.addObject("criteria", criteria);
-		mav.setViewName("/myreservation");
-		
 
 		return mav;
 	}

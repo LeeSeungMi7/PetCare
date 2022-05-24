@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -79,8 +80,14 @@ public class Ad_boardController {
 	}
 
 	@GetMapping("/en_insert.mdo")
-	public String ad_chartsGet() {
-		return "/en_insert";
+	public String ad_chartsGet(HttpSession session) {
+		String url ="";
+		if(session.getAttribute("admin")== null) {
+			url="/ad_login";
+		}else {
+			url="/en_insert";
+		}
+		return url;
 	}
 
 	@RequestMapping(value = "/eninsert.mdo", method = RequestMethod.POST)

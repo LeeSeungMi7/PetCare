@@ -51,7 +51,7 @@
 						<!--사용자이름-->
 						<div class="join-user__items">
 							<label>이름</label> 
-							<input type="text" value="${member.m_name}" readonly="readonly" >
+							<input type="text" value="${member.m_name}" readonly="readonly" name="m_name">
 							<span class="error_next_box" id="error_email" aria-live="assertive">
 							이름은 수정 불가능 합니다.</span>
 						</div>

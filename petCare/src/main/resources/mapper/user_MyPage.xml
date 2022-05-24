@@ -40,7 +40,7 @@
 	
 	<!-- 회원정보 수정 -->
 	<update id="modifyUser" parameterType="MemberVO">
-	update Member_Table set m_pw=#{m_pw}, m_tel=#{m_tel},m_zipcode=#{m_zipcode}, m_address=#{m_address},m_address_detail=#{m_address_detail}, m_sido=#{m_sido},m_dong=#{m_dong} where m_number=#{m_number}	
+	update Member_Table set m_name=#{m_name}, m_pw=#{m_pw}, m_tel=#{m_tel},m_zipcode=#{m_zipcode}, m_address=#{m_address},m_address_detail=#{m_address_detail}, m_sido=#{m_sido},m_dong=#{m_dong} where m_number=#{m_number}	
 	</update>
 	
 	<delete id="reservation_delete">
