@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,8 +59,6 @@ function onClickComment(index) {
 
 </script>
 
-
-
 </head>
 <body>
 <div id="pet-layout" class="background--white">
@@ -69,7 +68,7 @@ function onClickComment(index) {
     <div id="map" style="width:100%;height:300px;"></div>
     <div class="pet-hospital-detail__info-text" id="infos"></div>
 </div>
-
+ <c:if test="${criteria.rw_partner_number != 0}">
 <div class="pet-hospital-detail__reviews">
     <div class="comment">
         <!--리뷰 추가-->
@@ -97,7 +96,7 @@ function onClickComment(index) {
 									<td>${comment.rw_date}</td>
 									<c:if test="${user.m_number == comment.rw_number}">
 									<td>
-										<a role="button" href="#" class="btn-close cancle" aria-label="Close"></a>
+										<a role="button" href="${path}/hospital_reply_delete.do?review_num=${comment.review_num}" class="btn-close cancle" aria-label="Close"></a>
 									</td>
 									</c:if>
 								</tr>
@@ -133,15 +132,20 @@ function onClickComment(index) {
 				</div>
 				<hr>
 				<c:if test="${user.m_number != null}">
+					<script>
+						window.user_number = ${user.m_number};
+						window.user_role = ${user.m_role}
+					</script>
 					<form id="form12" name="ReplyVO" method="POST" onsubmit="return onclickOk()" action="hospital_reply_write.do" enctype="multipart/form-data">
 						<div>
 							<div class="form-floating">
 								<textarea class="commentbox form-control" id="floatingTextarea2" name="rw_content"></textarea>
 								<label for="floatingTextarea2">리뷰 작성</label>
 							</div>
+						<input type="hidden" name="rw_partner_number" value="${criteria.rw_partner_number}">
 						<input type="hidden" name="rw_writer" value="${user.m_name}">
 						<input type="hidden" name="rw_number" value="${user.m_number}">
-							<input type="hidden" name="rw_partner_number" value="${criteria.rw_partner_number}">
+					
 							<input type="submit" class="btn btn-success" id="btnReply" role="button" value="댓글 등록">
 						</div>
 					</form>
@@ -157,13 +161,14 @@ function onClickComment(index) {
     		<!-- 페이징 처리 폼 -->
 		<form action="/hospital_detail.do" name="pageNumform">
 			<input type="hidden" name="pageNum" id="pageNumId" value="">
-			<input type="hidden" name="rw_partner_number" value="${criteria.rw_partner_number}">
+			<input type="hidden" name="m_number" value="${criteria.rw_partner_number}">
 		</form>
 </div>
+</c:if>
 <%@ include file="/WEB-INF/page/user/views/footer.jsp"%>
 	<script type="text/javascript">
 function fnSubmitForm(page){
-		document.getElementById("pageNumId").value =page;
+		document.getElementById("pageNumId").value = page;
 		document.pageNumform.submit(); 
 }
 </script>

@@ -35,21 +35,64 @@
   <!-- 경은이 카카오 MAP API-KEY -->
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1e818982c81810e2470dd6b0b339e676&libraries=services"></script>
 <script>
-function checkboacArr(){
-	var checkArr=[]; //배열의 초기화
-	$("input[name='pet']:checked").each(function(i)) {
-        checkArr.push($(this).val());     // 체크된 것만 값을 뽑아서 배열에 push
+
+function onClickCancel() {
+	swal('취소되었습니다.', 'error');
+	window.location.href ="/hospital.do";	
+}
+
+function onClickSubmit(){
+    const date = $('#datepicker1').val();
+    const hour = $('#hour').val();
+	const petNums =[]; 
+	$("input[name='pet']:checked").each(function(i) {
+        petNums.push(Number($("input[name='pet']:checked")[i].value))
+    });
+
+    const urlParams = new URLSearchParams(window.location.search)
+    let rvInfo = {}
+
+    for (const entry of urlParams.entries()) {
+        rvInfo[entry[0]] = entry[1];
     }
+
+    if (!date || !hour) {
+		swal('예약 날짜를 입력해주세요.', 'error');
+        return;
+    }
+
+    if (petNums.length === 0) {
+		swal('선택된 동물이 없습니다.', 'error');
+        return;
+    }
+
+    if (!rvInfo['m_number'] || !rvInfo['hospital_number']) {
+		swal('정보가 옳바르지 않습니다.', 'error');
+        return;
+    }
+
+
     $.ajax({
-        url: 'hospital_reservation_my_pet'
-        , type: 'post'
-        , dataType: 'text'
-        , data: {
-        	myPet: checkArr
+        url: '/hospital_reservation_form.do',
+        type: 'post',
+        data: {
+            userNum: Number(rvInfo['m_number']),
+            hospitalNum: Number(rvInfo['hospital_number']),
+            rvDate: date,
+            rvHour: hour,
+            myPets: petNums.join(',')
+        },
+        success: function(data) {
+            swal({
+                title: "예약신청이 완료되었습니다.",
+                text: "확정시 병원에서 개별적으로 연락드립니다.",
+                icon : "success",
+            }, function(){
+                window.location.href ="/hospital.do";
+            });
         }
     });
 }
-
 
 </script>
 
@@ -59,23 +102,22 @@ function checkboacArr(){
 <body>
 <div id="pet-layout" class="background--white">
 	<%@ include file="/WEB-INF/page/user/views/header.jsp"%>
-<form method="post" action="/.do" enctype="multipart/form-data">
         <div class="board p-3 mb-5 bg-body rounded">
             <div class="mb-3">
                 <label for="formGroupExampleInput" class="form-label">병원 이름</label>
-                <input type="text" class="titlebox form-control" id="formGroupExampleInput" placeholder="">
+                <input type="text" class="titlebox form-control" id="formGroupExampleInput" value="${hospital.m_name}" disabled>
             </div>
             <div class="mb-3">
                 <label for="formGroupExampleInput2" class="form-label">예약자 성함</label>
-                <input type="text" class="namebox form-control" id="formGroupExampleInput2">
+                <input type="text" class="namebox form-control" id="formGroupExampleInput2" value="${user.m_name}" disabled>
             </div>
             <input type="hidden" value="${user.m_number}" name="m_number">
             
             <div class="mb-3">
                 <label for="formGroupExampleInput2" class="form-label">날짜 선택</label>
                 <div class="dateselect">
-                    <input type="text" id="datepicker1" class="datepick" readonly>
-                    <select name="job">
+                    <input type="text" id="datepicker1" class="datepick" name="rv_date" readonly>
+                    <select id="hour" name="rv_time">
                         <option value="">시간선택</option>
                         <option value="오전 9시">오전 9시</option>
                         <option value="오전 10시">오전 10시</option>
@@ -104,7 +146,7 @@ function checkboacArr(){
                         <tbody>
                         <c:forEach var ="mypet" items="${mypet}" varStatus="status"> 
                             <tr>
-                                <th scope="row"><input type="checkbox" name="pet"></th>
+                                <th scope="row"><input type="checkbox" name="pet" value="${mypet.myPet_num}"></th>
                                 <td>${mypet.mp_petName}</td>
                                 <td>${mypet.mp_petAge} 살</td>
                                 <td>${mypet.mp_petGender} </td>
@@ -114,10 +156,9 @@ function checkboacArr(){
                     </table>
                 </div>
             </div>
-            <a class="btn btn-primary" href="" role="button">예약하기</a>
-            <a class="btn btn-secondary" href="" role="button">취소</a>
+            <button class="btn btn-primary" href="hospital.do" role="button" onclick="onClickSubmit()">예약하기</button>
+            <button class="btn btn-secondary" href="hospital.do" role="button" onclick="onClickCancel()">취소</button>
         </div>
-</form>
 
 
 <div class="pet-footer">

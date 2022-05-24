@@ -17,6 +17,7 @@
 		<typeAlias alias="Ad_encyVO" type="com.petcare.web.admin.vo.Ad_encyVO"/>
 		<typeAlias alias="ChartVO" type="com.petcare.web.admin.vo.ChartVO"/>
 		<typeAlias alias="HospitalVO" type="com.petcare.web.user.vo.HospitalVO"/>
+		<typeAlias alias="AnimalReservationVO" type="com.petcare.web.user.vo.AnimalReservationVO"/>
 		
 	</typeAliases>
 	

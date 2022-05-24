@@ -17,11 +17,17 @@
 	insert into Review_Table (rw_number, rw_content, rw_date, rw_partner_number)
 	values(#{rw_number}, #{rw_content}, #{rw_date}, #{rw_partner_number})
 	</insert>
+	<delete id="hospital_reply_delete">
+	delete from Review_Table where review_num = #{review_num}
+	</delete>
 	<select id="hospital_alliance">
 	select * from Member_Table where m_address_class=#{m_address_class}
 	</select>
 	<select id="hospital_reservation_mypet" parameterType="integer" resultType="MyPetVO">
 		select * from MyPet_Table where mp_number=#{m_number};
+	</select>
+	<select id="hospitalDetail" parameterType="integer" resultType="MemberVO">
+		select * from Member_Table where m_number=#{hospital_number};
 	</select>
 	<select id="search_for_map_ids" resultType="MemberVO">
 		select * from Member_Table where m_address_class in (
@@ -29,4 +35,12 @@
 			${item}
 		</foreach>)
 	</select>
+	<insert id="hospitalInsert" parameterType="ReservationVO" useGeneratedKeys="true" keyColumn="reservation_num" keyProperty="reservation_num">
+	insert into Reservation_Table (rv_number, rv_partner_number, rv_date, rv_time, rv_access)
+	values(#{rv_number}, #{rv_partner_number}, #{rv_date}, #{rv_time}, #{rv_access})
+	</insert>
+	<insert id="hospitalRsvn">
+	insert into Animal_Reservation_Table (animal_num, reservation_num)
+	values(#{animal_num}, #{reservation_num})
+	</insert>
 </mapper>

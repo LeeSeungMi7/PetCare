@@ -1,9 +1,12 @@
 package com.petcare.web.user.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,10 +18,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.petcare.web.user.service.HospitalService;
+import com.petcare.web.user.vo.AnimalReservationVO;
 import com.petcare.web.user.vo.Criteria;
 import com.petcare.web.user.vo.HospitalVO;
 import com.petcare.web.user.vo.MemberVO;
 import com.petcare.web.user.vo.MyPetVO;
+import com.petcare.web.user.vo.ReservationVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,10 +43,6 @@ public class HospitalController {
 	public String hospitalGet() {
 		return "hospital";
 	}
-//	@RequestMapping("/hospital_detail.do")
-//	public String hospitaldetailGet() {
-//		return "hospital_detail";
-//	}
 	
 	@RequestMapping("/hospital_reservation.do")
 	public String hospitalreservationGet() {
@@ -50,11 +51,8 @@ public class HospitalController {
 	
 	//병원 상세보기
 	@RequestMapping(value="hospital_detail.do")
-	public ModelAndView hospital_view(@RequestParam int m_number, @RequestParam(defaultValue="0")int pageNum) {
-		System.out.println("들어옴");
-		System.out.println("m_number: " + m_number);
+	public ModelAndView hospital_view(@RequestParam(defaultValue="0") int m_number, @RequestParam(defaultValue="0")int pageNum) {
 		Criteria criteria;
-		
 		
 		if(pageNum == 0) {
 			criteria = new Criteria();
@@ -77,7 +75,6 @@ public class HospitalController {
 			criteria.setBlock_end(criteria.getTotal_page());
 		}
 		
-		System.out.println("crt" + criteria.toString());
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("hos_com", cv);
 		mav.addObject("criteria", criteria);
@@ -87,9 +84,14 @@ public class HospitalController {
 	}
 	@RequestMapping(value="hospital_reply_write.do", method=RequestMethod.POST)
 	public String hospital_reply_write(@ModelAttribute HospitalVO hospitalVO) {
-		System.out.println("reply_write" + hospitalVO.toString());
 		hospitalService.hospital_reply_write(hospitalVO);
-		System.out.println("reply_write" + hospitalVO.toString());
+		return "redirect:/hospital.do";
+		
+	}
+	
+	@RequestMapping(value="hospital_reply_delete.do")
+	public String hospital_reply_delete(HospitalVO hospitalVO) {
+		hospitalService.hospital_reply_delete(hospitalVO);
 		return "redirect:/hospital.do";
 		
 	}
@@ -113,30 +115,55 @@ public class HospitalController {
 	
 	
 	
-	
 	//펫예약
 	@RequestMapping(value="/hospital_reservation_mypet.do")
-	public ModelAndView hospital_reservation_mypet(@RequestParam int m_number) {
-		
+	public ModelAndView hospital_reservation_mypet(@RequestParam int m_number, @RequestParam int hospital_number) {
 		List<MyPetVO> myPetVO = new ArrayList<MyPetVO>();
 		ModelAndView mav = new ModelAndView();
+
+
+		MemberVO hospitalDetailInfo = hospitalService.hospitalDetail(hospital_number);
 		myPetVO = hospitalService.hospital_reservation_mypet(m_number);
 		mav.addObject("mypet", myPetVO);
-		
+		mav.addObject("hospital", hospitalDetailInfo);
+
 		mav.setViewName("/hospital_reservation_mypet");
-		
+
 		return mav;
 	}
-	@RequestMapping(value="hospital_reservation_form.do")
-	public String hospital_reservation_form(@ModelAttribute MyPetVO myPetVO) {
-		return null;
+	
+	
+	
+	@ResponseBody
+	@RequestMapping(value="hospital_reservation_form.do", method=RequestMethod.POST)
+	public String hospital_reservation_form(@RequestParam int userNum, @RequestParam int hospitalNum, @RequestParam String rvDate, @RequestParam String rvHour, @RequestParam String myPets) {
+	  
+	  
+	  String[] myPetsArray = myPets.split(",");
+	  int[] myPetsToInt = new int[myPetsArray.length];
+
+	  
+	  ReservationVO reservationVO = new ReservationVO();
+	  
+	  reservationVO.setRv_number(userNum);
+	  reservationVO.setRv_partner_number(hospitalNum);
+	  reservationVO.setRv_date(rvDate);
+	  reservationVO.setRv_time(rvHour);
+	  reservationVO.setRv_access("0");
+
+	  hospitalService.hospitalInsert(reservationVO);
+	  
+	  int reservation_num = reservationVO.getReservation_num();
+	  reservationVO.setReservation_num(reservation_num);
+	  
+	  
+	  for(int i = 0; i < myPetsArray.length; i++) {
+		    AnimalReservationVO animalReservationVO = new AnimalReservationVO(Integer.parseInt(myPetsArray[i]), reservation_num);
+		    hospitalService.hospitalRsvn(animalReservationVO);
+		  }
+	  
+	  return "null";
 	}
-//	
-//	@RequestMapping(value="/hospital_reservation_my_pet", method=RequestMethod.POST)
-//	@ResponseBody
-//	public void hospital_reservation_my_pet(value="myPet[]")List<String> myPetRV{
-//		
-//	}
 
 	
 }
