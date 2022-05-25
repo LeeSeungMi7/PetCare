@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,8 +42,14 @@ public class Ad_chartController {
 		return chart;
 	}
 	@GetMapping("/ad_charts.mdo")
-	public String ad_chartsGet() {
-		return "ad_charts";
+	public String ad_chartsGet(HttpSession session) {
+		String url ="";
+		if(session.getAttribute("admin")== null) {
+			url="/ad_login";
+		}else {
+			url="/ad_charts";
+		}
+		return url;
 	}
 	@RequestMapping("/ad_barchart.mdo")
 	@ResponseBody

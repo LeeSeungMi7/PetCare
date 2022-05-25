@@ -86,7 +86,7 @@ public class LoginController {
 	@RequestMapping(value="/logout.do")
 	public String logout(HttpSession session) {
 		memberService.logout(session);
-		return "/home";
+		return "redirect:/home.do";
 	}
 }
 

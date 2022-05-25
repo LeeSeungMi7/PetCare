@@ -5,14 +5,18 @@
 <mapper namespace="Home">
 
 	<select id="Show" resultType="ShowVO">
-	select * from Board_Table order by board_num desc limit 0, 4;
+	select * from Board_Table order by board_num desc limit 0, 4
 	</select>
 	
 	<select id="Qna" resultType="QnaVO">
-	select * from FAQ_Table order by faq_num desc limit 0, 4;
+	select * from FAQ_Table order by faq_num desc limit 0, 4
 	</select>
 	
 	<select id="Ency" resultType="Ad_encyVO">
-	select * from Encyclopedia_Table order by en_number desc limit 0, 4;
+	select * from Encyclopedia_Table order by en_number desc limit 0, 4
+	</select>
+	
+	<select id="hospital" resultType="MemberVO">
+	select * from Member_Table where m_role='1' and m_access='0' order by m_number desc limit 0,3
 	</select>
 </mapper>

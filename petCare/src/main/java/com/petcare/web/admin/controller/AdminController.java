@@ -41,6 +41,7 @@ public class AdminController {
 		if(result == true) {
 			mav.setViewName("ad_charts");
 			mav.addObject("msg", "success");
+			mav.addObject("admin", result);
 			session.setAttribute("admin", result);
 		}else {
 			mav.setViewName("ad_login");
@@ -60,10 +61,15 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/ad_hospital.mdo", method = RequestMethod.GET)
-	public ModelAndView ad_hospitalGet(Model model) throws Exception{
+	public ModelAndView ad_hospitalGet(Model model,HttpSession session) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("AccHosList", adminService.getAccHosList());
 		mav.addObject("UnAccHosList", adminService.getUnAccHosList());
+		if(session.getAttribute("admin")== null) {
+			mav.setViewName("/ad_login");
+		}else {
+			mav.setViewName("/ad_hospital");
+		}
 		return mav;
 	}
 	
@@ -89,8 +95,14 @@ public class AdminController {
 	
 	
 	@RequestMapping(value = "/ad_user.mdo", method = RequestMethod.GET) 
-	public String ad_userGet(Model model) throws Exception{
+	public String ad_userGet(Model model,HttpSession session) throws Exception{
 		model.addAttribute("userList", adminService.getUserList()); 
-		return "ad_user"; 
+		String url ="";
+		if(session.getAttribute("admin")== null) {
+			url="/ad_login";
+		}else {
+			url="/ad_user";
+		}
+		return url;
 	}
 }

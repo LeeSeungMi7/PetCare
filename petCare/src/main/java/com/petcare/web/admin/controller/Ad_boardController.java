@@ -37,50 +37,66 @@ public class Ad_boardController {
 	}
 
 	@RequestMapping(value = "/ad_community.mdo")
-	public ModelAndView ad_communityGet(Model model) throws Exception {
+	public ModelAndView ad_communityGet(Model model,HttpSession session) throws Exception {
 		Criteria Criteria = null;
 		ModelAndView mav = new ModelAndView();
 		List<Ad_boardVO> showList = new ArrayList<Ad_boardVO>();
 		showList = ad_boardService.ad_board_page(Criteria);
 		mav.addObject("Cm_BoardList", showList);
-		mav.setViewName("/ad_community");
+		if(session.getAttribute("admin")== null) {
+			mav.setViewName("/ad_login");
+		}else {
+			mav.setViewName("/ad_community");
+		}
 		return mav;
 	}
 
 	@RequestMapping(value = "/ad_encyclopedia.mdo")
-	public ModelAndView ad_encyclopediaGet(Model model) throws Exception {
+	public ModelAndView ad_encyclopediaGet(Model model,HttpSession session) throws Exception {
 		Criteria Criteria = null;
 		ModelAndView mav = new ModelAndView();
 		List<Ad_encyVO> showList = new ArrayList<Ad_encyVO>();
 		showList = ad_boardService.ad_enboard_page(Criteria);
 		mav.addObject("En_BoardList", showList);
-		mav.setViewName("/ad_encyclopedia");
+		if(session.getAttribute("admin")== null) {
+			mav.setViewName("/ad_login");
+		}else {
+			mav.setViewName("/ad_encyclopedia");
+		}
 		return mav;
 	}
 
 	// 자랑하기 글 상세보기
 	@RequestMapping("/comm_getboard.mdo")
-	public ModelAndView board_view(@RequestParam int board_num) {
+	public ModelAndView board_view(@RequestParam int board_num,HttpSession session) {
 		Ad_boardVO ad_boardVO;
 		ModelAndView mav = new ModelAndView();
 		ad_boardVO = ad_boardService.read(board_num);
 		mav.addObject("CM_view", ad_boardVO);
-		mav.setViewName("/comm_getBoard");
+		if(session.getAttribute("admin")== null) {
+			mav.setViewName("/ad_login");
+		}else {
+			mav.setViewName("/comm_getBoard");
+		}
 		return mav;
 	}
 
 	@RequestMapping("/en_getboard.mdo")
-	public ModelAndView en_getBoardGet(@RequestParam int en_number) {
+	public ModelAndView en_getBoardGet(@RequestParam int en_number,HttpSession session) {
 		Ad_encyVO ad_encyVO;
 		ModelAndView mav = new ModelAndView();
 		ad_encyVO = ad_boardService.enread(en_number);
 		mav.addObject("En_view", ad_encyVO);
-		mav.setViewName("/en_getBoard");
+		if(session.getAttribute("admin")== null) {
+			mav.setViewName("/ad_login");
+		}else {
+			mav.setViewName("/en_getBoard");
+		}
 		return mav;
 	}
 
 	@GetMapping("/en_insert.mdo")
-	public String ad_chartsGet(HttpSession session) {
+	public String ad_insertGet(HttpSession session) {
 		String url ="";
 		if(session.getAttribute("admin")== null) {
 			url="/ad_login";

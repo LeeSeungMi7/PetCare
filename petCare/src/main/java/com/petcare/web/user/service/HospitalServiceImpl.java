@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.petcare.web.user.dao.HospitalDAO;
+import com.petcare.web.user.vo.AnimalReservationVO;
 import com.petcare.web.user.vo.Criteria;
 import com.petcare.web.user.vo.HospitalVO;
 import com.petcare.web.user.vo.MemberVO;
 import com.petcare.web.user.vo.MyPetVO;
+import com.petcare.web.user.vo.ReservationVO;
 
 @Service
 public class HospitalServiceImpl implements HospitalService{
@@ -43,6 +45,32 @@ public class HospitalServiceImpl implements HospitalService{
 	public List<MemberVO> hospitalSearchForMapIds(int[] mapIds) {
 		return hospitalDAO.hospitalSearchForMapIds(mapIds);
 	}
+
+	@Override
+	public void hospital_reply_delete(HospitalVO hospitalVO) {
+		hospitalDAO.hospital_reply_delete(hospitalVO);
+		
+	}
+
+	@Override
+	public MemberVO hospitalDetail(int hospital_number) {
+		return hospitalDAO.hospitalDetail(hospital_number);
+	}
+
+	@Override
+	public void hospitalInsert(ReservationVO reservationVO) {
+		hospitalDAO.hospitalInsert(reservationVO);
+		
+	}
+
+	@Override
+	public void hospitalRsvn(AnimalReservationVO animalReservationVO) {
+		hospitalDAO.hospitalRsvn(animalReservationVO);
+		
+	}
+
+
+
 
 
 

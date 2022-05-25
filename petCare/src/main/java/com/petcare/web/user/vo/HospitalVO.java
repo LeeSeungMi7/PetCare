@@ -16,5 +16,6 @@ public class HospitalVO {
 	String rw_date = dateFormat.format(time); //시간
 	private String rw_writer; //작성자
 	private int m_address_class; //병원ip
+	private String rw_name; //병원이름
 
 }

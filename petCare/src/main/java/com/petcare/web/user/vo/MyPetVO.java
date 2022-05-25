@@ -11,5 +11,4 @@ public class MyPetVO {
 	private String mp_petAge;
 	private String mp_petGender;
 	private String mp_sugery;
-	private String m_name;
 }

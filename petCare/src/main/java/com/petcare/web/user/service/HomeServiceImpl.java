@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.petcare.web.admin.vo.Ad_encyVO;
 import com.petcare.web.user.dao.HomeDAO;
+import com.petcare.web.user.vo.MemberVO;
 import com.petcare.web.user.vo.QnaVO;
 import com.petcare.web.user.vo.ShowVO;
 
@@ -29,6 +30,11 @@ public class HomeServiceImpl implements HomeService {
 	@Override
 	public List<Ad_encyVO> ency() {
 		return homeDAO.ency();
+	}
+
+	@Override
+	public List<MemberVO> hospital() {
+		return homeDAO.hospital();
 	}
 
 }

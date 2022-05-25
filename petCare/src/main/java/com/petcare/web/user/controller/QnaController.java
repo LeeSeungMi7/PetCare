@@ -69,7 +69,7 @@ public class QnaController {
 	public String qna_write(@ModelAttribute QnaVO qnaVO, @RequestParam("qna_file")MultipartFile file) {
 		if(file.getOriginalFilename() == "" || file.getOriginalFilename()== null) {
 			qnaVO.setF_file_name(null);
-			qnaVO.setF_file_path("https://seungbuc.s3.ap-northeast-2.amazonaws.com/null_img.png");
+			qnaVO.setF_file_path("https://petcarebuc.s3.ap-northeast-2.amazonaws.com/null_img.png");
 			qnaService.qnaInsert(qnaVO);
 		}else {
 		qnaVO.setF_file_name(file.getOriginalFilename());

@@ -15,5 +15,6 @@ public class ReservationVO {
 	private String rv_time;
 	private String rv_access;
 	private String rv_petName;
+	private int[] reservation_animal_nums;
 
 }

@@ -40,6 +40,18 @@ function placesSearchCB(data, status, pagination) {
     }
 }
 
+
+function createUrlActionInput() {
+    for(let key in hospitalInfo) {
+        var input = document.createElement('input');
+        input.hidden = true;
+        input.name = key;
+        input.value = hospitalInfo[key];
+
+        document.getElementsByName('pageNumform')[0].appendChild(input);
+    }
+}
+
 function createHospitalLayout() {
     const {
         place_url,
@@ -53,6 +65,7 @@ function createHospitalLayout() {
         p_breaktime,
         m_number
     } = hospitalInfo;
+
     let contents = ``
 
     if (road_address_name) {
@@ -113,9 +126,13 @@ function createHospitalLayout() {
     }
 
     /** 예약 가능 버튼 **/
-    if (m_address_class) {
-        contents += `<
-        button type="button" class="button--sm" style="margin-top: 10px">예약가능</button>`
+    if (m_address_class && window.user_number && window.user_role === 0){
+        contents += `
+        <form action="/hospital_reservation_mypet.do">
+            <input hidden value="${window.user_number}" name="m_number"/>
+            <input hidden value="${m_number}" name="hospital_number"/>
+            <button type="submit" class="button--sm" style="margin-top: 10px">예약가능</button>
+        </form>`
     }
 
     document.getElementById('title').innerHTML = `${place_name} ${m_address_class ? '<span class="hos-badge">제휴</span>' : ''}`;
@@ -124,3 +141,4 @@ function createHospitalLayout() {
 
 searchPlaces();
 createHospitalLayout();
+createUrlActionInput();

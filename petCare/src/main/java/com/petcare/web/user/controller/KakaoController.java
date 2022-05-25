@@ -89,7 +89,7 @@ public class KakaoController {
 		mav.addObject("member",memberVO);
 		mav.addObject("mypet",myPetVO);
 
-		mav.setViewName("/kakao_user_update");
+		mav.setViewName("kakao_user_update");
 
 		return mav;
 		
