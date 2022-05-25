@@ -66,7 +66,7 @@ public class User_myPageController {
 		ModelAndView mav = new ModelAndView();
 		MemberVO member = (MemberVO) session.getAttribute("user");
 		if(member.getM_number() != m_number) {
-			mav.setViewName("/home");
+			mav.setViewName("error");
 		}else {
 			MemberVO memberVO;
 			List<MyPetVO> myPetVO = new ArrayList<MyPetVO>();
@@ -85,7 +85,7 @@ public class User_myPageController {
 			mav.addObject("member",memberVO);
 			mav.addObject("mypet",myPetVO);
 	
-			mav.setViewName("/user_update");
+			mav.setViewName("user_update");
 		}
 		return mav;
 		
@@ -145,7 +145,7 @@ public class User_myPageController {
 		MemberVO member = (MemberVO) session.getAttribute("user");
 		
 		if(member.getM_number()!= m_number) {
-			mav.setViewName("/home");
+			mav.setViewName("error");
 		}else {
 			Criteria criteria;
 			
@@ -176,7 +176,7 @@ public class User_myPageController {
 	//		System.out.println(reservationList.toString());
 			mav.addObject("reser", reservationList);
 			mav.addObject("criteria", criteria);
-			mav.setViewName("/myreservation");
+			mav.setViewName("myreservation");
 		}
 
 		return mav;

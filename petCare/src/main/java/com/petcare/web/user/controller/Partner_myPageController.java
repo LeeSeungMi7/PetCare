@@ -184,7 +184,7 @@ public class Partner_myPageController {
 			mav.addObject("criteria", criteria);
 			mav.setViewName("hos_reservation");
 		}else {
-			mav.setViewName("home");
+			mav.setViewName("error");
 		}
 		
 		return mav;
