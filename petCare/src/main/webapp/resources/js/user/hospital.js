@@ -68,7 +68,7 @@ function addEventHandle(target, type, callback) {
 function searchPlaces(address) {
     // 커스텀 오버레이를 숨깁니다
 
-    const keyword = (address ? address : '') + '동물병원'
+    const keyword = (address ? address : '') + ' 동물병원'
 
     placeOverlay.setMap(null);
 
@@ -176,8 +176,8 @@ function displayPlaces(places) {
 function addMarker(position, isAlliance) {
     let marker
     if(isAlliance) {
-        const imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다
-            imageSize = new kakao.maps.Size(29, 42), // 마커이미지의 크기입니다
+        const imageSrc = '/resources/img/location.png', // 마커이미지의 주소입니다
+            imageSize = new kakao.maps.Size(33, 42), // 마커이미지의 크기입니다
             imageOption = {offset: new kakao.maps.Point(27, 69)};
         const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 
@@ -356,9 +356,9 @@ function moveHospitalDetail(params) {
 }
 
 function currentLocation() {
-    const m_sido = sessionStorage.getItem('m_sido');
-    if (m_sido) {
-        searchPlaces(m_sido);
+    const m_dong = sessionStorage.getItem('m_dong');
+    if (m_dong) {
+        searchPlaces(m_dong);
     }
 }
 

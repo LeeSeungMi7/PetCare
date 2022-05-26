@@ -70,5 +70,9 @@ public class BoardDAO {
 		
 	}
 
+	public CommentVO commentRead(int comment_num) {
+		return sqlSessionTemplate.selectOne("board.commentRead", comment_num);
+	}
+
 	
 }

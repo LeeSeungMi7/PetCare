@@ -32,3 +32,6 @@ a{
 .datepick{
     width: 95px !important;
 }
+.btn-secondary{
+	height: 45px;
+}

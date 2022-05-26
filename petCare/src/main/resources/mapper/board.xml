@@ -49,4 +49,7 @@
 	<delete id="board_reply_delete">
 	delete from Comment_Table where comment_num = #{Comment_num}
 	</delete>
+	<select id="commentRead" resultType="CommentVO">
+	select * from Comment_Table Where Comment_num = #{Comment_num}
+	</select>
 </mapper>

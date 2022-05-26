@@ -23,6 +23,7 @@ import com.petcare.web.user.service.BoardService;
 import com.petcare.web.user.service.FileUploadService;
 import com.petcare.web.user.vo.CommentVO;
 import com.petcare.web.user.vo.Criteria;
+import com.petcare.web.user.vo.MemberVO;
 import com.petcare.web.user.vo.ShowPageVO;
 import com.petcare.web.user.vo.ShowVO;
 
@@ -52,7 +53,6 @@ public class BoardController {
       
       Map<String, String> map = new HashMap<String, String>();
       
-//      System.out.println(session.getAttribute("user"));
       
       map.put("user_ok","0");
       if(session.getAttribute("user") != null) {
@@ -70,7 +70,6 @@ public class BoardController {
 	   if(file.getOriginalFilename() == "" || file.getOriginalFilename() == null) {
 		   showVO.setB_file_name(null);
 		   showVO.setB_file_path("https://petcarebuc.s3.ap-northeast-2.amazonaws.com/null_img.png");
-//		   System.out.println(showVO.toString());
 		   boardService.boardInsert(showVO);
 		   
 	   }else {
@@ -78,7 +77,6 @@ public class BoardController {
       FileUploadService.FileUploadResult fileResult = fileUploadService.fileUpload(file, "자랑하기/", showVO.getB_file_name());
       showVO.setB_file_path(fileResult.getUrl());
       boardService.boardInsert(showVO);
-//      System.out.println("글작성: " + showVO.toString());
 	   }
       return "redirect:/show.do";
    }
@@ -129,13 +127,24 @@ public class BoardController {
    
    //수정 글 나타내기
    @RequestMapping(value="/show_rewrite.do", method=RequestMethod.GET)
-   public ModelAndView board_rewrite_view(@RequestParam int board_num) {
-      ShowVO showVO;
+   public ModelAndView board_rewrite_view(@RequestParam int board_num, HttpSession session) {
       ModelAndView mav = new ModelAndView();
-      showVO = boardService.rewrite_view(board_num);
-      mav.addObject("rewrite_view", showVO);
-      mav.setViewName("/show_rewrite");
       
+      if(session.getAttribute("user") == null) {
+    	  mav.setViewName("redirect:/home.do");
+      }else {
+    	  ShowVO showVO;
+          showVO = boardService.rewrite_view(board_num);
+          
+          MemberVO member = (MemberVO)session.getAttribute("user");
+          if(member.getM_number() == showVO.getB_number()) {
+              mav.addObject("rewrite_view", showVO);
+              mav.setViewName("/show_rewrite");
+          }else {
+        	  mav.setViewName("redirect:/home.do");
+          }
+   	  
+      }
       return mav;
    }
    //수정하기
@@ -157,9 +166,21 @@ public class BoardController {
    
    //삭제
    @RequestMapping("/board_delete.do")
-   public String board_delete(@RequestParam int board_num) {
-	boardService.board_delete(board_num);
-	return "redirect:show.do";
+   public String board_delete(@RequestParam int board_num, HttpSession session) {
+		if(session.getAttribute("user") == null) {
+			return "redirect:/home.do";
+		}else {
+			ShowVO showVO;
+		    showVO = boardService.read(board_num);
+			MemberVO member = (MemberVO)session.getAttribute("user");
+			if(member.getM_number() == showVO.getB_number()) {
+				boardService.board_delete(board_num);
+				return "redirect:show.do";
+			}else {
+				return "home";
+			}
+			
+		}
 
    }
    
@@ -191,7 +212,6 @@ public class BoardController {
 	   mav.addObject("showPageList", showList);
 	   mav.addObject("showPageVO", showPageVO);
 	   mav.setViewName("/show");
-	   System.out.println("showPageList" +showList.toString());
 
 	   
 	return mav;
@@ -206,11 +226,22 @@ public class BoardController {
    }
 
    @RequestMapping("/board_reply_delete.do")
-   public String board_reply_delete(CommentVO commentVO) {
-	boardService.board_reply_delete(commentVO.getComment_num());
-	
-	return "redirect:show.do";
-
+   public String board_reply_delete(CommentVO commentVO, HttpSession session) {
+		if(session.getAttribute("user") == null) {
+			return "redirect:/home.do";
+		}else {
+			int comment_num = commentVO.getComment_num();
+			commentVO = boardService.commentRead(comment_num);
+			MemberVO member = (MemberVO)session.getAttribute("user");
+			if(member.getM_number() == commentVO.getC_member_num()) {
+				boardService.board_reply_delete(commentVO.getComment_num());
+				return "redirect:show.do";
+			}else {
+				return "redirect:/home.do";
+			}
+			
+		}
+	   
    }
    
    

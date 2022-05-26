@@ -117,17 +117,27 @@ public class HospitalController {
 	
 	//펫예약
 	@RequestMapping(value="/hospital_reservation_mypet.do")
-	public ModelAndView hospital_reservation_mypet(@RequestParam int m_number, @RequestParam int hospital_number) {
+	public ModelAndView hospital_reservation_mypet(@RequestParam int m_number, @RequestParam int hospital_number, HttpSession session) {
 		List<MyPetVO> myPetVO = new ArrayList<MyPetVO>();
 		ModelAndView mav = new ModelAndView();
+		if(session.getAttribute("user") == null) {
+			mav.setViewName("redirect:/home.do");
+		}else {
+			MyPetVO mypets = new MyPetVO();
+			mypets.setMp_number(m_number);
+			MemberVO member = (MemberVO)session.getAttribute("user");
+			if(member.getM_number() == mypets.getMp_number()) {
+				MemberVO hospitalDetailInfo = hospitalService.hospitalDetail(hospital_number);
+				myPetVO = hospitalService.hospital_reservation_mypet(m_number);
+				mav.addObject("mypet", myPetVO);
+				mav.addObject("hospital", hospitalDetailInfo);
 
-
-		MemberVO hospitalDetailInfo = hospitalService.hospitalDetail(hospital_number);
-		myPetVO = hospitalService.hospital_reservation_mypet(m_number);
-		mav.addObject("mypet", myPetVO);
-		mav.addObject("hospital", hospitalDetailInfo);
-
-		mav.setViewName("/hospital_reservation_mypet");
+				mav.setViewName("/hospital_reservation_mypet");
+				
+			}else {
+				mav.setViewName("redirect:/home.do");
+			}
+		}
 
 		return mav;
 	}

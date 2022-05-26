@@ -84,6 +84,11 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 
+	@Override
+	public CommentVO commentRead(int comment_num) {
+		return boardDAO.commentRead(comment_num);
+	}
+
 
 	
 }

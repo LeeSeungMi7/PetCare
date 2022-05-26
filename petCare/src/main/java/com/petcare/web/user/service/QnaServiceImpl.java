@@ -80,6 +80,11 @@ public class QnaServiceImpl implements QnaService{
 	public void qna_delete(int faq_num) {
 		qnaDAO.qna_delete(faq_num);
 	}
+
+	@Override
+	public CommentVO commentRead(int comment_num) {
+		return qnaDAO.commentRead(comment_num);
+	}
 	
 	
 	

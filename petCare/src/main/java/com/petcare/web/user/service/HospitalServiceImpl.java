@@ -73,5 +73,4 @@ public class HospitalServiceImpl implements HospitalService{
 
 
 
-
 }
