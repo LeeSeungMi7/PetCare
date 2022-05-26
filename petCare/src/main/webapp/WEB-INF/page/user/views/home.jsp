@@ -71,7 +71,7 @@ start();
 			<div class="pet-home__cards">
 			
 			<c:forEach var="hospital" items="${hospital}">
-				<div class="pet-home__card pet-column" onclick="location.href='hospital_detail.do?m_number=${hospital.m_number}'">
+				<div class="pet-home__card pet-column">
 					<div>
 						<div class="pet-home__card-title text--16-bold">${hospital.m_name}</div>
 						<div class="pet-home__card-info text--14-normal pet-row">
