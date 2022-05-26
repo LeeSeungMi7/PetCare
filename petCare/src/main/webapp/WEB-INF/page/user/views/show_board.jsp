@@ -78,7 +78,8 @@ function onClickComment(index) {
     width: calc(450px - 1.5em);
 }
 </style>
-
+<link href="/resources/img/petcare_logo.png" rel="shortcut icon" type="image/x-icon">
+<title>PetCare Page</title>
 </head>
 
 <body>

@@ -16,6 +16,8 @@
     <link href="/resources/css/user/home.css" rel="stylesheet">
     <link href="/resources/css/user/ur_reservation.css?after" rel="stylesheet">
     <link href="/resources/css/user/datepicker_hospitalRV.css?after" rel="stylesheet" type="text/css" media="all">
+    <link href="/resources/img/petcare_logo.png" rel="shortcut icon" type="image/x-icon">
+	<title>PetCare Page</title>
   <!-- 제이쿼리 -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <!-- Air datepicker css -->

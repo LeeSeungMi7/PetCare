@@ -64,6 +64,8 @@ function onclickOk2(){
       document.getElementById("form2").submit();
    }
 </script>
+<link href="/resources/img/petcare_logo.png" rel="shortcut icon" type="image/x-icon">
+<title>PetCare Page</title>
 </head>
 
 <body>

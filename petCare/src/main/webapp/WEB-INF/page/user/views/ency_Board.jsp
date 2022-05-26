@@ -26,6 +26,7 @@
 <link href="/resources/css/user/button.css" rel="stylesheet">
 <link href="/resources/css/user/loginForm.css" rel="stylesheet">
 <link href="/resources/css/user/comm_board.css?after" rel="stylesheet">
+<link href="/resources/img/petcare_logo.png" rel="shortcut icon" type="image/x-icon">
 <title>PetCare Page</title>
 </head>
 <body>

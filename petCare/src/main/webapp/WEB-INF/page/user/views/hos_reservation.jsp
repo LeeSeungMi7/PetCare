@@ -36,7 +36,8 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> 
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<link href="/resources/css/user/hos_reservation.css" rel="stylesheet">
-	
+	<link href="/resources/img/petcare_logo.png" rel="shortcut icon" type="image/x-icon">
+	<title>PetCare Page</title>
 </head>
 
 <body>
