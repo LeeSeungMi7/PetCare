@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.petcare.web.admin.vo.Ad_encyVO;
+import com.petcare.web.user.vo.MemberVO;
 import com.petcare.web.user.vo.QnaVO;
 import com.petcare.web.user.vo.ShowVO;
 
@@ -26,5 +27,9 @@ public class HomeDAO {
 	
 	public List<Ad_encyVO> ency() {
 		return sqlSessionTemplate.selectList("Home.Ency");
+	}
+	
+	public List<MemberVO> hospital(){
+		return sqlSessionTemplate.selectList("Home.hospital");
 	}
 }

@@ -66,25 +66,30 @@ start();
 		<!-- 제휴 병원 💊 -->
 		<div class="pet-home__hospital">
 			<div class="pet-home__title pet-row">
-				<div class="text--18-bold">제휴 병원 💊</div>
-				<div class="text--14-normal center">더보기 ></div>
+				<div class="text--18-bold">최근 등록 제휴 병원 💊</div>
 			</div>
 			<div class="pet-home__cards">
-				<div class="pet-home__card pet-column">
+			
+			<c:forEach var="hospital" items="${hospital}">
+				<div class="pet-home__card pet-column" onclick="location.href='hospital_detail.do?m_number=${hospital.m_number}'">
 					<div>
-						<div class="pet-home__card-title text--16-bold">스마트동물병원
-							성북길음점</div>
+						<div class="pet-home__card-title text--16-bold">${hospital.m_name}</div>
 						<div class="pet-home__card-info text--14-normal pet-row">
-							<div class="pet-home__card-distance text--14-bold">853m</div>
-							<div class="pet-home__card-address color--gray">| 서울시 성북구
-								정릉동</div>
+							<div class="pet-home__card-distance text--14-bold">${hospital.m_zipcode}</div>
+							<c:if test="${hospital.p_24hour==1}">
+							<div class="pet-home__card-address color--gray">&nbsp;<span style="color:red;">[24시 진료중]</span></div>
+							</c:if>
 						</div>
+						<div class="pet-home__card-address color--gray">| ${hospital.m_address}</div>
 					</div>
+					
 
 					<div class="pet-home__card-tel">
-						전화번호: <a href="tel:010-0000-000">010-0000-0000</a>
+						전화번호: <a href="tel:${hospital.m_tel}">${hospital.m_tel}</a>
 					</div>
 				</div>
+			</c:forEach>	
+				
 			</div>
 		</div>
 		<!-- 우리 동네병원 💊 -->

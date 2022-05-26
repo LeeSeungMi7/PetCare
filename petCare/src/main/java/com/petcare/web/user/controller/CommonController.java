@@ -12,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.petcare.web.admin.vo.Ad_encyVO;
 import com.petcare.web.user.service.HomeService;
+import com.petcare.web.user.vo.HospitalVO;
+import com.petcare.web.user.vo.MemberVO;
 import com.petcare.web.user.vo.QnaVO;
 import com.petcare.web.user.vo.ShowVO;
 
@@ -33,7 +35,9 @@ public class CommonController {
 		List<ShowVO> show = homeService.show();
 		List<QnaVO> qna = homeService.qna();
 		List<Ad_encyVO> ency = homeService.ency();
+		List<MemberVO> hospital = homeService.hospital();
 		
+		mav.addObject("hospital",hospital);
 		mav.addObject("show",show);
 		mav.addObject("qna",qna);
 		mav.addObject("ency",ency);
