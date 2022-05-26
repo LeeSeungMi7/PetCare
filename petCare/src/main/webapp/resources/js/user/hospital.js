@@ -177,7 +177,7 @@ function addMarker(position, isAlliance) {
     let marker
     if(isAlliance) {
         const imageSrc = '/resources/img/location.png', // 마커이미지의 주소입니다
-            imageSize = new kakao.maps.Size(33, 42), // 마커이미지의 크기입니다
+            imageSize = new kakao.maps.Size(38, 42), // 마커이미지의 크기입니다
             imageOption = {offset: new kakao.maps.Point(27, 69)};
         const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 
