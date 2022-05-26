@@ -17,7 +17,8 @@
 <link href="/resources/css/admin/ad_hospital.css?after" rel="stylesheet" />
 <link href="/resources/css/admin/styles.css" rel="stylesheet" />
 <link href="/resources/css/admin/morris.css" rel="stylesheet" />
-
+<link href="/resources/img/petcare_logo.png" rel="shortcut icon" type="image/x-icon">
+<title>PetCare Admin</title>
 
 </head>
 
