@@ -63,13 +63,13 @@ public class AdminController {
 	@RequestMapping(value = "/ad_hospital.mdo", method = RequestMethod.GET)
 	public ModelAndView ad_hospitalGet(Model model,HttpSession session) throws Exception{
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("AccHosList", adminService.getAccHosList());
-		mav.addObject("UnAccHosList", adminService.getUnAccHosList());
 		if(session.getAttribute("admin")== null) {
 			mav.setViewName("/ad_login");
 		}else {
 			mav.setViewName("/ad_hospital");
 		}
+		mav.addObject("AccHosList", adminService.getAccHosList());
+		mav.addObject("UnAccHosList", adminService.getUnAccHosList());
 		return mav;
 	}
 	

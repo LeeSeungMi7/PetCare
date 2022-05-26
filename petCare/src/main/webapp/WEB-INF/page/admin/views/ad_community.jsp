@@ -12,7 +12,8 @@
 <link href="/resources/css/admin/styles.css" rel="stylesheet" />
 <link href="/resources/css/admin/morris.css" rel="stylesheet" />
 <link href="/resources/css/admin/ad_board.css" rel="stylesheet" />
-
+<link href="/resources/img/petcare_logo.png" rel="shortcut icon" type="image/x-icon">
+<title>PetCare Admin</title>
 </head>
 <body class="sb-nav-fixed">
 	<!--헤더 영역-->
@@ -53,9 +54,19 @@
 								<c:forEach var="list" items="${Cm_BoardList}" varStatus="status">
 									<tr>
 										<td><c:out value="${status.count}" /></td>
-										<td onclick="location.href='comm_getboard.mdo?board_num=${list.board_num}'"><c:out value="${list.b_title}" /></td>
-										<td><c:out value="${list.b_writer}" /></td>
-										<td><div><c:out value="${list.b_content}" /></div></td>
+										<td
+											onclick="location.href='comm_getboard.mdo?board_num=${list.board_num}'"><div
+												style="display: block; width: 150px !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+												<c:out value="${list.b_title}" />
+											</div></td>
+										<td><div
+												style="display: block; width: 130px !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+												<c:out value="${list.b_writer}" />
+											</div></td>
+										<td><div
+												style="display: block; width: 350px !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+												<c:out value="${list.b_content}" />
+											</div></td>
 										<td><c:out value="${list.b_date}" /></td>
 										<td><c:out value="${list.b_hit}" /></td>
 									</tr>
@@ -82,6 +93,5 @@
 	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest"
 		crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 </body>
 </html>
