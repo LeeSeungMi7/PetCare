@@ -109,30 +109,28 @@ function onClickComment(index) {
 
 						<!-- 페이징처리 -->
 
-						<div class="page1">
-							<ul class="pagination1 modal1">
+								<div class="page1">
+									<ul class="pagination1 modal1">
 
-								<c:if test="${criteria.pageNum > 1 }">
-									<li><a
-										href="javascript:fnSubmitForm(${criteria.block_start-1});"
-										class="arrow1 left1">[처음]</a></li>
-								</c:if>
 
-								<c:forEach var="i" begin="${criteria.block_start}"
-									end="${criteria.block_end}">
-									<li><a href="javascript:fnSubmitForm(${i});" class="num1">[${i}]</a>
-									<li>
-								</c:forEach>
+										<c:if test="${criteria.pageNum > 1 }">
+											<li><a href="javascript:fnSubmitForm(0,1);"
+												class="arrow1 left1">[처음으로]</a></li>
 
-								<c:if test="${!(criteria.block_num >= criteria.total_block)}">
-									<li><a
-										href="javascript:fnSubmitForm(${criteria.block_end+1});"
-										class="arrow1 right1">[마지막]</a></li>
-								</c:if>
+										</c:if>
 
-							</ul>
-						</div>
-					</div>
+										<c:forEach var="i" begin="${criteria.block_start}" end="${criteria.block_end}">
+											<li><a href="javascript:fnSubmitForm(${i},${criteria.pageConunt});" class="num1">[${i}]</a>
+											<li>
+										</c:forEach>
+
+										<c:if test="${criteria.block_end < criteria.total_page}">
+											<li><a href="javascript:fnSubmitForm(${criteria.block_end+1},${criteria.pageConunt+1});" class="arrow1 right1">[다음]</a></li>
+										</c:if>
+
+									</ul>
+								</div>
+							</div>
 					<hr>
 					<c:if test="${user.m_number != null}">
 						<script>
@@ -164,6 +162,7 @@ function onClickComment(index) {
 				<!-- 페이징 처리 폼 -->
 			<form action="/hospital_detail.do" name="pageNumform">
 				<input type="hidden" name="pageNum" id="pageNumId" value="">
+				<input type="hidden" name="pageConunt" id="pageConunt" value="">
 				<input type="hidden" name="m_number" value="${criteria.rw_partner_number}">
 			</form>
 	</div>
@@ -171,8 +170,9 @@ function onClickComment(index) {
 </div>
 <%@ include file="/WEB-INF/page/user/views/footer.jsp"%>
 	<script type="text/javascript">
-function fnSubmitForm(page){
+function fnSubmitForm(page, pageConunt){
 		document.getElementById("pageNumId").value = page;
+		document.getElementById("pageConunt").value =pageConunt;
 		document.pageNumform.submit(); 
 }
 </script>

@@ -84,14 +84,14 @@ public class BoardController {
    
    //자랑하기 글 상세보기 + 조회수 증가
    @RequestMapping(value="/show_board.do", method=RequestMethod.GET)
-   public ModelAndView board_view(@RequestParam int board_num ,@RequestParam(defaultValue="0") int pageNum) {
+   public ModelAndView board_view(@RequestParam int board_num ,@RequestParam(defaultValue="0") int pageNum, @RequestParam(defaultValue="0") int pageConunt) {
      
 	   Criteria criteria;
 		
 		if(pageNum == 0) {
 			criteria = new Criteria();
 		}else {
-			criteria = new Criteria(pageNum, 5);
+			criteria = new Criteria(pageNum, 5, pageConunt);
 		}
 
 		criteria.setBaord_num(board_num);
@@ -101,10 +101,9 @@ public class BoardController {
 //		댓글 페이징 하기
 		List<CommentVO> cv = boardService.commentList(criteria);
 		criteria.setTotal(boardService.totalpage(criteria)); 
-		
 		criteria.setTotal_page((int)Math.ceil(criteria.getTotal() *1.0/criteria.getSize())); 
 		
-		criteria.setBlock_num((int)Math.ceil(criteria.getSize()/ 5)); 
+		criteria.setBlock_num((int)Math.ceil(criteria.getPageConunt()));
 		criteria.setBlock_start(((criteria.getBlock_num() -1) * 5 ) +1 ); 
 		criteria.setBlock_end(criteria.getBlock_start() + 5 -1); 
 		
@@ -186,23 +185,21 @@ public class BoardController {
    
    //페이징+show 나타내기
    @RequestMapping(value="show.do")
-   public ModelAndView board_page(@RequestParam(defaultValue="0") int pageNum) {   
+   public ModelAndView board_page(@RequestParam(defaultValue="0") int pageNum, @RequestParam(defaultValue="0") int pageConunt) {   
 	   ShowPageVO showPageVO;
 
-	   
 	   ModelAndView mav = new ModelAndView();
 
-	   
 	   if(pageNum == 0) {
-		   showPageVO = new ShowPageVO(1,4); //4글까지 보이게
+		   showPageVO = new ShowPageVO(1,4,1); 
 	   }else {
-		   showPageVO = new ShowPageVO(pageNum, 4);
+		   showPageVO = new ShowPageVO(pageNum, 4, pageConunt);
 	   }	   
 	   List<ShowVO> showList = new ArrayList<ShowVO>();
 	   showList = boardService.board_page(showPageVO);
 	   showPageVO.setTotal(boardService.totalpage(showPageVO));	   
 	   showPageVO.setTotal_page((int)Math.ceil(showPageVO.getTotal() * 1.0/showPageVO.getSize()));
-	   showPageVO.setBlock_num((int)Math.ceil(showPageVO.getSize()/ 4));
+	   showPageVO.setBlock_num((int)Math.ceil(showPageVO.getPageConunt()));
 	   showPageVO.setBlock_start(((showPageVO.getBlock_num() -1) *5)+1);
 	   showPageVO.setBlock_end((showPageVO.getBlock_start()+5 -1));
 	   

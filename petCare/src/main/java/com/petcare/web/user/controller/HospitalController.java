@@ -51,13 +51,13 @@ public class HospitalController {
 	
 	//병원 상세보기
 	@RequestMapping(value="hospital_detail.do")
-	public ModelAndView hospital_view(@RequestParam(defaultValue="0") int m_number, @RequestParam(defaultValue="0")int pageNum) {
+	public ModelAndView hospital_view(@RequestParam(defaultValue="0") int m_number, @RequestParam(defaultValue="0")int pageNum, @RequestParam(defaultValue="0") int pageConunt) {
 		Criteria criteria;
 		
 		if(pageNum == 0) {
 			criteria = new Criteria();
 		}else {
-			criteria = new Criteria(pageNum, 5);
+			criteria = new Criteria(pageNum, 5, pageConunt);
 		}
 		
 		criteria.setRw_partner_number(m_number);
@@ -67,7 +67,7 @@ public class HospitalController {
 		
 		criteria.setTotal_page((int)Math.ceil(criteria.getTotal() *1.0/criteria.getSize())); 
 		
-		criteria.setBlock_num((int)Math.ceil(criteria.getSize()/ 5)); 
+		criteria.setBlock_num((int)Math.ceil(criteria.getPageConunt()));
 		criteria.setBlock_start(((criteria.getBlock_num() -1) * 5 ) +1 ); 
 		criteria.setBlock_end(criteria.getBlock_start() + 5 -1); 
 		
