@@ -44,7 +44,7 @@ function onclickOk(){
 		console.log
 		return false;
 	}
-	alert("등록되었습니다.")
+	swal("등록되었습니다.")
 	document.getElementById("form12").submit();
 }
 
@@ -59,7 +59,6 @@ function onClickComment(index) {
 }
 
 </script>
-
 
 </head>
 <body>
@@ -80,7 +79,7 @@ function onClickComment(index) {
 						<table class="table">
 							<thead>
 								<tr>
-									<th scope="col" colspan="2">총 댓글 수 : ${criteria.total} 개</th>
+									<th scope="col" colspan="2" style="font-size: 12px;">총 댓글 수 : ${criteria.total} 개</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -170,6 +169,7 @@ function onClickComment(index) {
 </div>
 <%@ include file="/WEB-INF/page/user/views/footer.jsp"%>
 	<script type="text/javascript">
+	
 function fnSubmitForm(page, pageConunt){
 		document.getElementById("pageNumId").value = page;
 		document.getElementById("pageConunt").value =pageConunt;

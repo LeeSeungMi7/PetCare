@@ -36,6 +36,7 @@ p {
 }
 .look{
 	margin-left: 355px;
+	font-size: small;
 }
 .qna-board{
 	display: flex; flex-direction: column; height: 120px; justify-content: space-between;

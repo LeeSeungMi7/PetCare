@@ -13,7 +13,7 @@
 <link href="/resources/css/user/footer.css" rel="stylesheet">
 <link href="/resources/css/user/button.css" rel="stylesheet">
 <link href="/resources/css/user/loginForm.css" rel="stylesheet">
-<link href="/resources/css/user/show.css?after" rel="stylesheet">
+<link href="/resources/css/user/show.css" rel="stylesheet">
 <link href="/resources/css/user/mywrite.css" rel="stylesheet">
 <link href="/resources/css/user/myreservation.css" rel="stylesheet">
 <!--부트스트랩-->
@@ -69,7 +69,7 @@
                     <div class="card-body">
                         <div>
                         <h6 class="look">LOOK ${showPageList.b_hit}</h6>
-                        <h5 class="card-title" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">${showPageList.b_title} </h5>
+                        <h5 class="card-title" >${showPageList.b_title} </h5>
                     	</div>
                     </div>
                     <ul class="list-group list-group-flush rowpoint" >

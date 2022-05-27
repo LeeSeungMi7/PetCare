@@ -47,3 +47,9 @@ background-color: white !important;
 .formGroupExampleInput2{
 background-color: white !important;
 }
+.comment-min {
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: calc(450px - 1.5em);
+}

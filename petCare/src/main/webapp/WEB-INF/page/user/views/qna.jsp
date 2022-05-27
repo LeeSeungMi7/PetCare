@@ -13,7 +13,7 @@
 <link href="/resources/css/user/footer.css" rel="stylesheet">
 <link href="/resources/css/user/button.css" rel="stylesheet">
 <link href="/resources/css/user/loginForm.css" rel="stylesheet">
-<link href="/resources/css/user/qna.css?after" rel="stylesheet">
+<link href="/resources/css/user/qna.css" rel="stylesheet">
 <link href="/resources/css/user/mywrite.css" rel="stylesheet">
 <link href="/resources/css/user/myreservation.css" rel="stylesheet">
 <!--부트스트랩-->

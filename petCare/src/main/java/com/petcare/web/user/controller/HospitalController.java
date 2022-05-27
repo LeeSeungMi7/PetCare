@@ -88,6 +88,7 @@ public class HospitalController {
 		return "redirect:/hospital.do";
 		
 	}
+	   
 	
 	@RequestMapping(value="hospital_reply_delete.do")
 	public String hospital_reply_delete(HospitalVO hospitalVO) {

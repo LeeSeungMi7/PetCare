@@ -169,7 +169,6 @@
       display: none; } }
 
 .datepicker {
-  margin-left: -450px;
   background: #fff;
   border: 1px solid #dbdbdb;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);

@@ -51,3 +51,10 @@
 	flex: auto;
 	overflow: auto;
 }
+
+.hour{
+	height: 30px;
+}
+.rounded{
+	margin-top: 30px;
+}
