@@ -39,7 +39,7 @@
 	<div class="pet-hospital__infos pet-row">
    	 <div id="map"></div>
    	 <div class="pet-hospital__info pet-column">
-        <div>
+        <div class="button-group">
             <button type="button" class="button--sl filter" onclick="findAddr()">주소</button>
             <c:if test="${user.m_number != null}">
             <button type="button" class="button--sl filter" onclick="currentLocation()">우리 동네</button>

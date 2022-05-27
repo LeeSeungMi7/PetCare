@@ -43,6 +43,12 @@ function onClickCancel() {
 	window.location.href ="/hospital.do";	
 }
 
+function datepicker() { 
+	$('#datepicker1').datepicker({
+		  minDate: 0
+		});
+};
+
 function onClickSubmit(){
     const date = $('#datepicker1').val();
     const hour = $('#hour').val();
@@ -50,6 +56,7 @@ function onClickSubmit(){
 	$("input[name='pet']:checked").each(function(i) {
         petNums.push(Number($("input[name='pet']:checked")[i].value))
     });
+
 
     const urlParams = new URLSearchParams(window.location.search)
     let rvInfo = {}
@@ -98,12 +105,12 @@ function onClickSubmit(){
 
 </script>
 
-
 </head>
 
 <body>
 <div id="pet-layout" class="background--white">
 	<%@ include file="/WEB-INF/page/user/views/header.jsp"%>
+    <div style="flex: auto">
         <div class="board p-3 mb-5 bg-body rounded">
             <div class="mb-3">
                 <label for="formGroupExampleInput" class="form-label">병원 이름</label>
@@ -118,7 +125,7 @@ function onClickSubmit(){
             <div class="mb-3">
                 <label for="formGroupExampleInput2" class="form-label">날짜 선택</label>
                 <div class="dateselect">
-                    <input type="text" id="datepicker1" class="datepick" name="rv_date" readonly>
+                    <input type="text" id="datepicker1" class="datepick" name="rv_date" onclick="datepicker()" readonly>
                     <select id="hour" name="rv_time">
                         <option value="">시간선택</option>
                         <option value="오전 9시">오전 9시</option>
@@ -161,6 +168,7 @@ function onClickSubmit(){
             <button class="btn btn-primary" href="hospital.do" role="button" onclick="onClickSubmit()">예약하기</button>
             <button class="btn btn-secondary" href="hospital.do" role="button" onclick="onClickCancel()">취소</button>
         </div>
+    </div>
 
 
 <div class="pet-footer">
