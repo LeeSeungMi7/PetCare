@@ -11,6 +11,8 @@
         <link href="/resources/img/petcare_logo.png" rel="shortcut icon" type="image/x-icon">
 		<title>PetCare Admin</title>
         <link href="/resources/css/admin/styles.css" rel="stylesheet" />
+        <link href="/resources/css/admin/addmin_page.css" rel="stylesheet" />
+
         <!-- 제이쿼리 -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
@@ -37,10 +39,10 @@
     </head>
     <body class="bg-primary">
         <div id="layoutAuthentication">
-            <div id="layoutAuthentication_content">
+            <div id="layoutAuthentication_content" class="admin_back">
                 <main>
                     <div class="container">
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-center admin_login_box">
                             <div class="col-lg-5">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">관리자 로그인</h3></div>

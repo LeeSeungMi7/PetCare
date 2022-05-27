@@ -121,7 +121,7 @@ public class QnaController {
 	
 	//상세보기
 	@RequestMapping(value="/qna_board.do", method=RequestMethod.GET)
-	public ModelAndView qna_view(@RequestParam int faq_num, @RequestParam(defaultValue="0") int pageNum, int pageConunt) {
+	public ModelAndView qna_view(@RequestParam int faq_num, @RequestParam(defaultValue="0") int pageNum, @RequestParam(defaultValue="0")int pageConunt) {
 		
 		Criteria criteria;
 		
@@ -138,16 +138,16 @@ public class QnaController {
 //		댓글 페이징 하기
 		List<CommentVO> cv = qnaService.commentList(criteria);
 		criteria.setTotal(qnaService.totalpage(criteria)); 
-		
 		criteria.setTotal_page((int)Math.ceil(criteria.getTotal() *1.0/criteria.getSize())); 
-		criteria.setBlock_num((int)Math.ceil(criteria.getSize()/ 5)); 
+		
+		criteria.setBlock_num((int)Math.ceil(criteria.getPageConunt()));
 		criteria.setBlock_start(((criteria.getBlock_num() -1) * 5 ) +1 ); 
 		criteria.setBlock_end(criteria.getBlock_start() + 5 -1); 
 		
 		if(criteria.getBlock_end() > criteria.getTotal_page()) {
 			criteria.setBlock_end(criteria.getTotal_page());
 		}
-		
+		System.out.println(criteria.toString());
 		QnaVO qnaVO;
 		ModelAndView mav = new ModelAndView();
 		qnaVO = qnaService.read(faq_num);
