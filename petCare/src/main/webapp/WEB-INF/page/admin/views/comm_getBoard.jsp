@@ -27,7 +27,7 @@
                         <h1 class="mt-4">글 상세보기</h1>
                         <hr>
                         <div class="insertEn">
-                            <div class="insert" style="height: 93vh;">
+                            <div class="insert" style="height: 43rem;">
                                 <form action="./boardInsert" method="POST">
                                     <input class="title" type="text" name="title" placeholder="제목" value="${CM_view.b_title }" readonly/>
                                     <input class="username" type="text" name="name" placeholder="작성자" value="${CM_view.b_writer }" readonly/>
@@ -37,7 +37,8 @@
                                     <div class="file-hidden-list"></div>
                                 </form>
                                 <div class="buttonarea">
-                                    <button type="button" class="btn btn-danger"><a href="${path}/board_delete.mdo?board_num=${CM_view.board_num }">삭제</a></button>
+                                    <button type="button" class="btn btn-danger">
+                                    	<a href="${path}/board_delete.mdo?board_num=${CM_view.board_num }">삭제</a></button>
                                     <button type="button" class="btn btn-secondary">
                                         <a href="ad_community.mdo">취소</a>
                                     </button>

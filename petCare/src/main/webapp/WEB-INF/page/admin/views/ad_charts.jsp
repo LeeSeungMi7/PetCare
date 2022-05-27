@@ -40,7 +40,7 @@
 			<main>
 				<!--본문영역-->
 				<div class="container-fluid px-4">
-					<h1 class="mt-4">차트</h1>
+					<h1 style="margin-bottom:3%;" class="mt-4">PetCare 활성도</h1>
 					<div class="card mb-4">
 						<div class="card-header" style="white-space: nowrap">
 							<i class="fas fa-chart-area me-1"></i> 제휴 병원 등록 <br> <br>
@@ -133,7 +133,7 @@
 							datasets:[{
 								data:posList,
 								label:"승인 병원",
-								borderColor:"#3e95cd",
+								borderColor:"#0B0B61",
 								fill:false
 							}]
 						},
@@ -177,14 +177,14 @@
 							datasets:[{
 								data:pos1List,
 								label:"질문",
-								borderColor:"#00FF40",
-								backgroundColor:"#2EFE9A",
+								borderColor:"#2E9AFE",
+								backgroundColor:"#2E9AFE",
 								borderWidth:3
 							},{
 								data:pos2List,
 								label:"답변",
-								borderColor:"#58FA82",
-								backgroundColor:"#81F7D8",
+								borderColor:"#F78181",
+								backgroundColor:"#F78181",
 								borderWidth:3
 							}
 							]

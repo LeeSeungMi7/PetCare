@@ -33,7 +33,7 @@
                                 <div class="sb-nav-link-icon">
                                     <i class="fas fa-chart-area"></i>
                                 </div>
-                                PetCare 활성도 
+                                차트
                             </a>
                             <a class="nav-link" href="ad_encyclopedia.mdo">
                                 <div class="sb-nav-link-icon">
