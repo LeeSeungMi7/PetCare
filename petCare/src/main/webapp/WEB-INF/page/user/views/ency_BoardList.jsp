@@ -50,8 +50,7 @@
 							<h4 class="media-heading" id="top-aligned-media">
 								${List.en_title }</h4>
 							<p class="content">${List.en_content }</p>
-							<p class="insertdate">작성일 : ${List.en_date } 조회수 :
-								${List.en_hit }</p>
+							<pre class="insertdate">WRITER : ${List.en_date }					LOOK   ${List.en_hit }</pre>
 						</div>
 					</div>
 				</c:forEach>

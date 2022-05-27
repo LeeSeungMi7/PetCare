@@ -35,24 +35,23 @@
 		<%@ include file="/WEB-INF/page/user/views/header.jsp"%>
 		<div class="board shadow p-3 mb-5 bg-body rounded">
 			<div class="mb-3">
-				<label for="formGroupExampleInput" class="form-label">제목</label> <input
+				<label for="formGroupExampleInput" class="form-label">TITLE</label> <input
 					type="text" class="titlebox form-control"
 					id="formGroupExampleInput" placeholder="${ency_view.en_title}"
 					disabled>
 			</div>
 			<div class="mb-3">
-				<label for="formGroupExampleInput2" class="form-label">날짜</label> <input
+				<label for="formGroupExampleInput2" class="form-label">DATE</label> <input
 					type="text" class="datebox form-control"
 					id="formGroupExampleInput2" placeholder="${ency_view.en_date}"
 					disabled>
 			</div>
 			<div class="mb-3">
-				<label for="formGroupExampleInput" class="form-label">내용</label>
+				<label for="formGroupExampleInput" class="form-label">CONTENT</label>
 				<div class="form-floating">
-					<div class="contentbox form-control" id="floatingTextarea2"
-						style="display: flex; flex-direction: column;">
-						<img style="width: 50%; margin-bottom: 20px;"
-							src="${ency_view.en_file_path}">${ency_view.en_content}</div>
+					<img style="width: 50%; margin-bottom: 20px;"
+							src="${ency_view.en_file_path}">
+					<textarea class="contentbox form-control" id="floatingTextarea2" readonly>${ency_view.en_content}</textarea>
 				</div>
 			</div>
 			<hr>
