@@ -27,6 +27,7 @@
 <link href="/resources/css/user/ency_BoardList.css?after"
 	rel="stylesheet">
 <link href="/resources/css/user/myreservation.css" rel="stylesheet">
+<link href="/resources/img/petcare_logo.png" rel="shortcut icon" type="image/x-icon">
 <title>PetCare Page</title>
 </head>
 <body>
@@ -56,34 +57,32 @@
 				</c:forEach>
 			</ul>
 			<div class="page1">
-				<ul class="pagination1 modal1">
+					<ul class="pagination1 modal1">
+
+						<c:if test="${enPageVO.pageNum > 1 }">
+							<li><a
+								href="javascript:fnSubmitForm(0,1);"
+								class="arrow1 left1">[처음으로]</a></li>
+							
+						</c:if>
+
+						<c:forEach var="i" begin="${enPageVO.block_start}" end="${enPageVO.block_end}">
+							<li><a href="javascript:fnSubmitForm(${i},${enPageVO.pageConunt});" class="num1">[${i}]</a>
+							<li>
+						</c:forEach> 
+						
+						<c:if test="${enPageVO.block_end < enPageVO.total_page}">
+							<li><a href="javascript:fnSubmitForm(${enPageVO.block_end+1},${enPageVO.pageConunt+1});" class="arrow1 right1">[다음]</a></li>
+						</c:if>
 
 
-					<c:if test="${showPageVO.pageNum > 1 }">
-						<li><a
-							href="javascript:fnSubmitForm(${showPageVO.block_start-1});"
-							class="arrow1 left1">[처음]</a></li>
-					</c:if>
+					</ul>
+				</div>
 
-					<c:forEach var="i" begin="${showPageVO.block_start}"
-						end="${showPageVO.block_end}">
-						<li><a href="javascript:fnSubmitForm(${i});" class="num1">[${i}]</a>
-						<li>
-					</c:forEach>
-
-					<c:if test="${!(showPageVO.block_num >= showPageVO.total_block)}">
-						<li><a
-							href="javascript:fnSubmitForm(${showPageVO.block_end+1});"
-							class="arrow1 right1">[마지막]</a></li>
-					</c:if>
-
-
-				</ul>
-			</div>
-
-			<form action="/ency_BoardList.do" method="post" name="pageNumform">
-				<input type="hidden" name="enpageNum" id="pageNumId" value="">
-			</form>
+				<form action="/ency_BoardList.do" method="post" name="pageNumform">
+					<input type="hidden" name="pageNum" id="pageNumId" value="">
+					<input type="hidden" name="pageConunt" id="pageConunt" value="">
+				</form>
 		</div>
 	</div>
 	<!--푸터-->
@@ -96,8 +95,9 @@
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 	<script type="text/javascript">
-		function fnSubmitForm(page) {
+		function fnSubmitForm(page,pageConunt) {
 			document.getElementById("pageNumId").value = page;
+			document.getElementById("pageConunt").value =pageConunt;
 			document.pageNumform.submit();
 		}
 	</script>

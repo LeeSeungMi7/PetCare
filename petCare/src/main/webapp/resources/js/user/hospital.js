@@ -28,7 +28,7 @@ let markers = []; // 마커를 담을 배열입니다
 
 let mapContainer = document.getElementById('map'); // 지도를 표시할 div
 let mapOption = {
-    center: new kakao.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+    center: new kakao.maps.LatLng(37.5710194900321, 126.992526739499), // 지도의 중심좌표
     level: 5 // 지도의 확대 레벨
 };
 
@@ -38,8 +38,11 @@ let map = new kakao.maps.Map(mapContainer, mapOption);
 // 장소 검색 객체를 생성합니다
 let ps = new kakao.maps.services.Places(map);
 
+let geocoder = new kakao.maps.services.Geocoder();
+
+
 // 지도에 idle 이벤트를 등록합니다
-kakao.maps.event.addListener(map, 'idle', searchPlaces);
+kakao.maps.event.addListener(map, 'idle', searchKeyword);
 
 // 커스텀 오버레이의 컨텐츠 노드에 css class를 추가합니다
 contentNode.className = 'placeinfo_wrap';
@@ -64,27 +67,30 @@ function addEventHandle(target, type, callback) {
     }
 }
 
+function searchAddress(address) {
+    geocoder.addressSearch(address, function(result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+            // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+            map.setCenter(coords);
+        }
+    })
+}
+
 // 카테고리 검색을 요청하는 함수입니다
-function searchPlaces(address) {
+function searchKeyword() {
     // 커스텀 오버레이를 숨깁니다
 
-    const keyword = (address ? address : '') + '동물병원'
-
     placeOverlay.setMap(null);
+    let bounds = map.getBounds()
 
-    ps.keywordSearch(keyword, placesSearchCB,
-        {
-            useMapCenter: !address
-        });
+    ps.keywordSearch('동물병원', placesSearchCB, {bounds: bounds});
 }
 
 // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
 function placesSearchCB(data, status, pagination) {
     if (status === kakao.maps.services.Status.OK) {
-
-        if (data.length > 0) {
-            map.panTo(new kakao.maps.LatLng(data[0].y, data[0].x));
-        }
 
         const mapIds = data.map((info) => {
             return info.id
@@ -176,8 +182,8 @@ function displayPlaces(places) {
 function addMarker(position, isAlliance) {
     let marker
     if(isAlliance) {
-        const imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다
-            imageSize = new kakao.maps.Size(29, 42), // 마커이미지의 크기입니다
+        const imageSrc = '/resources/img/location.png', // 마커이미지의 주소입니다
+            imageSize = new kakao.maps.Size(38, 42), // 마커이미지의 크기입니다
             imageOption = {offset: new kakao.maps.Point(27, 69)};
         const markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 
@@ -313,8 +319,6 @@ function displayPlaceInfo(places) {
     placeOverlay.setMap(map);
 }
 
-searchPlaces();
-
 function findAddr() {
     new daum.Postcode({
         oncomplete: function (data) {
@@ -325,9 +329,7 @@ function findAddr() {
                 inputAddress.val(jibunAddr || roadAddr);
             }
 
-            const keyword = (data.sigungu ? data.sigungu + ' ' : ' ') || (data.bname ? data.bname + ' ' : ' ');
-
-            searchPlaces(keyword)
+            searchAddress(jibunAddr || roadAddr)
         }
     }).open();
 }
@@ -335,7 +337,7 @@ function findAddr() {
 function onClickFilter(type) {
     setActiveFilter(filter === type ? '' : type);
     filter = filter === type ? '' : type;
-    searchPlaces();
+    searchKeyword();
 }
 
 function setActiveFilter(type) {
@@ -356,9 +358,9 @@ function moveHospitalDetail(params) {
 }
 
 function currentLocation() {
-    const m_sido = sessionStorage.getItem('m_sido');
-    if (m_sido) {
-        searchPlaces(m_sido);
+    const address = sessionStorage.getItem("address");
+    if (address) {
+        searchAddress(address);
     }
 }
 
@@ -367,4 +369,6 @@ window.onload = function () {
     map.relayout();
 }
 
-debounce(searchPlaces, 1000);
+debounce(searchKeyword, 1000);
+
+searchKeyword();

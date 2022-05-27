@@ -23,6 +23,7 @@ import com.petcare.web.user.service.FileUploadService;
 import com.petcare.web.user.service.QnaService;
 import com.petcare.web.user.vo.CommentVO;
 import com.petcare.web.user.vo.Criteria;
+import com.petcare.web.user.vo.MemberVO;
 import com.petcare.web.user.vo.QnaVO;
 import com.petcare.web.user.vo.ShowPageVO;
 import com.petcare.web.user.vo.ShowVO;
@@ -83,50 +84,51 @@ public class QnaController {
 	
 //	//main
 	@RequestMapping(value="qna.do")
-	public ModelAndView qna_page(@RequestParam(defaultValue="0") int pageNum) {
+	public ModelAndView qna_page(@RequestParam(defaultValue="0") int pageNum ,@RequestParam(defaultValue="0") int pageConunt) {
 		Criteria qnaPage;
-//			System.out.println("a");
+
 		   ModelAndView mav = new ModelAndView();
 
 		   if(pageNum == 0) {
-			   qnaPage = new Criteria(1,3); 
+			   qnaPage = new Criteria(1,3,1); 
 		   }else {
-			   qnaPage = new Criteria(pageNum, 3);
+			   qnaPage = new Criteria(pageNum, 3 , pageConunt);
 		   }
 
 		   List<QnaVO> qnaList = new ArrayList<QnaVO>();
-//		   System.out.println("b"+ qnaList.toString());
-		   qnaList = qnaService.qna_page(qnaPage);
-		   
-//		   System.out.println("c"+ qnaList.toString());
 		   
 		   qnaPage.setTotal(qnaService.maintotalpage(qnaPage));	   
 		   qnaPage.setTotal_page((int)Math.ceil(qnaPage.getTotal() * 1.0/qnaPage.getSize()));
-		   qnaPage.setBlock_num((int)Math.ceil(qnaPage.getSize()/ 3));
-		   qnaPage.setBlock_start(((qnaPage.getBlock_num() -1) *5)+1);
+		  
+		   
+		   qnaPage.setBlock_num((int)Math.ceil(qnaPage.getPageConunt()));
+		   qnaPage.setBlock_start((qnaPage.getBlock_num()-1)* 5 + 1);
 		   qnaPage.setBlock_end((qnaPage.getBlock_start()+5 -1));
-//		   System.out.println("d"+ qnaList.toString());
+		  
+		   qnaList = qnaService.qna_page(qnaPage);
+		   
+		   
 		   if(qnaPage.getBlock_end() > qnaPage.getTotal_page()) {
 			   qnaPage.setBlock_end(qnaPage.getTotal_page());
 		   }
 		   mav.addObject("qnaPageList", qnaList);
 		   mav.addObject("qnaPage", qnaPage);
 		   mav.setViewName("/qna");
-//		   System.out.println("qnaPageList" + qnaList.toString());
+
 		return mav;
 		
 	}
 	
 	//상세보기
 	@RequestMapping(value="/qna_board.do", method=RequestMethod.GET)
-	public ModelAndView qna_view(@RequestParam int faq_num, @RequestParam(defaultValue="0") int pageNum) {
+	public ModelAndView qna_view(@RequestParam int faq_num, @RequestParam(defaultValue="0") int pageNum, @RequestParam(defaultValue="0")int pageConunt) {
 		
 		Criteria criteria;
 		
 		if(pageNum == 0) {
 			criteria = new Criteria();
 		}else {
-			criteria = new Criteria(pageNum, 5);
+			criteria = new Criteria(pageNum, 5, pageConunt);
 		}
 		
 		criteria.setFaq_num(faq_num);
@@ -136,17 +138,16 @@ public class QnaController {
 //		댓글 페이징 하기
 		List<CommentVO> cv = qnaService.commentList(criteria);
 		criteria.setTotal(qnaService.totalpage(criteria)); 
-		
 		criteria.setTotal_page((int)Math.ceil(criteria.getTotal() *1.0/criteria.getSize())); 
 		
-		criteria.setBlock_num((int)Math.ceil(criteria.getSize()/ 5)); 
+		criteria.setBlock_num((int)Math.ceil(criteria.getPageConunt()));
 		criteria.setBlock_start(((criteria.getBlock_num() -1) * 5 ) +1 ); 
 		criteria.setBlock_end(criteria.getBlock_start() + 5 -1); 
 		
 		if(criteria.getBlock_end() > criteria.getTotal_page()) {
 			criteria.setBlock_end(criteria.getTotal_page());
 		}
-		
+		System.out.println(criteria.toString());
 		QnaVO qnaVO;
 		ModelAndView mav = new ModelAndView();
 		qnaVO = qnaService.read(faq_num);
@@ -164,27 +165,52 @@ public class QnaController {
 	public String qna_reply_write(@ModelAttribute CommentVO commentVO) {
 		commentVO.setC_kind("0");
 		qnaService.qna_reply_write(commentVO);
-		System.out.println(commentVO.toString());
+
 		return "redirect:/qna_board.do?faq_num=" + commentVO.getC_num();
 		
 	}
 	//댓글 삭제
 	@RequestMapping("/qna_reply_delete.do")
-	public String qna_reply_delete(CommentVO commentVO) {
-		qnaService.qna_reply_delete(commentVO.getComment_num());
+	public String qna_reply_delete(CommentVO commentVO, HttpSession session) {
+		if(session.getAttribute("user") == null) {
+			return "redirect:/home.do";
+		}else {
+			int comment_num = commentVO.getComment_num();
+			commentVO = qnaService.commentRead(comment_num);
+			MemberVO member = (MemberVO)session.getAttribute("user");
+			if(member.getM_number() == commentVO.getC_member_num()) {
+				qnaService.qna_reply_delete(commentVO.getComment_num());
+				return "redirect:qna.do";
+			}else {
+				return"redirect:/home.do";
+			}
+		}
 		
-		return "redirect:qna.do";
 	}
 	
 	@RequestMapping(value="qna_rewrite.do", method=RequestMethod.GET)
-	public ModelAndView qna_rewrite_view(@RequestParam int faq_num) {
-		QnaVO qnaVO;
+	public ModelAndView qna_rewrite_view(@RequestParam int faq_num, HttpSession session) {
+
 		ModelAndView mav = new ModelAndView();
-		qnaVO = qnaService.rewrite_view(faq_num);
-		mav.addObject("rewrite_view", qnaVO);
-		mav.setViewName("/qna_rewrite");
+	
+		if(session.getAttribute("user") == null) {
+			mav.setViewName("redirect:/home.do");
+		}else {
+			QnaVO qnaVO;
+			qnaVO = qnaService.rewrite_view(faq_num);
+			
+			MemberVO member = (MemberVO)session.getAttribute("user");
+			if(member.getM_number() == qnaVO.getF_number()) {
+				mav.addObject("rewrite_view", qnaVO);
+				mav.setViewName("/qna_rewrite");
+			}else {
+			mav.setViewName("redirect:/home.do");
+			}
+		}
 		return mav;
 	}
+	
+	
 	@RequestMapping(value="qna_update.do", method=RequestMethod.POST)
 	public String qna_update(@ModelAttribute QnaVO qnaVO, @RequestParam("qna_update_file")MultipartFile file) {
 		
@@ -199,12 +225,22 @@ public class QnaController {
 		return "redirect:qna_board.do?faq_num=" + qnaVO.getFaq_num();
 	}
 	@RequestMapping("/qna_delete.do")
-	public String qna_delete(@RequestParam int faq_num) {
-		qnaService.qna_delete(faq_num);
-		return "redirect:qna.do";
+	public String qna_delete(@RequestParam int faq_num, HttpSession session) {
+		if(session.getAttribute("user") == null) {
+			return "redirect:/home.do";
+		}else {
+			QnaVO qnaVO;
+			qnaVO = qnaService.read(faq_num);
+			MemberVO member = (MemberVO)session.getAttribute("user");
+			if(member.getM_number() == qnaVO.getF_number()) {
+				qnaService.qna_delete(faq_num);
+				return "redirect:qna.do";
+			}else {
+				return "redirect:/home.do";
+			}
+		}
+	
 	}
-	
-	
 	
 }
 

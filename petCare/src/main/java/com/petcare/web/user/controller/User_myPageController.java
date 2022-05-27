@@ -139,7 +139,7 @@ public class User_myPageController {
 	
 	//내 예약 현황
 	@RequestMapping("/user_myreservation.do")
-	public ModelAndView myreservation(@RequestParam int m_number, @RequestParam(defaultValue="0") int pageNum, HttpSession session) {
+	public ModelAndView myreservation(@RequestParam int m_number, @RequestParam(defaultValue="0") int pageNum,@RequestParam(defaultValue="0") int pageConunt, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		
 		MemberVO member = (MemberVO) session.getAttribute("user");
@@ -151,29 +151,26 @@ public class User_myPageController {
 			
 		
 			if(pageNum == 0) {
-				criteria = new Criteria(1,10); //10글까지 보이게
+				criteria = new Criteria(1,10,1); //10글까지 보이게
 			}else {
-				criteria = new Criteria(pageNum,10);
+				criteria = new Criteria(pageNum, 10, pageConunt);
 			}
-			criteria.setM_number(m_number);
 			
+			criteria.setM_number(m_number);
 			List<ReservationVO> reservationList = new ArrayList<ReservationVO>();
 	        
 			reservationList = user_mypageService.reservation(criteria);
 			criteria.setTotal(user_mypageService.totalpage(criteria));
-	//		log.info("total : " + total);
-	//		log.info("criteria.getSize() : " + criteria.getSize());
-	//		log.info("(int)Math.ceil(total/criteria.getSize()) : " + (int)Math.ceil(total *1.0/criteria.getSize()));
-			
 			criteria.setTotal_page((int)Math.ceil(criteria.getTotal() *1.0/criteria.getSize()));
-			criteria.setBlock_num((int)Math.ceil(criteria.getSize() / 10));
-			criteria.setBlock_start(((criteria.getBlock_num() -1) *5)+1);
-			criteria.setBlock_end(criteria.getBlock_start()+5 -1);
-			
+
+			criteria.setBlock_num((int)Math.ceil(criteria.getPageConunt()));
+			criteria.setBlock_start(((criteria.getBlock_num() - 1) * 5) + 1);
+			criteria.setBlock_end((criteria.getBlock_start() + 5 - 1));
+			 
 			if(criteria.getBlock_end() > criteria.getTotal_page()) {
 				criteria.setBlock_end(criteria.getTotal_page());
 			}
-	//		System.out.println(reservationList.toString());
+	
 			mav.addObject("reser", reservationList);
 			mav.addObject("criteria", criteria);
 			mav.setViewName("myreservation");

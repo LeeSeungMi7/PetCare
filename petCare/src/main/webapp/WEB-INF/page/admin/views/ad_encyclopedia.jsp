@@ -32,7 +32,7 @@
 						<div class="card-header">
 							<i class="fas fa-table me-1"></i> 백과사전 관리
 							<button class="en_insertBtn1 shadow-sm bg-body rounded" id="">
-								<a style="color: #3CB371" href="en_insert.mdo">백과사전 등록</a>
+								<a style="#0d6efd" href="en_insert.mdo">백과사전 등록</a>
 							</button>
 						</div>
 						<div class="card-body">

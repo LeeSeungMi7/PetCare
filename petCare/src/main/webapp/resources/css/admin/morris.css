@@ -20,3 +20,18 @@
     white-space: nowrap;
     margin: 0.1em 0;
 }
+
+.save:hover{
+	background-color:#3de007;
+	color: white;
+}
+
+.cancel:hover{
+	background-color:red;
+	color: white;
+}
+
+.open_btn:hover{
+	background-color:#0d6efd;
+	color:#fff;
+}

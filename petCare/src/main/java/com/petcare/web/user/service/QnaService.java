@@ -35,4 +35,7 @@ public interface QnaService {
 	
 	//글 삭제하기
 	void qna_delete(int faq_num);
+	
+	//댓글 리스트 나타내기
+	CommentVO commentRead(int comment_num);
 }

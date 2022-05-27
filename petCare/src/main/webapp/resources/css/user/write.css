@@ -80,3 +80,14 @@ a{
 .content{
 	max-width: 650px;
 }
+#pet-layout {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+#form1 {
+	flex: auto;
+}
+.eidtor {
+	border: none !important;
+}

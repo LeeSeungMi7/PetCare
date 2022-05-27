@@ -67,4 +67,8 @@ public class QnaDAO {
 		sqlSessionTemplate.delete("qna.qna_delete", faq_num);
 		
 	}
+
+	public CommentVO commentRead(int comment_num) {
+		return sqlSessionTemplate.selectOne("qna.commentRead", comment_num);
+	}
 }

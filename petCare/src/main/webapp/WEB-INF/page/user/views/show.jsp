@@ -42,7 +42,8 @@
 <!-- 카카오 MAP API-KEY -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1e818982c81810e2470dd6b0b339e676&libraries=services"></script>
-
+<link href="/resources/img/petcare_logo.png" rel="shortcut icon" type="image/x-icon">
+<title>PetCare Page</title>
 </head>
 
 <body>
@@ -68,7 +69,7 @@
                     <div class="card-body">
                         <div>
                         <h6 class="look">LOOK ${showPageList.b_hit}</h6>
-                        <h5 class="card-title">${showPageList.b_title} </h5>
+                        <h5 class="card-title" style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">${showPageList.b_title} </h5>
                     	</div>
                     </div>
                     <ul class="list-group list-group-flush rowpoint" >
@@ -83,20 +84,20 @@
 				<div class="page1">
 					<ul class="pagination1 modal1">
 
-
 						<c:if test="${showPageVO.pageNum > 1 }">
 							<li><a
-								href="javascript:fnSubmitForm(${showPageVO.block_start-1});"
-								class="arrow1 left1">[처음]</a></li>
+								href="javascript:fnSubmitForm(0,1);"
+								class="arrow1 left1">[처음으로]</a></li>
+							
 						</c:if>
 
 						<c:forEach var="i" begin="${showPageVO.block_start}" end="${showPageVO.block_end}">
-							<li><a href="javascript:fnSubmitForm(${i});" class="num1">[${i}]</a>
+							<li><a href="javascript:fnSubmitForm(${i},${showPageVO.pageConunt});" class="num1">[${i}]</a>
 							<li>
-						</c:forEach>
-
-						<c:if test="${!(showPageVO.block_num >= showPageVO.total_block)}">
-							<li><a href="javascript:fnSubmitForm(${showPageVO.block_end+1});" class="arrow1 right1">[마지막]</a></li>
+						</c:forEach> 
+						
+						<c:if test="${showPageVO.block_end < showPageVO.total_page}">
+							<li><a href="javascript:fnSubmitForm(${showPageVO.block_end+1},${showPageVO.pageConunt+1});" class="arrow1 right1">[다음]</a></li>
 						</c:if>
 
 
@@ -105,6 +106,7 @@
 
 				<form action="/show.do" method="post" name="pageNumform">
 					<input type="hidden" name="pageNum" id="pageNumId" value="">
+					<input type="hidden" name="pageConunt" id="pageConunt" value="">
 				</form>
 	</div>
 </div>
@@ -129,8 +131,9 @@ function show_write_check(){
 			}
 		});
 }
-function fnSubmitForm(page){
+function fnSubmitForm(page,pageConunt){
 	document.getElementById("pageNumId").value =page;
+	document.getElementById("pageConunt").value =pageConunt;
 	document.pageNumform.submit();
 }	
 </script>

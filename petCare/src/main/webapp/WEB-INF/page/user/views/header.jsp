@@ -25,7 +25,7 @@ function loginWithKakao() {
 		             data:{"kakao_id" : kakao_id},
 		             success:function(result){
 		             	if(result.msg=="로그인"){
-		             		sessionStorage.setItem('m_sido', result.m_sido);
+							sessionStorage.setItem("address", result.address);
 		             		swal({
 		     					title: "로그인 성공.",
 		     					text: "카카로 로그인으로 성공되었습니다",
@@ -104,15 +104,14 @@ function kakaoLogout() {
     
 </div>
 <div class="pet-header__tabs pet-row">
-    <a class="pet-header__tab text--16-normal color--black active" href="home.do">홈</a>
-    <a class="pet-header__tab text--16-normal color--black" href="hospital.do">내주변 병원</a>
-    <a class="pet-header__tab text--16-normal color--black" href="show.do">자랑하기</a>
-    <a class="pet-header__tab text--16-normal color--black" href="qna.do">QnA</a>
-    <a class="pet-header__tab text--16-normal color--black" href="ency_BoardList.do">동물백과</a>
-   
+    <a class="pet-header__tab text--16-normal color--black" id="home" href="home.do">홈</a>
+    <a class="pet-header__tab text--16-normal color--black" id="hospital" href="hospital.do">내주변 병원</a>
+    <a class="pet-header__tab text--16-normal color--black" id="show" href="show.do">자랑하기</a>
+    <a class="pet-header__tab text--16-normal color--black" id="qna" href="qna.do">QnA</a>
+    <a class="pet-header__tab text--16-normal color--black" id="ency_BoardList" href="ency_BoardList.do">동물백과</a>
    <!-- 마이페이지 -->
    <c:if test="${user.m_role=='0'}">
-    <div class="dropdown pet-header__tab text--16-normal color--black">
+    <div class="dropdown pet-header__tab text--16-normal color--black" id="mypage">
 		<span>내정보</span>
 		<div class="dropdown-content">
 			<c:if test="${user.kakao_member == 'N'}">
@@ -138,7 +137,7 @@ function kakaoLogout() {
 
 	<!-- 병원페이지 -->
 	<c:if test="${user.m_role=='1'}">
-	<div class="dropdown pet-header__tab text--16-normal color--black">
+	<div class="dropdown pet-header__tab text--16-normal color--black" id="mypage">
 		<span>내정보</span>
 		<div class="dropdown-content">
 			<form action="/partner_mypage_password.do" method="POST">
@@ -155,7 +154,28 @@ function kakaoLogout() {
 	<!-- 로그인 안할때 -->
 	<a class="pet-header__tab text--16-normal color--black" role="button" id="partner_myPage" aria-expanded="true" onclick="No_myPage()">내정보</a>
 	</c:if>
- </div>  
+
+	<script type="application/javascript">
+		let id = ''
+		if (window.location.pathname.startsWith('/home')) {
+			id = 'home'
+		} else if (window.location.pathname.startsWith('/hospital')) {
+			id = 'hospital'
+		} else if (window.location.pathname.startsWith('/show')) {
+			id = 'show'
+		} else if (window.location.pathname.startsWith('/qna')){
+			id = 'qna'
+		} else if (window.location.pathname.startsWith('/ency_BoardList')) {
+			id = 'ency_BoardList'
+		} else if (window.location.pathname.startsWith('/user_mypage_password') | window.location.pathname.startsWith('/user_myreservation')) {
+			id = 'mypage'
+		}
+
+		if (document.getElementById(id)) {
+			document.getElementById(id).classList.add("active")
+		}
+	</script>
+</div>
  
 
 <!--로그인 모달창-->

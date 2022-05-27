@@ -30,7 +30,8 @@
   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <!-- 경은이 카카오 MAP API-KEY -->
   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1e818982c81810e2470dd6b0b339e676&libraries=services"></script>
-
+	<link href="/resources/img/petcare_logo.png" rel="shortcut icon" type="image/x-icon">
+	<title>PetCare Page</title>
 <script>
 
 function onclickOk(){
@@ -59,116 +60,119 @@ function onClickComment(index) {
 
 </script>
 
+
 </head>
 <body>
 <div id="pet-layout" class="background--white">
 <%@ include file="/WEB-INF/page/user/views/header.jsp"%>
-<div class="pet-hospital-detail__title text--20-bold" id="title"></div>
-<div class="pet-hospital-detail__infos pet-row">
-    <div id="map" style="width:100%;height:300px;"></div>
-    <div class="pet-hospital-detail__info-text" id="infos"></div>
-</div>
- <c:if test="${criteria.rw_partner_number != 0}">
-<div class="pet-hospital-detail__reviews">
-    <div class="comment">
-        <!--리뷰 추가-->
- 				<div class="comment">
- 				<div>
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col" colspan="2">총 댓글 수 : ${criteria.total} 개</th>
-							</tr>
-						</thead>
-						<tbody>
-						
-							<c:forEach var="comment" items="${hos_com}" varStatus="status">
+<div id="pet-hospital-detail__body">
+	<div class="pet-hospital-detail__title text--20-bold" id="title"></div>
+	<div class="pet-hospital-detail__infos pet-row">
+		<div id="map" style="width:100%;height:300px;"></div>
+		<div class="pet-hospital-detail__info-text" id="infos"></div>
+	</div>
+	 <c:if test="${criteria.rw_partner_number != 0}">
+	<div class="pet-hospital-detail__reviews">
+		<div class="comment">
+			<!--리뷰 추가-->
+					<div class="comment">
+					<div>
+						<table class="table">
+							<thead>
 								<tr>
-									<th scope="row">
-									<c:out value="${criteria.pageNum + (status.count)}"></c:out></th>
-									<td>${comment.rw_writer}
-									</td>
-									<td class="sb-sidenav-collapse-arrow" style="width: 450px;">
-										<div class="comment-text comment-min" onclick="onClickComment(${status.index})">
-											${comment.rw_content}
-										</div>
-									</td>
-									<td>${comment.rw_date}</td>
-									<c:if test="${user.m_number == comment.rw_number}">
-									<td>
-										<a role="button" href="${path}/hospital_reply_delete.do?review_num=${comment.review_num}" class="btn-close cancle" aria-label="Close"></a>
-									</td>
-									</c:if>
+									<th scope="col" colspan="2">총 댓글 수 : ${criteria.total} 개</th>
 								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
+							</thead>
+							<tbody>
 
-					<!-- 페이징처리 -->
+								<c:forEach var="comment" items="${hos_com}" varStatus="status">
+									<tr>
+										<th scope="row">
+										<c:out value="${criteria.pageNum + (status.count)}"></c:out></th>
+										<td>${comment.rw_writer}
+										</td>
+										<td class="sb-sidenav-collapse-arrow" style="width: 450px;">
+											<div class="comment-text comment-min" onclick="onClickComment(${status.index})">
+												${comment.rw_content}
+											</div>
+										</td>
+										<td>${comment.rw_date}</td>
+										<c:if test="${user.m_number == comment.rw_number}">
+										<td>
+											<a role="button" href="${path}/hospital_reply_delete.do?review_num=${comment.review_num}" class="btn-close cancle" aria-label="Close"></a>
+										</td>
+										</c:if>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
 
-					<div class="page1">
-						<ul class="pagination1 modal1">
+						<!-- 페이징처리 -->
 
-							<c:if test="${criteria.pageNum > 1 }">
-								<li><a
-									href="javascript:fnSubmitForm(${criteria.block_start-1});"
-									class="arrow1 left1">[처음]</a></li>
-							</c:if>
+								<div class="page1">
+									<ul class="pagination1 modal1">
 
-							<c:forEach var="i" begin="${criteria.block_start}"
-								end="${criteria.block_end}">
-								<li><a href="javascript:fnSubmitForm(${i});" class="num1">[${i}]</a>
-								<li>
-							</c:forEach>
 
-							<c:if test="${!(criteria.block_num >= criteria.total_block)}">
-								<li><a
-									href="javascript:fnSubmitForm(${criteria.block_end+1});"
-									class="arrow1 right1">[마지막]</a></li>
-							</c:if>
+										<c:if test="${criteria.pageNum > 1 }">
+											<li><a href="javascript:fnSubmitForm(0,1);"
+												class="arrow1 left1">[처음으로]</a></li>
 
-						</ul>
-					</div>
-				</div>
-				<hr>
-				<c:if test="${user.m_number != null}">
-					<script>
-						window.user_number = ${user.m_number};
-						window.user_role = ${user.m_role}
-					</script>
-					<form id="form12" name="ReplyVO" method="POST" onsubmit="return onclickOk()" action="hospital_reply_write.do" enctype="multipart/form-data">
-						<div>
-							<div class="form-floating">
-								<textarea class="commentbox form-control" id="floatingTextarea2" name="rw_content"></textarea>
-								<label for="floatingTextarea2">리뷰 작성</label>
+										</c:if>
+
+										<c:forEach var="i" begin="${criteria.block_start}" end="${criteria.block_end}">
+											<li><a href="javascript:fnSubmitForm(${i},${criteria.pageConunt});" class="num1">[${i}]</a>
+											<li>
+										</c:forEach>
+
+										<c:if test="${criteria.block_end < criteria.total_page}">
+											<li><a href="javascript:fnSubmitForm(${criteria.block_end+1},${criteria.pageConunt+1});" class="arrow1 right1">[다음]</a></li>
+										</c:if>
+
+									</ul>
+								</div>
 							</div>
-						<input type="hidden" name="rw_partner_number" value="${criteria.rw_partner_number}">
-						<input type="hidden" name="rw_writer" value="${user.m_name}">
-						<input type="hidden" name="rw_number" value="${user.m_number}">
-					
-							<input type="submit" class="btn btn-success" id="btnReply" role="button" value="댓글 등록">
-						</div>
-					</form>
-				</c:if>
+					<hr>
+					<c:if test="${user.m_number != null}">
+						<script>
+							window.user_number = ${user.m_number};
+							window.user_role = ${user.m_role}
+						</script>
+						<form id="form12" name="ReplyVO" method="POST" onsubmit="return onclickOk()" action="hospital_reply_write.do" enctype="multipart/form-data">
+							<div>
+								<div class="form-floating">
+									<textarea class="commentbox form-control" id="floatingTextarea2" name="rw_content"></textarea>
+									<label for="floatingTextarea2">리뷰 작성</label>
+								</div>
+							<input type="hidden" name="rw_partner_number" value="${criteria.rw_partner_number}">
+							<input type="hidden" name="rw_writer" value="${user.m_name}">
+							<input type="hidden" name="rw_number" value="${user.m_number}">
+
+								<input type="submit" class="btn btn-success" id="btnReply" role="button" value="댓글 등록">
+							</div>
+						</form>
+					</c:if>
 
 
-				</div>
-				<!-- 페이징 끝 -->
-				
-				
-    </div>
-    <hr>
-    		<!-- 페이징 처리 폼 -->
-		<form action="/hospital_detail.do" name="pageNumform">
-			<input type="hidden" name="pageNum" id="pageNumId" value="">
-			<input type="hidden" name="m_number" value="${criteria.rw_partner_number}">
-		</form>
-</div>
+					</div>
+					<!-- 페이징 끝 -->
+
+
+		</div>
+		<hr>
+				<!-- 페이징 처리 폼 -->
+			<form action="/hospital_detail.do" name="pageNumform">
+				<input type="hidden" name="pageNum" id="pageNumId" value="">
+				<input type="hidden" name="pageConunt" id="pageConunt" value="">
+				<input type="hidden" name="m_number" value="${criteria.rw_partner_number}">
+			</form>
+	</div>
 </c:if>
+</div>
 <%@ include file="/WEB-INF/page/user/views/footer.jsp"%>
 	<script type="text/javascript">
-function fnSubmitForm(page){
+function fnSubmitForm(page, pageConunt){
 		document.getElementById("pageNumId").value = page;
+		document.getElementById("pageConunt").value =pageConunt;
 		document.pageNumform.submit(); 
 }
 </script>

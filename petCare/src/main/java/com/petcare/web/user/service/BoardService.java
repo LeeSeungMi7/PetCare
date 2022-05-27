@@ -40,6 +40,8 @@ public interface BoardService {
 
 	void board_reply_delete(int comment_num);
 
+	CommentVO commentRead(int comment_num);
+
 	
 
 }

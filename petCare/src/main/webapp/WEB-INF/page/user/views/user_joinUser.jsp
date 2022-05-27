@@ -32,7 +32,8 @@
 	  <!-- 카카오 주소 -->
 	  <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=1e818982c81810e2470dd6b0b339e676&libraries=services"></script>
-	  
+	  <link href="/resources/img/petcare_logo.png" rel="shortcut icon" type="image/x-icon">
+		<title>PetCare Page</title>
 	  </head>	
 	   <body>
 			<div id="pet-layout" class="background--white">

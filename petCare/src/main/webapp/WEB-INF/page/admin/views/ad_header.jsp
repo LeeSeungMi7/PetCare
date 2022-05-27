@@ -6,30 +6,26 @@
     <head>
         <meta charset="utf-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <meta name="description" content=""/>
         <meta name="author" content=""/>
         <link href="/resources/css/admin/styles.css" rel="stylesheet" />
-        <script
-            src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
-            crossorigin="anonymous"></script>
-    </head>
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+   		<link href="/resources/css/admin/addmin_page.css" rel="stylesheet" />
+	
+	</head>
     <body class="sb-nav-fixed">
-        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg_color_admin">
             <!-- Navbar Brand-->
+            <img class="addmin_logo" src="/resources/img/admin_logo.png">
             <a class="navbar-brand ps-3" href="ad_charts.mdo">PetCare</a>
             
-            <button class="custom-btn btn-3" id="">
-                <span>
-                    <a href="${path}/logout.mdo">로그아웃</a>
-                </span>
-            </button>
+            <a style="margin-left:78%; color:#fff;" href="${path}/logout.mdo">로그아웃</a>
+
         </nav>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
-                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <nav class="sb-sidenav accordion admin-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Menu</div>

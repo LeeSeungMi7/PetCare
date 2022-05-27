@@ -29,22 +29,20 @@ public class EncyController {
 
 	// 페이징+show 나타내기
 	@RequestMapping(value = "/ency_BoardList.do")
-	public ModelAndView encyboard_page(@RequestParam(defaultValue = "0") int enpageNum) {
-//		System.out.println(enpageNum);
+	public ModelAndView encyboard_page(@RequestParam(defaultValue = "0") int pageNum, @RequestParam(defaultValue="0") int pageConunt) {
 		Criteria cr;
-
 		ModelAndView mav = new ModelAndView();
 
-		if (enpageNum == 0) {
-			cr = new Criteria(1, 3); // 3글까지 보이게
+		if (pageNum == 0) {
+			cr = new Criteria(1,3,1); // 3글까지 보이게
 		} else {
-			cr = new Criteria(enpageNum, 3);
+			cr = new Criteria(pageNum, 3, pageConunt);
 		}
 		List<Ad_encyVO> showenList = new ArrayList<Ad_encyVO>();
 		showenList = encyService.enboard_page(cr);
 		cr.setTotal(encyService.totalpage(cr));
 		cr.setTotal_page((int) Math.ceil(cr.getTotal() * 1.0 / cr.getSize()));
-		cr.setBlock_num((int) Math.ceil(cr.getSize() / 3));
+		cr.setBlock_num((int)Math.ceil(cr.getPageConunt()));
 		cr.setBlock_start(((cr.getBlock_num() - 1) * 5) + 1);
 		cr.setBlock_end((cr.getBlock_start() + 5 - 1));
 
@@ -52,7 +50,7 @@ public class EncyController {
 			cr.setBlock_end(cr.getTotal_page());
 		}
 		mav.addObject("showEnList", showenList);
-		mav.addObject("showPageVO", cr);
+		mav.addObject("enPageVO", cr);
 		mav.setViewName("/ency_BoardList");
 		return mav;
 	}

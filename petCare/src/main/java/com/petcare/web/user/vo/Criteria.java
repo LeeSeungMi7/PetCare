@@ -16,14 +16,16 @@ public class Criteria {
 	private int block_start; //블록시작
 	private int block_end; //블록 마지막
 	private int total; //총 글 수
-	
+	private int pageConunt;
+
 	public Criteria() {
-		this(1,5);
+		this(1,5,1);
 	}
 	
-	public Criteria(int pageNum, int size) {
+	public Criteria(int pageNum, int size, int pageConunt) {
 		this.pageNum = pageNum;
 		this.size =size;
+		this.pageConunt = pageConunt;
 	}
 	
 	public int getSkip() {

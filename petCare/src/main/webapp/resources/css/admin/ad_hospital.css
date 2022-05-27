@@ -8,12 +8,9 @@
     padding: 0 10px;
     cursor: pointer;
     display: inline-block;
+    height: 30px;
 }
-/* 버튼 눌렀을때 */
-.btn1:hover {
-    background: rgb(243, 9, 9);
-    color: white;
-}
+
 img.modalimg {
     width: 100%;
 }

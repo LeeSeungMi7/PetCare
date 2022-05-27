@@ -47,5 +47,8 @@
 	<delete id="qna_delete">
 	delete from FAQ_Table where faq_num = #{faq_num}
 	</delete>
+	<select id="commentRead" resultType="CommentVO">
+	select * from Comment_Table Where Comment_num = #{Comment_num}
+	</select>
 
 </mapper>

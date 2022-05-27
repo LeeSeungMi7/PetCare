@@ -65,7 +65,7 @@
 										<td><c:out value="${list.m_tel}" /></td>
 										<td><c:out value="${list.m_id}" /></td>
 										<td>
-											<button type="button" class="btn1" data-bs-toggle="modal"
+											<button type="button" class="btn1 open_btn" data-bs-toggle="modal"
 												data-bs-target="#exampleModal${status.index}">open</button>
 											<div class="modal fade" id="exampleModal${status.index}"
 												tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -131,7 +131,7 @@
 										<td><c:out value="${list.m_tel}" /></td>
 										<td><c:out value="${list.m_id}" /></td>
 										<td>
-											<button type="button" class="btn1" data-bs-toggle="modal"
+											<button type="button" class="btn1 open_btn" data-bs-toggle="modal"
 												data-bs-target="#exampleModal${status.index}">open</button>
 											<div class="modal fade" id="exampleModal${status.index}"
 												tabindex="-1" aria-labelledby="exampleModalLabel"

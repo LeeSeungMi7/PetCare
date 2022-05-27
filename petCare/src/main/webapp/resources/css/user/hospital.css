@@ -46,7 +46,8 @@
 }
 
 .pet-hospital__infos {
-    height: 85%;
+    flex: auto;
+    overflow: auto;
 }
 
 .pet-hospital__info {
@@ -71,3 +72,15 @@
 .pet-hospital__list-item:not(:last-of-type) {
     border-bottom: 1px solid #007bff;
 }
+.button-group {
+    display: flex;
+    flex-direction: row;
+}
+.button-group > :last-child.filter {
+	margin-right: 0;
+}
+
+.button-group > .filter {
+   flex-grow: 1;
+   margin-right: 5px
+    }

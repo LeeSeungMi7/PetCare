@@ -76,7 +76,8 @@ function onClickComment(index) {
     width: calc(450px - 1.5em);
 }
 </style>
-
+<link href="/resources/img/petcare_logo.png" rel="shortcut icon" type="image/x-icon">
+<title>PetCare Page</title>
 </head>
 
 <body>
@@ -150,22 +151,20 @@ function onClickComment(index) {
 						<ul class="pagination1 modal1">
 
 							<c:if test="${criteria.pageNum > 1 }">
-								<li><a
-									href="javascript:fnSubmitForm(${criteria.block_start-1});"
-									class="arrow1 left1">[처음]</a></li>
-							</c:if>
+							<li><a
+								href="javascript:fnSubmitForm(0,1);"
+								class="arrow1 left1">[처음으로]</a></li>
+							
+						</c:if>
 
-							<c:forEach var="i" begin="${criteria.block_start}"
-								end="${criteria.block_end}">
-								<li><a href="javascript:fnSubmitForm(${i});" class="num1">[${i}]</a>
-								<li>
-							</c:forEach>
-
-							<c:if test="${!(criteria.block_num >= criteria.total_block)}">
-								<li><a
-									href="javascript:fnSubmitForm(${criteria.block_end+1});"
-									class="arrow1 right1">[마지막]</a></li>
-							</c:if>
+						<c:forEach var="i" begin="${criteria.block_start}" end="${criteria.block_end}">
+							<li><a href="javascript:fnSubmitForm(${i},${criteria.pageConunt});" class="num1">[${i}]</a>
+							<li>
+						</c:forEach> 
+						
+						<c:if test="${criteria.block_end < criteria.total_page}">
+							<li><a href="javascript:fnSubmitForm(${criteria.block_end+1},${criteria.pageConunt+1});" class="arrow1 right1">[다음]</a></li>
+						</c:if>
 
 						</ul>
 					</div>
@@ -212,6 +211,7 @@ function onClickComment(index) {
 		<form action="/qna_board.do" name="pageNumform">
 			<input type="hidden" name="pageNum" id="pageNumId" value="">
 			<input type="hidden" name="faq_num" value="${view.faq_num}">
+			<input type="hidden" name="pageConunt" id="pageConunt" value="">
 		</form>
 	</div>
 
@@ -219,8 +219,10 @@ function onClickComment(index) {
 	<!--푸터-->
 	<%@ include file="/WEB-INF/page/user/views/footer.jsp"%>
 	<script type="text/javascript">
-function fnSubmitForm(page){
+	
+function fnSubmitForm(page,pageConunt){
 		document.getElementById("pageNumId").value =page;
+		document.getElementById("pageConunt").value =pageConunt;
 		document.pageNumform.submit(); 
 }
 </script>
