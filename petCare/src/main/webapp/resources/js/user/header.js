@@ -37,7 +37,7 @@ function fn_loginCheck() {
 					location.reload();
 				});
             } else if (result.msg == "hos_success") {
-            sessionStorage.setItem('m_dong', result.m_dong);
+            sessionStorage.setItem("address", result.address);
                 swal({
 					title: "로그인 성공.",
 					icon : "success",
@@ -64,7 +64,7 @@ function fn_loginCheck() {
 					window.location.href ="/signinForm.do";
 				});
             } else {
-            sessionStorage.setItem('m_dong', result.m_dong);
+				sessionStorage.setItem("address", result.address);
                 swal({
 					title: "로그인 성공.",
 					text: "환영합니다. 성공적으로 로그인 되었습니다.",

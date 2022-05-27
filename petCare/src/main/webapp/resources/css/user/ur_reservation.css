@@ -35,3 +35,13 @@ a{
 .btn-secondary{
 	height: 45px;
 }
+#pet-layout {
+	height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#pet-hospital-detail__body {
+    flex: auto;
+    overflow: auto;
+}

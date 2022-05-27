@@ -68,8 +68,7 @@ function onclickOk(){
 
 
 </script>
-<link href="/resources/img/petcare_logo.png" rel="shortcut icon" type="image/x-icon">
-<title>PetCare Page</title>
+
 </head>
 
 <body>
@@ -78,39 +77,39 @@ function onclickOk(){
 		<%@ include file="/WEB-INF/page/user/views/header.jsp"%>
 		<!--본문-->
 		<%-- <%@ include file="/WEB-INF/page/user/views/show_write.jsp" %> --%>
-		<form id="form1" name="showVO" method="POST" onsubmit="return onclickOk()" action="/show_insert.do" enctype="multipart/form-data">
-			<div class="eidtor">
-				<!--제목-->
-				<div class="mb-3">
-					<label for="formGroupExampleInput" class="form-label" id="title">TITLE</label> 
-					<input
-						type="text" class="datebox form-control" maxlength="20"
-						placeholder="" style="max-width: 300px;" name="b_title" id="input_title">
-				</div>
-				<!--대표이미지-->
-				<div class="mb-3">
-					<label for="formGroupExampleInput2" class="form-label">IMAGE</label>
+			<form id="form1" name="showVO" method="POST" onsubmit="return onclickOk()" action="/show_insert.do" enctype="multipart/form-data">
+				<div class="eidtor">
+					<!--제목-->
+					<div class="mb-3">
+						<label for="formGroupExampleInput" class="form-label" id="title">TITLE</label>
+						<input
+							type="text" class="datebox form-control" maxlength="20"
+							placeholder="" style="max-width: 300px;" name="b_title" id="input_title">
+					</div>
+					<!--대표이미지-->
+					<div class="mb-3">
+						<label for="formGroupExampleInput2" class="form-label">IMAGE</label>
+						<div>
+						<input type="file" name="show_file" id="profile_pt" onchange="previewImage(this,'View_area')"/>
+						<div id='View_area' style='position:relative;  border: 0px solid black; dispaly: inline; '></div>
+						</div>
+					</div>
+					<!--내용-->
 					<div>
-					<input type="file" name="show_file" id="profile_pt" onchange="previewImage(this,'View_area')"/>
-					<div id='View_area' style='position:relative;  border: 0px solid black; dispaly: inline; '></div>
+						<label>CONTENT</label>
+						<textarea id="ir1" rows="10" cols="100" style="max-width: 650px;" name="b_content"></textarea>
+					</div>
+					<!--버튼-->
+					<div>
+						<input type="hidden" name="b_writer" value="${user.m_name}">
+						<input type="hidden" name="b_number" value="${user.m_number}">
+						<input type="submit" class="btn btn-success" id="btnSave" value="등록">
+						<!-- <button class="btn btn-success" type="button" id="btnSave" ">등록</button> -->
+						<a class="btn btn-danger" href="show.do" role="button" onclick="Cancel()">취소</a>
 					</div>
 				</div>
-				<!--내용-->
-				<div>
-					<label>CONTENT</label>
-					<textarea id="ir1" rows="10" cols="100" style="max-width: 650px;" name="b_content"></textarea>
-				</div>
-				<!--버튼-->
-				<div>
-					<input type="hidden" name="b_writer" value="${user.m_name}">
-					<input type="hidden" name="b_number" value="${user.m_number}">
-					<input type="submit" class="btn btn-success" id="btnSave" value="등록">
-					<!-- <button class="btn btn-success" type="button" id="btnSave" ">등록</button> -->
-					<a class="btn btn-danger" href="show.do" role="button" onclick="Cancel()">취소</a>
-				</div>
-			</div>
 
-		</form>
+			</form>
 		</div>
 		<script type="text/javascript" src="/se2/js/service/HuskyEZCreator.js"
 			charset="utf-8"></script>
