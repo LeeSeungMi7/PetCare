@@ -78,27 +78,30 @@
         </table>
         <div class="page1">
         <ul class="pagination1 modal1">
-        	
-                 
-            <c:if test="${criteria.pageNum > 1 }">
-            	<li><a href="javascript:fnSubmitForm(${criteria.block_start-1});" class="arrow1 left1">[처음]</a></li>
-            </c:if>
-            
-            <c:forEach var="i" begin="${criteria.block_start}" end="${criteria.block_end}">
-            	<li><a href="javascript:fnSubmitForm(${i});" class="num1">[${i}]</a><li>
-            </c:forEach>
-            
-            <c:if test="${!(criteria.block_num >= criteria.total_block)}">
-            	<li><a href="javascript:fnSubmitForm(${criteria.block_end+1});" class="arrow1 right1" >[마지막]</a></li>
-            </c:if>
-            
-           
-        </ul>
+					
+					<c:if test="${criteria.pageNum > 1 }">
+							<li><a
+								href="javascript:fnSubmitForm(0,1);"
+								class="arrow1 left1">[처음으로]</a></li>
+							
+						</c:if>
+
+						<c:forEach var="i" begin="${criteria.block_start}" end="${criteria.block_end}">
+							<li><a href="javascript:fnSubmitForm(${i},${criteria.pageConunt});" class="num1">[${i}]</a>
+							<li>
+						</c:forEach> 
+						
+						<c:if test="${criteria.block_end < criteria.total_page}">
+							<li><a href="javascript:fnSubmitForm(${criteria.block_end+1},${criteria.pageConunt+1});" class="arrow1 right1">[다음]</a></li>
+						</c:if>
+				</ul>
+				
         </div>
         
         <form action="/hos_reservation.do" method="post" name="pageNumform">
         	<input type="hidden" name="pageNum" id="pageNumId" value="">
         	<input type="hidden" name="m_number" value="${user.m_number}">
+        	<input type="hidden" name="pageConunt" id="pageConunt" value="">
         </form>
         
         <hr style="margin-bottom: 20px;">
@@ -240,8 +243,9 @@ $("#datepicker").on("change", function(){
 	
 })
 
-function fnSubmitForm(page){
-	document.getElementById("pageNumId").value =page;
+function fnSubmitForm(page,pageConunt){
+	document.getElementById("pageNumId").value = page;
+	document.getElementById("pageConunt").value = pageConunt;
 	document.pageNumform.submit();
 }
 

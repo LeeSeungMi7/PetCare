@@ -84,29 +84,30 @@ public class QnaController {
 	
 //	//main
 	@RequestMapping(value="qna.do")
-	public ModelAndView qna_page(@RequestParam(defaultValue="0") int pageNum) {
+	public ModelAndView qna_page(@RequestParam(defaultValue="0") int pageNum ,@RequestParam(defaultValue="0") int pageConunt) {
 		Criteria qnaPage;
 
 		   ModelAndView mav = new ModelAndView();
 
 		   if(pageNum == 0) {
-			   qnaPage = new Criteria(1,3); 
+			   qnaPage = new Criteria(1,3,1); 
 		   }else {
-			   qnaPage = new Criteria(pageNum, 3);
+			   qnaPage = new Criteria(pageNum, 3 , pageConunt);
 		   }
 
 		   List<QnaVO> qnaList = new ArrayList<QnaVO>();
-
-		   qnaList = qnaService.qna_page(qnaPage);
-		   
-
 		   
 		   qnaPage.setTotal(qnaService.maintotalpage(qnaPage));	   
 		   qnaPage.setTotal_page((int)Math.ceil(qnaPage.getTotal() * 1.0/qnaPage.getSize()));
-		   qnaPage.setBlock_num((int)Math.ceil(qnaPage.getSize()/ 3));
-		   qnaPage.setBlock_start(((qnaPage.getBlock_num() -1) *5)+1);
+		  
+		   
+		   qnaPage.setBlock_num((int)Math.ceil(qnaPage.getPageConunt()));
+		   qnaPage.setBlock_start((qnaPage.getBlock_num()-1)* 5 + 1);
 		   qnaPage.setBlock_end((qnaPage.getBlock_start()+5 -1));
-
+		  
+		   qnaList = qnaService.qna_page(qnaPage);
+		   
+		   
 		   if(qnaPage.getBlock_end() > qnaPage.getTotal_page()) {
 			   qnaPage.setBlock_end(qnaPage.getTotal_page());
 		   }
@@ -120,14 +121,14 @@ public class QnaController {
 	
 	//상세보기
 	@RequestMapping(value="/qna_board.do", method=RequestMethod.GET)
-	public ModelAndView qna_view(@RequestParam int faq_num, @RequestParam(defaultValue="0") int pageNum) {
+	public ModelAndView qna_view(@RequestParam int faq_num, @RequestParam(defaultValue="0") int pageNum, int pageConunt) {
 		
 		Criteria criteria;
 		
 		if(pageNum == 0) {
 			criteria = new Criteria();
 		}else {
-			criteria = new Criteria(pageNum, 5);
+			criteria = new Criteria(pageNum, 5, pageConunt);
 		}
 		
 		criteria.setFaq_num(faq_num);
@@ -139,7 +140,6 @@ public class QnaController {
 		criteria.setTotal(qnaService.totalpage(criteria)); 
 		
 		criteria.setTotal_page((int)Math.ceil(criteria.getTotal() *1.0/criteria.getSize())); 
-		
 		criteria.setBlock_num((int)Math.ceil(criteria.getSize()/ 5)); 
 		criteria.setBlock_start(((criteria.getBlock_num() -1) * 5 ) +1 ); 
 		criteria.setBlock_end(criteria.getBlock_start() + 5 -1); 

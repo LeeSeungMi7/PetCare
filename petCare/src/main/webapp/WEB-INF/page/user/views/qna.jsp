@@ -91,21 +91,21 @@
 
 				<div class="page1">
 					<ul class="pagination1 modal1">
-
-
+							
 						<c:if test="${qnaPage.pageNum > 1 }">
 							<li><a
-								href="javascript:fnSubmitForm(${qnaPage.block_start-1});"
-								class="arrow1 left1">[처음]</a></li>
+								href="javascript:fnSubmitForm(0,1);"
+								class="arrow1 left1">[처음으로]</a></li>
+							
 						</c:if>
 
 						<c:forEach var="i" begin="${qnaPage.block_start}" end="${qnaPage.block_end}">
-							<li><a href="javascript:fnSubmitForm(${i});" class="num1">[${i}]</a>
+							<li><a href="javascript:fnSubmitForm(${i},${qnaPage.pageConunt});" class="num1">[${i}]</a>
 							<li>
-						</c:forEach>
-
-						<c:if test="${!(qnaPage.block_num >= qnaPage.total_block)}">
-							<li><a href="javascript:fnSubmitForm(${qnaPage.block_end+1});" class="arrow1 right1">[마지막]</a></li>
+						</c:forEach> 
+						
+						<c:if test="${qnaPage.block_end < qnaPage.total_page}">
+							<li><a href="javascript:fnSubmitForm(${qnaPage.block_end+1},${qnaPage.pageConunt+1});" class="arrow1 right1">[다음]</a></li>
 						</c:if>
 
 
@@ -114,6 +114,7 @@
 				
 				<form action="/qna.do" method="post" name="pageNumform">
 					<input type="hidden" name="pageNum" id="pageNumId" value="">
+					<input type="hidden" name="pageConunt" id="pageConunt" value="">
 				</form>
 
 		</div>
@@ -137,8 +138,10 @@ function qna_write_check(){
 			}
 		});
 }
-function fnSubmitForm(page){
+function fnSubmitForm(page , pageConunt){
 	document.getElementById("pageNumId").value =page;
+	document.getElementById("pageConunt").value =pageConunt;
+	
 	document.pageNumform.submit();
 }	
 </script>

@@ -149,7 +149,7 @@ public class Partner_myPageController {
 	
 //	병원 예약 연결
 	@RequestMapping( value ="/hos_reservation.do")
-	public ModelAndView hos_reservation(@RequestParam int m_number,@RequestParam(defaultValue="0") int pageNum, HttpSession session) {
+	public ModelAndView hos_reservation(@RequestParam int m_number,@RequestParam(defaultValue="0") int pageNum, @RequestParam(defaultValue="0") int pageConunt, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		MemberVO member = (MemberVO) session.getAttribute("user");
 		if(member.getM_number()==m_number) {
@@ -158,28 +158,27 @@ public class Partner_myPageController {
 			if(pageNum == 0) {
 				criteria = new Criteria();
 			}else {
-				criteria = new Criteria(pageNum, 5);
+				criteria = new Criteria(pageNum, 5, pageConunt);
 			}
 	
 			criteria.setM_number(m_number);
-	
+			
 			List<ReservationVO> rv = partnerMapage.partner_reservationPage(criteria);
 			criteria.setTotal(partnerMapage.totalpage(criteria)); //총 글 몇개인지 (디비갔다와~)
 			
-	//		log.info("total : " + total);
-	//		log.info("criteria.getSize() : " + criteria.getSize());
-	//		log.info("(int)Math.ceil(total/criteria.getSize()) : " + (int)Math.ceil(total*1.0/criteria.getSize()));
+//			log.info("criteria.getSize() : " + criteria.getSize());
+//			log.info("(int)Math.ceil(total/criteria.getSize()) : " + (int)Math.ceil(total*1.0/criteria.getSize()));
 			criteria.setTotal_page((int)Math.ceil(criteria.getTotal() *1.0/criteria.getSize())); //총 페이지수 = 게시글수 / 한화면에 보여질 사이즈 (올림)
 			
-			criteria.setBlock_num((int)Math.ceil(criteria.getSize()/ 5)); // 블록 넘버 구하기 double이라 int로 캐스팅 후 올림 (5는 블록 수)
+			criteria.setBlock_num((int)Math.ceil(criteria.getPageConunt())); // 블록 넘버 구하기 double이라 int로 캐스팅 후 올림 (5는 블록 수)
 			criteria.setBlock_start(((criteria.getBlock_num() -1) * 5 ) +1 ); //블록 start (예 : 1, 6, 11)
 			criteria.setBlock_end(criteria.getBlock_start() + 5 -1); //블록 끝 (예 : 5,10,15)
+
 			
 			if(criteria.getBlock_end() > criteria.getTotal_page()) { //totalpage 보다 블록이 더 클경우 (예 : totalpage2 <end블록 5 )
 				criteria.setBlock_end(criteria.getTotal_page()); //블록의 끝변호는 2로 셋팅 
 			}
 			
-	//		System.out.println(criteria.toString());
 			mav.addObject("reservationInfo", rv);
 			mav.addObject("criteria", criteria);
 			mav.setViewName("hos_reservation");
