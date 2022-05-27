@@ -24,7 +24,7 @@
 <link href="/resources/css/user/footer.css" rel="stylesheet">
 <link href="/resources/css/user/button.css" rel="stylesheet">
 <link href="/resources/css/user/loginForm.css" rel="stylesheet">
-<link href="/resources/css/user/ency_BoardList.css?after"
+<link href="/resources/css/user/ency_BoardList.css"
 	rel="stylesheet">
 <link href="/resources/css/user/myreservation.css" rel="stylesheet">
 <link href="/resources/img/petcare_logo.png" rel="shortcut icon" type="image/x-icon">
@@ -50,7 +50,10 @@
 							<h4 class="media-heading" id="top-aligned-media">
 								${List.en_title }</h4>
 							<p class="content">${List.en_content }</p>
-							<pre class="insertdate">WRITER : ${List.en_date }					LOOK   ${List.en_hit }</pre>
+							<div style="display: flex !important; flex-direction: row !important; justify-content: space-between; font-size: smaller !important;">
+                     <div class="insertdate" style="color: gray !important; font-size: small;">${List.en_date }</div>
+                     <div class="insertdate" style="color: gray !important; font-size: small;margin-right: 20px;font-weight: bold;">LOOK ${List.en_hit }</div>
+							</div>	
 						</div>
 					</div>
 				</c:forEach>
