@@ -30,7 +30,7 @@
 		select * from Member_Table where m_number=#{hospital_number};
 	</select>
 	<select id="search_for_map_ids" resultType="MemberVO">
-		select * from Member_Table where m_address_class in (
+		select * from Member_Table where m_access='0' and m_address_class in (
 		<foreach collection="array" item="item" index="index" separator=",">
 			${item}
 		</foreach>)
