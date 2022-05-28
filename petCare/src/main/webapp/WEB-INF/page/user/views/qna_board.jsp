@@ -12,7 +12,7 @@
 <link href="/resources/css/user/footer.css" rel="stylesheet">
 <link href="/resources/css/user/button.css" rel="stylesheet">
 <link href="/resources/css/user/loginForm.css" rel="stylesheet">
-<link href="/resources/css/user/comm_board.css" rel="stylesheet">
+<link href="/resources/css/user/comm_board.css?after" rel="stylesheet">
 <link href="/resources/css/user/myreservation.css" rel="stylesheet">
 <!--부트스트랩-->
 <link
@@ -68,14 +68,6 @@ function onClickComment(index) {
 
 </script>
 
-<style>
-.comment-min {
-	overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: calc(450px - 1.5em);
-}
-</style>
 <link href="/resources/img/petcare_logo.png" rel="shortcut icon" type="image/x-icon">
 <title>PetCare Page</title>
 </head>
@@ -115,7 +107,7 @@ function onClickComment(index) {
 					<table class="table">
 						<thead>
 							<tr>
-								<th scope="col" colspan="2">총 댓글 수 : ${criteria.total} 개</th>
+								<th scope="col" colspan="2" style="font-size: 15px;">총 댓글 수 : ${criteria.total} 개</th>
 							</tr>
 						</thead>
 						<tbody>

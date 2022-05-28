@@ -147,7 +147,6 @@ public class QnaController {
 		if(criteria.getBlock_end() > criteria.getTotal_page()) {
 			criteria.setBlock_end(criteria.getTotal_page());
 		}
-		System.out.println(criteria.toString());
 		QnaVO qnaVO;
 		ModelAndView mav = new ModelAndView();
 		qnaVO = qnaService.read(faq_num);

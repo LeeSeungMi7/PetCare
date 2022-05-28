@@ -33,8 +33,8 @@
     -webkit-box-orient: vertical;
 }
 .insertdate {
-    height: 24px;
     margin-bottom: 16px;
+    color: gray !important;
 }
 .media-heading {
     font-size: 36px;
