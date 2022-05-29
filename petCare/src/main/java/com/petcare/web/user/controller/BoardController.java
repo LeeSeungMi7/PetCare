@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -63,6 +64,16 @@ public class BoardController {
       return map;
    }
    
+	//자랑하기 목록
+	@GetMapping("/show_write.do")
+	public String show_write(HttpSession session) {
+	      if(session.getAttribute("user") == null) {
+	    	  return "redirect:/home.do";
+	      }else {
+		return "show_write";
+	      }
+	}
+   
    //자랑하기 글 작성
    @RequestMapping(value = "/show_insert.do" , method=RequestMethod.POST)
    public String board_write(@ModelAttribute ShowVO showVO, @RequestParam("show_file") MultipartFile file) {
@@ -80,6 +91,7 @@ public class BoardController {
 	   }
       return "redirect:/show.do";
    }
+  
   
    
    //자랑하기 글 상세보기 + 조회수 증가

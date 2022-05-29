@@ -330,10 +330,10 @@
      * HTML5 DragAndDrop으로 사진을 추가하고, 확인버튼을 누른 경우에 동작한다.
      * @return
      */
-    function html5Upload() {	
+    function html5Upload() {
     	var tempFile,
     		sUploadURL;
-    	
+
     	// sUploadURL= 'http://test.naver.com/popup/quick_photo/FileUploader_html5.php'; 	//upload URL
     	sUploadURL= '/nse/nse_files/quick_photo_uploader/popup/FileUploader_html5.php'; 	//upload URL
 
@@ -369,7 +369,7 @@
 			onerror :  jindo.$Fn(onAjaxError, this).bind()
 		});
 		oAjax.header("contentType","multipart/form-data");
-		oAjax.header("file-name",encodeURIComponent(tempFile.name));
+		oAjax.body("file-name",encodeURIComponent(tempFile.name));
 		oAjax.header("file-size",tempFile.size);
 		oAjax.header("file-Type",tempFile.type);
 		oAjax.request(tempFile);
@@ -464,14 +464,52 @@
       * 이미지 업로드 시작
       * 확인 버튼 클릭하면 호출되는 msg
       */
-     function uploadImage (e){
-    	 if(!bSupportDragAndDropAPI){
-    		 generalUpload();
-    	 }else{
-    		 html5Upload();
-    	 }
-     }
-     
+	function uploadImage (e){
+		// if(!bSupportDragAndDropAPI){
+			//  generalUpload();
+			customGeneralUpload();
+		// } else{
+		// 	 html5Upload();
+		// 	// customHtml5Upload();
+		// }
+	}
+
+	function customGeneralUpload() {
+		let imgFile = $("uploadInputBox").files[0];
+
+		let fdata = new FormData();
+		fdata.enctype = "multipart/form-data"
+		fdata.method = "POST"
+
+		fdata.append("filedata", imgFile)
+
+		window.ajax({
+			url: "/fileUpload.do",
+			data: fdata,
+			method: "POST",
+			enctype: "multipart/formdata; charset=utf-8",
+			processData: false,
+			contentType: false,
+			cache: false, success: function(result) {
+				if (result.success) {
+					setPhotoToEditor([
+						{
+							bNewLine: false,
+							url: result.url
+						}
+					]) // 사진을 에디터에 세팅(기존함수)
+					goReadyMode()	// 초기 사진업로드 준비상태로 되돌리기
+					window.close()	// 사진 업로드 창 닫기
+				} else {
+					alert('사진 업로드를 실패하였습니다.')
+				}
+			}
+			, error: function(xhr, textStatus, errorThrown) {
+				alert('사진 업로드를 실패하였습니다.')
+			}
+		})
+	}
+
  	/**
  	 * jindo에 파일 업로드 사용.(iframe에 Form을 Submit하여 리프레시없이 파일을 업로드하는 컴포넌트)
  	 */
@@ -539,26 +577,26 @@ console.log(1);
 	   	if(bSupportDragAndDropAPI){
 	   		removeEvent();
 	   	}
-	 //  	window.close();
+	  	window.close();
     }
     
 	window.onload = function(){
   		checkDragAndDropAPI();
   		
   		
-  		if(bSupportDragAndDropAPI){
-  			$Element("pop_container2").hide();
-  			$Element("pop_container").show();
-  			
-  			welTextGuide.removeClass("nobg");
-  			welTextGuide.className("bg");
-  			
-  			addEvent();
-  		} else {
+  		// if(bSupportDragAndDropAPI){
+  		// 	$Element("pop_container2").hide();
+  		// 	$Element("pop_container").show();
+  		//
+  		// 	welTextGuide.removeClass("nobg");
+  		// 	welTextGuide.className("bg");
+  		//
+  		// 	addEvent();
+  		// } else {
   			$Element("pop_container").hide();
   			$Element("pop_container2").show();
   			callFileUploader();
-  		}
+  		// }
   		fnUploadImage = $Fn(uploadImage,this);
   		$Fn(closeWindow,this).attach(welBtnCancel.$value(), "click");
 	};
@@ -582,7 +620,8 @@ console.log(1);
  	function setPhotoToEditor(oFileInfo){
 		if (!!opener && !!opener.nhn && !!opener.nhn.husky && !!opener.nhn.husky.PopUpManager) {
 			//스마트 에디터 플러그인을 통해서 넣는 방법 (oFileInfo는 Array)
-			opener.nhn.husky.PopUpManager.setCallback(window, 'SET_PHOTO', [oFileInfo]);
+			let img = `<img src='${oFileInfo[0].url}' style="max-width: 100%; max-height: 300px;"/>`
+			opener.nhn.husky.PopUpManager.setCallback(window, 'PASTE_HTML', [img]);
 			//본문에 바로 tag를 넣는 방법 (oFileInfo는 String으로 <img src=....> )
 			//opener.nhn.husky.PopUpManager.setCallback(window, 'PASTE_HTML', [oFileInfo]);
 		}
