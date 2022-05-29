@@ -48,8 +48,12 @@ public class QnaController {
 
 	//자랑하기 목록
 	@GetMapping("/qna_write.do")
-	public String show_write() {
+	public String show_write(HttpSession session) {
+	      if(session.getAttribute("user") == null) {
+	    	  return "redirect:/home.do";
+	      }else {
 		return "qna_write";
+	      }
 	}
 
 	

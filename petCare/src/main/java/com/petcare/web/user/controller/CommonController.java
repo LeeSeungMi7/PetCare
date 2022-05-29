@@ -64,11 +64,6 @@ public class CommonController {
 	public String petGet() {
 		return "pet_joinUser";
 	}
-	//자랑하기 목록
-	@GetMapping("/show_write.do")
-	public String show_write() {
-		return "show_write";
-	}
 
 	
 }
