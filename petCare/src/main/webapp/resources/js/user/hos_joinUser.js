@@ -209,12 +209,16 @@ const invalid = {
             return '병원 이름을 입력해주세요.';
         }
 
-        if (name.length > 10) {
-            return '병원 이름은 10자리 이하여야 합니다.';
+        if (name.length > 20) {
+            return '병원 이름은 20자리 이하여야 합니다.';
         }
 
-        if (/[^a-zA-Z가-힣ㄱ-ㅎ]/g.test(name)) {
-            return '병원 이름에 영문/한글 이외의 값은 입력 할 수 없습니다.';
+        if (/[\s]/g.test(name)) {
+            return '병원 이름에 공백은 입력할 수 없습니다.';
+        }
+        
+        if (/[`~!@#$%^&*|\\\'\";:\/?]/gi.test(name)) {
+            return '병원 이름에 특수문자는 입력할 수 없습니다.';
         }
         return;
     },
