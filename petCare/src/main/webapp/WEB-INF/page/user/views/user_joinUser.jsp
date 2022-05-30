@@ -177,8 +177,8 @@
 				            </div>
 				            <div class="modal-footer">
 				                
-				                <input type="button" class="btn btn-success" onclick="petsubmit()" value="추가">
-				                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >닫기</button>
+				                <button type="button" class="btn_pet btn-success" onclick="petsubmit()">추가</button>
+				                <button type="button" class="btn_pet btn-secondary" data-bs-dismiss="modal" >닫기</button>
 				            </div>
 				        </div>
 				    </div>
