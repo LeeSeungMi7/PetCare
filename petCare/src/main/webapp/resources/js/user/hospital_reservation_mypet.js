@@ -57,7 +57,7 @@ function datePickerSet(sDate, eDate, flag, sOption, eOption) {
 
         //한개짜리 달력 datepicker
     } else if (!isValidStr(sDate)) {
-        console.error(sDate, eDate, flag, sOption, eOption)
+        console.error(sDate, eDate, flag, sOption, eOption);
         var sDay = sDate.val();
         if (flag && !isValidStr(sDay)) { //처음 입력 날짜 설정, update...
             var sdp = sDate.datepicker().data("datepicker");
@@ -70,7 +70,7 @@ function datePickerSet(sDate, eDate, flag, sOption, eOption) {
             ...(sOption || {})
         }
 
-        console.error(option)
+        console.error(option);
 
         sDate.datepicker(option);
     }
